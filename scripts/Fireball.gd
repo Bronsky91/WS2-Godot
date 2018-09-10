@@ -6,7 +6,7 @@ var direction = Vector2(0, -1)
 var target = null
 var rune = null
 
-
+# DEMO OF GIT 
 func _ready():
 	connect("area_entered", self, "_on_area_entered")
 
