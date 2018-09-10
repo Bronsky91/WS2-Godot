@@ -23,7 +23,7 @@ func _physics_process(delta):
 
 func _on_area_entered(collidee):
 	print('colliding with ' + collidee.name)
-	if collidee.name == "Enemy":
+	if collidee.is_in_group('enemy'):
 		rune.get_ref().rearm()
 		#rune.firing = false
 		collidee.take_damage(damage)

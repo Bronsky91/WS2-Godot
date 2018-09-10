@@ -4,7 +4,7 @@ export(PackedScene) var fireball
 var target = null
 var firing = false
 var time = 0.0
-var fire_delta = 1.0/2.0
+var fire_delta = 1.0/3.0
 var fire_next = 0.0
 
 func _ready():
@@ -17,11 +17,11 @@ func _process(delta):
 		_shoot()
 
 func _on_area_entered(collidee):
-	if collidee.name == "Enemy":
+	if collidee.is_in_group('enemy'):
 		target = weakref(collidee)
 		
 func _on_area_exited(collidee):
-	if collidee.name == "Enemy":
+	if collidee.is_in_group('enemy'):
 		target = null
 
 func rearm():
