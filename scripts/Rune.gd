@@ -35,7 +35,9 @@ func choose_target():
 		#print("distance: " + str(pos.distance_to(enemy.get_global_position())))
 		if pos.distance_to(enemy.get_global_position()) <= attack_range:
 			if target == null or pos.distance_to(enemy.get_global_position()) > get_global_position().distance_to(target.get_global_position()):
-				target = weakref(enemy)
+				target = enemy
+	if target != null:
+		target = weakref(target)
 	return target
 	
 	
