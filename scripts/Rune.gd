@@ -6,7 +6,7 @@ var firing = false
 
 func _ready():
 	connect("area_entered", self, "_on_area_entered")
-	connect("area_exited", self, "_on_area_exit")
+	connect("area_exited", self, "_on_area_exited")
 
 func _process(delta):
 	if target and target.get_ref() and !firing:
@@ -15,15 +15,14 @@ func _process(delta):
 func _on_area_entered(collidee):
 	if collidee.name == "Enemy":
 		target = weakref(collidee)
-		print('penatrated')
-		print(target.get_ref().name)
+		
+func _on_area_exited(collidee):
+	if collidee.name == "Enemy":
+		print('byee bye target')
+		target = null
 
 func rearm():
-	print("RUNE FIRING = FALSE")
 	firing = false
-
-func _on_area_exited(enemy):
-	target = null
 	
 func _shoot():
 	print('FIREBALL')

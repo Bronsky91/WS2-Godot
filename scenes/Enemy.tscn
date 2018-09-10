@@ -9,7 +9,7 @@ custom_solver_bias = 0.0
 radius = 42.9307
 height = 31.1203
 
-[node name="Enemy" type="Area2D"]
+[node name="Enemy" type="Area2D" index="0"]
 
 position = Vector2( 487.535, 255.956 )
 input_pickable = true
@@ -21,7 +21,7 @@ audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
 _sections_unfolded = [ "Material", "Visibility", "Z Index" ]
-health = 50
+health = 325
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 

@@ -4,20 +4,20 @@
 [ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Rune.tscn" type="PackedScene" id=3]
 
-[node name="Game" type="Node" index="0"]
+[node name="Game" type="Node"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Pause" ]
 
 [node name="Enemy" parent="." index="0" instance=ExtResource( 2 )]
 
-position = Vector2( -96.3985, 474.239 )
+position = Vector2( -60.2223, 472.732 )
 rotation = -1.5708
 _sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
 
 [node name="Rune" parent="." index="1" instance=ExtResource( 3 )]
 
-position = Vector2( 596.122, 270.36 )
+position = Vector2( 605.752, 335.963 )
 _sections_unfolded = [ "Transform" ]
 
 

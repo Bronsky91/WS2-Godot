@@ -1,7 +1,7 @@
 extends Area2D
 
 const SPEED = 200
-export var health = 50
+export var health = 325
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
