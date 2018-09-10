@@ -20,11 +20,13 @@ func _physics_process(delta):
 		var rad_angle = atan2(-direction.x, direction.y)
 		set_rotation(rad_angle)
 		set_position(pos + (direction * speed * delta))
+	else:
+		# TODO: special animation or behavior for fireball whose target dies before reaching it?
+		queue_free()
 
 func _on_area_entered(collidee):
 	print('colliding with ' + collidee.name)
 	if collidee.is_in_group('enemy'):
 		rune.get_ref().rearm()
-		#rune.firing = false
 		collidee.take_damage(damage)
 		queue_free()
