@@ -7,7 +7,7 @@
 [sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
-radius = 170.698
+radius = 440.622
 
 [node name="Rune" type="Area2D" index="0"]
 

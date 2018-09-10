@@ -26,7 +26,7 @@ func _physics_process(delta):
 
 func _on_area_entered(collidee):
 	print('colliding with ' + collidee.name)
-	if collidee.is_in_group('enemy'):
+	if collidee.is_in_group('enemies'):
 		rune.get_ref().rearm()
 		collidee.take_damage(damage)
 		queue_free()
