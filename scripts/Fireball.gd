@@ -6,13 +6,13 @@ var direction = Vector2(0, -1)
 var target = null
 var rune = null
 
-# DEMO OF GIT 
+
 func _ready():
 	connect("area_entered", self, "_on_area_entered")
 
 func _process(delta):
 	pass
-		
+
 func _physics_process(delta):
 	if target.get_ref():
 		var pos = get_position()
