@@ -14,22 +14,35 @@ _sections_unfolded = [ "Pause" ]
 position = Vector2( -57.2077, 514.937 )
 rotation = -1.5708
 _sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
+health = 125
 
 [node name="Enemy2" parent="." index="1" instance=ExtResource( 2 )]
 
 position = Vector2( 242.753, 514.937 )
 rotation = -1.5708
 _sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
+health = 125
 
 [node name="Enemy3" parent="." index="2" instance=ExtResource( 2 )]
 
 position = Vector2( 85.9896, 514.937 )
 rotation = -1.5708
 _sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
+health = 125
 
 [node name="Rune" parent="." index="3" instance=ExtResource( 3 )]
 
-position = Vector2( 605.752, 335.963 )
+position = Vector2( 468.584, 352.544 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Rune2" parent="." index="4" instance=ExtResource( 3 )]
+
+position = Vector2( 788.14, 637.431 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Rune3" parent="." index="5" instance=ExtResource( 3 )]
+
+position = Vector2( 1118.25, 355.559 )
 _sections_unfolded = [ "Transform" ]
 
 

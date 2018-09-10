@@ -1,7 +1,7 @@
 extends Area2D
 
 const SPEED = 200
-export var health = 325
+export var health = 125
 
 func _ready():
 	add_to_group("enemy")

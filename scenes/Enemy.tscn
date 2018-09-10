@@ -21,7 +21,7 @@ audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
 _sections_unfolded = [ "Material", "Visibility", "Z Index" ]
-health = 325
+health = 125
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
