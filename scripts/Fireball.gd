@@ -10,8 +10,10 @@ var rune = null
 func _ready():
 	connect("area_entered", self, "_on_area_entered")
 
+
 func _process(delta):
 	pass
+
 
 func _physics_process(delta):
 	if target.get_ref():
@@ -24,8 +26,8 @@ func _physics_process(delta):
 		# TODO: special animation or behavior for fireball whose target dies before reaching it?
 		queue_free()
 
+
 func _on_area_entered(collidee):
-	print('colliding with ' + collidee.name)
 	if collidee.is_in_group('enemies'):
 		rune.get_ref().rearm()
 		collidee.take_damage(damage)

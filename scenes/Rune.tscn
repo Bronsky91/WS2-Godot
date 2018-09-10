@@ -7,9 +7,9 @@
 [sub_resource type="CircleShape2D" id=1]
 
 custom_solver_bias = 0.0
-radius = 440.622
+radius = 170.698
 
-[node name="Rune" type="Area2D"]
+[node name="Rune" type="Area2D" index="0"]
 
 position = Vector2( 501.939, 253.74 )
 input_pickable = true

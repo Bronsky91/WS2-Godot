@@ -4,33 +4,19 @@
 [ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Rune.tscn" type="PackedScene" id=3]
 
-[node name="Game" type="Node" index="0"]
+[node name="Game" type="Node"]
 
 script = ExtResource( 1 )
+_sections_unfolded = [ "Pause" ]
 
 [node name="Enemy" parent="." index="0" instance=ExtResource( 2 )]
 
-position = Vector2( -96.3985, 474.239 )
+position = Vector2( -57.2077, 514.937 )
 rotation = -1.5708
 _sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
 
 [node name="Enemy2" parent="." index="1" instance=ExtResource( 2 )]
 
-position = Vector2( -219.137, 214.815 )
-rotation = -1.5708
-_sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
-
-[node name="Enemy3" parent="." index="2" instance=ExtResource( 2 )]
-
-position = Vector2( -378.139, 474.239 )
-rotation = -1.5708
-_sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
-
-[node name="Rune" parent="." index="3" instance=ExtResource( 3 )]
-
-<<<<<<< Updated upstream
-position = Vector2( 596.122, 270.36 )
-=======
 position = Vector2( 242.753, 514.937 )
 rotation = -1.5708
 _sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
@@ -54,7 +40,6 @@ _sections_unfolded = [ "Transform" ]
 [node name="Rune3" parent="." index="5" instance=ExtResource( 3 )]
 
 position = Vector2( 1118.25, 355.559 )
->>>>>>> Stashed changes
 _sections_unfolded = [ "Transform" ]
 
 
