@@ -13,11 +13,36 @@ script = ExtResource( 1 )
 position = Vector2( -96.3985, 474.239 )
 rotation = -1.5708
 _sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
-health = 125
 
 [node name="Rune" parent="." index="1" instance=ExtResource( 3 )]
 
+<<<<<<< Updated upstream
 position = Vector2( 596.122, 270.36 )
+=======
+position = Vector2( 242.753, 514.937 )
+rotation = -1.5708
+_sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
+
+[node name="Enemy3" parent="." index="2" instance=ExtResource( 2 )]
+
+position = Vector2( 85.9896, 514.937 )
+rotation = -1.5708
+_sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
+
+[node name="Rune" parent="." index="3" instance=ExtResource( 3 )]
+
+position = Vector2( 468.584, 352.544 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Rune2" parent="." index="4" instance=ExtResource( 3 )]
+
+position = Vector2( 788.14, 637.431 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Rune3" parent="." index="5" instance=ExtResource( 3 )]
+
+position = Vector2( 1118.25, 355.559 )
+>>>>>>> Stashed changes
 _sections_unfolded = [ "Transform" ]
 
 
