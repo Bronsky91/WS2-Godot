@@ -8,7 +8,7 @@ var rune = null
 
 
 func _ready():
-	connect("area_entered", self, "_on_area_entered")
+	pass
 
 
 func _process(delta):
@@ -16,8 +16,11 @@ func _process(delta):
 
 
 func _physics_process(delta):
-	if target.get_ref():
-		var pos = get_position()
+	if target and target.get_ref():
+		var pos = get_global_position()
+		if target.get_ref().get_global_position().distance_to(get_global_position()) < 10:
+			target_hit()
+			return
 		direction = (target.get_ref().get_global_position() - pos).normalized()
 		var rad_angle = atan2(-direction.x, direction.y)
 		set_rotation(rad_angle)
@@ -27,8 +30,7 @@ func _physics_process(delta):
 		queue_free()
 
 
-func _on_area_entered(collidee):
-	if collidee.is_in_group('enemies'):
-		rune.get_ref().rearm()
-		collidee.take_damage(damage)
-		queue_free()
+func target_hit():
+	rune.get_ref().rearm()
+	target.get_ref().take_damage(damage)
+	queue_free()

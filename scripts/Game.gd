@@ -3,13 +3,19 @@ extends Node
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
+export(PackedScene) var enemy
 
 func _ready():
-	# Called when the node is added to the scene for the first time.
-	# Initialization here
-	pass
+	_begin_wave()
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+func _begin_wave():
+	_spawn_enemy(enemy,"Path1")
+	_spawn_enemy(enemy,"Path2")
+	
+
+func _spawn_enemy(type,path):
+	var new_enemy = type.instance()
+	var pathFollow = PathFollow2D.new()
+	pathFollow.set_loop(false)
+	self.get_node(path).add_child(pathFollow)
+	pathFollow.add_child(new_enemy)
