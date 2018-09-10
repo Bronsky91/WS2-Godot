@@ -17,7 +17,7 @@ func _physics_process(delta):
 	if target.get_ref():
 		var pos = get_position()
 		direction = (target.get_ref().get_global_position() - pos).normalized()
-		var rad_angle = atan2(direction.x, -direction.y)
+		var rad_angle = atan2(-direction.x, direction.y)
 		set_rotation(rad_angle)
 		set_position(pos + (direction * speed * delta))
 
