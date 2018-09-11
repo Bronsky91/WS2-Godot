@@ -1,6 +1,6 @@
 extends Area2D
 
-export(PackedScene) var fireball
+export(PackedScene) var spell
 var firing = false
 var attack_range = 300
 var time = 0.0
@@ -23,7 +23,7 @@ func choose_target():
 	var target = null
 	var pos = get_global_position()
 	for enemy in get_tree().get_nodes_in_group("enemies"):
-		#print("distance: " + str(pos.distance_to(enemy.get_global_position())))
+		# print("distance: " + str(pos.distance_to(enemy.get_global_position())))
 		if pos.distance_to(enemy.get_global_position()) <= attack_range:
 			if target == null or pos.distance_to(enemy.get_global_position()) > get_global_position().distance_to(target.get_global_position()):
 				target = enemy
@@ -35,12 +35,12 @@ func choose_target():
 func _shoot(target):
 	if time > fire_next:
 		firing = true
-		var new_fireball = fireball.instance()
-		new_fireball.target = target
-		new_fireball.rune = weakref(self)
-		new_fireball.position = global_position
+		var new_spell = spell.instance()
+		new_spell.target = target
+		new_spell.rune = weakref(self)
+		new_spell.position = global_position
 		fire_next = time + fire_delta
-		get_tree().get_root().add_child(new_fireball)
+		get_tree().get_root().add_child(new_spell)
 
 
 func rearm():

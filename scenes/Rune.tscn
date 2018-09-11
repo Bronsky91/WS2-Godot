@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scripts/Rune.gd" type="Script" id=1]
-[ext_resource path="res://scenes/Fireball.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Spell.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/rune.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=1]
@@ -9,7 +9,7 @@
 custom_solver_bias = 0.0
 radius = 440.622
 
-[node name="Rune" type="Area2D"]
+[node name="Rune" type="Area2D" index="0"]
 
 position = Vector2( 501.939, 253.74 )
 input_pickable = true
@@ -20,7 +20,7 @@ angular_damp = 1.0
 audio_bus_override = false
 audio_bus_name = "Master"
 script = ExtResource( 1 )
-fireball = ExtResource( 2 )
+spell = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://scripts/Fireball.gd" type="Script" id=1]
+[ext_resource path="res://scripts/Spell.gd" type="Script" id=1]
 [ext_resource path="res://assets/fireball.png" type="Texture" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
@@ -9,7 +9,7 @@ custom_solver_bias = 0.0
 radius = 26.3882
 height = 34.3669
 
-[node name="Fireball" type="Area2D"]
+[node name="Spell" type="Area2D"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
