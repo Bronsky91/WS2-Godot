@@ -12,13 +12,13 @@ func _process(delta):
 	position.x += SPEED * delta
 
 func _die():
-	print("DEAD")
+	#print("DEAD")
 	# explosion / death animation
 	queue_free()
 
 
 func take_damage(damage):
-	print("TAKING DAMAGE")
+	#print("TAKING DAMAGE")
 	health -= damage
 	if health <= 0:
 		_die()
