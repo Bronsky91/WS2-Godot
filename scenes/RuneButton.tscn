@@ -3,7 +3,7 @@
 [ext_resource path="res://scripts/RuneButton.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Rune.tscn" type="PackedScene" id=2]
 
-[node name="New Rune" type="Node2D"]
+[node name="New Rune" type="Node2D" index="0"]
 
 [node name="RuneButton" type="Button" parent="." index="0"]
 
@@ -27,6 +27,7 @@ group = null
 flat = false
 align = 1
 script = ExtResource( 1 )
+_sections_unfolded = [ "Mouse" ]
 rune = ExtResource( 2 )
 
 [connection signal="pressed" from="RuneButton" to="RuneButton" method="_on_RuneButton_pressed"]

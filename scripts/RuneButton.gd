@@ -13,4 +13,5 @@ func _ready():
 func _on_RuneButton_pressed():
 	# TODO: Create conditions with declared variables above
 	var new_rune = rune.instance()
+	# Unsure of how position should be set still
 	get_tree().get_root().add_child(new_rune)
