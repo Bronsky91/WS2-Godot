@@ -7,6 +7,7 @@ var time = 0.0
 var fire_delta = 1.0/2.0
 var fire_next = 0.0
 
+
 func _ready():
 	#connect("area_entered", self, "_on_area_entered")
 	#connect("area_exited", self, "_on_area_exited")
