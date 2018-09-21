@@ -11,11 +11,20 @@ func _ready():
 	pass
 
 func mod_ult_charge(num):
+	# Increase the ultimate charge by raw damage multiplied by dampener value
 	ult_charge += (num * _ult_damage_to_charge)
-	if (ult_charge > ult_max):
+	
+	# Cap ultimate charge at max value if it exceeds it
+	if (ult_charge >= ult_max):
 		ult_charge = ult_max
-	#game.print_tree()
+		# If at max value, change meter color
+		game.get_node("TowerDefenseHUD/UltimateMeter").set("modulate",Color(0.0,0.0,1.0))
+	else:
+		# If not at max value, ensure meter color is set to default
+		game.get_node("TowerDefenseHUD/UltimateMeter").set("modulate",Color(1.0,1.0,1.0))
+	# Increase ultimate meter fill bar to match charge value
 	game.get_node("TowerDefenseHUD/UltimateMeter/Fill").set_value(ult_charge)
+	
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

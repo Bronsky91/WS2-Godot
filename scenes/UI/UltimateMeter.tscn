@@ -47,6 +47,6 @@ texture_progress = ExtResource( 2 )
 radial_fill_degrees = 360.0
 radial_center_offset = Vector2( 0, 0 )
 nine_patch_stretch = false
-_sections_unfolded = [ "Margin", "Rect", "Textures" ]
+_sections_unfolded = [ "Margin", "Material", "Rect", "Textures", "Visibility" ]
 
 
