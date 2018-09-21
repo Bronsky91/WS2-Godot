@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/Rune.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/RuneButton.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/UI/TowerDefenseUI.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Rune.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/RuneButton.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Curve2D" id=1]
 
@@ -25,31 +26,33 @@ script = ExtResource( 1 )
 number_of_waves = 4
 enemy = ExtResource( 2 )
 
-[node name="Rune" parent="." index="0" instance=ExtResource( 3 )]
+[node name="TowerDefenseUI" parent="." index="0" instance=ExtResource( 3 )]
+
+[node name="Rune" parent="." index="1" instance=ExtResource( 4 )]
 
 position = Vector2( 596.122, 270.36 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="Path1" type="Path2D" parent="." index="1"]
+[node name="Path1" type="Path2D" parent="." index="2"]
 
 self_modulate = Color( 0.5, 0.6, 1, 0.7 )
 position = Vector2( 12.0429, -494.053 )
 curve = SubResource( 1 )
 _sections_unfolded = [ "Pause", "Transform", "Visibility", "Z Index" ]
 
-[node name="Path2" type="Path2D" parent="." index="2"]
+[node name="Path2" type="Path2D" parent="." index="3"]
 
 self_modulate = Color( 0.5, 0.6, 1, 0.7 )
 curve = SubResource( 2 )
 
-[node name="Timer" type="Timer" parent="." index="3"]
+[node name="Timer" type="Timer" parent="." index="4"]
 
 process_mode = 1
 wait_time = 1.5
 one_shot = false
 autostart = true
 
-[node name="NewRune" parent="." index="4" instance=ExtResource( 4 )]
+[node name="NewRune" parent="." index="5" instance=ExtResource( 5 )]
 
 margin_left = 87.0
 margin_top = 712.0
