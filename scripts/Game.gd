@@ -1,19 +1,18 @@
 extends Node
 
+onready var global = get_node("/root/Global")
 onready var wave_timer = $Timer
 export var number_of_waves = 2
 var new_wave = false
 var wave_counter = 0
-
 export(PackedScene) var enemy
 
 func _ready():
-	pass
+	global.game = self
 
 func _process(delta):
 	if new_wave:
 		_begin_wave()
-		
 
 func _begin_wave():
 	_spawn_enemy(enemy,"Path1")

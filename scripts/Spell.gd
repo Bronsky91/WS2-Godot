@@ -33,4 +33,6 @@ func _physics_process(delta):
 func target_hit():
 	rune.get_ref().rearm()
 	target.get_ref().take_damage(damage)
+	var global = get_node("/root/Global")
+	global.mod_ult_charge(damage)
 	queue_free()

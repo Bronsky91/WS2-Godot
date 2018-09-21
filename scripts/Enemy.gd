@@ -26,7 +26,6 @@ func _physics_process(delta):
 
 func take_damage(damage):
 	print("TAKING DAMAGE")
-	global = get_node("/root/global")
 	health -= damage
 	if health <= 0:
 		_die()
