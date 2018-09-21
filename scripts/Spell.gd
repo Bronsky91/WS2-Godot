@@ -27,10 +27,13 @@ func _physics_process(delta):
 		set_position(pos + (direction * speed * delta))
 	else:
 		# TODO: special animation or behavior for fireball whose target dies before reaching it?
+		# TODO: extra logic to account for runes that may be destroyed before this part of the spell code is executed
+		rune.get_ref().rearm()
 		queue_free()
 
 
 func target_hit():
+	# TODO: extra logic to account for runes that may be destroyed before this part of the spell code is executed
 	rune.get_ref().rearm()
 	target.get_ref().take_damage(damage)
 	var global = get_node("/root/Global")

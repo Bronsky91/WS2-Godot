@@ -28,13 +28,14 @@ func choose_target():
 	# Check if existing target is still within range
 	if target != null and target.get_ref() and pos.distance_to(target.get_ref().get_global_position()) <= attack_range:
 		return target
+	else:
+		target = null
 	
 	# If not, check if new enemy is in range, and choose closest one if multiple
 	for enemy in get_tree().get_nodes_in_group("enemies"):
-		# print("distance: " + str(pos.distance_to(enemy.get_global_position())))
 		if pos.distance_to(enemy.get_global_position()) <= attack_range:
 			if target == null or !target.get_ref() or pos.distance_to(enemy.get_global_position()) > get_global_position().distance_to(target.get_ref().get_global_position()):
-				target = weakref(enemy)
+				target = weakref(enemy)	
 	return target
 	
 	
