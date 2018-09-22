@@ -4,6 +4,7 @@ var ult_charge = 0					# Current ultimate meter charge value
 var ult_max = 100					# Ultimate meter maximum charge value
 var _ult_damage_to_charge = .1		# What damage dealt is multiplied by before being added to ultimate charge
 var game							# Reference to Game node (self-registers onready)
+var placeholder_cursor = null
 var tower_hp = 100					# Current tower health value
 var tower_hp_max = 100				# Tower maximum health value
 
