@@ -18,9 +18,11 @@ func _ready():
 
 func _on_toggled(button_pressed):
 	if(button_pressed):
+		print(button_pressed)
 		# TODO: Create conditions with declared variables above
 		new_rune = rune_placeholder.instance()
 		get_tree().get_root().add_child(new_rune)
 	else:
+		print(button_pressed)
 		new_rune.queue_free()
 

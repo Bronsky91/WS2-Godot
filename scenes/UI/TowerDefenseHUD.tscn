@@ -1,6 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://scenes/UI/UltimateMeter.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/RuneButton.gd" type="Script" id=2]
+[ext_resource path="res://scenes/RunePlaceholder.tscn" type="PackedScene" id=3]
 
 [sub_resource type="GDScript" id=1]
 
@@ -45,5 +47,45 @@ anchor_bottom = 1.0
 margin_top = -40.0
 margin_right = 248.0
 margin_bottom = 0.0
+
+[node name="NewRune" type="Control" parent="." index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+script = ExtResource( 2 )
+rune_placeholder = ExtResource( 3 )
+
+[node name="RuneButton" type="Button" parent="NewRune" index="0"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 87.0
+margin_top = 701.0
+margin_right = 135.0
+margin_bottom = 741.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+flat = false
+align = 1
+_sections_unfolded = [ "Mouse" ]
 
 
