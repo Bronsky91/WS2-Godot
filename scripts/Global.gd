@@ -5,8 +5,8 @@ var ult_max = 100					# Ultimate meter maximum charge value
 var _ult_damage_to_charge = .1		# What damage dealt is multiplied by before being added to ultimate charge
 var game							# Reference to Game node (self-registers onready)
 var placeholder_cursor = null
-var tower_hp = 100					# Current tower health value
-var tower_hp_max = 100				# Tower maximum health value
+var base_hp = 100					# Current base health value
+var base_hp_max = 100				# Base maximum health value
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
@@ -47,3 +47,14 @@ func on_placeholder_entered():
 func on_placeholder_exited():
 	if(placeholder_cursor != null and placeholder_cursor.get_ref()):
 		placeholder_cursor.get_ref().set_visibility(true)
+
+
+func hit_base(damage):
+	if damage > base_hp:
+		print("Harry Potter is dead")
+		# End level GAME OVER
+	else:
+		base_hp -= damage
+		print(base_hp)
+	
+	

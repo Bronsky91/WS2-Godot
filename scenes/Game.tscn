@@ -1,25 +1,26 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Rune.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/UI/TowerDefenseHUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/Base.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/UI/TowerDefenseHUD.tscn" type="PackedScene" id=5]
 
 [sub_resource type="Curve2D" id=1]
 
 bake_interval = 5.0
 _data = {
-"points": PoolVector2Array( 0, 0, 146.574, -196.151, -64.6743, 709.379, -237.568, 226.005, 102.831, -164.167, 427.05, 636.452, 0, 0, 176.751, 217.706, 742.957, 631.253, 0, 0, 0, 0, 1096.96, 710.053, 0, 0, 0, 0, 1323.47, 577.893 )
+"points": PoolVector2Array( 0, 0, 146.574, -196.151, -64.6743, 709.379, -237.568, 226.005, 102.831, -164.167, 427.05, 636.452, 0, 0, 176.751, 217.706, 742.957, 631.253, 0, 0, 0, 0, 1211.17, 611.506, 0, 0, 0, 0, 1403.92, 779.651 )
 }
 
 [sub_resource type="Curve2D" id=2]
 
 bake_interval = 5.0
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, -141.443, 409.239, -250.421, -82.697, 100.168, 37.2719, 171.989, 583.671, 0, 0, 0, 0, 404.872, 594.256, -149.088, -78.0381, 114.145, 3.49424, 685.389, 570.439, 0, 0, 215.478, -71.0496, 867.99, 533.389, 0, 0, 159.57, 62.8963, 1156.45, 583.671, 0, 0, 0, 0, 1439.61, 596.903 )
+"points": PoolVector2Array( 0, 0, 0, 0, -141.443, 409.239, -250.421, -82.697, 100.168, 37.2719, 171.989, 583.671, 0, 0, 0, 0, 404.872, 594.256, -149.088, -78.0381, 114.145, 3.49424, 685.389, 570.439, 0, 0, 215.478, -71.0496, 867.99, 533.389, 0, 0, 159.57, 62.8963, 1156.45, 583.671, 0, 0, 0, 0, 1463.12, 449.642 )
 }
 
-[node name="Game" type="Node"]
+[node name="Game" type="Node" index="0"]
 
 script = ExtResource( 1 )
 number_of_waves = 4
@@ -49,7 +50,16 @@ wait_time = 1.5
 one_shot = false
 autostart = true
 
-[node name="TowerDefenseHUD" parent="." index="4" instance=ExtResource( 4 )]
+[node name="Base" parent="." index="4" instance=ExtResource( 4 )]
+
+position = Vector2( 1482.55, 354.745 )
+
+[node name="TowerDefenseHUD" parent="." index="5" instance=ExtResource( 5 )]
+
+margin_left = 2.0
+margin_top = -4.0
+margin_right = 2.0
+margin_bottom = -4.0
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 

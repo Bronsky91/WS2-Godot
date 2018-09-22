@@ -3,6 +3,8 @@ extends RigidBody2D
 # class member variables go here, for example:
 const SPEED = 200
 export var health = 125
+export var damage = 20
+onready var global = get_node("/root/Global")
 
 
 func _ready():
@@ -22,7 +24,8 @@ func _physics_process(delta):
 	else:
 		print(get_name() + " reached harry potter's house")
 		queue_free()
-		#global.hit_fortress(damage)
+		global.hit_base(damage)
+		
 
 func take_damage(damage):
 	print("TAKING DAMAGE")
