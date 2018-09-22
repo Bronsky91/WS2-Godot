@@ -11,7 +11,7 @@ config_version=3
 [application]
 
 config/name="Wizard Shit 2"
-run/main_scene="res://scenes/Game.tscn"
+run/main_scene="res://scenes/StartMenu.tscn"
 config/icon="res://icon.png"
 
 [autoload]
