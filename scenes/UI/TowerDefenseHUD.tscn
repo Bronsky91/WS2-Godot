@@ -1,32 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scenes/UI/UltimateMeter.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/RuneButton.gd" type="Script" id=2]
 [ext_resource path="res://scenes/RunePlaceholder.tscn" type="PackedScene" id=3]
 
-[sub_resource type="GDScript" id=1]
-
-script/source = "extends Node
-
-# class member variables go here, for example:
-# var a = 2
-# var b = \"textvar\"
-
-func _ready():
-	# Called when the node is added to the scene for the first time.
-	# Initialization here
-	pass
-	
-func modify_ult_charge(num):
-	echo(\"Modify ult by \" + num)
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
-"
-
-[node name="UI" type="Control"]
+[node name="UI" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -38,7 +16,6 @@ mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1
 size_flags_vertical = 1
-script = SubResource( 1 )
 
 [node name="UltimateMeter" parent="." index="0" instance=ExtResource( 1 )]
 

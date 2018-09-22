@@ -40,3 +40,10 @@ func decrease_ult_charge(num):
 #	# Called every frame. Delta is time since last frame.
 #	# Update game logic here.
 #	pass
+func on_placeholder_entered():
+	if(placeholder_cursor != null and placeholder_cursor.get_ref()):
+		placeholder_cursor.get_ref().set_visibility(false)
+		
+func on_placeholder_exited():
+	if(placeholder_cursor != null and placeholder_cursor.get_ref()):
+		placeholder_cursor.get_ref().set_visibility(true)

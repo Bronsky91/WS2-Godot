@@ -16,8 +16,8 @@ func _ready():
 	rune_button.set_text('Rune Type')
 	rune_button.set_toggle_mode(true)
 	rune_button.connect("toggled", self, "_on_toggled")
-	rune_button.connect("mouse_entered", self, "_on_mouse_entered")
-	rune_button.connect("mouse_exited", self, "_on_mouse_exited")
+	rune_button.connect("mouse_entered", global, "on_placeholder_entered")
+	rune_button.connect("mouse_exited", global, "on_placeholder_exited")
 
 func _on_toggled(toggled):
 	if(toggled):
@@ -29,12 +29,4 @@ func _on_toggled(toggled):
 		global.placeholder_cursor = null
 		new_rune.queue_free()
 		
-func _on_mouse_entered():
-	if(global.placeholder_cursor != null and global.placeholder_cursor.get_ref()):
-		print('mouse entered')
-		global.placeholder_cursor.get_ref().set_visibility(false)
-		
-func _on_mouse_exited():
-	if(global.placeholder_cursor != null and global.placeholder_cursor.get_ref()):
-		print('mouse exited')
-		global.placeholder_cursor.get_ref().set_visibility(true)
+
