@@ -7,11 +7,15 @@ var game							# Reference to Game node (self-registers onready)
 var placeholder_cursor = null
 var base_hp = 100					# Current base health value
 var base_hp_max = 100				# Base maximum health value
+var mana = 100
+var mana_max = 100
+
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	pass
+
 
 func increase_ult_charge(num):
 	# Increase the ultimate charge by raw damage multiplied by dampener value
@@ -28,6 +32,7 @@ func increase_ult_charge(num):
 	# Increase ultimate meter fill bar to match charge value
 	game.get_node("TowerDefenseHUD/UltimateMeter/Fill").set_value(ult_charge)
 
+
 func decrease_ult_charge(num):
 	# Decrease the ultimate charge by value specified
 	ult_charge -= num
@@ -35,11 +40,12 @@ func decrease_ult_charge(num):
 	game.get_node("TowerDefenseHUD/UltimateMeter").set("modulate",Color(1.0,1.0,1.0))
 	# Increase ultimate meter fill bar to match charge value
 	game.get_node("TowerDefenseHUD/UltimateMeter/Fill").set_value(ult_charge)
+	
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+func mana_bar(num):
+	pass
+
+
 func on_placeholder_entered():
 	if(placeholder_cursor != null and placeholder_cursor.get_ref()):
 		placeholder_cursor.get_ref().set_visibility(false)
@@ -51,10 +57,11 @@ func on_placeholder_exited():
 
 func hit_base(damage):
 	if damage > base_hp:
+		game.get_node("TowerDefenseHUD/HealthMeter/Fill").set_value(0)
 		print("Harry Potter is dead")
 		# End level GAME OVER
 	else:
 		base_hp -= damage
-		print(base_hp)
+		game.get_node("TowerDefenseHUD/HealthMeter/Fill").set_value(base_hp)
 	
 	
