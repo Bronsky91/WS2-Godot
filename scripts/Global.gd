@@ -43,7 +43,8 @@ func decrease_ult_charge(num):
 	
 
 func mana_bar(num):
-	pass
+	game.get_node("TowerDefenseHUD/ManaMeter/Fill").set_value(num)
+	
 
 
 func on_placeholder_entered():
