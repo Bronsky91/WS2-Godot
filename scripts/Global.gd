@@ -61,7 +61,7 @@ func hit_base(damage):
 		game.get_node("TowerDefenseHUD/HealthMeter/Fill").set_value(0)
 		print("Harry Potter is dead")
 		# End level GAME OVER
-		get_tree().change_scene("res://scenes/gameover.tscn")
+		get_tree().change_scene("res://scenes/GameOver.tscn")
 	else:
 		base_hp -= damage
 		game.get_node("TowerDefenseHUD/HealthMeter/Fill").set_value(base_hp)
