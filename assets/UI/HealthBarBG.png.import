@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rune_placeholder.png-618265baa5c0a58f7b5eec5b1faee5c1.stex"
+path="res://.import/HealthBarBG.png-9cf7f4864ead3354294908d8c55552b3.stex"
 
 [deps]
 
-source_file="res://assets/rune_placeholder.png"
-dest_files=[ "res://.import/rune_placeholder.png-618265baa5c0a58f7b5eec5b1faee5c1.stex" ]
+source_file="res://Assets/UI/HealthBarBG.png"
+dest_files=[ "res://.import/HealthBarBG.png-9cf7f4864ead3354294908d8c55552b3.stex" ]
 
 [params]
 

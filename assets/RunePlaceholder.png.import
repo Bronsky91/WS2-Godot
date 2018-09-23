@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ult_bar_fill.png-68c1862c8c3d5d738c2fa5cc475cad1d.stex"
+path="res://.import/RunePlaceholder.png-33f4b04732a70e0771039fc3c244b6a3.stex"
 
 [deps]
 
-source_file="res://assets/UI/ult_bar_fill.png"
-dest_files=[ "res://.import/ult_bar_fill.png-68c1862c8c3d5d738c2fa5cc475cad1d.stex" ]
+source_file="res://Assets/RunePlaceholder.png"
+dest_files=[ "res://.import/RunePlaceholder.png-33f4b04732a70e0771039fc3c244b6a3.stex" ]
 
 [params]
 

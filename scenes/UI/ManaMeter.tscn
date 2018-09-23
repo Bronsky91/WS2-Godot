@@ -1,7 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://assets/UI/mana_bar_bg.png" type="Texture" id=1]
-[ext_resource path="res://assets/UI/ult_bar_fill.png" type="Texture" id=2]
+[ext_resource path="res://Assets/UI/ManaBarBG.png" type="Texture" id=1]
+[ext_resource path="res://Assets/UI/UltBarFill.png" type="Texture" id=2]
+
+
 
 [node name="Bar" type="HBoxContainer"]
 

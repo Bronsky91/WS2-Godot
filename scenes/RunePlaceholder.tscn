@@ -2,7 +2,8 @@
 
 [ext_resource path="res://scripts/RunePlaceholder.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Rune.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/rune_placeholder.png" type="Texture" id=3]
+[ext_resource path="res://assets/RunePlaceholder.png" type="Texture" id=3]
+
 
 [node name="RunePlaceholder" type="Node2D" index="0"]
 
