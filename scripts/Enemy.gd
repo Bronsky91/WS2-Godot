@@ -28,12 +28,10 @@ func _physics_process(delta):
 		
 
 func take_damage(damage):
-	print("TAKING DAMAGE")
 	health -= damage
 	if health <= 0:
 		_die()
 
 func _die():
-	print("DEAD")
 	# explosion / death animation
 	queue_free()

@@ -1,14 +1,15 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=2 format=2]
 
-[ext_resource path="res://scripts/Base.gd" type="Script" id=1]
-[ext_resource path="res://assets/tower.png" type="Texture" id=2]
+[ext_resource path="res://assets/tower.png" type="Texture" id=1]
 
-[node name="Base" type="Node2D" index="0"]
+[node name="Base" type="Node2D"]
 
-script = ExtResource( 1 )
+position = Vector2( -0.352066, -0.738808 )
+scale = Vector2( 0.230933, 0.241818 )
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
-texture = ExtResource( 2 )
+position = Vector2( 6.36643, 3.03999 )
+texture = ExtResource( 1 )
 
 

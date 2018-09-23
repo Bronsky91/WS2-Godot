@@ -12,7 +12,7 @@ use_filter = false
 font_data = ExtResource( 1 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="StartMenu" type="Node" index="0"]
+[node name="StartMenu" type="Node"]
 
 [node name="Start" type="Control" parent="." index="0"]
 
@@ -40,7 +40,7 @@ anchor_bottom = 0.0
 margin_left = -47.0
 margin_top = 72.0
 margin_right = 137.0
-margin_bottom = 126.0
+margin_bottom = 129.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2

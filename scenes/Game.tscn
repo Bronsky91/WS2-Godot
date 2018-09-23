@@ -2,58 +2,60 @@
 
 [ext_resource path="res://scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Enemy.tscn" type="PackedScene" id=2]
-[ext_resource path="res://scenes/Base.tscn" type="PackedScene" id=3]
-[ext_resource path="res://scenes/UI/TowerDefenseHUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/UI/TowerDefenseHUD.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/Base.tscn" type="PackedScene" id=4]
 
 [sub_resource type="Curve2D" id=1]
 
 bake_interval = 5.0
 _data = {
-"points": PoolVector2Array( 0, 0, 146.574, -196.151, -64.6743, 709.379, -237.568, 226.005, 160.246, -158.015, 427.05, 636.452, 0, 0, 129.588, 84.4203, 848.219, 625.86, 0, 0, 0, 0, 1225.52, 634.062, 0, 0, 0, 0, 1403.92, 779.651 )
+"points": PoolVector2Array( 0, 0, 99.8464, -191.629, -64.6743, 709.379, -104.922, -196.051, 68.2981, 173.6, 604.9, 688.706, 0, 0, 150.691, -82.8948, 1090.26, 697.75, 0, 0, 0, 0, 1361.59, 837.933, 0, 0, 0, 0, 1491.22, 1092.67 )
 }
 
 [sub_resource type="Curve2D" id=2]
 
 bake_interval = 5.0
 _data = {
-"points": PoolVector2Array( 0, 0, 0, 0, -141.443, 409.239, -250.421, -82.697, 100.168, 37.2719, 171.989, 583.671, 0, 0, 0, 0, 404.872, 594.256, -149.088, -78.0381, 114.145, 3.49424, 685.389, 570.439, 0, 0, 215.478, -71.0496, 867.99, 533.389, 0, 0, 159.57, 62.8963, 1156.45, 583.671, 0, 0, 0, 0, 1463.12, 449.642 )
+"points": PoolVector2Array( 0, 0, 0, 0, -91.5088, 461.452, -250.421, -82.697, 143.96, 76.3942, 152.269, 627.378, 0, 0, 0, 0, 457.355, 595.827, -149.088, -78.0381, 114.145, 3.49424, 759.523, 593.303, 0, 0, 215.478, -71.0496, 959.508, 525.155, 0, 0, 137.674, 64.1583, 1258.76, 498.653, 0, 0, 0, 0, 1436.84, 584.469 )
 }
 
-[node name="Game" type="Node" index="0"]
+[node name="Game" type="Node"]
 
 script = ExtResource( 1 )
-number_of_waves = 4
+number_of_waves = 10
 enemy = ExtResource( 2 )
 
-[node name="Path1" type="Path2D" parent="." index="0"]
+[node name="TowerDefenseHUD" parent="." index="0" instance=ExtResource( 3 )]
+
+margin_left = 2.0
+margin_top = -4.0
+margin_right = 2.0
+margin_bottom = -4.0
+
+[node name="Path1" type="Path2D" parent="." index="1"]
 
 self_modulate = Color( 0.5, 0.6, 1, 0.7 )
 position = Vector2( 12.0429, -494.053 )
 curve = SubResource( 1 )
 _sections_unfolded = [ "Pause", "Transform", "Visibility", "Z Index" ]
 
-[node name="Path2" type="Path2D" parent="." index="1"]
+[node name="Path2" type="Path2D" parent="." index="2"]
 
 self_modulate = Color( 0.5, 0.6, 1, 0.7 )
+position = Vector2( 2.98382, -87.4093 )
+scale = Vector2( 1.03261, 1.1944 )
 curve = SubResource( 2 )
 
-[node name="Timer" type="Timer" parent="." index="2"]
+[node name="Timer" type="Timer" parent="." index="3"]
 
 process_mode = 1
 wait_time = 1.5
 one_shot = false
 autostart = true
 
-[node name="Base" parent="." index="3" instance=ExtResource( 3 )]
+[node name="Base" parent="." index="4" instance=ExtResource( 4 )]
 
-position = Vector2( 1482.55, 354.745 )
-
-[node name="TowerDefenseHUD" parent="." index="4" instance=ExtResource( 4 )]
-
-margin_left = 2.0
-margin_top = -4.0
-margin_right = 2.0
-margin_bottom = -4.0
+position = Vector2( 1500.64, 610.993 )
 
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
 

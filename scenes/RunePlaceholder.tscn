@@ -4,15 +4,18 @@
 [ext_resource path="res://scenes/Rune.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/rune_placeholder.png" type="Texture" id=3]
 
-[node name="RunePlaceholder" type="Node2D"]
+[node name="RunePlaceholder" type="Node2D" index="0"]
 
+position = Vector2( 0.102595, 0.846178 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Material", "Transform", "Visibility" ]
 rune = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
+position = Vector2( -3.11766, -5.71594 )
+scale = Vector2( 0.285478, 0.280059 )
 texture = ExtResource( 3 )
-_sections_unfolded = [ "Material", "Visibility" ]
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
 
 

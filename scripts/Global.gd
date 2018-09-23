@@ -15,7 +15,7 @@ func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	pass
-
+	
 
 func increase_ult_charge(num):
 	# Increase the ultimate charge by raw damage multiplied by dampener value
@@ -57,7 +57,7 @@ func on_placeholder_exited():
 
 
 func hit_base(damage):
-	if damage > base_hp:
+	if damage >= base_hp:
 		game.get_node("TowerDefenseHUD/HealthMeter/Fill").set_value(0)
 		print("Harry Potter is dead")
 		# End level GAME OVER

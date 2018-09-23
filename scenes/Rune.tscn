@@ -6,8 +6,10 @@
 
 [node name="Rune" type="Node2D"]
 
-position = Vector2( 501.939, 253.74 )
+position = Vector2( -0.34737, 0.410734 )
+scale = Vector2( 0.248179, 0.258401 )
 script = ExtResource( 1 )
+_sections_unfolded = [ "Transform" ]
 spell = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="." index="0"]

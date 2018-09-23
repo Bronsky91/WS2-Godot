@@ -23,7 +23,7 @@ func _on_toggled(toggled):
 	if(toggled):
 		# TODO: Create conditions with declared variables above
 		new_rune = rune_placeholder.instance()
-		get_tree().get_root().add_child(new_rune)
+		get_parent().add_child(new_rune)
 		global.placeholder_cursor = weakref(new_rune)
 	else:
 		global.placeholder_cursor = null
