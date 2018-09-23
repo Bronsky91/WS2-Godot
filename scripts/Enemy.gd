@@ -11,11 +11,13 @@ func _ready():
 	add_to_group("enemies")
 	set_physics_process(true)
 
+
 func init(sprite, speed, health, damage):
 	get_node("Sprite").set_texture(load("res://Assets/" + sprite + ".png"))
 	_speed =  speed
 	_health = health
 	_damage = damage
+
 
 func _physics_process(delta):
 	#if health <= 0:
@@ -37,6 +39,7 @@ func take_damage(damage):
 	_health -= damage
 	if _health <= 0:
 		_die()
+
 
 func _die():
 	# explosion / death animation
