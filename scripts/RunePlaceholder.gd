@@ -5,8 +5,8 @@ onready var global = get_node("/root/Global")
 onready var placeholder = $Sprite
 var disabled = false
 var cost = 25
-var power_level = 1.0
-var max_power_level = 3.0
+var power_level = 1
+var max_power_level = 3
 var Mouse_Position
 var rune_scale = .25
 
@@ -20,22 +20,20 @@ func _input(event):
 	if disabled:
 		return
 	if event.is_pressed():
-		if event.button_index == BUTTON_WHEEL_UP:
-			power_level += 1.0
-			if power_level <= max_power_level and power_level > 0:
-				cost += 25
-				print("power_level = " + str(power_level))
-				print("cost = " + str(cost))
-				rune_scale = .25 * power_level
-				placeholder.set_scale(Vector2(rune_scale, rune_scale))
-		if event.button_index == BUTTON_WHEEL_DOWN:
-			power_level -= 1.0
-			if power_level > 0 and power_level <= max_power_level:
-				cost -= 25
-				print("power_level = " + str(power_level))
-				print("cost = " + str(cost))
-				rune_scale -= .25
-				placeholder.set_scale(Vector2(rune_scale, rune_scale))
+		if event.button_index == BUTTON_WHEEL_UP and power_level < max_power_level:
+			power_level += 1
+			cost += 25
+			print("power_level = " + str(power_level))
+			print("cost = " + str(cost))
+			rune_scale = .25 * power_level
+			placeholder.set_scale(Vector2(rune_scale, rune_scale))
+		if event.button_index == BUTTON_WHEEL_DOWN and power_level > 1:
+			power_level -= 1
+			cost -= 25
+			print("power_level = " + str(power_level))
+			print("cost = " + str(cost))
+			rune_scale -= .25
+			placeholder.set_scale(Vector2(rune_scale, rune_scale))
 		if event.button_index == BUTTON_LEFT and global.mana >= cost:
 			var new_rune = rune.instance()
 			new_rune.position = get_global_mouse_position()
