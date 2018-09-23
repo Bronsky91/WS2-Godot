@@ -11,9 +11,11 @@ scale = Vector2( 0.248179, 0.258401 )
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
 spell = ExtResource( 2 )
+speed = 450
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
 texture = ExtResource( 3 )
+_sections_unfolded = [ "Transform" ]
 
 

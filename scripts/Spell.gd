@@ -1,7 +1,5 @@
 extends Node2D
 
-export var speed = 450
-export var damage = 25
 var direction = Vector2(0, -1)
 var target = null
 var rune = null
@@ -19,12 +17,12 @@ func _physics_process(delta):
 	if target and target.get_ref():
 		var pos = get_global_position()
 		if target.get_ref().get_global_position().distance_to(get_global_position()) < 10:
-			target_hit()
+			target_hit(rune.get_ref().damage)
 			return
 		direction = (target.get_ref().get_global_position() - pos).normalized()
 		var rad_angle = atan2(-direction.x, direction.y)
 		set_rotation(rad_angle)
-		set_position(pos + (direction * speed * delta))
+		set_position(pos + (direction * rune.get_ref().speed * delta))
 	else:
 		# TODO: special animation or behavior for fireball whose target dies before reaching it?
 		# TODO: extra logic to account for runes that may be destroyed before this part of the spell code is executed
@@ -32,7 +30,7 @@ func _physics_process(delta):
 		queue_free()
 
 
-func target_hit():
+func target_hit(damage):
 	# TODO: extra logic to account for runes that may be destroyed before this part of the spell code is executed
 	rune.get_ref().rearm()
 	target.get_ref().take_damage(damage)

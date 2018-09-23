@@ -6,13 +6,13 @@
 [node name="Spell" type="Node2D"]
 
 script = ExtResource( 1 )
-speed = 450
-damage = 25
+_sections_unfolded = [ "Transform" ]
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
 position = Vector2( -0.228661, 0.243858 )
 scale = Vector2( 0.212364, 0.229549 )
 texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
 
 

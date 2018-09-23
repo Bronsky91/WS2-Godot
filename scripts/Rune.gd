@@ -7,6 +7,9 @@ var time = 0.0
 var fire_delta = 1.0/2.0
 var fire_next = 0.0
 var target = null
+var damage = 25
+export var speed = 450
+var spell_scale
 
 
 func _ready():
@@ -43,6 +46,7 @@ func _shoot(target):
 	if time > fire_next:
 		firing = true
 		var new_spell = spell.instance()
+		new_spell.set_scale(spell_scale)
 		new_spell.target = target
 		new_spell.rune = weakref(self)
 		new_spell.position = global_position
@@ -52,3 +56,6 @@ func _shoot(target):
 
 func rearm():
 	firing = false
+	
+	
+	

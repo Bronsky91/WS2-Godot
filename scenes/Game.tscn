@@ -22,7 +22,7 @@ _data = {
 [node name="Game" type="Node"]
 
 script = ExtResource( 1 )
-number_of_waves = 10
+number_of_waves = 20
 enemy = ExtResource( 2 )
 
 [node name="TowerDefenseHUD" parent="." index="0" instance=ExtResource( 3 )]
@@ -49,7 +49,7 @@ curve = SubResource( 2 )
 [node name="Timer" type="Timer" parent="." index="3"]
 
 process_mode = 1
-wait_time = 1.5
+wait_time = 1.0
 one_shot = false
 autostart = true
 
