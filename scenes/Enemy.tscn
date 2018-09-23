@@ -9,7 +9,7 @@ custom_solver_bias = 0.0
 radius = 10.0
 height = 20.0
 
-[node name="Enemy" type="RigidBody2D"]
+[node name="Enemy" type="RigidBody2D" index="0"]
 
 position = Vector2( 0.187386, -0.280029 )
 scale = Vector2( 0.253207, 0.278606 )
@@ -33,8 +33,6 @@ angular_velocity = 0.0
 angular_damp = -1.0
 script = ExtResource( 1 )
 _sections_unfolded = [ "Angular", "Applied Forces", "Collision", "Linear", "Material", "Pickable", "Transform", "Visibility", "Z Index" ]
-health = 125
-damage = 20
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 

@@ -25,6 +25,7 @@ func _begin_wave():
 
 func _spawn_enemy(type,path):
 	var new_enemy = type.instance()
+	new_enemy.init("Enemy",200,125,20)
 	var pathFollow = PathFollow2D.new()
 	pathFollow.set_loop(false)
 	self.get_node(path).add_child(pathFollow)
