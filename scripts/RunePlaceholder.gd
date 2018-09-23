@@ -25,16 +25,14 @@ func _input(event):
 			if power_level <= max_power_level and power_level > 0:
 				cost += 25
 				print("power_level = " + str(power_level))
-				print("mana = " + str(global.mana))
 				print("cost = " + str(cost))
 				rune_scale = .25 * power_level
 				placeholder.set_scale(Vector2(rune_scale, rune_scale))
 		if event.button_index == BUTTON_WHEEL_DOWN:
 			power_level -= 1.0
-			if power_level > 0.0 and power_level <= max_power_level:
+			if power_level > 0 and power_level <= max_power_level:
 				cost -= 25
 				print("power_level = " + str(power_level))
-				print("mana = " + str(global.mana))
 				print("cost = " + str(cost))
 				rune_scale -= .25
 				placeholder.set_scale(Vector2(rune_scale, rune_scale))
@@ -53,8 +51,6 @@ func _input(event):
 		if global.mana >= cost:
 			placeholder.modulate = Color(0,1,0)
 
-		
-	
 
 func set_visibility(visible):
 	if(visible):
