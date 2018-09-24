@@ -1,0 +1,85 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scripts/UltimateCast.gd" type="Script" id=1]
+[ext_resource path="res://assets/RunePlaceholder.png" type="Texture" id=2]
+
+[sub_resource type="Curve2D" id=1]
+
+bake_interval = 0.01
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 139.886, -219.326, 0, 0, 0, 0, 139.906, 710.644 )
+}
+
+[sub_resource type="Curve2D" id=2]
+
+bake_interval = 5.0
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 637.077, -54.3913, 0, 0, 0, 0, 636.747, 872.901 )
+}
+
+[sub_resource type="Curve2D" id=3]
+
+bake_interval = 5.0
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, 316.246, -218.958, 0, 0, 0, 0, 316.145, 711.176 )
+}
+
+[node name="UltimateCasting" type="Node" index="0"]
+
+script = ExtResource( 1 )
+number_of_notes = 6
+
+[node name="CatchRune" type="Sprite" parent="." index="0"]
+
+position = Vector2( 543.273, 691.687 )
+scale = Vector2( 0.575972, 0.58362 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CatchRune2" type="Sprite" parent="." index="1"]
+
+position = Vector2( 637.238, 688.117 )
+scale = Vector2( 0.575972, 0.58362 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="CatchRune3" type="Sprite" parent="." index="2"]
+
+position = Vector2( 723.001, 688.432 )
+scale = Vector2( 0.575972, 0.58362 )
+texture = ExtResource( 2 )
+_sections_unfolded = [ "Transform" ]
+
+[node name="Path1" type="Path2D" parent="." index="3"]
+
+self_modulate = Color( 0.5, 0.6, 1, 0.7 )
+position = Vector2( 408.056, 162.986 )
+curve = SubResource( 1 )
+_sections_unfolded = [ "Transform", "Visibility" ]
+
+[node name="Path2" type="Path2D" parent="." index="4"]
+
+self_modulate = Color( 0.5, 0.6, 1, 0.7 )
+curve = SubResource( 2 )
+
+[node name="Path3" type="Path2D" parent="." index="5"]
+
+self_modulate = Color( 0.5, 0.6, 1, 0.7 )
+position = Vector2( 408.056, 162.986 )
+curve = SubResource( 3 )
+
+[node name="NoteTimer" type="Timer" parent="." index="6"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[node name="BarTimer" type="Timer" parent="." index="7"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+

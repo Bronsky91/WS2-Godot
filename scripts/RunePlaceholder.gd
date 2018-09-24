@@ -23,26 +23,19 @@ func _input(event):
 		if event.button_index == BUTTON_WHEEL_UP and power_level < max_power_level:
 			power_level += 1
 			cost += 25
-			print("power_level = " + str(power_level))
-			print("cost = " + str(cost))
 			rune_scale = .25 * power_level
 			placeholder.set_scale(Vector2(rune_scale, rune_scale))
 		if event.button_index == BUTTON_WHEEL_DOWN and power_level > 1:
 			power_level -= 1
 			cost -= 25
-			print("power_level = " + str(power_level))
-			print("cost = " + str(cost))
 			rune_scale -= .25
 			placeholder.set_scale(Vector2(rune_scale, rune_scale))
 		if event.button_index == BUTTON_LEFT and global.mana >= cost:
 			var new_rune = rune.instance()
 			new_rune.position = get_global_mouse_position()
-			_balance_power(power_level)
 			_power_up(new_rune, power_level) # Power up function ups the cost and powers up the rune
 			global.mana -=  cost 
 			global.mana_bar(global.mana)
-			print("mana = " + str(global.mana))
-			print("cost = " + str(cost))
 			get_tree().get_root().add_child(new_rune)
 		if global.mana < cost:
 			placeholder.modulate = Color(1,0,0)
@@ -68,8 +61,3 @@ func _power_up(rune, power):
 			rune.spell_scale = Vector2(1.0 + rune_scale, 1.0 + rune_scale)
 			
 			
-func _balance_power(power):
-	if power > max_power_level:
-		power_level = max_power_level
-	if power < 0:
-		power_level = 1.0

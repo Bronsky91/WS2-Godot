@@ -1,15 +1,13 @@
 extends Node
 
-onready var global = get_node("/root/Global")
-onready var wave_timer = $Timer
-export var number_of_waves = 6
-var new_wave = false
-var wave_counter = 0
-export(PackedScene) var enemy
+onready var note_timer = $NoteTimer
+onready var bar_timer = $BarTimer
+export var number_of_notes = 6
+var new_bar = false
+var bar_counter = 0
+
 
 func _ready():
-	#if global.restart:
-		#get_tree().reload_current_scene()
 	global.game = self
 
 
