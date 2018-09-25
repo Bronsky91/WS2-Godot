@@ -7,9 +7,11 @@ var new_wave = false
 var wave_counter = 0
 export(PackedScene) var enemy
 
+
 func _ready():
 	#if global.restart:
 		#get_tree().reload_current_scene()
+	wave_timer.stop()
 	global.game = self
 
 

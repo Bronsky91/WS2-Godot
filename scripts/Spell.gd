@@ -17,12 +17,12 @@ func _physics_process(delta):
 	if target and target.get_ref():
 		var pos = get_global_position()
 		if target.get_ref().get_global_position().distance_to(get_global_position()) < 10:
-			target_hit(rune.get_ref().damage)
+			target_hit(rune.get_ref()._damage)
 			return
 		direction = (target.get_ref().get_global_position() - pos).normalized()
 		var rad_angle = atan2(-direction.x, direction.y)
 		set_rotation(rad_angle)
-		set_position(pos + (direction * rune.get_ref().speed * delta))
+		set_position(pos + (direction * rune.get_ref()._speed * delta))
 	else:
 		# TODO: special animation or behavior for fireball whose target dies before reaching it?
 		# TODO: extra logic to account for runes that may be destroyed before this part of the spell code is executed

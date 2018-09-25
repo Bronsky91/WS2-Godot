@@ -4,8 +4,7 @@
 [ext_resource path="res://scenes/Rune.tscn" type="PackedScene" id=2]
 [ext_resource path="res://assets/RunePlaceholder.png" type="Texture" id=3]
 
-
-[node name="RunePlaceholder" type="Node2D" index="0"]
+[node name="RunePlaceholder" type="Node2D"]
 
 position = Vector2( 0.102595, 0.846178 )
 script = ExtResource( 1 )
