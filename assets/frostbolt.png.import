@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/rune.png-6a91260895c6df2abe3db3ab408b9a3f.stex"
+path="res://.import/frostbolt.png-f34ae300979e586d66347a2416267dc4.stex"
 
 [deps]
 
-source_file="res://assets/rune.png"
-dest_files=[ "res://.import/rune.png-6a91260895c6df2abe3db3ab408b9a3f.stex" ]
+source_file="res://assets/frostbolt.png"
+dest_files=[ "res://.import/frostbolt.png-f34ae300979e586d66347a2416267dc4.stex" ]
 
 [params]
 

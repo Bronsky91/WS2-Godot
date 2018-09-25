@@ -2,11 +2,11 @@ extends Node2D
 
 export(PackedScene) var spell
 
-var _attack_range = 300
-var _fire_delta = 1.0/2.0
-var _damage = 25
-var _speed = 450
-var _cost = 25
+var _attack_range #= 300
+var _fire_delta #= 1.0/2.0
+var _damage #= 25
+var _speed #= 450
+var _spell_sprite
 
 var fire_next = 0.0
 var target = null
@@ -15,19 +15,20 @@ var firing = false
 var time = 0.0
 
 
+
 func _ready():
 	#connect("area_entered", self, "_on_area_entered")
 	#connect("area_exited", self, "_on_area_exited")
 	pass
 
 
-func init(sprite, speed, attack_range, fire_delta, damage, cost):
-	get_node("Sprite").set_texture(load("res://Assets/" + sprite + ".png"))
-	_speed =  speed
-	_attack_range = attack_range
-	_fire_delta = fire_delta
-	_damage = damage
-	_cost = cost
+func init(rune_details):
+	get_node("Sprite").set_texture(load("res://Assets/" + rune_details["rune_sprite"] + ".png"))
+	_speed =  rune_details["speed"]
+	_attack_range = rune_details["attack_range"]
+	_fire_delta = rune_details["fire_delta"]
+	_damage = rune_details["damage"]
+	_spell_sprite = rune_details["spell_sprite"]
 	
 
 func _process(delta):
@@ -60,6 +61,7 @@ func _shoot(target):
 	if time > fire_next:
 		firing = true
 		var new_spell = spell.instance()
+		new_spell.get_node("Sprite").set_texture(load("res://Assets/" + _spell_sprite + ".png"))
 		new_spell.set_scale(spell_scale)
 		new_spell.target = target
 		new_spell.rune = weakref(self)

@@ -11,11 +11,15 @@ var base_hp = 100					# Current base health value
 var base_hp_max = 100				# Base maximum health value
 var mana = 200
 var mana_max = 200
+var tome_library # JSON File
 
 func _ready():
-	# Called when the node is added to the scene for the first time.
-	# Initialization here
-	pass
+	var file = File.new()
+	file.open("res://tomes/tome_library.json", file.READ)
+	var text = file.get_as_text()
+	tome_library = JSON.parse(text).result
+	file.close()
+	
 	
 
 func increase_ult_charge(num):

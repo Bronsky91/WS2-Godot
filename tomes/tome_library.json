@@ -1,0 +1,30 @@
+{
+    "Tomes": [
+        {
+            "name": "Fireball",
+            "cost": 25,
+            "size": 0.25,
+            "max_power_level": 3,
+            "attack_range": 300,
+            "fire_delta": 0.5,
+            "damage": 25,
+            "speed": 450,
+            "rune_sprite": "yellow",
+            "spell_sprite": "fireball",
+            "button_name": "Felo'Melorn"
+        },
+        {
+            "name": "Frostbolt",
+            "cost": 10,
+            "size": 0.10,
+            "max_power_level": 5,
+            "attack_range": 200,
+            "fire_delta": 0.2,
+            "damage": 10,
+            "speed": 800,
+            "rune_sprite": "blue",
+            "spell_sprite": "frostbolt",
+            "button_name": "Frostbolt"
+        }
+    ]
+}
