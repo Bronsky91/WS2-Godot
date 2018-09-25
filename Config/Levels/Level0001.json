@@ -1,23 +1,17 @@
 {
   "waves": [
     {
-      "id" : "1",
 	  "wave_timer" : 10.0,
       "enemies" : [
-        {"type": "enemy", "enemy_timer": 0.25, "path": "Path1", "quantity": 5},
-        {"type": "enemy", "enemy_timer": 0.25, "path": "Path2", "quantity": 5}
+        {"sprite": "Enemy", "speed": 600, "health": 125, "damage": 20, "enemy_timer": 0.25, "path": "Path1", "quantity": 2},
+        {"sprite": "Enemy", "speed": 25, "health": 125, "damage": 20, "enemy_timer": 2, "path": "Path2", "quantity": 5}
       ]
     },
     {
-      "id" : "2",
       "wave_timer" : 10.0,
       "enemies" : [
-        {"type": "enemy", "enemy_timer": 0.25, "path": "Path2"},
-        {"type": "enemy", "enemy_timer": 0.25, "path": "Path2"},
-        {"type": "enemy", "enemy_timer": 0.25, "path": "Path2"},
-        {"type": "enemy", "enemy_timer": 0.25, "path": "Path2"},
-        {"type": "enemy", "enemy_timer": 0.25, "path": "Path2"},
-        {"type": "enemy", "enemy_timer": 0.25, "path": "Path2"}
+        {"sprite": "Enemy", "speed": 200, "health": 125, "damage": 20, "enemy_timer": 0.25, "path": "Path2", "quantity": 3},
+        {"sprite": "Enemy", "speed": 200, "health": 125, "damage": 20, "enemy_timer": 0.25, "path": "Path1", "quantity": 3}
       ]
     }
   ]
