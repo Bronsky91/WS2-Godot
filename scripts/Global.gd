@@ -46,7 +46,6 @@ func mana_bar(num):
 	game.get_node("TowerDefenseHUD/ManaMeter/Fill").set_value(num)
 	
 
-
 func on_placeholder_entered():
 	if(placeholder_cursor != null and placeholder_cursor.get_ref()):
 		placeholder_cursor.get_ref().set_visibility(false)

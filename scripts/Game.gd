@@ -15,13 +15,15 @@ func _ready():
 
 func _process(delta):
 	if new_wave:
-		_begin_wave()
+		_begin_wave(randi()%2+1, rand_range(.1,.5))
 		
 
-func _begin_wave():
-	_spawn_enemy(enemy,"Path1")
-	_spawn_enemy(enemy,"Path2")
+func _begin_wave(path_num, set_timer):
+	# path_num is the path number the enemy will spawn on and follow
+	# set_timer sets the time between enemy waves
+	_spawn_enemy(enemy,"Path" + str(path_num))
 	new_wave = false
+	wave_timer.set_wait_time(set_timer)
 	wave_timer.start()
 	
 
