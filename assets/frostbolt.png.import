@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/frostbolt.png-f34ae300979e586d66347a2416267dc4.stex"
+path="res://.import/frostbolt.png-ec5ebe48d3aded81859688e56024a7cd.stex"
 
 [deps]
 
-source_file="res://assets/frostbolt.png"
-dest_files=[ "res://.import/frostbolt.png-f34ae300979e586d66347a2416267dc4.stex" ]
+source_file="res://Assets/frostbolt.png"
+dest_files=[ "res://.import/frostbolt.png-ec5ebe48d3aded81859688e56024a7cd.stex" ]
 
 [params]
 

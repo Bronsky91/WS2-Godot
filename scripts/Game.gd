@@ -2,7 +2,8 @@ extends Node
 
 onready var global = get_node("/root/Global")
 onready var wave_timer = $Timer
-export var number_of_waves = 6
+var number_of_waves = 6
+var waves
 var new_wave = false
 var wave_counter = 0
 export(PackedScene) var enemy
@@ -17,10 +18,23 @@ func _ready():
 
 func _process(delta):
 	if new_wave:
+		_load_level("Level0001")
 		_begin_wave(randi()%2+1, rand_range(.1,.5))
 		
+		
+func _load_level(level):
+	var file = File.new()
+	file.open("res://Config/Levels/" + level + ".json", File.READ)
+	var text = file.get_as_text()
+	print("LEVEL: " + text)
+	waves = JSON.parse(text).result
+	print(waves)
+	number_of_waves = waves["waves"].size()
+	print("WAVE LENGTH: " + str(number_of_waves))
 
 func _begin_wave(path_num, set_timer):
+	_spawn_enemy(enemy,"Path1")
+	_spawn_enemy(enemy,"Path2")
 	# path_num is the path number the enemy will spawn on and follow
 	# set_timer sets the time between enemy waves
 	_spawn_enemy(enemy,"Path" + str(path_num))

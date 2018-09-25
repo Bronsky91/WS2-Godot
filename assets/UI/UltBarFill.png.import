@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/UltBarFill.png-380f029ca411d82fd762da9863d1955b.stex"
+path="res://.import/UltBarFill.png-cdbdf7679c91277c11011d1d91053a28.stex"
 
 [deps]
 
-source_file="res://assets/UI/UltBarFill.png"
-dest_files=[ "res://.import/UltBarFill.png-380f029ca411d82fd762da9863d1955b.stex" ]
+source_file="res://Assets/UI/UltBarFill.png"
+dest_files=[ "res://.import/UltBarFill.png-cdbdf7679c91277c11011d1d91053a28.stex" ]
 
 [params]
 
