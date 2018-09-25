@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ManaBarBG.png-d01811ae1fa85de8676fc935dcd7e8eb.stex"
+path="res://.import/ManaBarBG.png-a7207a2d6f6461296fd4c45ae76cab18.stex"
 
 [deps]
 
-source_file="res://Assets/UI/ManaBarBG.png"
-dest_files=[ "res://.import/ManaBarBG.png-d01811ae1fa85de8676fc935dcd7e8eb.stex" ]
+source_file="res://assets/UI/ManaBarBG.png"
+dest_files=[ "res://.import/ManaBarBG.png-a7207a2d6f6461296fd4c45ae76cab18.stex" ]
 
 [params]
 

@@ -16,7 +16,7 @@
         {
             "name": "Frostbolt",
             "cost": 10,
-            "size": 0.10,
+            "size": 0.20,
             "max_power_level": 5,
             "attack_range": 200,
             "fire_delta": 0.2,

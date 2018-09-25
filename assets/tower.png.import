@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Tower.png-2c4972127d897750cfba6269c556c94d.stex"
+path="res://.import/tower.png-10a2aef8028988b756264007bfc6c076.stex"
 
 [deps]
 
-source_file="res://Assets/Tower.png"
-dest_files=[ "res://.import/Tower.png-2c4972127d897750cfba6269c556c94d.stex" ]
+source_file="res://assets/tower.png"
+dest_files=[ "res://.import/tower.png-10a2aef8028988b756264007bfc6c076.stex" ]
 
 [params]
 

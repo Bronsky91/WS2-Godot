@@ -18,7 +18,6 @@ var _max_power_level
 
 func init_placeholder(rune_details):
 	_rune_details = rune_details
-	print("_____________")
 	_cost = rune_details["cost"]
 	_rune_scale = rune_details["size"]
 	_max_power_level = rune_details["max_power_level"]
@@ -41,7 +40,7 @@ func _input(event):
 		if event.button_index == BUTTON_WHEEL_DOWN and power_level > 1:
 			power_level -= 1
 			_cost -= 25
-			current_rune_scale = - _rune_scale
+			current_rune_scale -= _rune_scale
 			placeholder.set_scale(Vector2(current_rune_scale, current_rune_scale))
 		if event.button_index == BUTTON_LEFT and global.mana >= _cost:
 			var new_rune = rune.instance() # instances new rune to place
