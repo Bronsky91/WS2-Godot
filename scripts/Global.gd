@@ -4,8 +4,8 @@ var ult_charge = 0					# Current ultimate meter charge value
 var ult_max = 1000					# Ultimate meter maximum charge value
 var _ult_damage_to_charge = .1		# What damage dealt is multiplied by before being added to ultimate charge
 var game							# Reference to Game node (self-registers onready)
-var start_game = false
-# var restart = false						
+var start_game = false			
+var current_level = 1
 var placeholder_cursor = null
 var base_hp = 100					# Current base health value
 var base_hp_max = 100				# Base maximum health value
@@ -50,6 +50,10 @@ func decrease_ult_charge(num):
 func mana_bar(num):
 	game.get_node("TowerDefenseHUD/ManaMeter/Fill").set_value(num)
 	
+	
+func hp_bar(num):
+	game.get_node("TowerDefenseHUD/HealthMeter/Fill").set_value(num)
+	
 
 func on_placeholder_entered():
 	if(placeholder_cursor != null and placeholder_cursor.get_ref()):
@@ -63,12 +67,12 @@ func on_placeholder_exited():
 
 func hit_base(damage):
 	if damage >= base_hp:
-		game.get_node("TowerDefenseHUD/HealthMeter/Fill").set_value(0)
+		hp_bar(0)
 		print("Harry Potter is dead")
 		# End level GAME OVER
 		get_tree().change_scene("res://scenes/GameOver.tscn")
 	else:
 		base_hp -= damage
-		game.get_node("TowerDefenseHUD/HealthMeter/Fill").set_value(base_hp)
+		hp_bar(base_hp)
 	
 	

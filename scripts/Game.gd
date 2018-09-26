@@ -13,17 +13,17 @@ export(PackedScene) var enemy
 
 
 func _ready():
-	#if global.restart:
-		#get_tree().reload_current_scene()
-	#wave_timer.stop()
-	_load_level("Level0001")
+	_load_level("Level" + str(global.current_level))
 	global.game = self
+	global.mana_bar(global.mana)
+	global.hp_bar(global.base_hp)
 
 
 func _process(delta):
 	if spawn_new and not waves_over:
 		_process_wave()
 	elif waves_over and get_tree().get_nodes_in_group("enemies").size() == 0:
+		global.current_level += 1
 		get_tree().change_scene("res://scenes/LevelComplete.tscn")
 		
 		

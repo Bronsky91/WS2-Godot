@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/Fonts/old-timey.tres" type="DynamicFont" id=1]
-[ext_resource path="res://assets/Tangerine/Tangerine-Regular.ttf" type="DynamicFontData" id=2]
+[ext_resource path="res://assets/Fonts/Tangerine/Tangerine-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://scripts/Restart.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
@@ -54,7 +54,6 @@ _sections_unfolded = [ "custom_fonts" ]
 
 [node name="Control2" type="Control" parent="." index="1"]
 
-visible = false
 anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
