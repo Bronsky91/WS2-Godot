@@ -15,7 +15,7 @@ var tome_library # JSON File
 
 func _ready():
 	var file = File.new()
-	file.open("res://tomes/tome_library.json", file.READ)
+	file.open("res://config/tomes/tome_library.json", file.READ)
 	var text = file.get_as_text()
 	tome_library = JSON.parse(text).result
 	file.close()

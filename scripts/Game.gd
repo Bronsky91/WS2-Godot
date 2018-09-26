@@ -29,7 +29,7 @@ func _process(delta):
 		
 func _load_level(level):
 	var file = File.new()
-	file.open("res://Config/Levels/" + level + ".json", File.READ)
+	file.open("res://config/levels/" + level + ".json", File.READ)
 	var text = file.get_as_text()
 	waves = JSON.parse(text).result
 	if (waves["waves"].size() > 0):
