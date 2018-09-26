@@ -1,23 +1,34 @@
 extends HSlider
 
 onready var global = get_node("/root/Global")
-onready var rune = $Rune
-var disabled = false
+var rune_scale
+var current_power_level
+var max_power_level
+var new_scale
+var current_scale
+var rune_cost
 
-
+	
 func _ready():
-	#value = get_parent().power_level
-	pass
-	
-	
-func _process(delta):
-	pass
+	set_editable(false)
 
 
-func set_visibility(visible):
-	if(visible):
-		show()
-		disabled = false
-	else:
-		hide()
-		disabled = true
+func _on_ManaSlider_mouse_entered():
+	set_editable(true)
+
+
+func _on_ManaSlider_value_changed(value):
+	rune_scale = get_parent()._size
+	current_scale = get_parent().get_scale().x
+	print(str(current_power_level) + ' vs ' + str(value))
+	if current_power_level:
+		if current_power_level < value:
+			global.mana = global.mana - (rune_cost * value)
+			global.mana_bar(global.mana)
+			get_parent().power_up(value, rune_scale * value)
+			current_power_level = get_parent()._power_level
+		elif current_power_level > value:
+			global.mana = global.mana + (rune_cost * value)
+			global.mana_bar(global.mana)
+			get_parent().power_down(value, current_scale - rune_scale)
+			current_power_level = get_parent()._power_level

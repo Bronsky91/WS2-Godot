@@ -15,7 +15,6 @@ var _rune_scale
 var _max_power_level
 
 
-
 func init_placeholder(rune_details):
 	_rune_details = rune_details
 	_cost = rune_details["cost"]
@@ -34,23 +33,23 @@ func _input(event):
 	if event.is_pressed():
 		if event.button_index == BUTTON_WHEEL_UP and power_level < _max_power_level:
 			power_level += 1
-			_cost += 25
+			_cost += _rune_details["cost"] * power_level
 			current_rune_scale = _rune_scale * power_level
 			placeholder.set_scale(Vector2(current_rune_scale, current_rune_scale))
 		if event.button_index == BUTTON_WHEEL_DOWN and power_level > 1:
 			power_level -= 1
-			_cost -= 25
+			_cost -= _rune_details["cost"] * power_level
 			current_rune_scale -= _rune_scale
 			placeholder.set_scale(Vector2(current_rune_scale, current_rune_scale))
 		if event.button_index == BUTTON_LEFT and global.mana >= _cost:
 			var new_rune = rune.instance() # instances new rune to place
-			new_rune.init(_rune_details)
+			new_rune.init(_rune_details, power_level)
 			new_rune.position = get_global_mouse_position()
 			if current_rune_scale:
-				_power_up(new_rune, power_level, current_rune_scale) # Power up function ups the cost and powers up the rune
+				new_rune.power_up(power_level, current_rune_scale) # Power up function ups the cost and powers up the rune
 			else:
-				_power_up(new_rune, power_level, _rune_scale)
-			global.mana -=  _cost 
+				new_rune.power_up(power_level, _rune_scale)
+			global.mana -= _cost
 			global.mana_bar(global.mana)
 			get_tree().get_root().add_child(new_rune)
 		if global.mana < _cost:
@@ -68,11 +67,3 @@ func set_visibility(visible):
 		disabled = true
 		
 		
-func _power_up(rune, power, r_scale):
-		rune._damage *= 1.0 + (power / 10)
-		rune._fire_delta = 1.0/(power + 1.0)
-		rune._speed *= 1.0 + (power / 10)
-		rune.set_scale(Vector2(r_scale, r_scale))
-		rune.spell_scale = Vector2(1.0 + r_scale, 1.0 + r_scale)
-			
-			

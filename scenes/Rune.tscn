@@ -16,7 +16,7 @@ spell = ExtResource( 2 )
 
 _sections_unfolded = [ "Transform" ]
 
-[node name="HSlider" type="HSlider" parent="." index="1"]
+[node name="ManaSlider" type="HSlider" parent="." index="1"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -28,9 +28,9 @@ margin_right = 63.0
 margin_bottom = 27.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
-focus_mode = 2
+hint_tooltip = "Change mana value of Rune to lessen or improve power!!!"
 mouse_filter = 0
-mouse_default_cursor_shape = 0
+mouse_default_cursor_shape = 2
 size_flags_horizontal = 1
 size_flags_vertical = 0
 min_value = 1.0
@@ -39,12 +39,18 @@ step = 1.0
 page = 0.0
 value = 1.0
 exp_edit = false
-rounded = false
-editable = true
+rounded = true
+editable = false
 tick_count = 0
 ticks_on_borders = false
-focus_mode = 2
+focus_mode = 0
 script = ExtResource( 3 )
-_sections_unfolded = [ "Visibility" ]
+_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Material", "Mouse", "Rect", "Size Flags", "Visibility" ]
+
+[connection signal="mouse_entered" from="ManaSlider" to="ManaSlider" method="_on_ManaSlider_mouse_entered"]
+
+[connection signal="mouse_exited" from="ManaSlider" to="ManaSlider" method="_on_ManaSlider_mouse_exited"]
+
+[connection signal="value_changed" from="ManaSlider" to="ManaSlider" method="_on_ManaSlider_value_changed"]
 
 

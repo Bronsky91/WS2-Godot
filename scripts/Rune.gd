@@ -2,11 +2,18 @@ extends Node2D
 
 export(PackedScene) var spell
 
+onready var global = get_node("/root/Global")
+onready var mana_slider = $ManaSlider
+
 var _attack_range
 var _fire_delta
 var _damage
 var _speed
 var _spell_sprite
+var _power_level
+var _size
+var _max_power_level
+var _cost
 
 var fire_next = 0.0
 var target = null
@@ -15,18 +22,24 @@ var firing = false
 var time = 0.0
 
 
-
 func _ready():
-	pass
+	mana_slider.set_max(_max_power_level)
+	mana_slider.set_value(_power_level)
+	mana_slider.current_power_level = mana_slider.get_value()
+	mana_slider.rune_cost = _cost
 
 
-func init(rune_details):
+func init(rune_details, power_level):
 	get_node("Sprite").set_texture(load("res://Assets/" + rune_details["rune_sprite"] + ".png"))
 	_speed =  rune_details["speed"]
 	_attack_range = rune_details["attack_range"]
 	_fire_delta = rune_details["fire_delta"]
 	_damage = rune_details["damage"]
 	_spell_sprite = rune_details["spell_sprite"]
+	_size = rune_details["size"]
+	_max_power_level = rune_details["max_power_level"]
+	_power_level = power_level
+	_cost = rune_details["cost"]
 	
 
 func _process(delta):
@@ -72,4 +85,19 @@ func rearm():
 	firing = false
 	
 	
-	
+func power_up(power, r_scale):
+	_damage *= 1.0 + (power / 10)
+	_fire_delta = 1.0/(power + 1.0)
+	_speed *= 1.0 + (power / 10)
+	set_scale(Vector2(r_scale, r_scale))
+	spell_scale = Vector2(1.0 + r_scale, 1.0 + r_scale)
+	_power_level = power
+		
+
+func power_down(power, r_scale):
+	_damage *= 1.0 - (power / 10)
+	_fire_delta = 1.0/(power - 1.0)
+	_speed *= 1.0 - (power / 10)
+	set_scale(Vector2(r_scale, r_scale))
+	spell_scale = Vector2(1.0 + r_scale, 1.0 + r_scale)
+	_power_level = power

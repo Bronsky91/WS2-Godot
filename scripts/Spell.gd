@@ -32,6 +32,7 @@ func _physics_process(delta):
 
 func target_hit(damage):
 	# TODO: extra logic to account for runes that may be destroyed before this part of the spell code is executed
+	print("damage = " + str(damage))
 	rune.get_ref().rearm()
 	target.get_ref().take_damage(damage)
 	var global = get_node("/root/Global")
