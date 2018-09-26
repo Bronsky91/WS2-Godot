@@ -6,7 +6,7 @@ var _ult_damage_to_charge = .1		# What damage dealt is multiplied by before bein
 var game							# Reference to Game node (self-registers onready)
 var start_game = false			
 var current_level = 1
-var placeholder_cursor = null
+var node_to_hide = null
 var base_hp = 100					# Current base health value
 var base_hp_max = 100				# Base maximum health value
 var mana = 200
@@ -55,21 +55,20 @@ func hp_bar(num):
 	game.get_node("TowerDefenseHUD/HealthMeter/Fill").set_value(num)
 	
 
-func on_placeholder_entered():
-	if(placeholder_cursor != null and placeholder_cursor.get_ref()):
-		placeholder_cursor.get_ref().set_visibility(false)
+func on_node_entered():
+	if(node_to_hide != null and node_to_hide.get_ref()):
+		node_to_hide.get_ref().set_visibility(false)
 		
 		
-func on_placeholder_exited():
-	if(placeholder_cursor != null and placeholder_cursor.get_ref()):
-		placeholder_cursor.get_ref().set_visibility(true)
+func on_node_exited():
+	if(node_to_hide != null and node_to_hide.get_ref()):
+		node_to_hide.get_ref().set_visibility(true)
 
 
 func hit_base(damage):
 	if damage >= base_hp:
 		hp_bar(0)
 		print("Harry Potter is dead")
-		# End level GAME OVER
 		get_tree().change_scene("res://scenes/GameOver.tscn")
 	else:
 		base_hp -= damage

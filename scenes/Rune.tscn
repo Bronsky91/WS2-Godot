@@ -1,9 +1,10 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/Rune.gd" type="Script" id=1]
 [ext_resource path="res://scenes/Spell.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/ManaSlider.gd" type="Script" id=3]
 
-[node name="Rune" type="Node2D"]
+[node name="Rune" type="Node2D" index="0"]
 
 position = Vector2( -0.34737, 0.410734 )
 scale = Vector2( 0.248179, 0.258401 )
@@ -14,5 +15,36 @@ spell = ExtResource( 2 )
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
 _sections_unfolded = [ "Transform" ]
+
+[node name="HSlider" type="HSlider" parent="." index="1"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = -61.0
+margin_top = -29.0
+margin_right = 63.0
+margin_bottom = 27.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 0
+min_value = 1.0
+max_value = 3.0
+step = 1.0
+page = 0.0
+value = 1.0
+exp_edit = false
+rounded = false
+editable = true
+tick_count = 0
+ticks_on_borders = false
+focus_mode = 2
+script = ExtResource( 3 )
+_sections_unfolded = [ "Visibility" ]
 
 
