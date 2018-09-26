@@ -6,9 +6,9 @@
             "size": 0.25,
             "max_power_level": 3,
             "attack_range": 300,
-            "fire_delta": 0.5,
+            "fire_delta": 0.4,
             "damage": 25,
-            "speed": 450,
+            "speed": 600,
             "rune_sprite": "yellow",
             "spell_sprite": "fireball",
             "button_name": "Felo'Melorn"

@@ -15,8 +15,8 @@
         {
           "sprite": "Enemy",
           "speed": 100,
-          "health": 400,
-          "damage": 20,
+          "health": 250,
+          "damage": 40,
           "enemy_timer": 2,
           "path": "Path2",
           "quantity": 5

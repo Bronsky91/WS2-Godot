@@ -13,6 +13,7 @@ var mana = 200
 var mana_max = 200
 var tome_library # JSON File
 
+
 func _ready():
 	var file = File.new()
 	file.open("res://config/tomes/tome_library.json", file.READ)
@@ -21,7 +22,6 @@ func _ready():
 	file.close()
 	
 	
-
 func increase_ult_charge(num):
 	# Increase the ultimate charge by raw damage multiplied by dampener value
 	ult_charge += (num * _ult_damage_to_charge)
@@ -54,6 +54,7 @@ func mana_bar(num):
 func on_placeholder_entered():
 	if(placeholder_cursor != null and placeholder_cursor.get_ref()):
 		placeholder_cursor.get_ref().set_visibility(false)
+		
 		
 func on_placeholder_exited():
 	if(placeholder_cursor != null and placeholder_cursor.get_ref()):

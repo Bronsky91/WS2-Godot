@@ -2,10 +2,10 @@ extends Node2D
 
 export(PackedScene) var spell
 
-var _attack_range #= 300
-var _fire_delta #= 1.0/2.0
-var _damage #= 25
-var _speed #= 450
+var _attack_range
+var _fire_delta
+var _damage
+var _speed
 var _spell_sprite
 
 var fire_next = 0.0

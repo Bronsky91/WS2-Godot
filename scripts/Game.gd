@@ -2,8 +2,6 @@ extends Node
 
 onready var global = get_node("/root/Global")
 onready var wave_timer = $Timer
-var number_of_waves = 0
-var wave_id = 0
 var waves
 var spawn_new = false
 var waves_over = false
@@ -25,6 +23,8 @@ func _ready():
 func _process(delta):
 	if spawn_new and not waves_over:
 		_process_wave()
+	elif waves_over and get_tree().get_nodes_in_group("enemies").size() == 0:
+		get_tree().change_scene("res://scenes/LevelComplete.tscn")
 		
 		
 func _load_level(level):
@@ -63,8 +63,14 @@ func _increment_enemy():
 			if(current_wave > waves["waves"].size() - 1):
 				current_wave = 0
 				waves_over = true
+				wave_timer.stop()
+
 
 func _on_Timer_timeout():
 	_increment_enemy()
 	if not waves_over:
 		spawn_new = true
+		
+
+
+		
