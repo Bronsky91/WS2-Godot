@@ -38,7 +38,7 @@
                 {
                     "field": "speed",
                     "operand": "subtract",
-                    "value": 5,
+                    "value": 10,
                     "reoccuring": 0.5,
                     "duration": 5
                 }
