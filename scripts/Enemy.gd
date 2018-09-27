@@ -6,7 +6,7 @@ var _health
 var _damage
 
 var afflicted = false
-var affliction_rate = false
+var next_affliction_cycle = false
 var affliction_counter = 0
 var affliction_max = 0
 var debuff_details
@@ -28,7 +28,7 @@ func init(sprite, speed, health, damage):
 
 
 func _physics_process(delta):
-	if afflicted and affliction_rate:
+	if afflicted and next_affliction_cycle:
 		debuff_stack(debuff_details)
 	#if health <= 0:
 		#if dead_since > global.DEAD_CLEAN_INTVAL:
@@ -62,14 +62,13 @@ func debuff_stack(debuff_array):
 		if debuff["reoccuring"] > 0:
 			debuff_timer.set_wait_time(debuff["reoccuring"])
 			debuff_timer.start()
-		affliction_rate = false
+		next_affliction_cycle = false
 		# The code below brought to you buy GDScript..
 		if debuff["operand"] == "subtract":
 			if debuff["field"] == "health":
 				take_damage(debuff["value"])
 			elif debuff["field"] == "speed" and _speed > debuff["value"]:
 				_speed -= debuff["value"]
-				print(_speed)
 			elif debuff["field"] == "damage" and _damage > debuff["value"]:
 				_damage -= debuff["value"]
 		elif debuff["operand"] == "add":
@@ -99,7 +98,7 @@ func _on_DebuffTimer_timeout():
 	# calls debuff stack function
 	if affliction_counter <= affliction_max:
 		affliction_counter += 1
-		affliction_rate = true
+		next_affliction_cycle = true
 	else:
 		afflicted = false
 		affliction_counter = 0
