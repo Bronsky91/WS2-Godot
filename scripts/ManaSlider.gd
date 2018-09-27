@@ -25,7 +25,7 @@ func _on_ManaSlider_value_changed(value):
 	rune_scale = get_parent()._size
 	current_scale = get_parent().get_scale().x
 	if current_power_level:
-		if current_power_level < value and global.mana >= rune_cost:
+		if current_power_level < value:
 			global.mana -= (rune_cost * value)
 			global.mana_bar(global.mana)
 			get_parent().power_up(value, rune_scale * value)
