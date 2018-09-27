@@ -66,11 +66,10 @@ func debuff_stack(debuff_array):
 		# The code below brought to you buy GDScript..
 		if debuff["operand"] == "subtract":
 			if debuff["field"] == "health":
-				print(_health)
 				take_damage(debuff["value"])
-				print(_health)
 			elif debuff["field"] == "speed" and _speed > debuff["value"]:
 				_speed -= debuff["value"]
+				print(_speed)
 			elif debuff["field"] == "damage" and _damage > debuff["value"]:
 				_damage -= debuff["value"]
 		elif debuff["operand"] == "add":

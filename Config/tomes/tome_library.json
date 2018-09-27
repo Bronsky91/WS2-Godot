@@ -39,8 +39,8 @@
                     "field": "speed",
                     "operand": "subtract",
                     "value": 5,
-                    "reoccuring": 0,
-                    "duration": 1
+                    "reoccuring": 0.5,
+                    "duration": 5
                 }
             ]
         },
