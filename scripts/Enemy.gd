@@ -68,30 +68,28 @@ func debuff_stack(debuff_array):
 				take_damage(debuff["value"])
 			elif debuff["field"] == "speed" and _speed > 50:
 				_speed -= debuff["value"]
-			elif debuff["field"] == "damage" and _damage > 0:
+			elif debuff["field"] == "damage" and _damage > debuff["value"]:
 				_damage -= debuff["value"]
-				print('damage')
-				print(_damage)
 		elif debuff["operand"] == "add":
 			if debuff["field"] == "health":
 				_health += debuff["value"]
-			elif debuff["field"] == "speed" and _speed > 50:
+			elif debuff["field"] == "speed":
 				_speed += debuff["value"]
-			elif debuff["field"] == "damage" and _damage > 0:
+			elif debuff["field"] == "damage":
 				_damage += debuff["value"]
 		elif debuff["operand"] == "multiply":
 			if debuff["field"] == "health":
 				_health *= debuff["value"]
-			elif debuff["field"] == "speed" and _speed > 50:
+			elif debuff["field"] == "speed":
 				_speed *= debuff["value"]
-			elif debuff["field"] == "damage" and _damage > 0:
+			elif debuff["field"] == "damage":
 				_damage *= debuff["value"]
 		elif debuff["operand"] == "divide":
 			if debuff["field"] == "health":
 				_health /= debuff["value"]
 			elif debuff["field"] == "speed" and _speed > 50:
 				_speed /= debuff["value"]
-			elif debuff["field"] == "damage" and _damage > 0:
+			elif debuff["field"] == "damage" and _damage > debuff["value"]:
 				_damage /= debuff["value"]
 	
 
