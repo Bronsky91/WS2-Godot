@@ -23,6 +23,7 @@ var time = 0.0
 
 
 func _ready():
+	add_to_group("runes")
 	mana_slider.set_max(_max_power_level)
 	mana_slider.set_value(_power_level)
 	mana_slider.current_power_level = mana_slider.get_value()
