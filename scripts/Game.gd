@@ -71,6 +71,3 @@ func _on_Timer_timeout():
 	if not waves_over:
 		spawn_new = true
 		
-
-
-		

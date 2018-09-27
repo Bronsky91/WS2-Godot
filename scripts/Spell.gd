@@ -32,17 +32,19 @@ func _physics_process(delta):
 
 func target_hit(damage):
 	# TODO: extra logic to account for runes that may be destroyed before this part of the spell code is executed
-	print("damage = " + str(damage))
 	rune.get_ref().rearm()
 	target.get_ref().take_damage(damage)
 	# Conditional for debuff
+	if not target.get_ref().afflicted:
+		debuff(rune.get_ref()._debuff)
 	var global = get_node("/root/Global")
 	global.increase_ult_charge(damage)
 	queue_free()
 	
 	
-func debuff(effect_dict):
-	# Pass a dictionary that gives debuff data, use loop and case statement to apply to enemy
-	pass
+func debuff(debuff_array):
+	if debuff_array:
+		target.get_ref().afflicted = true
+		target.get_ref().debuff_details = rune.get_ref()._debuff
 		
 		

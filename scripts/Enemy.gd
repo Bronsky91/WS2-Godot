@@ -1,9 +1,16 @@
 extends RigidBody2D
 
 # class member variables go here, for example:
-var _speed = 200
-var _health = 125
-var _damage = 20
+var _speed
+var _health
+var _damage
+
+var afflicted = false
+var affliction_counter = 0
+var affliction_max = 0
+var debuff_details
+
+onready var debuff_timer = $DebuffTimer 
 onready var global = get_node("/root/Global")
 
 
@@ -20,6 +27,8 @@ func init(sprite, speed, health, damage):
 
 
 func _physics_process(delta):
+	if afflicted:
+		debuff_stack(debuff_details)
 	#if health <= 0:
 		#if dead_since > global.DEAD_CLEAN_INTVAL:
 		#	queue_free()
@@ -44,3 +53,54 @@ func take_damage(damage):
 func _die():
 	# explosion / death animation
 	queue_free()
+	
+	
+func debuff_stack(debuff_array):
+	for debuff in debuff_array:
+		affliction_max = debuff["duration"]
+		if debuff["reoccuring"] > 0:
+			debuff_timer.set_wait_time(debuff["reoccuring"])
+			debuff_timer.start()
+		afflicted = false
+		# The code below brought to you buy GDScript..
+		if debuff["operand"] == "subtract":
+			if debuff["field"] == "health":
+				take_damage(debuff["value"])
+			elif debuff["field"] == "speed" and _speed > 50:
+				_speed -= debuff["value"]
+			elif debuff["field"] == "damage" and _damage > 0:
+				_damage -= debuff["value"]
+				print('damage')
+				print(_damage)
+		elif debuff["operand"] == "add":
+			if debuff["field"] == "health":
+				_health += debuff["value"]
+			elif debuff["field"] == "speed" and _speed > 50:
+				_speed += debuff["value"]
+			elif debuff["field"] == "damage" and _damage > 0:
+				_damage += debuff["value"]
+		elif debuff["operand"] == "multiply":
+			if debuff["field"] == "health":
+				_health *= debuff["value"]
+			elif debuff["field"] == "speed" and _speed > 50:
+				_speed *= debuff["value"]
+			elif debuff["field"] == "damage" and _damage > 0:
+				_damage *= debuff["value"]
+		elif debuff["operand"] == "divide":
+			if debuff["field"] == "health":
+				_health /= debuff["value"]
+			elif debuff["field"] == "speed" and _speed > 50:
+				_speed /= debuff["value"]
+			elif debuff["field"] == "damage" and _damage > 0:
+				_damage /= debuff["value"]
+	
+
+func _on_DebuffTimer_timeout():
+	# calls debuff stack function
+	if affliction_counter <= affliction_max:
+		affliction_counter += 1
+		afflicted = true
+	else:
+		affliction_counter = 0
+		debuff_timer.stop()
+		

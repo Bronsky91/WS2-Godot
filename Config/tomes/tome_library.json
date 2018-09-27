@@ -6,12 +6,21 @@
             "size": 0.25,
             "max_power_level": 3,
             "attack_range": 300,
-            "fire_delta": 0.4,
+            "fire_delta": 0.5,
             "damage": 25,
             "speed": 600,
             "rune_sprite": "yellow",
             "spell_sprite": "fireball",
-            "button_name": "Felo'Melorn"
+            "button_name": "Felo'Melorn",
+            "debuff": [
+                {
+                    "field": "health",
+                    "operand": "subtract",
+                    "value": 10,
+                    "reoccuring": 1,
+                    "duration": 5
+                }
+            ]
         },
         {
             "name": "Frostbolt",
@@ -24,7 +33,16 @@
             "speed": 800,
             "rune_sprite": "blue",
             "spell_sprite": "frostbolt",
-            "button_name": "Frostbolt"
+            "button_name": "Frostbolt",
+            "debuff": [
+                {
+                    "field": "speed",
+                    "operand": "subtract",
+                    "value": 5,
+                    "reoccuring": 0,
+                    "duration": 1
+                }
+            ]
         },
         {
             "name": "Lighting",
@@ -32,12 +50,21 @@
             "size": 0.20,
             "max_power_level": 5,
             "attack_range": 500,
-            "fire_delta": 0.2,
+            "fire_delta": 1,
             "damage": 100,
-            "speed": 400,
+            "speed": 450,
             "rune_sprite": "light_blue",
             "spell_sprite": "lighting",
-            "button_name": "Shockwave"
+            "button_name": "Shockwave",
+            "debuff": [
+                {
+                    "field": "damage",
+                    "operand": "subtract",
+                    "value": 5,
+                    "reoccuring": 0,
+                    "duration": 1
+                }
+            ]
         },
         {
             "name": "Gust",
@@ -50,7 +77,8 @@
             "speed": 500,
             "rune_sprite": "gray",
             "spell_sprite": "gust",
-            "button_name": "Gust"
+            "button_name": "Gust",
+            "debuff": false
         }
     ]
 }

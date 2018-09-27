@@ -14,6 +14,7 @@ var _power_level
 var _size
 var _max_power_level
 var _cost
+var _debuff
 
 var fire_next = 0.0
 var target = null
@@ -41,6 +42,7 @@ func init(rune_details, power_level):
 	_max_power_level = rune_details["max_power_level"]
 	_power_level = power_level
 	_cost = rune_details["cost"]
+	_debuff = rune_details["debuff"]
 	
 
 func _process(delta):
@@ -79,7 +81,6 @@ func _shoot(target):
 		new_spell.rune = weakref(self)
 		new_spell.position = global_position
 		fire_next = time + _fire_delta
-		print(fire_next)
 		get_tree().get_root().add_child(new_spell)
 
 
