@@ -102,5 +102,5 @@ func power_down(power, r_scale):
 	#_fire_delta = 1.0/(power - 10)
 	#_speed *= 1.0 - (power / 10)
 	set_scale(Vector2(r_scale, r_scale))
-	spell_scale = Vector2(r_scale, r_scale)
+	spell_scale = Vector2(1.0 + r_scale, 1.0 + r_scale)
 	_power_level = power
