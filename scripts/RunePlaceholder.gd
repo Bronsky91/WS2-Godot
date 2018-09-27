@@ -31,10 +31,6 @@ func _input(event):
 	if disabled:
 		return
 	if event.is_pressed():
-		print('cost')
-		print(_cost)
-		print('mana')
-		print(global.mana)
 		if event.button_index == BUTTON_WHEEL_UP and power_level < _max_power_level:
 			power_level += 1
 			_cost = _rune_details["cost"] * power_level

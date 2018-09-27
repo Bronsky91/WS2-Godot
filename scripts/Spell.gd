@@ -45,6 +45,7 @@ func target_hit(damage):
 func debuff(debuff_array):
 	if debuff_array:
 		target.get_ref().afflicted = true
+		target.get_ref().affliction_rate = true
 		target.get_ref().debuff_details = rune.get_ref()._debuff
 		
 		
