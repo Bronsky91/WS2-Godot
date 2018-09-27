@@ -2,7 +2,7 @@
     "Tomes": [
         {
             "name": "Fireball",
-            "cost": 25,
+            "cost": 20,
             "size": 0.25,
             "max_power_level": 3,
             "attack_range": 300,
@@ -25,6 +25,32 @@
             "rune_sprite": "blue",
             "spell_sprite": "frostbolt",
             "button_name": "Frostbolt"
+        },
+        {
+            "name": "Lighting",
+            "cost": 30,
+            "size": 0.20,
+            "max_power_level": 5,
+            "attack_range": 500,
+            "fire_delta": 0.2,
+            "damage": 100,
+            "speed": 400,
+            "rune_sprite": "light_blue",
+            "spell_sprite": "lighting",
+            "button_name": "Shockwave"
+        },
+        {
+            "name": "Gust",
+            "cost": 25,
+            "size": 0.20,
+            "max_power_level": 5,
+            "attack_range": 300,
+            "fire_delta": 0.2,
+            "damage": 30,
+            "speed": 500,
+            "rune_sprite": "gray",
+            "spell_sprite": "gust",
+            "button_name": "Gust"
         }
     ]
 }

@@ -31,9 +31,12 @@ func _input(event):
 	if disabled:
 		return
 	if event.is_pressed():
-		if event.button_index == BUTTON_WHEEL_UP and power_level < _max_power_level:
+		if event.button_index == BUTTON_WHEEL_UP and power_level < _max_power_level and global.mana >= _cost:
 			power_level += 1
-			_cost += _rune_details["cost"] * power_level
+			print(_cost)
+			_cost = _rune_details["cost"] * power_level
+			print(str(_rune_details["cost"]) + " x " + str(power_level))
+			print(_cost)
 			current_rune_scale = _rune_scale * power_level
 			placeholder.set_scale(Vector2(current_rune_scale, current_rune_scale))
 		if event.button_index == BUTTON_WHEEL_DOWN and power_level > 1:

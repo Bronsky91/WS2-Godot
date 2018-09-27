@@ -12,10 +12,9 @@ var rune_cost
 func _ready():
 	set_editable(false)
 	
-	
 
 func _on_ManaSlider_mouse_entered():
-	set_editable(true)
+	set_editable(true)	
 	
 
 func _on_ManaSlider_mouse_exited():
