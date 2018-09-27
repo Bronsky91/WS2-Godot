@@ -79,6 +79,7 @@ func _shoot(target):
 		new_spell.rune = weakref(self)
 		new_spell.position = global_position
 		fire_next = time + _fire_delta
+		print(fire_next)
 		get_tree().get_root().add_child(new_spell)
 
 
@@ -88,8 +89,8 @@ func rearm():
 	
 func power_up(power, r_scale):
 	_damage *= 1.0 + (power / 10)
-	_fire_delta = 1.0/(power + 1.0)
-	_speed *= 1.0 + (power / 10)
+	#_fire_delta = 1.0/(power + 10)
+	#_speed *= 1.0 + (power / 10)
 	set_scale(Vector2(r_scale, r_scale))
 	spell_scale = Vector2(1.0 + r_scale, 1.0 + r_scale)
 	_power_level = power
@@ -97,8 +98,8 @@ func power_up(power, r_scale):
 
 func power_down(power, r_scale):
 	_damage *= 1.0 - (power / 10)
-	_fire_delta = 1.0/(power - 1.0)
-	_speed *= 1.0 - (power / 10)
+	#_fire_delta = 1.0/(power - 10)
+	#_speed *= 1.0 - (power / 10)
 	set_scale(Vector2(r_scale, r_scale))
 	spell_scale = Vector2(1.0 + r_scale, 1.0 + r_scale)
 	_power_level = power
