@@ -1,0 +1,10 @@
+[gd_resource type="NavigationPolygon" format=2]
+
+[resource]
+
+resource_local_to_scene = true
+vertices = PoolVector2Array( 32, -32, 32, 32, -32, 32, -32, -32 )
+polygons = [ PoolIntArray( 0, 1, 2, 3 ) ]
+outlines = [ PoolVector2Array( 32, -32, 32, 32, -32, 32, -32, -32 ) ]
+_sections_unfolded = [ "Resource" ]
+

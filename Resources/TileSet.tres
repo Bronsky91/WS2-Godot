@@ -1,0 +1,28 @@
+[gd_resource type="TileSet" load_steps=4 format=2]
+
+[ext_resource path="res://Resources/NavPoly.tres" type="NavigationPolygon" id=1]
+[ext_resource path="res://Assets/Tiles/WalkTile.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Tiles/BlockTile.png" type="Texture" id=3]
+
+[resource]
+
+0/name = "001"
+0/texture = ExtResource( 2 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 65, 65 )
+0/is_autotile = false
+0/occluder_offset = Vector2( 32.5, 32.5 )
+0/navigation_offset = Vector2( 32.5, 32.5 )
+0/navigation = ExtResource( 1 )
+0/shapes = [  ]
+1/name = "002"
+1/texture = ExtResource( 3 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 65, 65 )
+1/is_autotile = false
+1/occluder_offset = Vector2( 32.5, 32.5 )
+1/navigation_offset = Vector2( 32.5, 32.5 )
+1/shapes = [  ]
+

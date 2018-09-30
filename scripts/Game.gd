@@ -2,6 +2,10 @@ extends Node
 
 onready var global = get_node("/root/Global")
 onready var wave_timer = $Timer
+onready var path_end = get_node("PathEnd").position
+onready var nav = get_node("Nav")
+onready var map = get_node("Nav/TileMap")
+
 var waves
 var spawn_new = false
 var waves_over = false
@@ -21,6 +25,7 @@ func _ready():
 
 func _process(delta):
 	if spawn_new and not waves_over:
+		print("process_wave")
 		_process_wave()
 	elif waves_over and get_tree().get_nodes_in_group("enemies").size() == 0:
 		global.current_level += 1
@@ -46,10 +51,16 @@ func _process_wave():
 func _spawn_enemy(d):
 	var new_enemy = enemy.instance()
 	new_enemy.init(d.sprite ,d.speed,d.health,d.damage)
-	var pathFollow = PathFollow2D.new()
-	pathFollow.set_loop(false)
-	self.get_node(d.path).add_child(pathFollow)
-	pathFollow.add_child(new_enemy)
+	new_enemy.position = get_node(d.path).position
+	new_enemy.goal = path_end
+	new_enemy.nav = nav
+	add_child(new_enemy)
+	#connect("map_update", new_enemy, "update_path")
+	
+	#var pathFollow = PathFollow2D.new()
+	#pathFollow.set_loop(false)
+	#self.get_node(d.path).add_child(pathFollow)
+	#pathFollow.add_child(new_enemy)
 	
 
 func _increment_enemy():

@@ -4,6 +4,9 @@ extends RigidBody2D
 var _speed
 var _health
 var _damage
+var nav = null setget set_nav
+var path = []
+var goal = Vector2()
 
 var afflicted = false
 var next_affliction_cycle = false
@@ -16,6 +19,7 @@ onready var global = get_node("/root/Global")
 
 
 func _ready():
+	print("I'm alive!")
 	add_to_group("enemies")
 	set_physics_process(true)
 
@@ -28,22 +32,35 @@ func init(sprite, speed, health, damage):
 
 
 func _physics_process(delta):
+	if path.size() > 1:
+		var dist = self.position.distance_to(path[0])
+		if dist > 2:
+			# close to Harry Potter's house
+			self.position = self.position.linear_interpolate(path[0], (_speed * delta)/dist)
+		else:
+			path.remove(0)
+	else:
+		print("_fixed_process() reached_tower")
+		reached_tower()
+		
 	if afflicted and next_affliction_cycle:
 		debuff_stack(debuff_details)
-	#if health <= 0:
-		#if dead_since > global.DEAD_CLEAN_INTVAL:
-		#	queue_free()
-		#else:
-		#	dead_since += delta
-		#return
 		
-	if get_parent().get_unit_offset() < 1.0:
-		get_parent().set_offset(get_parent().get_offset() + (_speed * delta) )
-	else:
-		print(get_name() + " reached harry potter's house")
-		queue_free()
-		global.hit_base(_damage)
 		
+func set_nav(new_nav):
+	nav = new_nav
+	update_path()
+	
+func update_path():
+	path = nav.get_simple_path(self.position, goal, false)
+	if path.size() == 0:
+		print("update_path() reached_tower")
+		reached_tower()
+
+func reached_tower():
+	print(get_name() + " reached harry potter's house")
+	queue_free()
+	global.hit_base(_damage)
 
 func take_damage(damage):
 	_health -= damage
@@ -53,6 +70,7 @@ func take_damage(damage):
 
 func _die():
 	# explosion / death animation
+	print("I died")
 	queue_free()
 	
 	
