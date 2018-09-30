@@ -27,7 +27,7 @@ func _on_toggled(toggled):
 	if(toggled):
 		new_rune = rune_placeholder.instance()
 		new_rune.init_placeholder(_rune_details)
-		get_parent().add_child(new_rune)
+		get_tree().get_root().add_child(new_rune)
 		global.node_to_hide = weakref(new_rune)
 	else:
 		global.node_to_hide = null

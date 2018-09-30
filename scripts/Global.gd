@@ -12,6 +12,11 @@ var base_hp_max = 100				# Base maximum health value
 var mana = 200
 var mana_max = 200
 var tome_library # JSON File
+var cursor_tile_x = 0
+var cursor_tile_y = 0
+var cursor_tile_pos = Vector2()
+const TILE_WIDTH = 64
+const TILE_HEIGHT = 64
 
 
 func _ready():

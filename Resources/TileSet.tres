@@ -1,8 +1,10 @@
 [gd_resource type="TileSet" load_steps=4 format=2]
 
 [ext_resource path="res://Resources/NavPoly.tres" type="NavigationPolygon" id=1]
-[ext_resource path="res://Assets/Tiles/WalkTile.png" type="Texture" id=2]
-[ext_resource path="res://Assets/Tiles/BlockTile.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Tiles/000.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Tiles/001.png" type="Texture" id=3]
+
+
 
 [resource]
 

@@ -19,7 +19,6 @@ onready var global = get_node("/root/Global")
 
 
 func _ready():
-	print("I'm alive!")
 	add_to_group("enemies")
 	set_physics_process(true)
 
@@ -70,7 +69,6 @@ func take_damage(damage):
 
 func _die():
 	# explosion / death animation
-	print("I died")
 	queue_free()
 	
 	

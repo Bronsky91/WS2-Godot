@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/BlockTile.png-fdae30661101b10c9af4f0fe23084153.stex"
+path="res://.import/000.png-63c1a74498283733cb96df6467868abe.stex"
 
 [deps]
 
-source_file="res://Assets/Tiles/BlockTile.png"
-dest_files=[ "res://.import/BlockTile.png-fdae30661101b10c9af4f0fe23084153.stex" ]
+source_file="res://Assets/Tiles/000.png"
+dest_files=[ "res://.import/000.png-63c1a74498283733cb96df6467868abe.stex" ]
 
 [params]
 

@@ -4,7 +4,6 @@ export(PackedScene) var rune
 onready var global = get_node("/root/Global")
 onready var placeholder = $Sprite
 var disabled = false
-var Mouse_Position
 var current_rune_scale
 var power_level = 1
 
@@ -23,8 +22,8 @@ func init_placeholder(rune_details):
 
 
 func _process(delta):
-	Mouse_Position = get_local_mouse_position()
-	position += Mouse_Position
+	position = global.cursor_tile_pos 
+	#print("placeholder: " + str(self.position))
 		
 
 func _input(event):
@@ -44,7 +43,7 @@ func _input(event):
 		if event.button_index == BUTTON_LEFT and global.mana >= _cost:
 			var new_rune = rune.instance() # instances new rune to place
 			new_rune.init(_rune_details, power_level)
-			new_rune.position = get_global_mouse_position()
+			new_rune.position = global.cursor_tile_pos
 			if current_rune_scale:
 				new_rune.power_up(power_level, current_rune_scale) # Power up function ups the cost and powers up the rune
 			else:
