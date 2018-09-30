@@ -3,13 +3,17 @@
         {
             "name": "Fireball",
             "cost": 20,
-            "size": 0.25,
             "max_power_level": 3,
             "attack_range": 300,
             "fire_delta": 0.5,
             "damage": 25,
             "speed": 600,
-            "rune_sprite": "yellow",
+            "rune_sprite": "rune",
+			"rune_color": {
+				"r": 1.0,
+				"g": 0.5,
+				"b": 0.0
+			},
             "spell_sprite": "fireball",
             "button_name": "Felo'Melorn",
             "debuff": [
@@ -25,13 +29,17 @@
         {
             "name": "Frostbolt",
             "cost": 10,
-            "size": 0.20,
             "max_power_level": 5,
             "attack_range": 200,
             "fire_delta": 0.2,
             "damage": 10,
             "speed": 800,
-            "rune_sprite": "blue",
+            "rune_sprite": "rune",
+			"rune_color": {
+				"r": 0.0,
+				"g": 0.0,
+				"b": 1.0
+			},
             "spell_sprite": "frostbolt",
             "button_name": "Frostbolt",
             "debuff": [
@@ -47,13 +55,17 @@
         {
             "name": "Lighting",
             "cost": 30,
-            "size": 0.20,
             "max_power_level": 5,
             "attack_range": 500,
             "fire_delta": 1,
             "damage": 100,
             "speed": 450,
-            "rune_sprite": "light_blue",
+            "rune_sprite": "rune",
+			"rune_color": {
+				"r": 0.0,
+				"g": 0.5,
+				"b": 0.5
+			},
             "spell_sprite": "lighting",
             "button_name": "Shockwave",
             "debuff": [
@@ -69,14 +81,18 @@
         {
             "name": "Gust",
             "cost": 25,
-            "size": 0.20,
             "max_power_level": 5,
             "attack_range": 300,
             "fire_delta": 0.2,
             "damage": 30,
             "speed": 500,
-            "rune_sprite": "gray",
-            "spell_sprite": "gust",
+            "rune_sprite": "rune",
+			"rune_color": {
+				"r": 0.8,
+				"g": 0.8,
+				"b": 0.8
+			},
+			"spell_sprite": "gust",
             "button_name": "Gust",
             "debuff": false
         }

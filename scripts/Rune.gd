@@ -3,19 +3,18 @@ extends Node2D
 export(PackedScene) var spell
 
 onready var global = get_node("/root/Global")
-onready var mana_slider = $ManaSlider
-
 var _attack_range
 var _fire_delta
 var _damage
 var _speed
 var _spell_sprite
 var _power_level
-var _size
 var _max_power_level
 var _cost
 var _debuff
-
+var _details
+var _color
+var cursor_hovering = false
 var fire_next = 0.0
 var target = null
 var spell_scale
@@ -25,25 +24,23 @@ var time = 0.0
 
 func _ready():
 	add_to_group("runes")
-	mana_slider.set_max(_max_power_level)
-	mana_slider.set_value(_power_level)
-	mana_slider.current_power_level = mana_slider.get_value()
-	mana_slider.rune_cost = _cost
 
 
-func init(rune_details, power_level):
-	get_node("Sprite").set_texture(load("res://Assets/" + rune_details["rune_sprite"] + ".png"))
-	_speed =  rune_details["speed"]
-	_attack_range = rune_details["attack_range"]
-	_fire_delta = rune_details["fire_delta"]
-	_damage = rune_details["damage"]
-	_spell_sprite = rune_details["spell_sprite"]
-	_size = rune_details["size"]
-	_max_power_level = rune_details["max_power_level"]
+func init(d, power_level):
+	get_node("Sprite").set_texture(load("res://Assets/" + d["rune_sprite"] + ".png"))
+	_color = d["rune_color"]
+	_speed =  d["speed"]
+	_attack_range = d["attack_range"]
+	_fire_delta = d["fire_delta"]
+	_damage = d["damage"]
+	_spell_sprite = d["spell_sprite"]
+	_max_power_level = d["max_power_level"]
 	_power_level = power_level
-	_cost = rune_details["cost"]
-	_debuff = rune_details["debuff"]
-	
+	_cost = d["cost"]
+	_debuff = d["debuff"]
+	_details = d
+	modulate = Color(_color.r, _color.g, _color.b)
+
 
 func _process(delta):
 	time += delta #
@@ -69,8 +66,8 @@ func choose_target():
 				or pos.distance_to(enemy.get_global_position()) > get_global_position().distance_to(target.get_ref().get_global_position())):
 					target = weakref(enemy)	
 	return target
-	
-	
+
+
 func _shoot(target):
 	if time > fire_next:
 		firing = true
@@ -79,28 +76,40 @@ func _shoot(target):
 		new_spell.set_scale(spell_scale)
 		new_spell.target = target
 		new_spell.rune = weakref(self)
-		new_spell.position = global_position
+		new_spell.position = get_global_position()
 		fire_next = time + _fire_delta
 		get_tree().get_root().add_child(new_spell)
 
 
 func rearm():
 	firing = false
-	
-	
-func power_up(power, r_scale):
-	_damage *= 1.0 + (power / 10)
-	#_fire_delta = 1.0/(power + 10)
-	#_speed *= 1.0 + (power / 10)
-	set_scale(Vector2(r_scale, r_scale))
-	spell_scale = Vector2(1.0 + r_scale, 1.0 + r_scale)
-	_power_level = power
-		
 
-func power_down(power, r_scale):
-	_damage *= 1.0 - (power / 10)
+
+func power_up():
+	_power_level += 1
+	global.mana -= _cost
+	refresh_rune()
+
+
+func power_down():
+	_power_level -= 1
+	global.mana += _cost
+	refresh_rune()
+
+
+func refresh_rune():
+	_damage *= 1.0 + (_power_level / 10)
+	global.mana_bar(global.mana)
 	#_fire_delta = 1.0/(power - 10)
 	#_speed *= 1.0 - (power / 10)
-	set_scale(Vector2(r_scale, r_scale))
-	spell_scale = Vector2(1.0 + r_scale, 1.0 + r_scale)
-	_power_level = power
+	#set_scale(Vector2(_power_level, _power_level))
+	modulate = Color(_color.r / _power_level, _color.g / _power_level, _color.b / _power_level)
+	spell_scale = Vector2(_power_level, _power_level)
+
+
+func _input(event):
+	if event.is_pressed():
+		if cursor_hovering and event.button_index == BUTTON_WHEEL_UP and _power_level < _max_power_level and global.mana > _cost:
+			power_up()
+		if cursor_hovering and event.button_index == BUTTON_WHEEL_DOWN and _power_level > 1 and global.mana < global.mana_max:
+			power_down()

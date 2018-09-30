@@ -7,7 +7,6 @@ var _damage
 var nav = null setget set_nav
 var path = []
 var goal = Vector2()
-
 var afflicted = false
 var next_affliction_cycle = false
 var affliction_counter = 0
@@ -80,35 +79,39 @@ func debuff_stack(debuff_array):
 			debuff_timer.start()
 		next_affliction_cycle = false
 		# The code below brought to you buy GDScript..
-		if debuff["operand"] == "subtract":
-			if debuff["field"] == "health":
-				take_damage(debuff["value"])
-			elif debuff["field"] == "speed" and _speed > debuff["value"]:
-				_speed -= debuff["value"]
-			elif debuff["field"] == "damage" and _damage > debuff["value"]:
-				_damage -= debuff["value"]
-		elif debuff["operand"] == "add":
-			if debuff["field"] == "health":
-				_health += debuff["value"]
-			elif debuff["field"] == "speed":
-				_speed += debuff["value"]
-			elif debuff["field"] == "damage":
-				_damage += debuff["value"]
-		elif debuff["operand"] == "multiply":
-			if debuff["field"] == "health":
-				_health *= debuff["value"]
-			elif debuff["field"] == "speed":
-				_speed *= debuff["value"]
-			elif debuff["field"] == "damage":
-				_damage *= debuff["value"]
-		elif debuff["operand"] == "divide":
-			if debuff["field"] == "health":
-				_health /= debuff["value"]
-			elif debuff["field"] == "speed" and _speed > debuff["value"]:
-				_speed /= debuff["value"]
-			elif debuff["field"] == "damage" and _damage > debuff["value"]:
-				_damage /= debuff["value"]
-	
+		_debuff_calculus(debuff["operand"], debuff["field"], debuff["value"])
+
+
+func _debuff_calculus(op, field, value):
+	if op == "subtract":
+		if field == "health":
+			take_damage(value)
+		elif field == "speed" and _speed > value:
+			_speed -= value
+		elif field == "damage" and _damage > value:
+			_damage -= value
+	elif op == "add":
+		if field == "health":
+			_health += value
+		elif field == "speed":
+			_speed += value
+		elif field == "damage":
+			_damage += value
+	elif op == "multiply":
+		if field == "health":
+			_health *= value
+		elif field == "speed":
+			_speed *= value
+		elif field == "damage":
+			_damage *= value
+	elif op == "divide":
+		if field == "health":
+			_health /= value
+		elif field == "speed" and _speed > value:
+			_speed /= value
+		elif field == "damage" and _damage > value:
+			_damage /= value
+
 
 func _on_DebuffTimer_timeout():
 	# calls debuff stack function
