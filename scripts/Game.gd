@@ -13,7 +13,6 @@ var current_wave = 0
 var current_enemy_batch = 0
 var current_enemy = 0
 var enemy_quantity = 0
-var mouse_pos
 export(PackedScene) var enemy
 
 
@@ -30,16 +29,7 @@ func _process(delta):
 	elif waves_over and get_tree().get_nodes_in_group("enemies").size() == 0:
 		global.current_level += 1
 		get_tree().change_scene("res://scenes/LevelComplete.tscn")
-		
-	mouse_pos = get_global_mouse_position()
-	global.cursor_tile_x = int(mouse_pos.x) / global.TILE_WIDTH
-	global.cursor_tile_y = int(mouse_pos.y) / global.TILE_HEIGHT
-	global.cursor_tile_pos = Vector2(
-		(global.cursor_tile_x * 64) + (global.TILE_WIDTH / 2),
-		(global.cursor_tile_y * 64) + (global.TILE_HEIGHT / 2)
-	)
-
-	print("global: " + str(global.cursor_tile_pos) + " -- mouse: " + str(mouse_pos))
+	
 		
 func _load_level(level):
 	var file = File.new()

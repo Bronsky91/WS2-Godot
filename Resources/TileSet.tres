@@ -4,11 +4,9 @@
 [ext_resource path="res://Assets/Tiles/000.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Tiles/001.png" type="Texture" id=3]
 
-
-
 [resource]
 
-0/name = "001"
+0/name = "000"
 0/texture = ExtResource( 2 )
 0/tex_offset = Vector2( 0, 0 )
 0/modulate = Color( 1, 1, 1, 1 )
@@ -18,7 +16,7 @@
 0/navigation_offset = Vector2( 32.5, 32.5 )
 0/navigation = ExtResource( 1 )
 0/shapes = [  ]
-1/name = "002"
+1/name = "001"
 1/texture = ExtResource( 3 )
 1/tex_offset = Vector2( 0, 0 )
 1/modulate = Color( 1, 1, 1, 1 )

@@ -6,7 +6,7 @@ onready var placeholder = $Sprite
 var disabled = false
 var current_rune_scale
 var power_level = 1
-
+var enabled = true
 var _rune_details
 
 var _cost
@@ -22,9 +22,12 @@ func init_placeholder(rune_details):
 
 
 func _process(delta):
-	position = global.cursor_tile_pos 
-	#print("placeholder: " + str(self.position))
-		
+	position = global.cursor_tile_pos
+	if global.mana < _cost or global.cursor_tile_path:
+		disable()
+	else:
+		enable()
+
 
 func _input(event):
 	if disabled:
@@ -40,7 +43,7 @@ func _input(event):
 			_cost -= _rune_details["cost"]
 			current_rune_scale -= _rune_scale
 			placeholder.set_scale(Vector2(current_rune_scale, current_rune_scale))
-		if event.button_index == BUTTON_LEFT and global.mana >= _cost:
+		if event.button_index == BUTTON_LEFT and enabled:
 			var new_rune = rune.instance() # instances new rune to place
 			new_rune.init(_rune_details, power_level)
 			new_rune.position = global.cursor_tile_pos
@@ -51,10 +54,16 @@ func _input(event):
 			global.mana -= _cost
 			global.mana_bar(global.mana)
 			get_tree().get_root().add_child(new_rune)
-		if global.mana < _cost:
-			placeholder.modulate = Color(1,0,0)
-		if global.mana >= _cost:
-			placeholder.modulate = Color(0,1,0)
+
+
+func disable():
+	enabled = false
+	placeholder.modulate = Color(1,0,0)
+
+
+func enable():
+	enabled = true
+	placeholder.modulate = Color(0,0,1)
 
 
 func set_visibility(visible):
@@ -64,5 +73,3 @@ func set_visibility(visible):
 	else:
 		hide()
 		disabled = true
-		
-		

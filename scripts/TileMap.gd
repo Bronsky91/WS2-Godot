@@ -2,15 +2,21 @@ extends TileMap
 
 onready var global = get_node("/root/Global")
 var cursor_cell
+var mouse_pos
 
 func _ready():
-	# Called when the node is added to the scene for the first time.
-	# Initialization here
 	pass
 
 func _process(delta):
+	mouse_pos = get_global_mouse_position()
+	global.cursor_tile_x = int(mouse_pos.x) / global.TILE_WIDTH
+	global.cursor_tile_y = int(mouse_pos.y) / global.TILE_HEIGHT
+	global.cursor_tile_pos = Vector2(
+        (int(global.cursor_tile_x) * 64) + (global.TILE_WIDTH / 2),
+        (int(global.cursor_tile_y) * 64) + (global.TILE_HEIGHT / 2)
+    )
 	cursor_cell = get_cell(global.cursor_tile_x, global.cursor_tile_y)
-	print(cursor_cell)
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
+	if tile_set.tile_get_navigation_polygon(cursor_cell) != null:
+		global.cursor_tile_path = true
+	else:
+		global.cursor_tile_path = false
