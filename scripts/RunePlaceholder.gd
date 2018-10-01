@@ -5,11 +5,12 @@ onready var global = get_node("/root/Global")
 onready var placeholder = $Sprite
 var disabled = false
 var power_level = 1
-var enabled = true
+var placeable = true
 var _rune_details
 var _cost
 var _color
 var _max_power_level
+var _attack_range
 
 
 func init_placeholder(rune_details):
@@ -17,14 +18,15 @@ func init_placeholder(rune_details):
 	_cost = rune_details["cost"]
 	_max_power_level = rune_details["max_power_level"]
 	_color = rune_details["rune_color"]
+	_attack_range = rune_details["attack_range"]
 
 
 func _process(delta):
 	position = global.cursor_tile_pos
 	if global.mana < _cost or global.cursor_tile_path:
-		disable()
+		cannot_place()
 	else:
-		enable()
+		can_place()
 
 
 func _input(event):
@@ -39,7 +41,7 @@ func _input(event):
 			power_level -= 1
 			_cost -= _rune_details["cost"]
 			modulate = Color(_color.r / power_level, _color.g / power_level, _color.b / power_level)
-		if event.button_index == BUTTON_LEFT and enabled:
+		if event.button_index == BUTTON_LEFT and placeable:
 			var new_rune = rune.instance() # instances new rune to place
 			new_rune.init(_rune_details, power_level)
 			new_rune.position = global.cursor_tile_pos
@@ -48,13 +50,13 @@ func _input(event):
 			new_rune.refresh_rune()
 
 
-func disable():
-	enabled = false
+func cannot_place():
+	placeable = false
 	placeholder.modulate = Color(1,0,0)
 
 
-func enable():
-	enabled = true
+func can_place():
+	placeable = true
 	placeholder.modulate = Color(0,0,1)
 
 
