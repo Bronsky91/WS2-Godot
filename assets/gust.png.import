@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/gust.png-328d1f2e84d98993100f08f23a8fa1c2.stex"
+path="res://.import/gust.png-f4defff7545c39be2e73c516be295f7d.stex"
 
 [deps]
 
-source_file="res://Assets/gust.png"
-dest_files=[ "res://.import/gust.png-328d1f2e84d98993100f08f23a8fa1c2.stex" ]
+source_file="res://assets/gust.png"
+dest_files=[ "res://.import/gust.png-f4defff7545c39be2e73c516be295f7d.stex" ]
 
 [params]
 

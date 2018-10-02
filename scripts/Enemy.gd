@@ -32,6 +32,7 @@ func init(sprite, speed, health, damage):
 func _physics_process(delta):
 	if path.size() > 1:
 		var dist = self.position.distance_to(path[0])
+		look_at(path[0])
 		if dist > 2:
 			# close to Harry Potter's house
 			self.position = self.position.linear_interpolate(path[0], (_speed * delta)/dist)
@@ -49,17 +50,20 @@ func set_nav(new_nav):
 	nav = new_nav
 	update_path()
 	
+	
 func update_path():
 	path = nav.get_simple_path(self.position, goal, false)
 	if path.size() == 0:
 		print("update_path() reached_tower")
 		reached_tower()
 
+
 func reached_tower():
 	print(get_name() + " reached harry potter's house")
 	queue_free()
 	global.hit_base(_damage)
-
+	 
+   
 func take_damage(damage):
 	_health -= damage
 	if _health <= 0:

@@ -9,7 +9,7 @@ custom_solver_bias = 0.0
 radius = 10.0
 height = 20.0
 
-[node name="Enemy" type="RigidBody2D"]
+[node name="Enemy" type="RigidBody2D" index="0"]
 
 position = Vector2( 0.187386, -0.280029 )
 scale = Vector2( 0.253207, 0.278606 )
@@ -36,7 +36,6 @@ _sections_unfolded = [ "Angular", "Applied Forces", "Collision", "Linear", "Mate
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
-rotation = -1.5708
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Animation", "Transform" ]
 

@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/RunePlaceholder.png-33f4b04732a70e0771039fc3c244b6a3.stex"
+path="res://.import/RunePlaceholder.png-3848165f7f40cdad6701593e5d916589.stex"
 
 [deps]
 
-source_file="res://Assets/RunePlaceholder.png"
-dest_files=[ "res://.import/RunePlaceholder.png-33f4b04732a70e0771039fc3c244b6a3.stex" ]
+source_file="res://assets/RunePlaceholder.png"
+dest_files=[ "res://.import/RunePlaceholder.png-3848165f7f40cdad6701593e5d916589.stex" ]
 
 [params]
 

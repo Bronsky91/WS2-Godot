@@ -2,12 +2,12 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Rune.png-90d2eb941a9cc0c63f992ab0db084b18.stex"
+path="res://.import/Rune.png-7fd697d72a22ed1b1eff593ebdfee3fa.stex"
 
 [deps]
 
-source_file="res://Assets/Rune.png"
-dest_files=[ "res://.import/Rune.png-90d2eb941a9cc0c63f992ab0db084b18.stex" ]
+source_file="res://assets/Rune.png"
+dest_files=[ "res://.import/Rune.png-7fd697d72a22ed1b1eff593ebdfee3fa.stex" ]
 
 [params]
 
