@@ -12,6 +12,7 @@ var next_affliction_cycle = false
 var affliction_counter = 0
 var affliction_max = 0
 var debuff_details
+var default_attribute
 
 onready var debuff_timer = $DebuffTimer 
 onready var global = get_node("/root/Global")
@@ -27,7 +28,8 @@ func init(sprite, speed, health, damage):
 	_speed =  speed
 	_health = health
 	_damage = damage
-
+	default_attribute = {"speed": speed, "health": health, "damage": damage}
+	
 
 func _physics_process(delta):
 	if path.size() > 1:
@@ -83,38 +85,43 @@ func debuff_stack(debuff_array):
 			debuff_timer.start()
 		next_affliction_cycle = false
 		# The code below brought to you buy GDScript..
-		_debuff_calculus(debuff["operand"], debuff["field"], debuff["value"])
+		_debuff_calculus(debuff["operand"], debuff["attribute"], debuff["value"])
 
 
-func _debuff_calculus(op, field, value):
+func _debuff_calculus(op, attribute, value):
 	if op == "subtract":
-		if field == "health":
+		if attribute == "health":
 			take_damage(value)
-		elif field == "speed" and _speed > value:
+		elif attribute == "speed" and _speed > value:
 			_speed -= value
-		elif field == "damage" and _damage > value:
+		elif attribute == "damage" and _damage > value:
 			_damage -= value
 	elif op == "add":
-		if field == "health":
+		if attribute == "health":
 			_health += value
-		elif field == "speed":
+		elif attribute == "speed":
 			_speed += value
-		elif field == "damage":
+		elif attribute == "damage":
 			_damage += value
 	elif op == "multiply":
-		if field == "health":
+		if attribute == "health":
 			_health *= value
-		elif field == "speed":
+		elif attribute == "speed":
 			_speed *= value
-		elif field == "damage":
+		elif attribute == "damage":
 			_damage *= value
 	elif op == "divide":
-		if field == "health":
+		if attribute == "health":
 			_health /= value
-		elif field == "speed" and _speed > value:
+		elif attribute == "speed" and _speed > value:
 			_speed /= value
-		elif field == "damage" and _damage > value:
+		elif attribute == "damage" and _damage > value:
 			_damage /= value
+			
+
+func remove_debuffs():
+	_speed = default_attribute.speed
+	_damage = default_attribute.damage
 
 
 func _on_DebuffTimer_timeout():
@@ -125,5 +132,6 @@ func _on_DebuffTimer_timeout():
 	else:
 		afflicted = false
 		affliction_counter = 0
+		remove_debuffs()
 		debuff_timer.stop()
 		

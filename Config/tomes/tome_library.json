@@ -1,7 +1,7 @@
 {
     "Tomes": [
         {
-            "name": "Fireball",
+            "name": "fireball",
             "cost": 20,
             "max_power_level": 3,
             "attack_range": 300,
@@ -18,7 +18,8 @@
             "button_name": "Felo'Melorn",
             "debuff": [
                 {
-                    "field": "health",
+                    "name":"fireball",
+                    "attribute": "health",
                     "operand": "subtract",
                     "value": 10,
                     "reoccuring": 1,
@@ -27,7 +28,7 @@
             ]
         },
         {
-            "name": "Frostbolt",
+            "name": "frostbolt",
             "cost": 10,
             "max_power_level": 5,
             "attack_range": 200,
@@ -44,7 +45,8 @@
             "button_name": "Frostbolt",
             "debuff": [
                 {
-                    "field": "speed",
+                    "name":"frostbolt",
+                    "attribute": "speed",
                     "operand": "subtract",
                     "value": 10,
                     "reoccuring": 0.5,
@@ -53,7 +55,7 @@
             ]
         },
         {
-            "name": "Lighting",
+            "name": "lighting",
             "cost": 30,
             "max_power_level": 5,
             "attack_range": 500,
@@ -70,7 +72,8 @@
             "button_name": "Shockwave",
             "debuff": [
                 {
-                    "field": "damage",
+                    "name":"lighting",
+                    "attribute": "damage",
                     "operand": "subtract",
                     "value": 5,
                     "reoccuring": 0,
@@ -79,7 +82,7 @@
             ]
         },
         {
-            "name": "Gust",
+            "name": "gust",
             "cost": 25,
             "max_power_level": 5,
             "attack_range": 300,
