@@ -1,0 +1,63 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Path.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Resources/TileSet.tres" type="TileSet" id=4]
+[ext_resource path="res://Scripts/TileMap.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/UI/TowerDefenseHUD.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Scenes/Base.tscn" type="PackedScene" id=7]
+
+
+
+
+[node name="Game" type="Node2D"]
+
+script = ExtResource( 1 )
+enemy = ExtResource( 2 )
+nav_point = ExtResource( 3 )
+
+[node name="Nav" type="Navigation2D" parent="." index="0"]
+
+[node name="TileMap" type="TileMap" parent="Nav" index="0"]
+
+mode = 0
+tile_set = ExtResource( 4 )
+cell_size = Vector2( 64, 64 )
+cell_quadrant_size = 16
+cell_custom_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+cell_half_offset = 2
+cell_tile_origin = 0
+cell_y_sort = false
+cell_clip_uv = false
+collision_use_kinematic = false
+collision_friction = 1.0
+collision_bounce = 0.0
+collision_layer = 1
+collision_mask = 1
+occluder_light_mask = 1
+format = 1
+tile_data = PoolIntArray(  )
+script = ExtResource( 5 )
+
+[node name="TowerDefenseHUD" parent="." index="1" instance=ExtResource( 6 )]
+
+margin_left = 2.0
+margin_top = -4.0
+margin_right = 2.0
+margin_bottom = -4.0
+
+[node name="Timer" type="Timer" parent="." index="2"]
+
+process_mode = 1
+wait_time = 0.8
+one_shot = false
+autostart = true
+
+[node name="Tower" parent="." index="3" instance=ExtResource( 7 )]
+
+position = Vector2( 1500.64, 610.993 )
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+
+

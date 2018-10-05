@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.stex"
+path="res://.import/HealthBarBG.png-9cf7f4864ead3354294908d8c55552b3.stex"
 
 [deps]
 
-source_file="res://icon.png"
-source_md5="ae7e641067601e2184afcade49abd283"
+source_file="res://Assets/UI/HealthBarBG.png"
+source_md5="1d12631d32ef2b98ff541c22418cfddd"
 
-dest_files=[ "res://.import/icon.png-487276ed1e3a0c39cad0279d744ee560.stex" ]
-dest_md5="84511021bbc8c9d37c7f0f4d181de883"
+dest_files=[ "res://.import/HealthBarBG.png-9cf7f4864ead3354294908d8c55552b3.stex" ]
+dest_md5="4deeccca141f2685700cfec820735fb0"
 
 [params]
 

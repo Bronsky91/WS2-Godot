@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Scripts/RunePlaceholder.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Rune.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Rune.png" type="Texture" id=3]
+
+
+
+
+[node name="RunePlaceholder" type="Node2D" index="0"]
+
+position = Vector2( 0.102595, 0.846178 )
+script = ExtResource( 1 )
+_sections_unfolded = [ "Material", "Transform", "Visibility" ]
+rune = ExtResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="." index="0"]
+
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Material", "Offset", "Transform", "Visibility", "Z Index" ]
+
+

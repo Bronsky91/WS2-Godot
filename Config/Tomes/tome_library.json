@@ -1,0 +1,103 @@
+{
+    "Tomes": [
+        {
+            "name": "fireball",
+            "cost": 20,
+            "max_power_level": 3,
+            "attack_range": 300,
+            "fire_delta": 0.5,
+            "damage": 25,
+            "speed": 600,
+            "rune_sprite": "Rune",
+			"rune_color": {
+				"r": 1.0,
+				"g": 0.5,
+				"b": 0.0
+			},
+            "spell_sprite": "Fireball",
+            "button_name": "Felo'Melorn",
+            "debuff": [
+                {
+                    "name":"fireball",
+                    "attribute": "health",
+                    "operand": "subtract",
+                    "value": 10,
+                    "reoccuring": 1,
+                    "duration": 5
+                }
+            ]
+        },
+        {
+            "name": "frostbolt",
+            "cost": 10,
+            "max_power_level": 5,
+            "attack_range": 200,
+            "fire_delta": 0.2,
+            "damage": 10,
+            "speed": 800,
+            "rune_sprite": "Rune",
+			"rune_color": {
+				"r": 0.0,
+				"g": 0.0,
+				"b": 1.0
+			},
+            "spell_sprite": "Frostbolt",
+            "button_name": "Frostbolt",
+            "debuff": [
+                {
+                    "name":"frostbolt",
+                    "attribute": "speed",
+                    "operand": "subtract",
+                    "value": 10,
+                    "reoccuring": 0.5,
+                    "duration": 5
+                }
+            ]
+        },
+        {
+            "name": "lighting",
+            "cost": 30,
+            "max_power_level": 5,
+            "attack_range": 500,
+            "fire_delta": 1,
+            "damage": 100,
+            "speed": 450,
+            "rune_sprite": "Rune",
+			"rune_color": {
+				"r": 0.0,
+				"g": 0.5,
+				"b": 0.5
+			},
+            "spell_sprite": "Lighting",
+            "button_name": "Shockwave",
+            "debuff": [
+                {
+                    "name":"lighting",
+                    "attribute": "damage",
+                    "operand": "subtract",
+                    "value": 5,
+                    "reoccuring": 0,
+                    "duration": 1
+                }
+            ]
+        },
+        {
+            "name": "gust",
+            "cost": 25,
+            "max_power_level": 5,
+            "attack_range": 300,
+            "fire_delta": 0.2,
+            "damage": 30,
+            "speed": 500,
+            "rune_sprite": "Rune",
+			"rune_color": {
+				"r": 0.8,
+				"g": 0.8,
+				"b": 0.8
+			},
+	    "spell_sprite": "Gust",
+            "button_name": "Gust",
+            "debuff": false
+        }
+    ]
+}
