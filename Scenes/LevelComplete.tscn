@@ -4,8 +4,6 @@
 [ext_resource path="res://Assets/Fonts/Tangerine/Tangerine-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Scripts/Continue.gd" type="Script" id=3]
 
-
-
 [sub_resource type="DynamicFont" id=1]
 
 size = 40

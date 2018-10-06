@@ -7,10 +7,7 @@ path="res://.import/Gust.png-aaec17aeedebb548298f101d4cf078af.stex"
 [deps]
 
 source_file="res://Assets/Gust.png"
-source_md5="c515e2f88fabf1ae6a35d578200acff1"
-
 dest_files=[ "res://.import/Gust.png-aaec17aeedebb548298f101d4cf078af.stex" ]
-dest_md5="c8c8212d93c87b8064e4962cde008635"
 
 [params]
 

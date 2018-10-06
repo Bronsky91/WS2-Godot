@@ -7,10 +7,7 @@ path="res://.import/Frostbolt.png-1ffc4895de125a6affd9b5c0e8493514.stex"
 [deps]
 
 source_file="res://Assets/Frostbolt.png"
-source_md5="e9937f026e0eec3bc7e0f08c6a89fc8f"
-
 dest_files=[ "res://.import/Frostbolt.png-1ffc4895de125a6affd9b5c0e8493514.stex" ]
-dest_md5="65fe63a90963eb67f603f609de95f5e3"
 
 [params]
 

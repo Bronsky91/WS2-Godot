@@ -6,6 +6,7 @@ export var number_of_notes = 6
 var new_bar = false
 var bar_counter = 0
 
+# ---------------------- SCRIPT IN PROGRESS ------------------------- #
 
 func _ready():
 	global.game = self

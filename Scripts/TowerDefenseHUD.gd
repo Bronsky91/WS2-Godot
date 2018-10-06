@@ -7,6 +7,8 @@ var new_rune_button
 
 
 func _ready():
+	# Loads runes that the player has acccess to
+	# Tomes hold runes - term for research
 	for tome in global.tome_library['Tomes']:
 		new_rune_button = rune_button.instance()
 		new_rune_button.init(tome)

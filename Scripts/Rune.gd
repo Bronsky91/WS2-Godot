@@ -3,6 +3,8 @@ extends Node2D
 export(PackedScene) var spell
 
 onready var global = get_node("/root/Global")
+
+# Sets class variables from init 
 var _attack_range
 var _fire_delta
 var _damage
@@ -14,6 +16,7 @@ var _cost
 var _debuff
 var _details
 var _color
+
 var cursor_hovering = false
 var fire_next = 0.0
 var target = null
@@ -69,6 +72,7 @@ func choose_target():
 
 
 func _shoot(target):
+	# Creates spell and shoots at enemy target
 	if time > fire_next:
 		firing = true
 		var new_spell = spell.instance()
@@ -86,20 +90,26 @@ func rearm():
 
 
 func power_up():
+	# increases power level of rune when scrolling up
+	# removes mana based on power level
 	_power_level += 1
 	global.mana -= _cost
 	refresh_rune()
 
 
 func power_down():
+	# decreases power level of rune when scrolling down
+	# adds mana based on power level
 	_power_level -= 1
 	global.mana += _cost
 	refresh_rune()
 
 
 func refresh_rune():
+	# gives rune updated stats based on current power level
 	_damage *= 1.0 + (_power_level / 10)
 	global.mana_bar(global.mana)
+	# TODO: Find a way to include fire rate delta and speed of spell without breaking game
 	#_fire_delta = 1.0/(power - 10)
 	#_speed *= 1.0 - (power / 10)
 	#set_scale(Vector2(_power_level, _power_level))
@@ -108,8 +118,11 @@ func refresh_rune():
 
 
 func _input(event):
+	# Watches for if player is scrolling over runes to power them up or down
 	if event.is_pressed():
 		if cursor_hovering and event.button_index == BUTTON_WHEEL_UP and _power_level < _max_power_level and global.mana > _cost:
 			power_up()
 		if cursor_hovering and event.button_index == BUTTON_WHEEL_DOWN and _power_level > 1 and global.mana < global.mana_max:
 			power_down()
+			
+			

@@ -7,10 +7,7 @@ path="res://.import/LightBlue.png-7e30370b8e57adba7d0b79250116e0dc.stex"
 [deps]
 
 source_file="res://Assets/LightBlue.png"
-source_md5="e354ab323953640442f1d7c822e6bb3a"
-
 dest_files=[ "res://.import/LightBlue.png-7e30370b8e57adba7d0b79250116e0dc.stex" ]
-dest_md5="e9265d9db4029c55360c2b0c1419f638"
 
 [params]
 

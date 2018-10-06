@@ -6,6 +6,8 @@ onready var placeholder = $Sprite
 var disabled = false
 var power_level = 1
 var placeable = true
+
+# class variables that include details for rune being placed 
 var _rune_details
 var _cost
 var _color
@@ -23,6 +25,7 @@ func init_placeholder(rune_details):
 
 func _process(delta):
 	position = global.cursor_tile_pos
+	# Checks if rune can be placed based on mana and tile availabity
 	if global.mana < _cost or global.cursor_tile_path:
 		cannot_place()
 	else:
@@ -52,6 +55,7 @@ func draw_empty_circle (circle_center, circle_radius, color, resolution):
 
 
 func _input(event):
+	# Watches for scrolling up or down to place the rune already powered up or back down
 	if disabled:
 		return
 	if event.is_pressed():
@@ -73,6 +77,7 @@ func _input(event):
 
 
 func cannot_place():
+	# Changes color to represent not being able to place a rune
 	placeable = false
 	placeholder.modulate = Color(1,0,0)
 
@@ -83,6 +88,7 @@ func can_place():
 
 
 func set_visibility(visible):
+	# Disables placeholder if player is hovering over button to select new rune
 	if(visible):
 		show()
 		disabled = false

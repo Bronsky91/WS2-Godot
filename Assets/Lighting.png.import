@@ -7,10 +7,7 @@ path="res://.import/Lighting.png-de00f7343a1cb2c9a3ab6935ce1a1adf.stex"
 [deps]
 
 source_file="res://Assets/Lighting.png"
-source_md5="59c0091c2e27769d0dc48c7d35cb2b4e"
-
 dest_files=[ "res://.import/Lighting.png-de00f7343a1cb2c9a3ab6935ce1a1adf.stex" ]
-dest_md5="ce239fea5704f8cc419fc6958e71ff7e"
 
 [params]
 

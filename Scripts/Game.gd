@@ -19,18 +19,21 @@ export(PackedScene) var enemy
 export(PackedScene) var nav_point
 
 func _ready():
-	_load_level("Level" + str(global.current_level))
+	# Loads level fom JSON file and sets UI bars
+	_load_level("Level" + str(global.current_level)) #TODO: Refactor level naming system for more customization
 	global.game = weakref(self)
 	global.mana_bar(global.mana)
 	global.hp_bar(global.base_hp)
 
 
 func _process(delta):
+	# Checks when to spawn the next enemy
 	if spawn_new and not waves_over:
 		_process_wave()
 	elif waves_over and get_tree().get_nodes_in_group("enemies").size() == 0:
-		global.current_level += 1
-		get_tree().change_scene("res://Scenes/LevelComplete.tscn")
+	# Ends the level when all enemies are off the map and no more waves incoming
+		global.current_level += 1 # Advances tp next level
+		get_tree().change_scene("res://Scenes/LevelComplete.tscn") # Brings to level complete scene
 
 
 func _load_level(levelname):
@@ -59,10 +62,13 @@ func _load_level(levelname):
 			y += 1
 			x = 0
 		if level["waves"].size() > 0:
+		# Begins level
+		#TODO: Let player "start" level when they are ready or create a timer that the player sees
 			spawn_new = true
 
 
 func _process_wave():
+	# Processes the wave of enemies then starts timer for next wave
 	_spawn_enemy(level["waves"][current_wave]["enemies"][current_enemy_batch])
 	spawn_new = false
 	wave_timer.set_wait_time(level["waves"][current_wave]["enemies"][current_enemy_batch].enemy_timer)
@@ -70,6 +76,7 @@ func _process_wave():
 	
 	
 func _spawn_enemy(d):
+	# instances enemy into map and sets nav goal to base
 	var new_enemy = enemy.instance()
 	new_enemy.init(d.sprite ,d.speed,d.health,d.damage)
 	new_enemy.position = get_node(d.path).position

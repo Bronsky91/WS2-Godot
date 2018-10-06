@@ -20,10 +20,13 @@ func _ready():
 
 
 func init(rune_details):
+	# Inits what rune will be used when button is pressed
 	_rune_details = rune_details
 	
 	
 func _on_toggled(toggled):
+	# while button is toggled rune placeholder appears and chosen rune can be placed
+	#TODO: Refactor rune placement method to be more intutive 
 	if(toggled):
 		new_rune = rune_placeholder.instance()
 		new_rune.init_placeholder(_rune_details)
