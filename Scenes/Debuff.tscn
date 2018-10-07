@@ -2,8 +2,17 @@
 
 [ext_resource path="res://Scripts/Debuff.gd" type="Script" id=1]
 
-[node name="Debuff" type="Node"]
+[node name="Debuff" type="Node" index="0"]
 
 script = ExtResource( 1 )
+
+[node name="DebuffTimer" type="Timer" parent="." index="0"]
+
+process_mode = 1
+wait_time = 1.0
+one_shot = false
+autostart = false
+
+[connection signal="timeout" from="DebuffTimer" to="." method="_on_DebuffTimer_timeout"]
 
 

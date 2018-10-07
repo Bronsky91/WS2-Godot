@@ -47,13 +47,4 @@ scale = Vector2( 4.64521, 2.8845 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]
 
-[node name="DebuffTimer" type="Timer" parent="." index="2"]
-
-process_mode = 1
-wait_time = 1.0
-one_shot = false
-autostart = false
-
-[connection signal="timeout" from="DebuffTimer" to="." method="_on_DebuffTimer_timeout"]
-
 

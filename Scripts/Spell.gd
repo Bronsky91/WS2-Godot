@@ -44,7 +44,7 @@ func target_hit(damage):
 	# if the rune has the debuff attribute
 		for debuff in rune.get_ref()._debuffs:
 			if not target.get_ref().afflictions.has(debuff["class"]):
-			# If the enemy is not already afflicted with the current debuff of the spell
+			# If the enemy is not already afflicted with the current debuff class of the spell
 				apply_debuff(debuff)
 	var global = get_node("/root/Global")
 	# Increases ultimate charge
@@ -57,6 +57,7 @@ func apply_debuff(debuff):
 	target.get_ref().afflictions.append(debuff["class"])
 	var new_debuff
 	new_debuff = debuff_scene.instance()
+	# adds the debuff as a child of the enemy so multiple can be applied
 	target.get_ref().add_child(new_debuff)
 	new_debuff.init(debuff)
 		
