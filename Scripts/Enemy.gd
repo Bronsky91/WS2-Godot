@@ -7,14 +7,15 @@ var _damage
 var nav = null setget set_nav
 var path = []
 var goal = Vector2()
-var afflicted = false
+var afflictions = []
+var default_attribute
+
 var next_affliction_cycle = false
 var affliction_counter = 0
 var affliction_max = 0
 var debuff_details
-var default_attribute
 
-onready var debuff_timer = $DebuffTimer 
+onready var debuff_timer = $DebuffTimer
 onready var global = get_node("/root/Global")
 
 
@@ -43,10 +44,10 @@ func _physics_process(delta):
 			path.remove(0)
 	else:
 		reached_tower()
-		
-	if afflicted and next_affliction_cycle:
-		# Still need to update logic to be able stack debuffs
-		debuff_stack(debuff_details)
+	
+	#if afflicted and next_affliction_cycle:
+	# Still need to update logic to be able stack debuffs
+	#	debuff_stack(debuff_details)
 		
 		
 func set_nav(new_nav):
@@ -73,6 +74,7 @@ func take_damage(damage):
 	_health -= damage
 	if _health <= 0:
 		_die()
+	
 
 
 func _die():
@@ -137,7 +139,7 @@ func _on_DebuffTimer_timeout():
 		next_affliction_cycle = true
 	else:
 	# Ends debuff
-		afflicted = false
+		#afflicted = false
 		affliction_counter = 0
 		remove_debuffs()
 		debuff_timer.stop()

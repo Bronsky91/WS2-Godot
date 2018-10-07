@@ -48,7 +48,7 @@ func _load_level(levelname):
 			new_startpoint.position = global.get_tile_pos(s.x, s.y)
 			new_startpoint.name = "Path" + str(c)
 			add_child(new_startpoint)
-			print(new_startpoint.name + ": " + str(new_startpoint.position))
+			#print(new_startpoint.name + ": " + str(new_startpoint.position))
 			c += 1
 		path_end = global.get_tile_pos(level["tilemap"]["tower"].x,level["tilemap"]["tower"].y)
 		tower.position = path_end
@@ -56,7 +56,7 @@ func _load_level(levelname):
 		var y = 0
 		for row in level["tilemap"]["tiles"]:
 			for cell in row:
-				print("x: " + str(x) + ", y: " + str(y) + ", cell: " + str(cell))
+				#print("x: " + str(x) + ", y: " + str(y) + ", cell: " + str(cell))
 				map.set_cell(x, y, cell)
 				x += 1
 			y += 1

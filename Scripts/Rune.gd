@@ -13,7 +13,7 @@ var _spell_sprite
 var _power_level
 var _max_power_level
 var _cost
-var _debuff
+var _debuffs
 var _details
 var _color
 
@@ -40,7 +40,7 @@ func init(d, power_level):
 	_max_power_level = d["max_power_level"]
 	_power_level = power_level
 	_cost = d["cost"]
-	_debuff = d["debuff"]
+	_debuffs = d["debuffs"]
 	_details = d
 	modulate = Color(_color.r, _color.g, _color.b)
 

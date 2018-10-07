@@ -16,9 +16,9 @@
 			},
             "spell_sprite": "Fireball",
             "button_name": "Felo'Melorn",
-            "debuff": [
+            "debuffs": [
                 {
-                    "name":"fireball",
+                    "class":"burn",
                     "attribute": "health",
                     "operand": "subtract",
                     "value": 10,
@@ -43,9 +43,9 @@
 			},
             "spell_sprite": "Frostbolt",
             "button_name": "Frostbolt",
-            "debuff": [
+            "debuffs": [
                 {
-                    "name":"frostbolt",
+                    "class":"slow",
                     "attribute": "speed",
                     "operand": "subtract",
                     "value": 10,
@@ -70,9 +70,9 @@
 			},
             "spell_sprite": "Lighting",
             "button_name": "Shockwave",
-            "debuff": [
+            "debuffs": [
                 {
-                    "name":"lighting",
+                    "class":"weaken",
                     "attribute": "damage",
                     "operand": "subtract",
                     "value": 5,
@@ -97,7 +97,7 @@
 			},
 	    "spell_sprite": "Gust",
             "button_name": "Gust",
-            "debuff": false
+            "debuffs": false
         }
     ]
 }

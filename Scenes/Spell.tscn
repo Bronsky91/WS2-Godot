@@ -1,18 +1,20 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scripts/Spell.gd" type="Script" id=1]
-[ext_resource path="res://Assets/Fireball.png" type="Texture" id=2]
+[ext_resource path="res://Scenes/Debuff.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Assets/Fireball.png" type="Texture" id=3]
 
-[node name="Spell" type="Node2D"]
+[node name="Spell" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Transform" ]
+debuff_scene = ExtResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="." index="0"]
 
 position = Vector2( -0.228661, 0.243858 )
 scale = Vector2( 0.212364, 0.229549 )
-texture = ExtResource( 2 )
+texture = ExtResource( 3 )
 _sections_unfolded = [ "Transform" ]
 
 
