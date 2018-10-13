@@ -9,6 +9,7 @@
           "health": 50,
           "damage": 5,
           "reach": 5,
+          "attack_rate": 2,
           "enemy_timer": 0.25,
           "path": "Path1",
           "quantity": 40
@@ -19,6 +20,7 @@
           "health": 250,
           "damage": 10,
           "reach": 5,
+          "attack_rate": 1,
           "enemy_timer": 0.5,
           "path": "Path2",
           "quantity": 20
@@ -34,6 +36,7 @@
           "health": 125,
           "damage": 5,
           "reach": 5,
+          "attack_rate": 2,
           "enemy_timer": 0.25,
           "path": "Path2",
           "quantity": 40
@@ -44,6 +47,7 @@
           "health": 125,
           "damage": 5,
           "reach": 5,
+          "attack_rate": 2,
           "enemy_timer": 0.25,
           "path": "Path1",
           "quantity": 50

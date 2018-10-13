@@ -5,6 +5,7 @@ var _speed
 var _health
 var _damage
 var _reach
+var _attack_rate
 
 var nav = null setget set_nav
 var path = []
@@ -23,12 +24,13 @@ func _ready():
 	set_physics_process(true)
 
 
-func init(sprite, speed, health, damage, reach):
+func init(sprite, speed, health, damage, reach, attack_rate):
 	get_node("Sprite").set_texture(load("res://Assets/" + sprite + ".png"))
 	_speed =  speed
 	_health = health
 	_damage = damage
 	_reach = reach
+	_attack_rate = attack_rate
 	default_attribute = {"speed": speed, "health": health, "damage": damage}
 	
 
@@ -64,11 +66,10 @@ func update_path():
 
 
 func reached_tower():
-	print('reached?')
 	# Called when enemy reaches base
 	attacking = true
+	attack_timer.set_wait_time(_attack_rate)
 	attack_timer.start()
-	
 	 
    
 func take_damage(damage):
