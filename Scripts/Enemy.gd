@@ -47,8 +47,6 @@ func _physics_process(delta):
 		if attacking:
 			pass
 		else:
-			print(path.size())
-			print(attacking)
 			reached_tower()
 		
 		

@@ -13,26 +13,33 @@ var _cost
 var _color
 var _max_power_level
 var _attack_range
+var _rune_class
 
 
 func init_placeholder(rune_details):
 	_rune_details = rune_details
+	_rune_class = rune_details["class"]
 	_cost = rune_details["cost"]
 	_max_power_level = rune_details["max_power_level"]
 	_color = rune_details["rune_color"]
-	_attack_range = rune_details["attack_range"]
+	if _rune_class == "spell":
+		_attack_range = rune_details["attack_range"]
 
 
 func _process(delta):
 	position = global.cursor_tile_pos
 	# Checks if rune can be placed based on mana and tile availabity
-	if global.mana < _cost or global.cursor_tile_path:
+	if _rune_class == "spell" and (global.mana < _cost or global.cursor_tile_path == "spell"):
+		cannot_place()
+	elif _rune_class == "minion" and (global.mana < _cost or global.cursor_tile_path == "minion"):
 		cannot_place()
 	else:
 		can_place()
-
+		
+		
 func _draw():
-    draw_circle(Vector2(0,0),_attack_range,Color(1.0,1.0,1.0,0.5))
+	if _rune_class == "spell":
+    	draw_circle(Vector2(0,0),_attack_range,Color(1.0,1.0,1.0,0.5))
 	# TODO: Unsure of what the other float should be in the circle_radius Vector2. Also unsure what the resolution should be.
 	#draw_empty_circle(Vector2(0,0), Vector2(10,_attack_range), Color(1.0,1.0,1.0,0.5), 720)
 

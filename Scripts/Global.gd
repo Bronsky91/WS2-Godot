@@ -15,7 +15,7 @@ var tome_library # JSON File
 var cursor_tile_x = 0
 var cursor_tile_y = 0
 var cursor_tile_pos = Vector2()
-var cursor_tile_path = false
+var cursor_tile_path
 const TILE_WIDTH = 64
 const TILE_HEIGHT = 64
 

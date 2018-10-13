@@ -16,6 +16,7 @@ var _cost
 var _debuffs
 var _details
 var _color
+var _rune_class
 
 var cursor_hovering = false
 var fire_next = 0.0
@@ -31,9 +32,9 @@ func _ready():
 
 func init(d, power_level):
 	get_node("Sprite").set_texture(load("res://Assets/" + d["rune_sprite"] + ".png"))
+	_rune_class = d["class"]
 	_color = d["rune_color"]
 	_speed =  d["speed"]
-	_attack_range = d["attack_range"]
 	_fire_delta = d["fire_delta"]
 	_damage = d["damage"]
 	_spell_sprite = d["spell_sprite"]
@@ -43,13 +44,18 @@ func init(d, power_level):
 	_debuffs = d["debuffs"]
 	_details = d
 	modulate = Color(_color.r, _color.g, _color.b)
-
+	if _rune_class == "spell":
+		_attack_range = d["attack_range"]
+		
 
 func _process(delta):
-	time += delta #
-	var target = choose_target()
-	if target != null and !firing:
-		_shoot(target)
+	if _rune_class == "spell":
+		time += delta #
+		var target = choose_target()
+		if target != null and !firing:
+			_shoot(target)
+	elif _rune_class == "minion":
+		pass
 
 
 func choose_target():
