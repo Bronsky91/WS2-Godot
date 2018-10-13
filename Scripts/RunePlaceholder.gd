@@ -80,7 +80,8 @@ func _input(event):
 			new_rune.position = global.cursor_tile_pos
 			global.mana -= _cost
 			get_tree().get_root().add_child(new_rune)
-			new_rune.refresh_rune()
+			if _rune_class == "spell":
+				new_rune.refresh_rune()
 
 
 func cannot_place():

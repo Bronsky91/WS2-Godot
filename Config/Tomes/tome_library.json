@@ -108,18 +108,22 @@
             "class": "minion",
             "cost": 25,
             "max_power_level": 2,
-            "fire_delta": 0.2,
-            "damage": 30,
-            "speed": 100,
             "rune_sprite": "Rune",
 			"rune_color": {
 				"r": 0,
 				"g": 0.3,
 				"b": 0.8
-			},
-	    "spell_sprite": "Gust",
-            "button_name": "demon",
-            "debuffs": false
+            },
+            "button_name": "Demon",
+            "mob_stats": {
+                "sprite": "Enemy",
+                "speed": 100,
+                "health": 100,
+                "damage": 5,
+                "reach": 1,
+                "attack_rate": 1,
+                "summon_rate": 1
+            }
         }
     ]
 }

@@ -47,23 +47,22 @@ func _physics_process(delta):
 		if attacking:
 			pass
 		else:
-			reached_tower()
+			reached_goal()
 		
 		
 func set_nav(new_nav):
-	# Is this actually used?
 	nav = new_nav
 	update_path()
 	
 	
 func update_path():
-	# Is this actually used?
+	print(goal)
 	path = nav.get_simple_path(self.position, goal, false)
 	if path.size() == 0:
-		reached_tower()
+		reached_goal()
 
 
-func reached_tower():
+func reached_goal():
 	# Called when enemy reaches base
 	attacking = true
 	attack_timer.set_wait_time(_attack_rate)
@@ -90,6 +89,6 @@ func remove_debuffs():
 		
 
 func _on_AttackTimer_timeout():
-	# attacks tower on timeout
+	# attacks goal on timeout
 	global.hit_base(_damage)
 	print(get_name() + " attacking harry potter's house")

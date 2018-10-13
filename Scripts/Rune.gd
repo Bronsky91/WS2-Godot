@@ -1,8 +1,13 @@
 extends Node2D
 
 export(PackedScene) var spell
+export(PackedScene) var minion
 
+onready var summon_timer = $Summon_Timer
 onready var global = get_node("/root/Global")
+onready var nav = get_node("/root/Game/Nav")
+onready var map = get_node("/root/Game/Nav/TileMap")
+onready var path_end
 
 # Sets class variables from init 
 var _attack_range
@@ -17,6 +22,7 @@ var _debuffs
 var _details
 var _color
 var _rune_class
+var _mob_stats
 
 var cursor_hovering = false
 var fire_next = 0.0
@@ -24,6 +30,7 @@ var target = null
 var spell_scale
 var firing = false
 var time = 0.0
+
 
 
 func _ready():
@@ -34,29 +41,32 @@ func init(d, power_level):
 	get_node("Sprite").set_texture(load("res://Assets/" + d["rune_sprite"] + ".png"))
 	_rune_class = d["class"]
 	_color = d["rune_color"]
-	_speed =  d["speed"]
-	_fire_delta = d["fire_delta"]
-	_damage = d["damage"]
-	_spell_sprite = d["spell_sprite"]
 	_max_power_level = d["max_power_level"]
 	_power_level = power_level
 	_cost = d["cost"]
-	_debuffs = d["debuffs"]
 	_details = d
 	modulate = Color(_color.r, _color.g, _color.b)
 	if _rune_class == "spell":
 		_attack_range = d["attack_range"]
+		_speed =  d["speed"]
+		_fire_delta = d["fire_delta"]
+		_damage = d["damage"]
+		_spell_sprite = d["spell_sprite"]
+		_debuffs = d["debuffs"]
+	if _rune_class == "minion":
+		_mob_stats = d["mob_stats"]
 		
 
 func _process(delta):
 	if _rune_class == "spell":
 		time += delta #
 		var target = choose_target()
-		if target != null and !firing:
+		if target != null and not firing:
 			_shoot(target)
 	elif _rune_class == "minion":
-		pass
-
+		if not firing:
+			_summon(_mob_stats)
+			
 
 func choose_target():
 	var pos = get_global_position()
@@ -90,6 +100,20 @@ func _shoot(target):
 		fire_next = time + _fire_delta
 		get_tree().get_root().add_child(new_spell)
 
+
+func _summon(d):
+	summon_timer.set_wait_time(d.summon_rate)
+	summon_timer.start()
+	firing = true
+	var new_minion = minion.instance()
+	new_minion.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate)
+	new_minion.position = get_global_position()
+	new_minion.modulate = Color(0, 0, 1)
+	path_end = global.get_tile_pos(23, 10)
+	new_minion.goal = path_end
+	new_minion.nav = nav
+	get_tree().get_root().add_child(new_minion)
+	
 
 func rearm():
 	firing = false
@@ -132,3 +156,5 @@ func _input(event):
 			power_down()
 			
 			
+func _on_Summon_Timer_timeout():
+	rearm()
