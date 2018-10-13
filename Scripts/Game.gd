@@ -14,6 +14,7 @@ var current_wave = 0
 var current_enemy_batch = 0
 var current_enemy = 0
 var enemy_quantity = 0
+var start_points = []
 
 export(PackedScene) var enemy
 export(PackedScene) var nav_point
@@ -47,6 +48,7 @@ func _load_level(levelname):
 			var new_startpoint = nav_point.instance()
 			new_startpoint.position = global.get_tile_pos(s.x, s.y)
 			new_startpoint.name = "Path" + str(c)
+			start_points.append(new_startpoint.position)
 			add_child(new_startpoint)
 			#print(new_startpoint.name + ": " + str(new_startpoint.position))
 			c += 1
@@ -78,7 +80,7 @@ func _process_wave():
 func _spawn_enemy(d):
 	# instances enemy into map and sets nav goal to base
 	var new_enemy = enemy.instance()
-	new_enemy.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate)
+	new_enemy.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate, false)
 	new_enemy.position = get_node(d.path).position
 	new_enemy.goal = path_end
 	new_enemy.nav = nav

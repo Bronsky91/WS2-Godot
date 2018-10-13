@@ -5,8 +5,7 @@ export(PackedScene) var minion
 
 onready var summon_timer = $Summon_Timer
 onready var global = get_node("/root/Global")
-onready var nav = get_node("/root/Game/Nav")
-onready var map = get_node("/root/Game/Nav/TileMap")
+onready var level = get_node("/root/Game")
 onready var path_end
 
 # Sets class variables from init 
@@ -99,6 +98,14 @@ func _shoot(target):
 		new_spell.position = get_global_position()
 		fire_next = time + _fire_delta
 		get_tree().get_root().add_child(new_spell)
+		
+
+func find_closest_point(array, current_pos):
+	var closest_point = array[0]
+	for point in array:
+		if point.distance_to(current_pos) < closest_point.distance_to(current_pos):
+	            closest_point = point
+	return closest_point
 
 
 func _summon(d):
@@ -106,12 +113,12 @@ func _summon(d):
 	summon_timer.start()
 	firing = true
 	var new_minion = minion.instance()
-	new_minion.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate)
+	new_minion.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate, true)
 	new_minion.position = get_global_position()
 	new_minion.modulate = Color(0, 0, 1)
-	path_end = global.get_tile_pos(23, 10)
+	path_end = find_closest_point(level.start_points, new_minion.position)
 	new_minion.goal = path_end
-	new_minion.nav = nav
+	new_minion.nav = level.nav
 	get_tree().get_root().add_child(new_minion)
 	
 

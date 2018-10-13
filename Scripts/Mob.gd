@@ -6,6 +6,7 @@ var _health
 var _damage
 var _reach
 var _attack_rate
+var _is_minion
 
 var nav = null setget set_nav
 var path = []
@@ -19,18 +20,23 @@ onready var global = get_node("/root/Global")
 
 
 func _ready():
-	# Adding enemies into 'enemies' group
-	add_to_group("enemies")
+	if _is_minion:
+		# Adding minions into 'minions' group
+		add_to_group("minions")
+	elif not _is_minion:
+		# Adding enemies into 'enemies' group
+		add_to_group("enemies")
 	set_physics_process(true)
 
 
-func init(sprite, speed, health, damage, reach, attack_rate):
+func init(sprite, speed, health, damage, reach, attack_rate, is_minion):
 	get_node("Sprite").set_texture(load("res://Assets/" + sprite + ".png"))
 	_speed =  speed
 	_health = health
 	_damage = damage
 	_reach = reach
 	_attack_rate = attack_rate
+	_is_minion = is_minion
 	default_attribute = {"speed": speed, "health": health, "damage": damage}
 	
 
@@ -56,7 +62,6 @@ func set_nav(new_nav):
 	
 	
 func update_path():
-	print(goal)
 	path = nav.get_simple_path(self.position, goal, false)
 	if path.size() == 0:
 		reached_goal()
@@ -90,5 +95,10 @@ func remove_debuffs():
 
 func _on_AttackTimer_timeout():
 	# attacks goal on timeout
-	global.hit_base(_damage)
-	print(get_name() + " attacking harry potter's house")
+	if _is_minion:
+		# attack target
+		# FIGHT TIME!
+		pass
+	else:
+		global.hit_base(_damage)
+		print(get_name() + " attacking harry potter's house")
