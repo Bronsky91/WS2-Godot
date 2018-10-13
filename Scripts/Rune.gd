@@ -6,7 +6,6 @@ export(PackedScene) var minion
 onready var summon_timer = $Summon_Timer
 onready var global = get_node("/root/Global")
 onready var level = get_node("/root/Game")
-onready var path_end
 
 # Sets class variables from init 
 var _attack_range
@@ -29,10 +28,12 @@ var target = null
 var spell_scale
 var firing = false
 var time = 0.0
-
+var path_end
+var level_check
 
 
 func _ready():
+	level_check = level.get_path()
 	add_to_group("runes")
 
 
@@ -63,7 +64,7 @@ func _process(delta):
 		if target != null and not firing:
 			_shoot(target)
 	elif _rune_class == "minion":
-		if not firing:
+		if not firing and has_node(level_check):
 			_summon(_mob_stats)
 			
 
@@ -100,13 +101,6 @@ func _shoot(target):
 		get_tree().get_root().add_child(new_spell)
 		
 
-func find_closest_point(array, current_pos):
-	var closest_point = array[0]
-	for point in array:
-		if point.distance_to(current_pos) < closest_point.distance_to(current_pos):
-	            closest_point = point
-	return closest_point
-
 
 func _summon(d):
 	summon_timer.set_wait_time(d.summon_rate)
@@ -116,7 +110,7 @@ func _summon(d):
 	new_minion.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate, true)
 	new_minion.position = get_global_position()
 	new_minion.modulate = Color(0, 0, 1)
-	path_end = find_closest_point(level.start_points, new_minion.position)
+	path_end = global.find_closest_point(level.start_points, new_minion.position)
 	new_minion.goal = path_end
 	new_minion.nav = level.nav
 	get_tree().get_root().add_child(new_minion)

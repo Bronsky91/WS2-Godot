@@ -4,8 +4,6 @@
 [ext_resource path="res://Assets/Fonts/Tangerine/Tangerine-Regular.ttf" type="DynamicFontData" id=2]
 [ext_resource path="res://Scripts/Restart.gd" type="Script" id=3]
 
-
-
 [sub_resource type="DynamicFont" id=1]
 
 size = 40
@@ -14,7 +12,7 @@ use_filter = false
 font_data = ExtResource( 2 )
 _sections_unfolded = [ "Font", "Settings" ]
 
-[node name="Node" type="Node"]
+[node name="Node" type="Node" index="0"]
 
 [node name="Control" type="Control" parent="." index="0"]
 

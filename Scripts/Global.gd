@@ -77,6 +77,14 @@ func on_node_entered():
 func on_node_exited():
 	if(node_to_hide != null and node_to_hide.get_ref()):
 		node_to_hide.get_ref().set_visibility(true)
+		
+		
+func find_closest_point(array, current_pos):
+	var closest_point = array[0]
+	for point in array:
+		if point.distance_to(current_pos) < closest_point.distance_to(current_pos):
+	            closest_point = point
+	return closest_point
 
 
 func hit_base(damage):

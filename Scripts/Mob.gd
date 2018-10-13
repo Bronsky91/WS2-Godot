@@ -50,10 +50,9 @@ func _physics_process(delta):
 		else:
 			path.remove(0)
 	else:
-		if attacking:
-			pass
-		else:
+		if not attacking:
 			reached_goal()
+			
 		
 		
 func set_nav(new_nav):
