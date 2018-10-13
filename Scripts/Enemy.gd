@@ -4,12 +4,16 @@ extends RigidBody2D
 var _speed
 var _health
 var _damage
+var _reach
+
 var nav = null setget set_nav
 var path = []
 var goal = Vector2()
 var afflictions = []
 var default_attribute
+var attacking = false
 
+onready var attack_timer = $AttackTimer
 onready var global = get_node("/root/Global")
 
 
@@ -19,17 +23,18 @@ func _ready():
 	set_physics_process(true)
 
 
-func init(sprite, speed, health, damage):
+func init(sprite, speed, health, damage, reach):
 	get_node("Sprite").set_texture(load("res://Assets/" + sprite + ".png"))
 	_speed =  speed
 	_health = health
 	_damage = damage
+	_reach = reach
 	default_attribute = {"speed": speed, "health": health, "damage": damage}
 	
 
 func _physics_process(delta):
 	# Lets enemy follow nav path tiles
-	if path.size() > 1:
+	if path.size() > _reach and not attacking:
 		var dist = self.position.distance_to(path[0])
 		look_at(path[0])
 		if dist > 2:
@@ -37,7 +42,12 @@ func _physics_process(delta):
 		else:
 			path.remove(0)
 	else:
-		reached_tower()
+		if attacking:
+			pass
+		else:
+			print(path.size())
+			print(attacking)
+			reached_tower()
 		
 		
 func set_nav(new_nav):
@@ -54,10 +64,11 @@ func update_path():
 
 
 func reached_tower():
+	print('reached?')
 	# Called when enemy reaches base
-	print(get_name() + " reached harry potter's house")
-	queue_free()
-	global.hit_base(_damage)
+	attacking = true
+	attack_timer.start()
+	
 	 
    
 func take_damage(damage):
@@ -78,3 +89,8 @@ func remove_debuffs():
 	_damage = default_attribute.damage
 
 		
+
+func _on_AttackTimer_timeout():
+	# attacks tower on timeout
+	global.hit_base(_damage)
+	print(get_name() + " attacking harry potter's house")

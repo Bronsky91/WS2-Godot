@@ -7,7 +7,8 @@
           "sprite": "Enemy",
           "speed": 200,
           "health": 50,
-          "damage": 20,
+          "damage": 5,
+          "reach": 5,
           "enemy_timer": 0.25,
           "path": "Path1",
           "quantity": 40
@@ -16,7 +17,8 @@
           "sprite": "Enemy",
           "speed": 250,
           "health": 250,
-          "damage": 40,
+          "damage": 10,
+          "reach": 5,
           "enemy_timer": 0.5,
           "path": "Path2",
           "quantity": 20
@@ -30,7 +32,8 @@
           "sprite": "Enemy",
           "speed": 200,
           "health": 125,
-          "damage": 20,
+          "damage": 5,
+          "reach": 5,
           "enemy_timer": 0.25,
           "path": "Path2",
           "quantity": 40
@@ -39,7 +42,8 @@
           "sprite": "Enemy",
           "speed": 200,
           "health": 125,
-          "damage": 20,
+          "damage": 5,
+          "reach": 5,
           "enemy_timer": 0.25,
           "path": "Path1",
           "quantity": 50
