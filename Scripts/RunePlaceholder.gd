@@ -1,8 +1,11 @@
 extends Node2D
 
 export(PackedScene) var rune
+
 onready var global = get_node("/root/Global")
 onready var placeholder = $Sprite
+onready var global_cooldown = $GlobalCooldown
+
 var disabled = false
 var power_level = 1
 var placeable = true
@@ -24,22 +27,25 @@ func init_placeholder(rune_details):
 	_color = rune_details["rune_color"]
 	if _rune_class == "spell":
 		_attack_range = rune_details["attack_range"]
-
+	
 
 func _process(delta):
 	position = global.cursor_tile_pos
 	# Checks if rune can be placed based on mana and tile availabity
-	if _rune_class == "spell" and (global.mana < _cost or global.cursor_tile_path == "spell"):
+	if _rune_class == "spell" and (global.mana < _cost or global.cursor_tile_path == "minion") and placeable:
 		cannot_place()
-	elif _rune_class == "minion" and (global.mana < _cost or global.cursor_tile_path == "minion"):
+	elif _rune_class == "minion" and (global.mana < _cost or global.cursor_tile_path == "spell") and placeable:
 		cannot_place()
-	else:
+	elif _rune_class == "spell" and global.cursor_tile_path == "spell" and not placeable and global_cooldown.is_stopped():
 		can_place()
+	elif _rune_class == "minion" and global.cursor_tile_path == "minion" and not placeable and global_cooldown.is_stopped():
+		can_place()
+
 		
 		
 func _draw():
 	if _rune_class == "spell":
-    	draw_circle(Vector2(0,0),_attack_range,Color(1.0,1.0,1.0,0.5))
+    	draw_circle(Vector2(0,0),_attack_range,Color(1.0,1.0,1.0,0.3))
 	# TODO: Unsure of what the other float should be in the circle_radius Vector2. Also unsure what the resolution should be.
 	#draw_empty_circle(Vector2(0,0), Vector2(10,_attack_range), Color(1.0,1.0,1.0,0.5), 720)
 
@@ -79,18 +85,21 @@ func _input(event):
 			new_rune.init(_rune_details, power_level)
 			new_rune.position = global.cursor_tile_pos
 			global.mana -= _cost
+			global_cooldown.start()
+			cannot_place()
 			get_tree().get_root().add_child(new_rune)
-			if _rune_class == "spell":
-				new_rune.refresh_rune()
+			new_rune.refresh_rune()
 
 
 func cannot_place():
+	print('cannot place')
 	# Changes color to represent not being able to place a rune
 	placeable = false
 	placeholder.modulate = Color(1,0,0)
 
 
 func can_place():
+	print('can place')
 	placeable = true
 	placeholder.modulate = Color(0,0,1)
 
@@ -103,3 +112,8 @@ func set_visibility(visible):
 	else:
 		hide()
 		disabled = true
+
+
+func _on_GlobalCooldown_timeout():
+	can_place()
+	global_cooldown.stop()
