@@ -150,11 +150,11 @@ func refresh_rune():
 func _input(event):
 	# Watches for if player is scrolling over runes to power them up or down
 	if event.is_pressed():
-		if global.hovering_on_rune and event.button_index == BUTTON_WHEEL_UP and _power_level < _max_power_level and global.mana > _cost:
+		if cursor_hovering and event.button_index == BUTTON_WHEEL_UP and _power_level < _max_power_level and global.mana > _cost:
 			power_up()
-		if global.hovering_on_rune and event.button_index == BUTTON_WHEEL_DOWN and _power_level > 1 and global.mana < global.mana_max:
+		if cursor_hovering and event.button_index == BUTTON_WHEEL_DOWN and _power_level > 1 and global.mana < global.mana_max:
 			power_down()
-		if global.hovering_on_rune and event.button_index == BUTTON_RIGHT:
+		if cursor_hovering and event.button_index == BUTTON_RIGHT:
 			global.mana += _cost # Refund full cost for now when destroying rune
 			#TODO: Make cooldown (probably long) of how often you can destroy a rune and refund
 			global.mana_bar(global.mana)
