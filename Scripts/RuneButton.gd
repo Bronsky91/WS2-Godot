@@ -5,7 +5,7 @@ export(PackedScene) var rune_placeholder
 onready var global = get_node("/root/Global")
 onready var rune_button = $RuneButton
 
-var new_rune
+var placeholder
 
 var _rune_details # JSON object of rune details
 
@@ -15,8 +15,6 @@ func _ready():
 	rune_button.set_text(_rune_details["button_name"])
 	rune_button.set_toggle_mode(true)
 	rune_button.connect("toggled", self, "_on_toggled")
-	rune_button.connect("mouse_entered", global, "on_node_entered")
-	rune_button.connect("mouse_exited", global, "on_node_exited")
 
 
 func init(rune_details):
@@ -27,13 +25,17 @@ func init(rune_details):
 func _on_toggled(toggled):
 	# while button is toggled rune placeholder appears and chosen rune can be placed
 	#TODO: Refactor rune placement method to be more intutive 
-	if(toggled):
-		new_rune = rune_placeholder.instance()
-		new_rune.init_placeholder(_rune_details)
-		get_tree().get_root().add_child(new_rune)
-		global.node_to_hide = weakref(new_rune)
+	if toggled and not placeholder:
+		placeholder = rune_placeholder.instance()
+		placeholder.init_placeholder(_rune_details)
+		get_tree().get_root().add_child(placeholder)
 	else:
-		global.node_to_hide = null
-		new_rune.queue_free()
+		placeholder.queue_free()
 		
 
+func _on_RuneButton_mouse_entered():
+	global.hovering_on_rune = true
+
+
+func _on_RuneButton_mouse_exited():
+	global.hovering_on_rune = false

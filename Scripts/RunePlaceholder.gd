@@ -30,6 +30,12 @@ func init_placeholder(rune_details):
 	
 
 func _process(delta):
+	if global.hovering_on_rune:
+			set_visibility(false)
+	elif not global.hovering_on_rune:
+			set_visibility(true)
+			
+		
 	position = global.cursor_tile_pos
 	# Checks if rune can be placed based on mana and tile availabity
 	if _rune_class == "spell" and (global.mana < _cost or global.cursor_tile_path == "minion") and placeable:
@@ -85,21 +91,19 @@ func _input(event):
 			new_rune.init(_rune_details, power_level)
 			new_rune.position = global.cursor_tile_pos
 			global.mana -= _cost
-			global_cooldown.start()
 			cannot_place()
+			global_cooldown.start()
 			get_tree().get_root().add_child(new_rune)
 			new_rune.refresh_rune()
 
 
 func cannot_place():
-	print('cannot place')
 	# Changes color to represent not being able to place a rune
 	placeable = false
 	placeholder.modulate = Color(1,0,0)
 
 
 func can_place():
-	print('can place')
 	placeable = true
 	placeholder.modulate = Color(0,0,1)
 
@@ -107,9 +111,11 @@ func can_place():
 func set_visibility(visible):
 	# Disables placeholder if player is hovering over button to select new rune
 	if(visible):
+		print('show')
 		show()
 		disabled = false
 	else:
+		print('hide')
 		hide()
 		disabled = true
 

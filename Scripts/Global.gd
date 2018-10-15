@@ -6,12 +6,14 @@ var _ult_damage_to_charge = .1		# What damage dealt is multiplied by before bein
 var game							# Reference to Game node (self-registers onready)	
 var current_level = 1
 var restarted = false
-var node_to_hide = null
+var hovering_on_rune = false
 var base_hp = 100					# Current base health value
 var base_hp_max = 100				# Base maximum health value
 var mana = 200
 var mana_max = 200
 var tome_library # JSON File
+var nav
+var start_points = []
 var cursor_tile_x = 0
 var cursor_tile_y = 0
 var cursor_tile_pos = Vector2()
@@ -67,16 +69,6 @@ func mana_bar(num):
 func hp_bar(num):
 	if game.get_ref():
 		game.get_ref().get_node("TowerDefenseHUD/HealthMeter/Fill").set_value(num)
-	
-
-func on_node_entered():
-	if(node_to_hide != null and node_to_hide.get_ref()):
-		node_to_hide.get_ref().set_visibility(false)
-		
-		
-func on_node_exited():
-	if(node_to_hide != null and node_to_hide.get_ref()):
-		node_to_hide.get_ref().set_visibility(true)
 		
 		
 func find_closest_point(array, current_pos):

@@ -5,7 +5,6 @@ export(PackedScene) var minion
 
 onready var summon_timer = $Summon_Timer
 onready var global = get_node("/root/Global")
-onready var level = get_node("/root/Game")
 
 # Sets class variables from init 
 var _attack_range
@@ -29,11 +28,9 @@ var spell_scale
 var firing = false
 var time = 0.0
 var path_end
-var level_check
 
 
 func _ready():
-	level_check = level.get_path()
 	add_to_group("runes")
 
 
@@ -64,7 +61,7 @@ func _process(delta):
 		if target != null and not firing:
 			_shoot(target)
 	elif _rune_class == "minion":
-		if not firing and has_node(level_check):
+		if not firing:
 			_summon(_mob_stats)
 			
 
@@ -110,9 +107,9 @@ func _summon(d):
 	new_minion.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate, true)
 	new_minion.position = get_global_position()
 	new_minion.modulate = Color(0, 0, 1)
-	path_end = global.find_closest_point(level.start_points, new_minion.position)
+	path_end = global.find_closest_point(global.start_points, new_minion.position)
 	new_minion.goal = path_end
-	new_minion.nav = level.nav
+	new_minion.nav = global.nav
 	get_tree().get_root().add_child(new_minion)
 	
 
@@ -152,9 +149,9 @@ func refresh_rune():
 func _input(event):
 	# Watches for if player is scrolling over runes to power them up or down
 	if event.is_pressed():
-		if cursor_hovering and event.button_index == BUTTON_WHEEL_UP and _power_level < _max_power_level and global.mana > _cost:
+		if global.hovering_on_rune and event.button_index == BUTTON_WHEEL_UP and _power_level < _max_power_level and global.mana > _cost:
 			power_up()
-		if cursor_hovering and event.button_index == BUTTON_WHEEL_DOWN and _power_level > 1 and global.mana < global.mana_max:
+		if global.hovering_on_rune and event.button_index == BUTTON_WHEEL_DOWN and _power_level > 1 and global.mana < global.mana_max:
 			power_down()
 			
 			

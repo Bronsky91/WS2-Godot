@@ -54,7 +54,6 @@ func _physics_process(delta):
 			reached_goal()
 			
 		
-		
 func set_nav(new_nav):
 	nav = new_nav
 	update_path()
