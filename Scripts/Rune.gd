@@ -89,6 +89,7 @@ func _shoot(target):
 	if time > fire_next:
 		firing = true
 		var new_spell = spell.instance()
+		new_spell.init(_damage, _speed, _debuffs)
 		new_spell.get_node("Sprite").set_texture(load("res://Assets/" + _spell_sprite + ".png"))
 		new_spell.set_scale(spell_scale)
 		new_spell.target = target
@@ -153,6 +154,12 @@ func _input(event):
 			power_up()
 		if global.hovering_on_rune and event.button_index == BUTTON_WHEEL_DOWN and _power_level > 1 and global.mana < global.mana_max:
 			power_down()
+		if global.hovering_on_rune and event.button_index == BUTTON_RIGHT:
+			global.mana += _cost # Refund full cost for now when destroying rune
+			#TODO: Make cooldown (probably long) of how often you can destroy a rune and refund
+			global.mana_bar(global.mana)
+			call_deferred('free')
+			
 			
 			
 func _on_Summon_Timer_timeout():

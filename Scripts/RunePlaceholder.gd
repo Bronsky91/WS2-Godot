@@ -111,11 +111,9 @@ func can_place():
 func set_visibility(visible):
 	# Disables placeholder if player is hovering over button to select new rune
 	if(visible):
-		print('show')
 		show()
 		disabled = false
 	else:
-		print('hide')
 		hide()
 		disabled = true
 

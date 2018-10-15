@@ -25,11 +25,11 @@ func init(rune_details):
 func _on_toggled(toggled):
 	# while button is toggled rune placeholder appears and chosen rune can be placed
 	#TODO: Refactor rune placement method to be more intutive 
-	if toggled and not placeholder:
+	if toggled:
 		placeholder = rune_placeholder.instance()
 		placeholder.init_placeholder(_rune_details)
 		get_tree().get_root().add_child(placeholder)
-	else:
+	elif not toggled:
 		placeholder.queue_free()
 		
 
