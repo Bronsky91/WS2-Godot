@@ -84,6 +84,7 @@ func hit_base(damage):
 	if damage >= base_hp:
 		hp_bar(0)
 		print("Harry Potter is dead")
+		end_level = true
 		get_tree().change_scene("res://Scenes/GameOver.tscn")
 	else:
 		base_hp -= damage

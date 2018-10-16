@@ -1,10 +1,13 @@
 extends "res://scripts/Mob.gd"
 
+onready var death_timer = $DeathTimer
+
 var _aggro_range
 var dist_total
 
 func _ready():
 	add_to_group("minions")
+	death_timer.start()
 
 
 func init(sprite, speed, health, damage, reach, attack_rate, aggro_range):
@@ -58,7 +61,6 @@ func _physics_process(delta):
 	if dist_total >= _reach:
 		# Rotate minion to face where it is going
 		look_at(path[0])
-		
 		# If we are still too far from the next step, continue to head towards it
 		if dist_step > 2:
 			self.position = self.position.linear_interpolate(path[0], (_speed * delta)/dist_step)
@@ -71,11 +73,6 @@ func _physics_process(delta):
 		if not attacking:
 			reached_goal()
 	## -----------------------
-
-
-#func _process():
-#	if path.size() > 0:
-#		look_at(path[0])
 
 
 func choose_target():
@@ -113,3 +110,7 @@ func _on_AttackTimer_timeout():
 		print('fight time!')
 		aggro_target.get_ref().take_damage(_damage)
 
+
+func _on_DeathTimer_timeout():
+	print('times up')
+	_die()
