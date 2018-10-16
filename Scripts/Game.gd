@@ -79,9 +79,9 @@ func _process_wave():
 func _spawn_enemy(d):
 	# instances enemy into map and sets nav goal to base
 	var new_enemy = enemy.instance()
-	new_enemy.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate, false, d.aggro_range)
+	new_enemy.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate)
 	new_enemy.position = get_node(d.path).position
-	new_enemy.goal = path_end
+	new_enemy.final_dest = path_end
 	new_enemy.nav = nav
 	global.nav = nav
 	add_child(new_enemy)

@@ -119,7 +119,7 @@
                 "sprite": "Enemy",
                 "speed": 100,
                 "health": 100,
-                "damage": 5,
+                "damage": 100,
                 "reach": 1,
                 "attack_rate": 1,
                 "aggro_range": 100,
