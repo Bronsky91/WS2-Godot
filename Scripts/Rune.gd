@@ -57,7 +57,7 @@ func init(d, power_level):
 func _process(delta):
 	if _rune_class == "spell":
 		time += delta #
-		var target = choose_target()
+		target = choose_target()
 		if target != null and not firing:
 			_shoot(target)
 	elif _rune_class == "minion":
@@ -105,7 +105,7 @@ func _summon(d):
 	summon_timer.start()
 	firing = true
 	var new_minion = minion.instance()
-	new_minion.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate, true)
+	new_minion.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate, true, d.aggro_range)
 	new_minion.position = get_global_position()
 	new_minion.modulate = Color(0, 0, 1)
 	path_end = global.find_closest_point(global.start_points, new_minion.position)

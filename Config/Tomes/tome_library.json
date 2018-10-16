@@ -122,6 +122,7 @@
                 "damage": 5,
                 "reach": 1,
                 "attack_rate": 1,
+                "aggro_range": 100,
                 "summon_rate": 1
             }
         }

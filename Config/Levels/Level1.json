@@ -12,7 +12,8 @@
           "attack_rate": 1,
           "enemy_timer": 3,
           "path": "Path1",
-          "quantity": 1
+          "quantity": 1,
+          "aggro_range": 200
         },
         {
           "sprite": "Enemy",
@@ -23,7 +24,9 @@
           "attack_rate": 2,
           "enemy_timer": 2,
           "path": "Path2",
-          "quantity": 2
+          "quantity": 2,
+          "aggro_range": 200
+          
         }
       ]
     },
@@ -39,7 +42,8 @@
           "attack_rate": 2,
           "enemy_timer": 4,
           "path": "Path2",
-          "quantity": 1
+          "quantity": 1,
+          "aggro_range": 200
         },
         {
           "sprite": "Enemy",
@@ -50,7 +54,8 @@
           "attack_rate": 2,
           "enemy_timer": 2,
           "path": "Path1",
-          "quantity": 2
+          "quantity": 2,
+          "aggro_range": 200
         }
       ]
     }

@@ -7,7 +7,9 @@ var _damage
 var _reach
 var _attack_rate
 var _is_minion
+var _aggro_range
 
+var aggro_target = null
 var nav = null setget set_nav
 var path = []
 var goal = Vector2()
@@ -29,7 +31,7 @@ func _ready():
 	set_physics_process(true)
 
 
-func init(sprite, speed, health, damage, reach, attack_rate, is_minion):
+func init(sprite, speed, health, damage, reach, attack_rate, is_minion, aggro_range):
 	get_node("Sprite").set_texture(load("res://Assets/" + sprite + ".png"))
 	_speed =  speed
 	_health = health
@@ -37,10 +39,15 @@ func init(sprite, speed, health, damage, reach, attack_rate, is_minion):
 	_reach = reach
 	_attack_rate = attack_rate
 	_is_minion = is_minion
+	_aggro_range = aggro_range
 	default_attribute = {"speed": speed, "health": health, "damage": damage}
 	
 
 func _physics_process(delta):
+	if _is_minion:
+		aggro_target = choose_target()
+		if aggro_target != null and aggro_target.get_ref():
+			update_path_aggro()
 	# Lets enemy follow nav path tiles
 	if path.size() > _reach and not attacking:
 		var dist = self.position.distance_to(path[0])
@@ -53,6 +60,29 @@ func _physics_process(delta):
 		if not attacking:
 			reached_goal()
 			
+
+func choose_target():
+	var pos = get_global_position()
+	
+	# Check if existing target is still within range
+	if aggro_target != null and aggro_target.get_ref() and pos.distance_to(aggro_target.get_ref().get_global_position()) <= _aggro_range:
+		return aggro_target
+	else:
+		aggro_target = null
+	
+	# If not, check if new enemy is in range, and choose closest one if multiple
+	for enemy in get_tree().get_nodes_in_group("enemies"):
+		if pos.distance_to(enemy.get_global_position()) <= _aggro_range:
+			if (aggro_target == null 
+				or !aggro_target.get_ref() 
+				or pos.distance_to(enemy.get_global_position()) > get_global_position().distance_to(aggro_target.get_ref().get_global_position())):
+					aggro_target = weakref(enemy)	
+	return aggro_target
+	
+	
+func fight_me(_aggro_target):
+	aggro_target = _aggro_target
+	
 		
 func set_nav(new_nav):
 	nav = new_nav
@@ -64,6 +94,10 @@ func update_path():
 	if path.size() == 0:
 		reached_goal()
 
+
+func update_path_aggro():
+	path = nav.get_simple_path(self.get_global_position(), aggro_target.get_ref().get_global_position(), false)
+	
 
 func reached_goal():
 	# Called when enemy reaches base
