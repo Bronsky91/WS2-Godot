@@ -120,11 +120,11 @@
                 "speed": 100,
                 "health": 100,
                 "damage": 100,
-                "reach": 1,
+                "reach": 20,
                 "attack_rate": 1,
                 "aggro_range": 100,
                 "summon_rate": 1,
-                "quantity": 1
+                "quantity": 2
             }
         }
     ]

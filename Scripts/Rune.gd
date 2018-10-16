@@ -62,7 +62,7 @@ func _process(delta):
 		if target != null and not firing:
 			_shoot(target)
 	elif _rune_class == "minion":
-		if not firing:
+		if not firing and not global.end_level:
 			_summon(_mob_stats)
 			
 
@@ -102,16 +102,14 @@ func _shoot(target):
 
 
 func _summon(d):
-	print("quantity: " + str(d.quantity) + ", minions: " + str(get_tree().get_nodes_in_group("minions").size()) + ", enemies: " + str(get_tree().get_nodes_in_group("enemies").size()))
+	#print("quantity: " + str(d.quantity) + ", minions: " + str(get_tree().get_nodes_in_group("minions").size()) + ", enemies: " + str(get_tree().get_nodes_in_group("enemies").size()))
 	if get_tree().get_nodes_in_group("minions").size() < d.quantity:
-		print("summon!")
 		summon_timer.set_wait_time(d.summon_rate)
 		summon_timer.start()
 		firing = true
 		var new_minion = minion.instance()
 		new_minion.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate, d.aggro_range)
 		new_minion.position = get_global_position()
-		print("spawned new minion!")
 		new_minion.modulate = Color(0, 0, 1)
 		path_end = global.find_closest_point(global.start_points, new_minion.position)
 		new_minion.final_dest = path_end

@@ -54,7 +54,8 @@ func _physics_process(delta):
 			self.position = self.position.linear_interpolate(path[0], (_speed * delta)/dist_step)
 		# If we have reached this step, remove it, so the next step is bumped up in line
 		else:
-			path.remove(0)
+			if path.size() > 1:
+				path.remove(0)
 	# If the final destination's distance is within the enemy's reach, start attacking it
 	else:
 		if not attacking:
@@ -74,8 +75,8 @@ func _die():
 	if has_target():
 		aggro_target.get_ref().attacking = false
 		aggro_target.get_ref().encounter_start = false
+		aggro_target.get_ref().aggro_target = null
 		attack_timer.stop()
-		
 	# explosion / death animation
 	queue_free()
 

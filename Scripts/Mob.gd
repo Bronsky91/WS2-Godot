@@ -54,7 +54,7 @@ func update_path(_goal):
 
 
 func update_path_aggro(_goal):
-	if path.size() > 0:
+	if path.size() > 1:
 		path[path.size() - 1] = _goal
 
    

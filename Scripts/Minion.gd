@@ -1,6 +1,7 @@
 extends "res://scripts/Mob.gd"
 
 var _aggro_range
+var dist_total
 
 func _ready():
 	add_to_group("minions")
@@ -33,26 +34,28 @@ func _physics_process(delta):
 			encounter_start = true
 			aggro_target.get_ref().fight_me(weakref(self))
 			update_path(_going_towards)
-		else:
+		elif encounter_start:
 			# if not first encounter, only update last element in path array rather than rebuild entire array multiple times
 			update_path_aggro(_going_towards)
 	# if no enemy is being targeted, and the minion is not moving towards its final destination (enemy spawn point)...
 	elif not has_target() and _going_towards != final_dest:
 		# ensure it is not in attack mode and set it back on its way to its final destination
+		aggro_target = null
 		attacking = false
 		attack_timer.stop()
 		encounter_start = false
 		_going_towards = final_dest
-		update_path(final_dest)
+		if not global.end_level:
+			update_path(final_dest)
 	## -----------------------
 	
 	## MOVE TOWARDS DETERMINED DESTINATION (EITHER FINAL DESTINATION OFF SCREEN OR NEARBY ENEMY)
 	## -----------------------
 	# Calculate the distance to the final destination as well as the next "step" towards that destination
-	var dist_total = self.position.distance_to(_going_towards)
+	dist_total = self.position.distance_to(_going_towards)
 	var dist_step = self.position.distance_to(path[0])
 	# If the final destination's distance is outside of the minion's reach...
-	if dist_total > _reach:
+	if dist_total >= _reach:
 		# Rotate minion to face where it is going
 		look_at(path[0])
 		
@@ -61,7 +64,8 @@ func _physics_process(delta):
 			self.position = self.position.linear_interpolate(path[0], (_speed * delta)/dist_step)
 		# If we have reached this step, remove it, so the next step is bumped up in line
 		else:
-			path.remove(0)
+			if path.size() > 1:
+				path.remove(0)
 	# If the final destination's distance is within the minion's reach, start attacking it
 	else:
 		if not attacking:
@@ -92,7 +96,7 @@ func choose_target():
 
 
 func reached_goal():
-	if position == final_dest:
+	if path.size() == 1:
 		# If we have reached the final destination, off screen, then despawn minion...
 		queue_free()
 	else:
@@ -109,8 +113,3 @@ func _on_AttackTimer_timeout():
 		print('fight time!')
 		aggro_target.get_ref().take_damage(_damage)
 
-
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
