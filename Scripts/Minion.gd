@@ -1,16 +1,19 @@
 extends "res://scripts/Mob.gd"
 
 onready var death_timer = $DeathTimer
+onready var rune = get_node("/root/Rune")
 
 var _aggro_range
 var dist_total
+var _summoner_id
 
 func _ready():
 	add_to_group("minions")
 	death_timer.start()
+	connect('', rune, 'minion_check')
 
 
-func init(sprite, speed, health, damage, reach, attack_rate, aggro_range):
+func init(sprite, speed, health, damage, reach, attack_rate, aggro_range, summoner_id):
 	get_node("Sprite").set_texture(load("res://Assets/" + sprite + ".png"))
 	_speed =  speed
 	_health = health
@@ -18,6 +21,7 @@ func init(sprite, speed, health, damage, reach, attack_rate, aggro_range):
 	_reach = reach
 	_attack_rate = attack_rate
 	_aggro_range = aggro_range
+	_summoner_id = summoner_id
 	default_attribute = {"speed": speed, "health": health, "damage": damage}
 
 
@@ -25,7 +29,7 @@ func _physics_process(delta):
 	# if the minion has not locked onto an enemy yet, check if one is in range
 	if not aggro_target:
 		aggro_target = choose_target()
-	
+		
 	## DETERMINE IF MOVING TOWARDS FINAL DESTINATION (OFF SCREEN) OR TOWARDS A TARGETTED ENEMY
 	## -----------------------
 	# check if enemy has been identified
@@ -93,14 +97,21 @@ func choose_target():
 
 
 func reached_goal():
-	if path.size() == 1:
+	if path.size() == 1 and not has_target():
 		# If we have reached the final destination, off screen, then despawn minion...
-		queue_free()
+		die()
 	else:
 		# ... otherwise, if we have reached an enemey target instead, start attacking them
 		attacking = true
 		attack_timer.set_wait_time(_attack_rate)
 		attack_timer.start()
+		
+
+func _die():
+	get_tree().get_nodes_in_group('minions').erase(self)
+	# Mob has died
+	# TODO: explosion / death animation
+	queue_free()
 
 
 func _on_AttackTimer_timeout():

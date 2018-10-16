@@ -3,7 +3,7 @@ extends Node2D
 export(PackedScene) var spell
 export(PackedScene) var minion
 
-onready var summon_timer = $Summon_Timer
+onready var summon_timer = $SummonTimer
 onready var global = get_node("/root/Global")
 
 # Sets class variables from init 
@@ -29,6 +29,7 @@ var spell_scale
 var firing = false
 var time = 0.0
 var path_end
+var summoned_minions = []
 
 
 func _ready():
@@ -99,23 +100,29 @@ func _shoot(target):
 		fire_next = time + _fire_delta
 		get_tree().get_root().add_child(new_spell)
 		
-
+	
+func minions_this_rune_summoned(group):
+	var owned_minions = []
+	for minion in group:
+		if minion._summoner_id == self.get_instance_id():
+			owned_minions.append(minion.get_instance_id())
+	return owned_minions
+	
 
 func _summon(d):
-	#print("quantity: " + str(d.quantity) + ", minions: " + str(get_tree().get_nodes_in_group("minions").size()) + ", enemies: " + str(get_tree().get_nodes_in_group("enemies").size()))
-	if get_tree().get_nodes_in_group("minions").size() < d.quantity:
+	if minions_this_rune_summoned(get_tree().get_nodes_in_group('minions')).size() < d.max_quantity:
 		summon_timer.set_wait_time(d.summon_rate)
 		summon_timer.start()
 		firing = true
 		var new_minion = minion.instance()
-		new_minion.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate, d.aggro_range)
+		new_minion.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate, d.aggro_range, self.get_instance_id())
 		new_minion.position = get_global_position()
 		new_minion.modulate = Color(0, 0, 1)
 		path_end = global.find_closest_point(global.start_points, new_minion.position)
 		new_minion.final_dest = path_end
 		new_minion.nav = global.nav
 		get_tree().get_root().add_child(new_minion)
-	
+
 
 func rearm():
 	firing = false
@@ -164,6 +171,6 @@ func _input(event):
 			call_deferred('free')
 			
 			
-			
 func _on_Summon_Timer_timeout():
 	rearm()
+

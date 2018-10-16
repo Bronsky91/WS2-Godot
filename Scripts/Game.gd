@@ -1,7 +1,7 @@
 extends Node2D
 
 onready var global = get_node("/root/Global")
-onready var wave_timer = $Timer
+onready var wave_timer = $WaveTimer
 onready var path_end
 onready var nav = get_node("Nav")
 onready var map = get_node("Nav/TileMap")
@@ -52,7 +52,6 @@ func _load_level(levelname):
 			new_startpoint.name = "Path" + str(c)
 			global.start_points.append(new_startpoint.position)
 			add_child(new_startpoint)
-			#print(new_startpoint.name + ": " + str(new_startpoint.position))
 			c += 1
 		path_end = global.get_tile_pos(level["tilemap"]["tower"].x,level["tilemap"]["tower"].y)
 		tower.position = path_end

@@ -6,7 +6,6 @@ var _health
 var _damage
 var _reach
 var _attack_rate
-var _is_minion
 var _going_towards
 
 var final_dest = Vector2()
@@ -63,12 +62,6 @@ func take_damage(damage):
 	_health -= damage
 	if _health <= 0:
 		_die()
-
-
-func _die():
-	# Mob has died
-	# TODO: explosion / death animation
-	queue_free()
 
 
 func remove_debuffs():
