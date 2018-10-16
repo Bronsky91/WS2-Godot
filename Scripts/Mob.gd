@@ -8,6 +8,7 @@ var _reach
 var _attack_rate
 var _is_minion
 var _aggro_range
+var _going_towards
 
 var aggro_target = null
 var nav = null setget set_nav
@@ -46,8 +47,16 @@ func init(sprite, speed, health, damage, reach, attack_rate, is_minion, aggro_ra
 func _physics_process(delta):
 	if _is_minion:
 		aggro_target = choose_target()
-		if aggro_target != null and aggro_target.get_ref():
-			update_path_aggro()
+	if aggro_target != null and aggro_target.get_ref() and _going_towards != aggro_target.get_ref().get_global_position():
+		_going_towards = aggro_target.get_ref().get_global_position()
+		update_path(_going_towards)
+		if _is_minion:
+			aggro_target.get_ref().fight_me(weakref(self))
+	elif _going_towards != goal:
+		attacking = false
+		_going_towards = goal
+		update_path(goal)
+			
 	# Lets enemy follow nav path tiles
 	if path.size() > _reach and not attacking:
 		var dist = self.position.distance_to(path[0])
@@ -59,7 +68,7 @@ func _physics_process(delta):
 	else:
 		if not attacking:
 			reached_goal()
-			
+
 
 func choose_target():
 	var pos = get_global_position()
@@ -82,21 +91,21 @@ func choose_target():
 	
 func fight_me(_aggro_target):
 	aggro_target = _aggro_target
-	
-		
+
+
 func set_nav(new_nav):
 	nav = new_nav
-	update_path()
-	
-	
-func update_path():
-	path = nav.get_simple_path(self.position, goal, false)
+	update_path(goal)
+
+
+func update_path(_goal):
+	path = nav.get_simple_path(self.position, _goal, false)
 	if path.size() == 0:
 		reached_goal()
 
 
-func update_path_aggro():
-	path = nav.get_simple_path(self.get_global_position(), aggro_target.get_ref().get_global_position(), false)
+#func update_path_aggro():
+#	path = nav.get_simple_path(self.get_global_position(), aggro_target.get_ref().get_global_position(), false)
 	
 
 func reached_goal():
@@ -127,10 +136,9 @@ func remove_debuffs():
 
 func _on_AttackTimer_timeout():
 	# attacks goal on timeout
-	if _is_minion:
-		# attack target
+	if _is_minion and aggro_target != null and aggro_target.get_ref() and get_global_position().distance_to(aggro_target.get_ref().get_global_position()) <= _reach:
 		# FIGHT TIME!
-		pass
+		aggro_target.get_ref().take_damage(_damage)
 	else:
 		global.hit_base(_damage)
 		print(get_name() + " attacking harry potter's house")
