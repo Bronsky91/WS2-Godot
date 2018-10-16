@@ -50,6 +50,7 @@ func _physics_process(delta):
 	if aggro_target and aggro_target.get_ref() and _going_towards != aggro_target.get_ref().get_global_position():
 		_going_towards = aggro_target.get_ref().get_global_position()
 		update_path(_going_towards)
+		print('path size == '+str(path.size()) + ' and reach == '+str(_reach))
 		if _is_minion:
 			aggro_target.get_ref().fight_me(weakref(self))
 	elif _going_towards != goal:
@@ -58,11 +59,15 @@ func _physics_process(delta):
 		update_path(goal)
 			
 	# Lets enemy follow nav path tiles
-	if path.size() > _reach and not attacking:
-		print('path size == '+str(path.size()) + ' and reach == '+str(_reach))
-		var dist = self.position.distance_to(path[0])
+	var total_dist = self.position.distance_to(_going_towards)
+	var dist = self.position.distance_to(path[0])
+	if total_dist > _reach and not attacking:
 		look_at(path[0])
 		if dist > 2:
+			#if _is_minion and dist < 4:
+			#	print('dist = '+str(dist))
+			#	print('self.postion = '+str(self.position))
+			#	print('new position? '+str(self.position.linear_interpolate(path[0], (_speed * delta)/dist)))
 			self.position = self.position.linear_interpolate(path[0], (_speed * delta)/dist)
 		else:
 			path.remove(0)
@@ -101,7 +106,7 @@ func set_nav(new_nav):
 
 func update_path(_goal):
 	path = nav.get_simple_path(self.position, _goal, false)
-	if path.size() <= _reach: 
+	if path.size() == 0: 
 		print('goal reached')
 		reached_goal()
 

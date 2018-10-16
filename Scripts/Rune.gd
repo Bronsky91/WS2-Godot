@@ -62,7 +62,6 @@ func _process(delta):
 		if target != null and not firing:
 			_shoot(target)
 	elif _rune_class == "minion":
-		print(get_tree().get_nodes_in_group("minions").size())
 		if not firing:
 			_summon(_mob_stats)
 			

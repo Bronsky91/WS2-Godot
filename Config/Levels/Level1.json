@@ -20,11 +20,11 @@
           "speed": 200,
           "health": 250,
           "damage": 10,
-          "reach": 2,
+          "reach": 1,
           "attack_rate": 2,
           "enemy_timer": 2,
           "path": "Path2",
-          "quantity": 2,
+          "quantity": 0,
           "aggro_range": 200
           
         }
@@ -42,7 +42,7 @@
           "attack_rate": 2,
           "enemy_timer": 4,
           "path": "Path2",
-          "quantity": 1,
+          "quantity": 0,
           "aggro_range": 200
         },
         {
@@ -50,11 +50,11 @@
           "speed": 200,
           "health": 125,
           "damage": 20,
-          "reach": 2,
+          "reach": 1,
           "attack_rate": 2,
           "enemy_timer": 2,
           "path": "Path1",
-          "quantity": 2,
+          "quantity": 0,
           "aggro_range": 200
         }
       ]
