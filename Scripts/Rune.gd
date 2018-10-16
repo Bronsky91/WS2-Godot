@@ -20,6 +20,7 @@ var _details
 var _color
 var _rune_class
 var _mob_stats
+var _max_minions
 
 var cursor_hovering = false
 var fire_next = 0.0
@@ -61,6 +62,7 @@ func _process(delta):
 		if target != null and not firing:
 			_shoot(target)
 	elif _rune_class == "minion":
+		print(get_tree().get_nodes_in_group("minions").size())
 		if not firing:
 			_summon(_mob_stats)
 			
@@ -101,17 +103,18 @@ func _shoot(target):
 
 
 func _summon(d):
-	summon_timer.set_wait_time(d.summon_rate)
-	summon_timer.start()
-	firing = true
-	var new_minion = minion.instance()
-	new_minion.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate, true, d.aggro_range)
-	new_minion.position = get_global_position()
-	new_minion.modulate = Color(0, 0, 1)
-	path_end = global.find_closest_point(global.start_points, new_minion.position)
-	new_minion.goal = path_end
-	new_minion.nav = global.nav
-	get_tree().get_root().add_child(new_minion)
+	if get_tree().get_nodes_in_group("minions").size() < d.quantity:
+		summon_timer.set_wait_time(d.summon_rate)
+		summon_timer.start()
+		firing = true
+		var new_minion = minion.instance()
+		new_minion.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate, true, d.aggro_range)
+		new_minion.position = get_global_position()
+		new_minion.modulate = Color(0, 0, 1)
+		path_end = global.find_closest_point(global.start_points, new_minion.position)
+		new_minion.goal = path_end
+		new_minion.nav = global.nav
+		get_tree().get_root().add_child(new_minion)
 	
 
 func rearm():

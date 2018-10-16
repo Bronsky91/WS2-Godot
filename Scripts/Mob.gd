@@ -45,9 +45,9 @@ func init(sprite, speed, health, damage, reach, attack_rate, is_minion, aggro_ra
 	
 
 func _physics_process(delta):
-	if _is_minion:
+	if _is_minion and not aggro_target:
 		aggro_target = choose_target()
-	if aggro_target != null and aggro_target.get_ref() and _going_towards != aggro_target.get_ref().get_global_position():
+	if aggro_target and aggro_target.get_ref() and _going_towards != aggro_target.get_ref().get_global_position():
 		_going_towards = aggro_target.get_ref().get_global_position()
 		update_path(_going_towards)
 		if _is_minion:
@@ -59,6 +59,7 @@ func _physics_process(delta):
 			
 	# Lets enemy follow nav path tiles
 	if path.size() > _reach and not attacking:
+		print('path size == '+str(path.size()) + ' and reach == '+str(_reach))
 		var dist = self.position.distance_to(path[0])
 		look_at(path[0])
 		if dist > 2:
@@ -100,7 +101,8 @@ func set_nav(new_nav):
 
 func update_path(_goal):
 	path = nav.get_simple_path(self.position, _goal, false)
-	if path.size() == 0:
+	if path.size() <= _reach: 
+		print('goal reached')
 		reached_goal()
 
 
@@ -136,8 +138,9 @@ func remove_debuffs():
 
 func _on_AttackTimer_timeout():
 	# attacks goal on timeout
-	if _is_minion and aggro_target != null and aggro_target.get_ref() and get_global_position().distance_to(aggro_target.get_ref().get_global_position()) <= _reach:
+	if aggro_target != null and aggro_target.get_ref() and get_global_position().distance_to(aggro_target.get_ref().get_global_position()) <= _reach:
 		# FIGHT TIME!
+		print('fight time?')
 		aggro_target.get_ref().take_damage(_damage)
 	else:
 		global.hit_base(_damage)
