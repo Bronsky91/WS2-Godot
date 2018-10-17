@@ -34,6 +34,7 @@ var summoned_minions = []
 
 func _ready():
 	add_to_group("runes")
+	rearm()
 
 
 func init(d, power_level):
