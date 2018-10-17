@@ -34,8 +34,9 @@ func _process(delta):
 	# Ends the level when all enemies are off the map and no more waves incoming
 		global.current_level += 1 # Advances tp next level
 		global.end_level = true
+		for minion in get_tree().get_nodes_in_group('minions'):
+			minion.queue_free()
 		get_tree().change_scene("res://Scenes/LevelComplete.tscn") # Brings to level complete scene
-
 
 
 func _load_level(levelname):

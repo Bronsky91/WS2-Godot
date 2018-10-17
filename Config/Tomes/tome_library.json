@@ -120,7 +120,7 @@
                 "speed": 100,
                 "health": 100,
                 "damage": 100,
-                "reach": 40,
+                "reach": 30,
                 "attack_rate": 1,
                 "aggro_range": 100,
                 "summon_rate": 1,

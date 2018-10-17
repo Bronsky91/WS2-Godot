@@ -10,7 +10,6 @@ var _summoner_id
 func _ready():
 	add_to_group("minions")
 	death_timer.start()
-	connect('', rune, 'minion_check')
 
 
 func init(sprite, speed, health, damage, reach, attack_rate, aggro_range, summoner_id):
@@ -97,9 +96,10 @@ func choose_target():
 
 
 func reached_goal():
+	print(path.size())
 	if path.size() == 1 and not has_target():
 		# If we have reached the final destination, off screen, then despawn minion...
-		die()
+		_die()
 	else:
 		# ... otherwise, if we have reached an enemey target instead, start attacking them
 		attacking = true
@@ -108,7 +108,6 @@ func reached_goal():
 		
 
 func _die():
-	get_tree().get_nodes_in_group('minions').erase(self)
 	# Mob has died
 	# TODO: explosion / death animation
 	queue_free()
@@ -118,10 +117,8 @@ func _on_AttackTimer_timeout():
 	# attacks goal on timeout
 	if has_target() and position.distance_to(aggro_target.get_ref().position) <= _reach:
 		# FIGHT TIME!
-		print('fight time!')
 		aggro_target.get_ref().take_damage(_damage)
 
 
 func _on_DeathTimer_timeout():
-	print('times up')
 	_die()
