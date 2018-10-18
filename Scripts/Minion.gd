@@ -96,7 +96,6 @@ func choose_target():
 
 
 func reached_goal():
-	print(path.size())
 	if path.size() == 1 and not has_target():
 		# If we have reached the final destination, off screen, then despawn minion...
 		_die()

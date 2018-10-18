@@ -72,12 +72,13 @@ func hp_bar(num):
 		game.get_ref().get_node("TowerDefenseHUD/HealthMeter/Fill").set_value(num)
 		
 		
-func find_closest_point(array, pos):
-	var closest_node = array[0]
-	for node in array:
-		if node.distance_to(pos) < closest_node.distance_to(pos):
-	            closest_node = node
-	return closest_node
+func find_closest_point(array, current_pos):
+	var closest_point = array[0]
+	for point in array:
+		if current_pos.distance_to(point) < current_pos.distance_to(closest_point):
+			closest_point = point
+	print('returning ' + str(closest_point))
+	return closest_point
 
 
 func hit_base(damage):

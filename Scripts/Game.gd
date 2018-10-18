@@ -40,6 +40,7 @@ func _process(delta):
 
 
 func _load_level(levelname):
+	global.start_points = []
 	global.end_level = false
 	var file = File.new()
 	file.open("res://Config/Levels/" + levelname + ".json", File.READ)

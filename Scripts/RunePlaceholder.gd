@@ -38,13 +38,15 @@ func _process(delta):
 		
 	position = global.cursor_tile_pos
 	# Checks if rune can be placed based on mana and tile availabity
-	if _rune_class == "spell" and (global.mana < _cost or global.cursor_tile_path == "minion") and placeable:
+	if _rune_class == "spell" and global.mana < _cost and global.cursor_tile_path == "minion" and placeable:
 		cannot_place()
-	elif _rune_class == "minion" and (global.mana < _cost or global.cursor_tile_path == "spell") and placeable:
+		print('cannot_place')
+	elif _rune_class == "minion" and global.mana < _cost and global.cursor_tile_path == "spell" and placeable:
 		cannot_place()
-	elif _rune_class == "spell" and global.cursor_tile_path == "spell" and not placeable and global_cooldown.is_stopped():
+	elif _rune_class == "spell" and global.mana >= _cost and global.cursor_tile_path == "spell" and not placeable and global_cooldown.is_stopped():
 		can_place()
-	elif _rune_class == "minion" and global.cursor_tile_path == "minion" and not placeable and global_cooldown.is_stopped():
+		print('can_place')
+	elif _rune_class == "minion" and global.mana >= _cost and global.cursor_tile_path == "spell" and not placeable and global_cooldown.is_stopped():
 		can_place()
 
 		
@@ -91,6 +93,7 @@ func _input(event):
 			new_rune.init(_rune_details, power_level)
 			new_rune.position = global.cursor_tile_pos
 			global.mana -= _cost
+			print(global.mana)
 			cannot_place()
 			global_cooldown.start()
 			get_tree().get_root().add_child(new_rune)
@@ -119,5 +122,4 @@ func set_visibility(visible):
 
 
 func _on_GlobalCooldown_timeout():
-	can_place()
 	global_cooldown.stop()
