@@ -11,7 +11,6 @@ height = 20.0
 
 [node name="Minion" type="KinematicBody2D" index="0"]
 
-position = Vector2( 0.187386, -0.280029 )
 scale = Vector2( 0.253207, 0.278606 )
 input_pickable = false
 collision_layer = 1
@@ -28,7 +27,7 @@ _sections_unfolded = [ "Animation", "Transform" ]
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." index="1"]
 
 position = Vector2( -2.75079, 1.59552 )
-rotation = -1.5708
+rotation = 1.5708
 scale = Vector2( 4.64521, 2.8845 )
 shape = SubResource( 1 )
 _sections_unfolded = [ "Transform" ]

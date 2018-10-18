@@ -25,6 +25,9 @@ func init(sprite, speed, health, damage, reach, attack_rate, aggro_range, summon
 
 
 func _physics_process(delta):
+	var space = get_world_2d().get_space()
+	var space_state = Physics2DServer.space_get_direct_state(space)
+	
 	# if the minion has not locked onto an enemy yet, check if one is in range
 	if not aggro_target:
 		aggro_target = choose_target()
@@ -66,7 +69,13 @@ func _physics_process(delta):
 		look_at(path[0])
 		# If we are still too far from the next step, continue to head towards it
 		if dist_step > 2:
-			var velocity = (path[0] - position).normalized() * _speed
+			#velocity = (path[0] - position).normalized() * _speed
+			velocity = seek((path[0] - position).normalized() * _speed)
+			ahead = Vector2(0,0) + velocity.normalized() * MAX_SEE_AHEAD
+			ahead2 = Vector2(0,0) + velocity.normalized() * MAX_SEE_AHEAD * 0.5
+			print("pos: " + str(position) + ", vec2: " + str(Vector2(0,0)) + ", velocity: " + str(velocity) + ", ahead: " + str(ahead) + ", ahead2: " + str(ahead2) + ", avoid: " + str(avoid_collision()))
+			update()
+			velocity += avoid_collision()
 			if attacking:
 				move_and_collide(velocity)
 			else:
@@ -81,6 +90,24 @@ func _physics_process(delta):
 			reached_goal()
 	## -----------------------
 
+
+func _draw():
+	draw_circle(ahead,20,Color(1.0,0.0,0.0, 1.0))
+	draw_circle(ahead2,20,Color(0.0,1.0,0.0, 1.0))
+	#draw_circle(Vector2(0,0),30,Color(1.0,0.0,0.0,1.0))
+	#draw_line(position,ahead, Color(1.0,1.0,1.0))
+
+
+func seek(velocity):
+	#position = position + velocity
+	#velocity = normalize(target - position) * max_velocity
+	#desired_velocity = normalize(target - position) * max_velocity
+	#steering = desired_velocity - velocity
+	#steering = truncate (steering, max_force)
+	#steering = steering / mass
+	#velocity = truncate (velocity + steering , max_speed)
+	#position = position + velocity
+	return velocity
 
 func choose_target():
 	var pos = get_global_position()
