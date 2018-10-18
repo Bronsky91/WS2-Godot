@@ -1,11 +1,11 @@
 extends "res://scripts/Mob.gd"
 
 onready var death_timer = $DeathTimer
-onready var rune = get_node("/root/Rune")
 
 var _aggro_range
 var dist_total
 var _summoner_id
+
 
 func _ready():
 	add_to_group("minions")
@@ -66,8 +66,11 @@ func _physics_process(delta):
 		look_at(path[0])
 		# If we are still too far from the next step, continue to head towards it
 		if dist_step > 2:
-			self.position = self.position.linear_interpolate(path[0], (_speed * delta)/dist_step)
-			#move_and_slide(path[0])
+			var velocity = (path[0] - position).normalized() * _speed
+			if attacking:
+				move_and_collide(velocity)
+			else:
+				move_and_slide(velocity)
 		# If we have reached this step, remove it, so the next step is bumped up in line
 		else:
 			if path.size() > 1:
@@ -91,8 +94,8 @@ func choose_target():
 	# If not, check if new enemy is in range, and choose closest one if multiple
 	for enemy in get_tree().get_nodes_in_group("enemies"):
 		if pos.distance_to(enemy.get_global_position()) <= _aggro_range:
-			if not has_target() or nearer(enemy, aggro_target.get_ref()):
-				aggro_target = weakref(enemy)	
+			if (not has_target() and not enemy.has_target()) or (aggro_target and nearer(enemy, aggro_target.get_ref()) and not enemy.has_target()):
+				aggro_target = weakref(enemy)
 	return aggro_target
 
 

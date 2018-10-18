@@ -92,7 +92,6 @@ func _input(event):
 			new_rune.init(_rune_details, power_level)
 			new_rune.position = global.cursor_tile_pos
 			global.mana -= _cost
-			print(global.mana)
 			cannot_place()
 			global_cooldown.start()
 			get_tree().get_root().add_child(new_rune)
