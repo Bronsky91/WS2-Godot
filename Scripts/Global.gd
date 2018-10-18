@@ -77,7 +77,6 @@ func find_closest_point(array, current_pos):
 	for point in array:
 		if current_pos.distance_to(point) < current_pos.distance_to(closest_point):
 			closest_point = point
-	print('returning ' + str(closest_point))
 	return closest_point
 
 

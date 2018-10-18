@@ -38,18 +38,17 @@ func _process(delta):
 		
 	position = global.cursor_tile_pos
 	# Checks if rune can be placed based on mana and tile availabity
-	if _rune_class == "spell" and global.mana < _cost and global.cursor_tile_path == "minion" and placeable:
+	if placeable and _rune_class == "spell" and (global.mana < _cost or global.cursor_tile_path == "mob"):
 		cannot_place()
 		print('cannot_place')
-	elif _rune_class == "minion" and global.mana < _cost and global.cursor_tile_path == "spell" and placeable:
+	elif placeable and _rune_class == "minion" and (global.mana < _cost or global.cursor_tile_path == "spell"):
 		cannot_place()
-	elif _rune_class == "spell" and global.mana >= _cost and global.cursor_tile_path == "spell" and not placeable and global_cooldown.is_stopped():
+	elif not placeable and _rune_class == "spell" and global.mana >= _cost and global.cursor_tile_path == "spell" and global_cooldown.is_stopped():
 		can_place()
 		print('can_place')
-	elif _rune_class == "minion" and global.mana >= _cost and global.cursor_tile_path == "spell" and not placeable and global_cooldown.is_stopped():
+	elif not placeable and _rune_class == "minion" and global.mana >= _cost and global.cursor_tile_path == "mob" and global_cooldown.is_stopped():
 		can_place()
 
-		
 		
 func _draw():
 	if _rune_class == "spell":

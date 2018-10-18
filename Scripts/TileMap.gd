@@ -18,6 +18,6 @@ func _process(delta):
     #)
 	cursor_cell = get_cell(global.cursor_tile_x, global.cursor_tile_y)
 	if tile_set.tile_get_navigation_polygon(cursor_cell) != null:
-		global.cursor_tile_path = "minion"
+		global.cursor_tile_path = "mob"
 	else:
 		global.cursor_tile_path = "spell"

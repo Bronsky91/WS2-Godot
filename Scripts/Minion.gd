@@ -67,6 +67,7 @@ func _physics_process(delta):
 		# If we are still too far from the next step, continue to head towards it
 		if dist_step > 2:
 			self.position = self.position.linear_interpolate(path[0], (_speed * delta)/dist_step)
+			#move_and_slide(path[0])
 		# If we have reached this step, remove it, so the next step is bumped up in line
 		else:
 			if path.size() > 1:
