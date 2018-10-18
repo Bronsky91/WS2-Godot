@@ -1,5 +1,7 @@
 extends KinematicBody2D
 
+var steering_control = preload( "res://Scripts/Steering.gd" ).new()
+
 # class member variables
 var _speed
 var _health
@@ -21,6 +23,9 @@ var ahead = Vector2()
 var ahead2 = Vector2()
 const MAX_AVOID_FORCE = 200
 const MAX_SEE_AHEAD = 50
+var force = Vector2()
+var other_bodies = []
+var vel = Vector2()
 
 onready var attack_timer = $AttackTimer
 onready var global = get_node("/root/Global")
@@ -28,6 +33,9 @@ onready var collider = $CollisionShape2D
 
 
 func _ready():
+	steering_control 
+	steering_control.max_vel = _speed
+	steering_control.max_force = 1000
 	set_physics_process(true)
 
 

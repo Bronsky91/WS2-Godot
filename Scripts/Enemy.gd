@@ -52,10 +52,7 @@ func _physics_process(delta):
 		# If we are still too far from the next step, continue to head towards it
 		if dist_step > 2:
 			var velocity = (path[0] - position).normalized() * _speed
-			if attacking:
-				move_and_collide(velocity)
-			else:
-				move_and_slide(velocity)
+			move_and_slide(velocity)
 		# If we have reached this step, remove it, so the next step is bumped up in line
 		else:
 			if path.size() > 1:

@@ -25,18 +25,20 @@ func init(sprite, speed, health, damage, reach, attack_rate, aggro_range, summon
 
 
 func _physics_process(delta):
-	var space = get_world_2d().get_space()
-	var space_state = Physics2DServer.space_get_direct_state(space)
-	
+	other_bodies = get_tree().get_nodes_in_group("enemies") + get_tree().get_nodes_in_group("minions")
+	other_bodies.remove( other_bodies.find( self ) )
+	print( "Found ", other_bodies.size() )
+	var chase_force = Vector2()
 	# if the minion has not locked onto an enemy yet, check if one is in range
 	if not aggro_target:
 		aggro_target = choose_target()
-		
 	## DETERMINE IF MOVING TOWARDS FINAL DESTINATION (OFF SCREEN) OR TOWARDS A TARGETTED ENEMY
 	## -----------------------
 	# check if enemy has been identified
+	chase_force = steering_control.steering( position, path[0], vel, delta )
 	if has_target():
 		_going_towards = aggro_target.get_ref().position
+		chase_force = steering_control.steering( position, _going_towards, vel, delta )
 		# if so, check if this is the first iteration dealing with this enemy
 		if not encounter_start:
 			# if first encounter, build a new path array heading towards the enemy
@@ -65,21 +67,37 @@ func _physics_process(delta):
 	var dist_step = self.position.distance_to(path[0])
 	# If the final destination's distance is outside of the minion's reach...
 	if dist_total >= _reach:
+		var bound_force = steering_control.rect_bound( position, vel, Rect2( Vector2( 0, 0 ), Vector2( 1024, 930 ) ).size, 20, 200, delta )
+		var other_pos = []
+		var other_vel = []
+		
+		for o in other_bodies:
+			other_pos.append( o.position )
+			other_vel.append( o.vel )
+		var flockforce = Vector2()
+		flockforce = steering_control.flocking( position, vel, other_pos, other_vel, \
+				40, 200, \
+				200, 1, \
+				200, 1 )
+		var force = chase_force  + flockforce
+		force = steering_control.truncate( force, steering_control.max_force )
+		vel += force * delta
+		vel = steering_control.truncate( vel, steering_control.max_vel )
+		var motion = Vector2()
+		motion = vel * delta
+		position = ( position + motion )
+		print( chase_force, " ", flockforce )
 		# Rotate minion to face where it is going
 		look_at(path[0])
 		# If we are still too far from the next step, continue to head towards it
 		if dist_step > 2:
 			#velocity = (path[0] - position).normalized() * _speed
-			velocity = seek((path[0] - position).normalized() * _speed)
-			ahead = Vector2(0,0) + velocity.normalized() * MAX_SEE_AHEAD
-			ahead2 = Vector2(0,0) + velocity.normalized() * MAX_SEE_AHEAD * 0.5
-			print("pos: " + str(position) + ", vec2: " + str(Vector2(0,0)) + ", velocity: " + str(velocity) + ", ahead: " + str(ahead) + ", ahead2: " + str(ahead2) + ", avoid: " + str(avoid_collision()))
-			update()
-			velocity += avoid_collision()
-			if attacking:
-				move_and_collide(velocity)
-			else:
-				move_and_slide(velocity)
+			#ahead = Vector2(0,0) + velocity.normalized() * MAX_SEE_AHEAD
+			#ahead2 = Vector2(0,0) + velocity.normalized() * MAX_SEE_AHEAD * 0.5
+			#print("pos: " + str(position) + ", vec2: " + str(Vector2(0,0)) + ", velocity: " + str(velocity) + ", ahead: " + str(ahead) + ", ahead2: " + str(ahead2) + ", avoid: " + str(avoid_collision()))
+			#velocity += avoid_collision()
+			
+			move_and_slide(motion)
 		# If we have reached this step, remove it, so the next step is bumped up in line
 		else:
 			if path.size() > 1:
@@ -92,22 +110,12 @@ func _physics_process(delta):
 
 
 func _draw():
-	draw_circle(ahead,20,Color(1.0,0.0,0.0, 1.0))
-	draw_circle(ahead2,20,Color(0.0,1.0,0.0, 1.0))
+	pass
+	#draw_circle(ahead,20,Color(1.0,0.0,0.0, 1.0))
+	#draw_circle(ahead2,20,Color(0.0,1.0,0.0, 1.0))
 	#draw_circle(Vector2(0,0),30,Color(1.0,0.0,0.0,1.0))
 	#draw_line(position,ahead, Color(1.0,1.0,1.0))
 
-
-func seek(velocity):
-	#position = position + velocity
-	#velocity = normalize(target - position) * max_velocity
-	#desired_velocity = normalize(target - position) * max_velocity
-	#steering = desired_velocity - velocity
-	#steering = truncate (steering, max_force)
-	#steering = steering / mass
-	#velocity = truncate (velocity + steering , max_speed)
-	#position = position + velocity
-	return velocity
 
 func choose_target():
 	var pos = get_global_position()
