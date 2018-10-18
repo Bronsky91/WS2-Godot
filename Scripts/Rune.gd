@@ -170,7 +170,7 @@ func _input(event):
 			#TODO: Make cooldown (probably long) of how often you can destroy a rune and refund
 			global.mana_bar(global.mana)
 			call_deferred('free')
-			
+		
 			
 func _on_Summon_Timer_timeout():
 	rearm()
