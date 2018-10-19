@@ -35,7 +35,7 @@ onready var collider = $CollisionShape2D
 func _ready():
 	steering_control 
 	steering_control.max_vel = _speed
-	steering_control.max_force = 1000
+	steering_control.max_force = 1500
 	set_physics_process(true)
 
 

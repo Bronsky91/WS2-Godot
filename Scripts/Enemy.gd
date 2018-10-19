@@ -18,7 +18,12 @@ func init(sprite, speed, health, damage, reach, attack_rate):
 func _physics_process(delta):
 	## DETERMINE IF MOVING TOWARDS FINAL DESTINATION (TOWER) OR TOWARDS AN AGGRO'D MINION
 	## -----------------------
+	other_bodies = get_tree().get_nodes_in_group("enemies") + get_tree().get_nodes_in_group("minions")
+	other_bodies.remove( other_bodies.find( self ) )
+	#print( "Found ", other_bodies.size() )
+	var chase_force = Vector2()
 	# check if we are targetting aggro'd minion
+	chase_force = steering_control.steering( position, path[0], vel, delta )
 	if has_target():
 		_going_towards = aggro_target.get_ref().position
 		# if so, check if this is the first iteration dealing with this minion
@@ -46,13 +51,32 @@ func _physics_process(delta):
 	var dist_step = self.position.distance_to(path[0])
 	# If the final destination's distance is outside of the enemy's reach...
 	if dist_total > _reach:
+		
+		var bound_force = steering_control.rect_bound( position, vel, Rect2( Vector2( 0, 0 ), Vector2( 1024, 930 ) ).size, 20, 20, delta )
+		var other_pos = []
+		var other_vel = []
+		
+		for o in other_bodies:
+			other_pos.append( o.position )
+			other_vel.append( o.vel )
+		var flockforce = Vector2()
+		flockforce = steering_control.flocking( position, vel, other_pos, other_vel, \
+				40, 60, \
+				50, 1, \
+				50, 1)
+		var force = chase_force  + flockforce
+		force = steering_control.truncate( force, steering_control.max_force )
+		vel += force * delta
+		vel = steering_control.truncate( vel, steering_control.max_vel )
+		var motion = Vector2()
+		motion = vel * delta
+		position = ( position + motion )
 		# Rotate enemy to face where it is going
 		look_at(path[0])
-		
 		# If we are still too far from the next step, continue to head towards it
-		if dist_step > 2:
-			var velocity = (path[0] - position).normalized() * _speed
-			move_and_slide(velocity)
+		if dist_step > 75:
+			# var velocity = (path[0] - position).normalized() * _speed
+			move_and_collide(motion)
 		# If we have reached this step, remove it, so the next step is bumped up in line
 		else:
 			if path.size() > 1:

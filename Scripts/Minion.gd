@@ -27,7 +27,7 @@ func init(sprite, speed, health, damage, reach, attack_rate, aggro_range, summon
 func _physics_process(delta):
 	other_bodies = get_tree().get_nodes_in_group("enemies") + get_tree().get_nodes_in_group("minions")
 	other_bodies.remove( other_bodies.find( self ) )
-	print( "Found ", other_bodies.size() )
+	#print( "Found ", other_bodies.size() )
 	var chase_force = Vector2()
 	# if the minion has not locked onto an enemy yet, check if one is in range
 	if not aggro_target:
@@ -67,7 +67,7 @@ func _physics_process(delta):
 	var dist_step = self.position.distance_to(path[0])
 	# If the final destination's distance is outside of the minion's reach...
 	if dist_total >= _reach:
-		var bound_force = steering_control.rect_bound( position, vel, Rect2( Vector2( 0, 0 ), Vector2( 1024, 930 ) ).size, 20, 200, delta )
+		var bound_force = steering_control.rect_bound( position, vel, Rect2( Vector2( 0, 0 ), Vector2( 1024, 930 ) ).size, 20, 20, delta )
 		var other_pos = []
 		var other_vel = []
 		
@@ -76,9 +76,9 @@ func _physics_process(delta):
 			other_vel.append( o.vel )
 		var flockforce = Vector2()
 		flockforce = steering_control.flocking( position, vel, other_pos, other_vel, \
-				40, 200, \
-				200, 1, \
-				200, 1 )
+				40, 60, \
+				50, 1, \
+				50, 1)
 		var force = chase_force  + flockforce
 		force = steering_control.truncate( force, steering_control.max_force )
 		vel += force * delta
@@ -86,18 +86,20 @@ func _physics_process(delta):
 		var motion = Vector2()
 		motion = vel * delta
 		position = ( position + motion )
-		print( chase_force, " ", flockforce )
+		
+		#print( chase_force, " ", flockforce )
 		# Rotate minion to face where it is going
 		look_at(path[0])
+		#print(path)
 		# If we are still too far from the next step, continue to head towards it
-		if dist_step > 2:
+		if dist_step > 75:
 			#velocity = (path[0] - position).normalized() * _speed
 			#ahead = Vector2(0,0) + velocity.normalized() * MAX_SEE_AHEAD
 			#ahead2 = Vector2(0,0) + velocity.normalized() * MAX_SEE_AHEAD * 0.5
 			#print("pos: " + str(position) + ", vec2: " + str(Vector2(0,0)) + ", velocity: " + str(velocity) + ", ahead: " + str(ahead) + ", ahead2: " + str(ahead2) + ", avoid: " + str(avoid_collision()))
 			#velocity += avoid_collision()
 			
-			move_and_slide(motion)
+			move_and_collide(motion)
 		# If we have reached this step, remove it, so the next step is bumped up in line
 		else:
 			if path.size() > 1:

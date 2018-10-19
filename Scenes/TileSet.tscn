@@ -12,6 +12,7 @@ _sections_unfolded = [ "Transform" ]
 
 position = Vector2( 64, 64 )
 texture = ExtResource( 1 )
+_sections_unfolded = [ "Offset", "Transform" ]
 
 [node name="NavigationPolygonInstance" type="NavigationPolygonInstance" parent="000" index="0"]
 
@@ -20,7 +21,26 @@ enabled = true
 
 [node name="001" type="Sprite" parent="." index="1"]
 
-position = Vector2( 160, 64 )
+position = Vector2( 256, 256 )
 texture = ExtResource( 3 )
+_sections_unfolded = [ "Animation", "Offset", "Region", "Transform", "Visibility", "Z Index" ]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="001" index="0"]
+
+visible = false
+input_pickable = false
+collision_layer = 0
+collision_mask = 0
+constant_linear_velocity = Vector2( 0, 0 )
+constant_angular_velocity = 0.0
+friction = 0.0
+bounce = 0.0
+_sections_unfolded = [ "Collision", "Pickable", "Transform", "Z Index" ]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="001/StaticBody2D" index="0"]
+
+visible = false
+build_mode = 0
+polygon = PoolVector2Array( -32.4761, -32.4982, 32.244, -32.4274, 32.244, 32.3497, -32.5332, 32.3497 )
 
 

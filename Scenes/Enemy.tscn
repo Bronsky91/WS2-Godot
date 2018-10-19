@@ -31,7 +31,7 @@ position = Vector2( -2.75079, 1.59552 )
 rotation = -1.5708
 scale = Vector2( 4.64521, 2.8845 )
 shape = SubResource( 1 )
-_sections_unfolded = [ "Transform" ]
+_sections_unfolded = [ "Transform", "Visibility" ]
 
 [node name="AttackTimer" type="Timer" parent="." index="2"]
 
