@@ -15,6 +15,7 @@ func _ready():
 	rune_button.set_text(_rune_details["button_name"])
 	rune_button.set_toggle_mode(true)
 	rune_button.connect("toggled", self, "_on_toggled")
+	
 
 
 func init(rune_details):

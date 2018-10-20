@@ -25,10 +25,9 @@ func init(sprite, speed, health, damage, reach, attack_rate, aggro_range, summon
 
 
 func _physics_process(delta):
-	other_bodies = get_tree().get_nodes_in_group("enemies") + get_tree().get_nodes_in_group("minions")
+	other_bodies = get_tree().get_nodes_in_group("minions")
 	other_bodies.remove( other_bodies.find( self ) )
 	#print( "Found ", other_bodies.size() )
-	var chase_force = Vector2()
 	# if the minion has not locked onto an enemy yet, check if one is in range
 	if not aggro_target:
 		aggro_target = choose_target()
@@ -67,7 +66,7 @@ func _physics_process(delta):
 	var dist_step = self.position.distance_to(path[0])
 	# If the final destination's distance is outside of the minion's reach...
 	if dist_total >= _reach:
-		var bound_force = steering_control.rect_bound( position, vel, Rect2( Vector2( 0, 0 ), Vector2( 1024, 930 ) ).size, 20, 20, delta )
+		#var bound_force = steering_control.rect_bound( position, vel, Rect2( Vector2( 0, 0 ), Vector2( 1024, 930 ) ).size, 20, 20, delta )
 		var other_pos = []
 		var other_vel = []
 		

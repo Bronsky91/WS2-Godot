@@ -85,9 +85,16 @@ func hit_base(damage):
 		hp_bar(0)
 		print("Harry Potter is dead")
 		end_level = true
+		clear_map()
 		get_tree().change_scene("res://Scenes/GameOver.tscn")
 	else:
 		base_hp -= damage
 		hp_bar(base_hp)
 	
+	
+func clear_map():
+	for minion in get_tree().get_nodes_in_group('minions'):
+		minion.queue_free()
+	for rune in get_tree().get_nodes_in_group('runes'):
+		rune.queue_free()
 	

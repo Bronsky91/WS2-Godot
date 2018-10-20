@@ -169,7 +169,7 @@ func _input(event):
 			global.mana += _cost # Refund full cost for now when destroying rune
 			#TODO: Make cooldown (probably long) of how often you can destroy a rune and refund
 			global.mana_bar(global.mana)
-			call_deferred('free')
+			queue_free()
 		
 			
 func _on_Summon_Timer_timeout():

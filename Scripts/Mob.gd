@@ -26,6 +26,7 @@ const MAX_SEE_AHEAD = 50
 var force = Vector2()
 var other_bodies = []
 var vel = Vector2()
+var chase_force = Vector2()
 
 onready var attack_timer = $AttackTimer
 onready var global = get_node("/root/Global")

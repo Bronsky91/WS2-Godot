@@ -19,6 +19,10 @@ var _attack_range
 var _rune_class
 
 
+func _ready():
+	add_to_group("runes")
+	
+
 func init_placeholder(rune_details):
 	_rune_details = rune_details
 	_rune_class = rune_details["class"]
