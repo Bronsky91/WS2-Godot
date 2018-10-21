@@ -5,7 +5,7 @@
       "enemies": [
         {
           "sprite": "Enemy",
-          "speed": 200,
+          "speed": 100,
           "health": 50,
           "damage": 5,
           "reach": 30,
@@ -34,7 +34,7 @@
       "enemies": [
         {
           "sprite": "Enemy",
-          "speed": 200,
+          "speed": 100,
           "health": 125,
           "damage": 5,
           "reach": 30,
@@ -46,7 +46,7 @@
         },
         {
           "sprite": "Enemy",
-          "speed": 200,
+          "speed": 100,
           "health": 125,
           "damage": 5,
           "reach": 30,

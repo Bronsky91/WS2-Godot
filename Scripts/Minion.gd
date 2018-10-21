@@ -73,16 +73,16 @@ func _physics_process(delta):
 		for o in other_bodies:
 			other_pos.append( o.position )
 			other_vel.append( o.vel )
-		var flockforce = Vector2()
+			
 		flockforce = steering_control.flocking( position, vel, other_pos, other_vel, \
 				40, 60, \
 				50, 1, \
 				50, 1)
-		var force = chase_force  + flockforce
+		force = chase_force  + flockforce
 		force = steering_control.truncate( force, steering_control.max_force )
 		vel += force * delta
 		vel = steering_control.truncate( vel, steering_control.max_vel )
-		var motion = Vector2()
+
 		motion = vel * delta
 		position = ( position + motion )
 		
@@ -92,13 +92,8 @@ func _physics_process(delta):
 		#print(path)
 		# If we are still too far from the next step, continue to head towards it
 		if dist_step > 75:
-			#velocity = (path[0] - position).normalized() * _speed
-			#ahead = Vector2(0,0) + velocity.normalized() * MAX_SEE_AHEAD
-			#ahead2 = Vector2(0,0) + velocity.normalized() * MAX_SEE_AHEAD * 0.5
-			#print("pos: " + str(position) + ", vec2: " + str(Vector2(0,0)) + ", velocity: " + str(velocity) + ", ahead: " + str(ahead) + ", ahead2: " + str(ahead2) + ", avoid: " + str(avoid_collision()))
-			#velocity += avoid_collision()
-			
-			move_and_collide(motion)
+
+			move_and_slide(motion)
 		# If we have reached this step, remove it, so the next step is bumped up in line
 		else:
 			if path.size() > 1:
@@ -108,15 +103,6 @@ func _physics_process(delta):
 		if not attacking:
 			reached_goal()
 	## -----------------------
-
-
-func _draw():
-	pass
-	#draw_circle(ahead,20,Color(1.0,0.0,0.0, 1.0))
-	#draw_circle(ahead2,20,Color(0.0,1.0,0.0, 1.0))
-	#draw_circle(Vector2(0,0),30,Color(1.0,0.0,0.0,1.0))
-	#draw_line(position,ahead, Color(1.0,1.0,1.0))
-
 
 func choose_target():
 	var pos = get_global_position()

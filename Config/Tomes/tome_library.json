@@ -92,7 +92,7 @@
             "attack_range": 300,
             "fire_delta": 0.2,
             "damage": 30,
-            "speed": 500,
+            "speed": 1000,
             "rune_sprite": "Rune",
 			"rune_color": {
 				"r": 0.8,
