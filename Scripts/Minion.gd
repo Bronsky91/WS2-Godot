@@ -1,4 +1,4 @@
-extends "res://scripts/Mob.gd"
+extends "res://Scripts/Mob.gd"
 
 onready var death_timer = $DeathTimer
 
