@@ -5,14 +5,15 @@ onready var death_timer = $DeathTimer
 var _aggro_range
 var dist_total
 var _summoner_id
-
+var _d_timer
 
 func _ready():
 	add_to_group("minions")
+	death_timer.set_wait_time(_d_timer)
 	death_timer.start()
 
 
-func init(sprite, speed, health, damage, reach, attack_rate, aggro_range, summoner_id):
+func init(sprite, speed, health, damage, reach, attack_rate, aggro_range, death_timer, summoner_id):
 	get_node("Sprite").set_texture(load("res://Assets/" + sprite + ".png"))
 	_speed =  speed
 	_health = health
@@ -20,6 +21,7 @@ func init(sprite, speed, health, damage, reach, attack_rate, aggro_range, summon
 	_reach = reach
 	_attack_rate = attack_rate
 	_aggro_range = aggro_range
+	_d_timer = death_timer
 	_summoner_id = summoner_id
 	default_attribute = {"speed": speed, "health": health, "damage": damage}
 

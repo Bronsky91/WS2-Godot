@@ -9,7 +9,7 @@ custom_solver_bias = 0.0
 radius = 10.0
 height = 20.0
 
-[node name="Minion" type="KinematicBody2D"]
+[node name="Minion" type="KinematicBody2D" index="0"]
 
 scale = Vector2( 0.253207, 0.278606 )
 input_pickable = false

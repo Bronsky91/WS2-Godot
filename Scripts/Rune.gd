@@ -111,7 +111,7 @@ func _summon(minion, d, pos):
 		firing = true
 		for i in range(d.summon_quantity, 0, -1):
 			var new_minion = minion.instance()
-			new_minion.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate, d.aggro_range, self.get_instance_id())
+			new_minion.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate, d.aggro_range, d.death_timer, self.get_instance_id())
 			new_minion.position = pos
 			new_minion.modulate = Color(0, 0, 1)
 			path_end = global.find_closest_point(global.start_points, new_minion.position)
