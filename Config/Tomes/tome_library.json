@@ -115,6 +115,7 @@
                 "reach": 30,
                 "attack_rate": 1,
                 "aggro_range": 100,
+                "summon_quantity": 1,
                 "summon_rate": 0.1,
                 "max_quantity": 100
             }

@@ -166,4 +166,6 @@ func _input(event):
 			global.mana_bar(global.mana)
 			queue_free()
 		
-
+		
+func _on_PulseTimer_timeout():
+	rearm()

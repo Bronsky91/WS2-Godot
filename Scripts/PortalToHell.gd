@@ -9,6 +9,3 @@ func _ready():
 func _process(delta):
 	if not firing and not global.end_level:
 		_summon(minion, _mob_stats, position)
-
-func _on_PulseTimer_timeout():
-	rearm()
