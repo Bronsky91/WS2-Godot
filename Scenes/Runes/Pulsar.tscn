@@ -1,13 +1,8 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://scripts/Pulsar.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/RuneControl.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Fireball.png" type="Texture" id=3]
-
-[sub_resource type="RectangleShape2D" id=1]
-
-custom_solver_bias = 0.0
-extents = Vector2( 10, 10 )
 
 [node name="Rune" type="Node2D" index="0"]
 
@@ -44,15 +39,11 @@ wait_time = 1.0
 one_shot = false
 autostart = false
 
-[node name="Sprite2" type="Sprite" parent="." index="3"]
+[node name="Beam" type="Node2D" parent="." index="3"]
 
-position = Vector2( -0.437189, -0.622101 )
-scale = Vector2( 0.30646, 1.98409 )
-texture = ExtResource( 3 )
-offset = Vector2( 0, 60 )
-_sections_unfolded = [ "Animation", "Material", "Offset", "Region", "Transform", "Z Index" ]
+_sections_unfolded = [ "Transform" ]
 
-[node name="Area2D" type="Area2D" parent="." index="4"]
+[node name="Area2D" type="Area2D" parent="Beam" index="0"]
 
 input_pickable = true
 gravity_vec = Vector2( 0, 1 )
@@ -63,13 +54,14 @@ audio_bus_override = false
 audio_bus_name = "Master"
 _sections_unfolded = [ "Collision", "Transform" ]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="0"]
+[node name="Sprite" type="Sprite" parent="Beam/Area2D" index="0"]
 
-shape = SubResource( 1 )
-_sections_unfolded = [ "Transform", "Z Index" ]
+scale = Vector2( 0.25, 2 )
+texture = ExtResource( 3 )
+_sections_unfolded = [ "Animation", "Material", "Offset", "Region", "Transform", "Z Index" ]
 
 [connection signal="timeout" from="PulseTimer" to="." method="_on_PulseTimer_timeout"]
 
-[connection signal="body_entered" from="Area2D" to="." method="_on_Area2D_body_entered"]
+[connection signal="body_entered" from="Beam/Area2D" to="." method="_on_Area2D_body_entered"]
 
 
