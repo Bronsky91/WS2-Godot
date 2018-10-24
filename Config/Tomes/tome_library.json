@@ -59,6 +59,26 @@
             "mob": false
         },
         {
+            "name": "Pulsar",
+            "placement": "out_of_lane",
+            "cost": 10,
+            "max_power_level": 5,
+            "range": 200,
+            "fire_delta": 0.2,
+            "damage": 100,
+            "speed": 0.5,
+            "rune_sprite": "Rune",
+			"rune_color": {
+				"r": 0.0,
+				"g": 0.0,
+				"b": 1.0
+			},
+            "spell_sprite": "Pulsar",
+            "button_name": "Pulsar",
+            "debuffs": false,
+            "mob": false
+        },
+        {
             "name": "PortalToHell",
             "placement": "in_lane",
             "cost": 25,
