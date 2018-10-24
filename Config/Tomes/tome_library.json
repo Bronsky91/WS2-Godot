@@ -2,10 +2,10 @@
     "Tomes": [
         {
             "name": "fireball",
-            "class": "spell",
+            "placement": "out_of_lane",
             "cost": 20,
             "max_power_level": 3,
-            "attack_range": 300,
+            "range": 300,
             "fire_delta": 0.5,
             "damage": 25,
             "speed": 600,
@@ -26,14 +26,15 @@
                     "reoccuring": 1,
                     "duration": 5
                 }
-            ]
+            ],
+            "mob": false
         },
         {
-            "name": "frostbolt",
-            "class": "spell",
+            "name": "Frostbolt",
+            "placement": "out_of_lane",
             "cost": 10,
             "max_power_level": 5,
-            "attack_range": 200,
+            "range": 200,
             "fire_delta": 0.2,
             "damage": 10,
             "speed": 800,
@@ -54,68 +55,59 @@
                     "reoccuring": 0.5,
                     "duration": 5
                 }
-            ]
+            ],
+            "mob": false
         },
         {
-            "name": "lighting",
-            "class": "spell",
-            "cost": 30,
-            "max_power_level": 5,
-            "attack_range": 500,
-            "fire_delta": 1,
-            "damage": 100,
-            "speed": 450,
-            "rune_sprite": "Rune",
-			"rune_color": {
-				"r": 0.0,
-				"g": 0.5,
-				"b": 0.5
-			},
-            "spell_sprite": "Lighting",
-            "button_name": "Shockwave",
-            "debuffs": [
-                {
-                    "class":"weaken",
-                    "attribute": "damage",
-                    "operand": "subtract",
-                    "value": 5,
-                    "reoccuring": 0,
-                    "duration": 1
-                }
-            ]
-        },
-        {
-            "name": "gust",
-            "class": "spell",
-            "cost": 25,
-            "max_power_level": 5,
-            "attack_range": 300,
-            "fire_delta": 0.2,
-            "damage": 30,
-            "speed": 1000,
-            "rune_sprite": "Rune",
-			"rune_color": {
-				"r": 0.8,
-				"g": 0.8,
-				"b": 0.8
-			},
-	    "spell_sprite": "Gust",
-            "button_name": "Gust",
-            "debuffs": false
-        },
-        {
-            "name": "demon",
-            "class": "minion",
+            "name": "PortalToHell",
+            "placement": "in_lane",
             "cost": 25,
             "max_power_level": 2,
             "rune_sprite": "Rune",
+            "range": 0,
 			"rune_color": {
 				"r": 0,
 				"g": 0.3,
 				"b": 0.8
             },
-            "button_name": "Demon",
-            "mob_stats": {
+            "button_name": "Portal To Hell",
+            "damage": false,
+            "speed": false,
+            "fire_delta": false,
+            "spell_sprite": false,
+            "debuffs": false,
+            "mob": {
+                "sprite": "Enemy",
+                "speed": 100,
+                "health": 10,
+                "damage": 20,
+                "reach": 30,
+                "attack_rate": 1,
+                "aggro_range": 100,
+                "summon_rate": 4,
+                "summon_quantity": 3,
+                "max_quantity": 500
+            }
+        },
+        {
+            "name": "NecroSigil",
+            "placement": "in_lane",
+            "cost": 25,
+            "max_power_level": 2,
+            "rune_sprite": "Rune",
+            "range": 300,
+			"rune_color": {
+				"r": 0,
+				"g": 0.8,
+				"b": 0.3
+            },
+            "button_name": "Necromancy Sigil",
+            "damage": false,
+            "speed": false,
+            "fire_delta": false,
+            "spell_sprite": false,
+            "debuffs": false,
+            "mob": {
                 "sprite": "Enemy",
                 "speed": 100,
                 "health": 100,
@@ -123,8 +115,8 @@
                 "reach": 30,
                 "attack_rate": 1,
                 "aggro_range": 100,
-                "summon_rate": 1,
-                "max_quantity": 3
+                "summon_rate": 0.1,
+                "max_quantity": 100
             }
         }
     ]

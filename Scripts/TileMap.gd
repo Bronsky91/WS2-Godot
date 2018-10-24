@@ -18,6 +18,6 @@ func _process(delta):
     #)
 	cursor_cell = get_cell(global.cursor_tile_x, global.cursor_tile_y)
 	if tile_set.tile_get_navigation_polygon(cursor_cell) != null:
-		global.cursor_tile_path = "mob"
+		global.cursor_tile_path = "in_lane"
 	else:
-		global.cursor_tile_path = "spell"
+		global.cursor_tile_path = "out_of_lane"

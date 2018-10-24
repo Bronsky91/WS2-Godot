@@ -1,7 +1,5 @@
 extends Node2D
 
-export(PackedScene) var rune
-
 onready var global = get_node("/root/Global")
 onready var placeholder = $Sprite
 onready var global_cooldown = $GlobalCooldown
@@ -10,13 +8,16 @@ var disabled = false
 var power_level = 1
 var placeable = true
 
+
 # class variables that include details for rune being placed 
+var rune
+
 var _rune_details
 var _cost
 var _color
 var _max_power_level
-var _attack_range
-var _rune_class
+var _range
+var _placement
 
 
 func _ready():
@@ -24,13 +25,14 @@ func _ready():
 	
 
 func init_placeholder(rune_details):
+	rune = load("res://Scenes/Runes/{spell}.tscn".format({"spell": rune_details["name"]}))
+	print(rune)
 	_rune_details = rune_details
-	_rune_class = rune_details["class"]
+	_placement = rune_details["placement"]
 	_cost = rune_details["cost"]
 	_max_power_level = rune_details["max_power_level"]
 	_color = rune_details["rune_color"]
-	if _rune_class == "spell":
-		_attack_range = rune_details["attack_range"]
+	_range = rune_details["range"]
 	
 
 func _process(delta):
@@ -42,41 +44,16 @@ func _process(delta):
 		
 	position = global.cursor_tile_pos
 	# Checks if rune can be placed based on mana and tile availabity
-	if placeable and _rune_class == "spell" and (global.mana < _cost or global.cursor_tile_path == "mob"):
+	if placeable and (global.mana < _cost or global.cursor_tile_path != _placement):
 		cannot_place()
-		print('cannot_place')
-	elif placeable and _rune_class == "minion" and (global.mana < _cost or global.cursor_tile_path == "spell"):
-		cannot_place()
-	elif not placeable and _rune_class == "spell" and global.mana >= _cost and global.cursor_tile_path == "spell" and global_cooldown.is_stopped():
-		can_place()
-		print('can_place')
-	elif not placeable and _rune_class == "minion" and global.mana >= _cost and global.cursor_tile_path == "mob" and global_cooldown.is_stopped():
+	elif not placeable and global.mana >= _cost and global.cursor_tile_path == _placement and global_cooldown.is_stopped():
 		can_place()
 
 		
 func _draw():
-	if _rune_class == "spell":
-    	draw_circle(Vector2(0,0),_attack_range,Color(1.0,1.0,1.0,0.3))
+   	draw_circle(Vector2(0,0),_range,Color(1.0,1.0,1.0,0.3))
 	# TODO: Unsure of what the other float should be in the circle_radius Vector2. Also unsure what the resolution should be.
 	#draw_empty_circle(Vector2(0,0), Vector2(10,_attack_range), Color(1.0,1.0,1.0,0.5), 720)
-
-# https://www.reddit.com/r/godot/comments/3ktq39/drawing_empty_circles_and_curves/
-# TODO: Figure this out. Does not seem to work right, as-is...
-func draw_empty_circle (circle_center, circle_radius, color, resolution):
-	var draw_counter = 1
-	var line_origin = Vector2()
-	var line_end = Vector2()
-	line_origin = circle_radius + circle_center
-	
-	while draw_counter <= 360:
-		line_end = circle_radius.rotated(deg2rad(draw_counter)) + circle_center
-		draw_line(line_origin, line_end, color)
-		draw_counter += 1 / resolution
-		line_origin = line_end
-		
-	line_end = circle_radius.rotated(deg2rad(360)) + circle_center
-	draw_line(line_origin, line_end, color)
-
 
 func _input(event):
 	# Watches for scrolling up or down to place the rune already powered up or back down

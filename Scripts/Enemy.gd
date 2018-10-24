@@ -1,5 +1,7 @@
 extends "res://Scripts/Mob.gd"
 
+signal died
+
 
 func _ready():
 	add_to_group("enemies")
@@ -102,6 +104,7 @@ func _die():
 		aggro_target.get_ref().aggro_target = null
 		attack_timer.stop()
 	# explosion / death animation
+	emit_signal("died")
 	queue_free()
 
 

@@ -1,13 +1,10 @@
 extends Node2D
 
-export(PackedScene) var spell
-export(PackedScene) var minion
-
-onready var summon_timer = $SummonTimer
+onready var pulse_timer = $PulseTimer
 onready var global = get_node("/root/Global")
 
 # Sets class variables from init 
-var _attack_range
+var _range
 var _fire_delta
 var _damage
 var _speed
@@ -18,9 +15,10 @@ var _cost
 var _debuffs
 var _details
 var _color
-var _rune_class
+var _placement
 var _mob_stats
 var _max_minions
+var _targeting
 
 var cursor_hovering = false
 var fire_next = 0.0
@@ -39,47 +37,43 @@ func _ready():
 
 func init(d, power_level):
 	get_node("Sprite").set_texture(load("res://Assets/" + d["rune_sprite"] + ".png"))
-	_rune_class = d["class"]
+	_placement = d["placement"]
 	_color = d["rune_color"]
 	_max_power_level = d["max_power_level"]
 	_power_level = power_level
 	_cost = d["cost"]
 	_details = d
 	modulate = Color(_color.r, _color.g, _color.b)
-	if _rune_class == "spell":
-		_attack_range = d["attack_range"]
-		_speed =  d["speed"]
-		_fire_delta = d["fire_delta"]
-		_damage = d["damage"]
-		_spell_sprite = d["spell_sprite"]
-		_debuffs = d["debuffs"]
-	if _rune_class == "minion":
-		_mob_stats = d["mob_stats"]
+	_range = d["range"]
+	_speed =  d["speed"]
+	_fire_delta = d["fire_delta"]
+	_damage = d["damage"]
+	_spell_sprite = d["spell_sprite"]
+	_debuffs = d["debuffs"]
+	_mob_stats = d["mob"]
 		
 
-func _process(delta):
-	if _rune_class == "spell":
-		time += delta #
-		target = choose_target()
-		if target != null and not firing:
-			_shoot(target)
-	elif _rune_class == "minion":
-		if not firing and not global.end_level:
-			_summon(_mob_stats)
+#func _process(delta):
+#		time += delta #
+#		target = choose_target()
+#		if target != null and not firing:
+#			_shoot(target)
+#		if not firing and not global.end_level:
+#			_summon(_mob)
 			
 
 func choose_target():
 	var pos = get_global_position()
 	
 	# Check if existing target is still within range
-	if target != null and target.get_ref() and pos.distance_to(target.get_ref().get_global_position()) <= _attack_range:
+	if target != null and target.get_ref() and pos.distance_to(target.get_ref().get_global_position()) <= _range:
 		return target
 	else:
 		target = null
 	
 	# If not, check if new enemy is in range, and choose closest one if multiple
 	for enemy in get_tree().get_nodes_in_group("enemies"):
-		if pos.distance_to(enemy.get_global_position()) <= _attack_range:
+		if pos.distance_to(enemy.get_global_position()) <= _range:
 			if (target == null 
 				or !target.get_ref() 
 				or pos.distance_to(enemy.get_global_position()) > get_global_position().distance_to(target.get_ref().get_global_position())):
@@ -87,7 +81,7 @@ func choose_target():
 	return target
 
 
-func _shoot(target):
+func _shoot(target, spell):
 	# Creates spell and shoots at enemy target
 	if time > fire_next:
 		firing = true
@@ -110,19 +104,20 @@ func minions_this_rune_summoned(group):
 	return owned_minions
 	
 
-func _summon(d):
+func _summon(minion, d, pos):
 	if minions_this_rune_summoned(get_tree().get_nodes_in_group('minions')).size() < d.max_quantity:
-		summon_timer.set_wait_time(d.summon_rate)
-		summon_timer.start()
+		pulse_timer.set_wait_time(d.summon_rate)
+		pulse_timer.start()
 		firing = true
-		var new_minion = minion.instance()
-		new_minion.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate, d.aggro_range, self.get_instance_id())
-		new_minion.position = get_global_position()
-		new_minion.modulate = Color(0, 0, 1)
-		path_end = global.find_closest_point(global.start_points, new_minion.position)
-		new_minion.final_dest = path_end
-		new_minion.nav = global.nav
-		get_tree().get_root().add_child(new_minion)
+		for i in range(d.summon_quantity, 0, -1):
+			var new_minion = minion.instance()
+			new_minion.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate, d.aggro_range, self.get_instance_id())
+			new_minion.position = pos
+			new_minion.modulate = Color(0, 0, 1)
+			path_end = global.find_closest_point(global.start_points, new_minion.position)
+			new_minion.final_dest = path_end
+			new_minion.nav = global.nav
+			get_tree().get_root().add_child(new_minion)
 
 
 func rearm():
@@ -147,9 +142,9 @@ func power_down():
 
 func refresh_rune():
 	# gives rune updated stats based on current power level
-	if _rune_class == "spell":
+	if _damage:
 		_damage *= 1.0 + (_power_level / 10)
-	global.mana_bar(global.mana)
+		global.mana_bar(global.mana)
 	# TODO: Find a way to include fire rate delta and speed of spell without breaking game
 	#_fire_delta = 1.0/(power - 10)
 	#_speed *= 1.0 - (power / 10)
@@ -171,7 +166,4 @@ func _input(event):
 			global.mana_bar(global.mana)
 			queue_free()
 		
-			
-func _on_Summon_Timer_timeout():
-	rearm()
 

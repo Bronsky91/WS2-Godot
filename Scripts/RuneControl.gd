@@ -12,14 +12,13 @@ func _ready():
 
 
 func _draw():
-	if rune._rune_class == "spell":
-    	draw_circle(Vector2(32,32),circle_width,Color(1.0,1.0,1.0,0.3))
+    draw_circle(Vector2(32,32),circle_width,Color(1.0,1.0,1.0,0.3))
 		
 
 func _on_mouse_entered():
 	global.hovering_on_rune = true
 	rune.cursor_hovering = true
-	circle_width = rune._attack_range
+	circle_width = rune._range
 	update()
 
 func _on_mouse_exited():

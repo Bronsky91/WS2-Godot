@@ -42,7 +42,8 @@ func _physics_process(delta):
 	else:
 		# TODO: special animation or behavior for fireball whose target dies before reaching it?
 		# TODO: extra logic to account for runes that may be destroyed before this part of the spell code is executed
-		rune.get_ref().rearm()
+		if rune.get_ref():
+			rune.get_ref().rearm()
 		queue_free()
 
 
