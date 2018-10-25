@@ -95,7 +95,7 @@ func _shoot(target, spell, chain_pos, _chain_counter, _targets_hit):
 	firing = true
 	pulse_timer.set_wait_time(_pulse)
 	pulse_timer.start()
-	var new_spell = spell.instance()																			# DON'T LOOK SSHHHHHHH
+	var new_spell = spell.instance()																				# DON'T LOOK SSHHHHHHHhhhh
 	new_spell.init(_damage, _speed, _debuffs, _chaining, _chain_range, _pulse, _spell_sprite, _range, _chain_max, _chain_counter, _targets_hit)
 	new_spell.get_node("Sprite").set_texture(load("res://Assets/" + _spell_sprite + ".png"))
 	#new_spell.set_scale(spell_scale)
@@ -103,7 +103,7 @@ func _shoot(target, spell, chain_pos, _chain_counter, _targets_hit):
 	new_spell.rune = weakref(self)
 	new_spell.position = chain_pos
 	get_tree().get_root().add_child(new_spell)
-		
+	
 	
 func minions_this_rune_summoned(group):
 	var owned_minions = []

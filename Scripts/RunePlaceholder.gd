@@ -5,7 +5,7 @@ onready var placeholder = $Sprite
 onready var global_cooldown = $GlobalCooldown
 
 var disabled = false
-var power_level = 1
+var power_level = 1.0
 var placeable = true
 
 
@@ -26,7 +26,6 @@ func _ready():
 
 func init_placeholder(rune_details):
 	rune = load("res://Scenes/Runes/{spell}.tscn".format({"spell": rune_details["name"]}))
-	print(rune)
 	_rune_details = rune_details
 	_placement = rune_details["placement"]
 	_cost = rune_details["cost"]

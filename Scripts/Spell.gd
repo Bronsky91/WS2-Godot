@@ -27,6 +27,7 @@ func init(damage, speed, debuffs, chaining, chain_range, pulse, spell_sprite, __
 	_chain_counter = chain_counter
 	_targets_hit = targets_hit
 	
+	
 func _physics_process(delta):
 	if target and target.get_ref():
 	# If enemy is not null and an enemy is found within range
