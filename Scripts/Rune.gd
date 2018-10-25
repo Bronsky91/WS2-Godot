@@ -15,24 +15,29 @@ var _cost
 var _debuffs
 var _details
 var _color
+var _pulse
+var _chaining
+var _chain_range
+var _chain_max
+var _chain_counter = 0
+var _targets_hit = []
 var _placement
 var _mob_stats
 var _max_minions
 var _targeting
+
 
 var cursor_hovering = false
 var fire_next = 0.0
 var target = null
 var spell_scale
 var firing = false
-var time = 0.0
 var path_end
 var summoned_minions = []
 
 
 func _ready():
 	add_to_group("runes")
-	rearm()
 
 
 func init(d, power_level):
@@ -46,12 +51,16 @@ func init(d, power_level):
 	modulate = Color(_color.r, _color.g, _color.b)
 	_range = d["range"]
 	_speed =  d["speed"]
+	_pulse = d["pulse"]
+	_chaining = d["chaining"]
 	_fire_delta = d["fire_delta"]
 	_damage = d["damage"]
 	_spell_sprite = d["spell_sprite"]
 	_debuffs = d["debuffs"]
 	_mob_stats = d["mob"]
-		
+	if _chaining:
+		_chain_range = d["chain_range"]
+		_chain_max = d["chain_max"]
 
 #func _process(delta):
 #		time += delta #
@@ -66,7 +75,7 @@ func choose_target():
 	var pos = get_global_position()
 	
 	# Check if existing target is still within range
-	if target != null and target.get_ref() and pos.distance_to(target.get_ref().get_global_position()) <= _range:
+	if not _chaining and target != null and target.get_ref() and pos.distance_to(target.get_ref().get_global_position()) <= _range:
 		return target
 	else:
 		target = null
@@ -81,19 +90,19 @@ func choose_target():
 	return target
 
 
-func _shoot(target, spell):
+func _shoot(target, spell, chain_pos, _chain_counter, _targets_hit):
 	# Creates spell and shoots at enemy target
-	if time > fire_next:
-		firing = true
-		var new_spell = spell.instance()
-		new_spell.init(_damage, _speed, _debuffs)
-		new_spell.get_node("Sprite").set_texture(load("res://Assets/" + _spell_sprite + ".png"))
-		new_spell.set_scale(spell_scale)
-		new_spell.target = target
-		new_spell.rune = weakref(self)
-		new_spell.position = get_global_position()
-		fire_next = time + _fire_delta
-		get_tree().get_root().add_child(new_spell)
+	firing = true
+	pulse_timer.set_wait_time(_pulse)
+	pulse_timer.start()
+	var new_spell = spell.instance()																			# DON'T LOOK SSHHHHHHH
+	new_spell.init(_damage, _speed, _debuffs, _chaining, _chain_range, _pulse, _spell_sprite, _range, _chain_max, _chain_counter, _targets_hit)
+	new_spell.get_node("Sprite").set_texture(load("res://Assets/" + _spell_sprite + ".png"))
+	#new_spell.set_scale(spell_scale)
+	new_spell.target = target
+	new_spell.rune = weakref(self)
+	new_spell.position = chain_pos
+	get_tree().get_root().add_child(new_spell)
 		
 	
 func minions_this_rune_summoned(group):
@@ -165,7 +174,7 @@ func _input(event):
 			#TODO: Make cooldown (probably long) of how often you can destroy a rune and refund
 			global.mana_bar(global.mana)
 			queue_free()
-		
+	
 		
 func _on_PulseTimer_timeout():
 	rearm()

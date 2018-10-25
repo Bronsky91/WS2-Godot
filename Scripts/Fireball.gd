@@ -8,7 +8,6 @@ func _ready():
 	pass
 
 func _process(delta):
-	time += delta #
 	target = choose_target()
 	if target != null and not firing:
 		_shoot(target, spell)
