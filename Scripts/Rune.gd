@@ -144,7 +144,7 @@ func refresh_rune():
 	# gives rune updated stats based on current power level
 	if _damage:
 		_damage *= 1.0 + (_power_level / 10)
-		global.mana_bar(global.mana)
+	global.mana_bar(global.mana)
 	# TODO: Find a way to include fire rate delta and speed of spell without breaking game
 	#_fire_delta = 1.0/(power - 10)
 	#_speed *= 1.0 - (power / 10)

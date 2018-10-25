@@ -66,6 +66,7 @@ func _physics_process(delta):
 				50, 1, \
 				50, 1)
 		var force = chase_force  + flockforce
+		steering_control.max_vel = _speed
 		force = steering_control.truncate( force, steering_control.max_force )
 		vel += force * delta
 		vel = steering_control.truncate( vel, steering_control.max_vel )

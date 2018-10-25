@@ -107,7 +107,7 @@
                 "summon_rate": 4,
                 "summon_quantity": 3,
                 "max_quantity": 500,
-                "death_timer": 5
+                "death_timer": 6
             }
         },
         {
@@ -139,8 +139,28 @@
                 "summon_quantity": 1,
                 "summon_rate": 0.1,
                 "max_quantity": 5,
-                "death_timer": 5
+                "death_timer": 10
             }
+        },
+        {
+            "name": "Whirlpool",
+            "placement": "in_lane",
+            "cost": 25,
+            "max_power_level": 2,
+            "rune_sprite": "Rune",
+            "range": 200,
+			"rune_color": {
+				"r": 0.1,
+				"g": 0.2,
+				"b": 0.8
+            },
+            "button_name": "Whirlpool",
+            "damage": false,
+            "speed": false,
+            "fire_delta": false,
+            "spell_sprite": false,
+            "debuffs": false,
+            "mob": false
         }
     ]
 }
