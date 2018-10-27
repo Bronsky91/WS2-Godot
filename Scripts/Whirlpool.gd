@@ -2,6 +2,16 @@ extends "res://Scripts/Rune.gd"
 
 onready var rune_range = $Area2D/CollisionShape2D
 
+var debuff = {
+	"name": "whirlpool",
+	"attribute": "speed",
+	"operand": "divide",
+	"value": 2,
+	"reoccuring": 0.1,
+	"duration": 1,
+	"on_timer": false
+}
+
 
 func _ready():
 	rune_range.shape.radius = _range
@@ -12,9 +22,9 @@ func _process(delta):
 
 
 func _on_Area2D_body_entered(body):
-	body._speed = body._speed/2
+	apply_debuff(debuff, weakref(body))
 
 
 func _on_Area2D_body_exited(body):
-	body._speed = body._speed*2
+	body.remove_debuffs(debuff)
 

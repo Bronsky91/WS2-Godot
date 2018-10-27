@@ -1,6 +1,5 @@
 extends Node
 
-var next_affliction_cycle
 var affliction_counter = 0
 var affliction_max = 0
 var _debuff_details
@@ -10,26 +9,22 @@ onready var debuff_timer = $DebuffTimer
 
 func _ready():
 	host = get_parent()
-	next_affliction_cycle = true # starts first affliction cycle
-
+	
 
 func _process(delta):
-	if host.afflictions.has(_debuff_details["class"]) and next_affliction_cycle:
-	# Still need to update logic to be able stack debuffs
-		debuff_stack(_debuff_details)
+	pass
 	
 	
 func init(debuff_details):
 	_debuff_details = debuff_details
+	affliction_max = debuff_details["duration"]
+	if debuff_details["reoccuring"] > 0:
+		debuff_timer.set_wait_time(debuff_details["reoccuring"])
+		debuff_timer.start()
 	
 	
 func debuff_stack(debuff):
 	# Applies and stacks the debuff with the proper duration and occurance timer
-	affliction_max = debuff["duration"]
-	if debuff["reoccuring"] > 0:
-		debuff_timer.set_wait_time(debuff["reoccuring"])
-		debuff_timer.start()
-	next_affliction_cycle = false
 	_debuff_calculus(debuff["operand"], debuff["attribute"], debuff["value"])
 
 
@@ -64,18 +59,20 @@ func _debuff_calculus(op, attribute, value):
 		elif attribute == "damage" and host._damage > value:
 			host._damage /= value
 			
-			
 
 func _on_DebuffTimer_timeout():
+	affliction_counter += 1
 	# Set next debuff cycle for duration
 	if affliction_counter <= affliction_max:
-		affliction_counter += 1
-		next_affliction_cycle = true
-	else:
+		print(affliction_counter)
+		debuff_stack(_debuff_details)
+		print(host._speed)
+	elif _debuff_details["on_timer"]:
 	# Ends debuff
-		var affliction = host.afflictions.find(_debuff_details['class'])
+		var affliction = host.afflictions.find(_debuff_details['name'])
 		host.afflictions.remove(affliction)
 		affliction_counter = 0
-		host.remove_debuffs()
+		host.remove_debuffs(_debuff_details)
 		debuff_timer.stop()
-	
+		queue_free()
+

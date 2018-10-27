@@ -1,6 +1,5 @@
 extends "res://Scripts/Rune.gd"
 
-export(PackedScene) var debuff_scene
 onready var spell = load("res://Scenes/Spell.tscn")
 
 var direction = Vector2(0, -1)
@@ -61,9 +60,9 @@ func target_hit(damage):
 	if _debuffs:
 	# if the rune has the debuff attribute
 		for debuff in _debuffs:
-			if not target.get_ref().afflictions.has(debuff["class"]):
+			if not target.get_ref().afflictions.has(debuff["name"]):
 			# If the enemy is not already afflicted with the current debuff class of the spell
-				apply_debuff(debuff)
+				apply_debuff(debuff, target)
 	var global = get_node("/root/Global")
 	if _chaining:
 		var new_target = choose_target()
@@ -74,12 +73,3 @@ func target_hit(damage):
 	global.increase_ult_charge(damage)
 	queue_free()
 
-
-func apply_debuff(debuff):
-	# Applies debuff that is this spell uses
-	target.get_ref().afflictions.append(debuff["class"])
-	var new_debuff
-	new_debuff = debuff_scene.instance()
-	# adds the debuff as a child of the enemy so multiple can be applied
-	target.get_ref().add_child(new_debuff)
-	new_debuff.init(debuff)

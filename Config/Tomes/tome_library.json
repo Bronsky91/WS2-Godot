@@ -21,12 +21,13 @@
             "button_name": "Felo'Melorn",
             "debuffs": [
                 {
-                    "class":"burn",
+                    "name":"firbolt",
                     "attribute": "health",
                     "operand": "subtract",
                     "value": 10,
                     "reoccuring": 1,
-                    "duration": 5
+                    "duration": 5,
+                    "on_timer": true
                 }
             ],
             "mob": false
@@ -54,12 +55,13 @@
             "button_name": "Frostbolt",
             "debuffs": [
                 {
-                    "class":"slow",
+                    "name":"frostbolt",
                     "attribute": "speed",
                     "operand": "subtract",
                     "value": 10,
                     "reoccuring": 0.5,
-                    "duration": 5
+                    "duration": 5,
+                    "on_timer": true
                 }
             ],
             "mob": false

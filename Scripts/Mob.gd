@@ -76,7 +76,15 @@ func take_damage(damage):
 		_die()
 
 
-func remove_debuffs():
+func remove_debuffs(d):
 	# If debuffs affected enemy speed or damage they are now reset
-	_speed = default_attribute.speed
-	_damage = default_attribute.damage
+	var reset_value = d.value * d.duration
+	if d.attribute == "speed":
+		if d.operand == 'subtract':
+			_speed += reset_value 
+		elif d.operand == 'add':
+			_speed -= reset_value
+		elif d.operand == 'divide':
+			_speed *= reset_value
+		elif d.operand == 'mulitply':
+			_speed /= reset_value

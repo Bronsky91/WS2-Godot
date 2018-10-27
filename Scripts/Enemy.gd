@@ -18,6 +18,7 @@ func init(sprite, speed, health, damage, reach, attack_rate):
 
 
 func _physics_process(delta):
+	#print(_speed)
 	## DETERMINE IF MOVING TOWARDS FINAL DESTINATION (TOWER) OR TOWARDS AN AGGRO'D MINION
 	## -----------------------
 	other_bodies = get_tree().get_nodes_in_group("enemies") #+ get_tree().get_nodes_in_group("minions")

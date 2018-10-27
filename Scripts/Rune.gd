@@ -2,6 +2,7 @@ extends Node2D
 
 onready var pulse_timer = $PulseTimer
 onready var global = get_node("/root/Global")
+onready var debuff_scene = load("res://Scenes/Debuff.tscn")
 
 # Sets class variables from init 
 var _range
@@ -161,6 +162,16 @@ func refresh_rune():
 	modulate = Color(_color.r / _power_level, _color.g / _power_level, _color.b / _power_level)
 	spell_scale = Vector2(_power_level, _power_level)
 
+
+func apply_debuff(debuff, target):
+	# Applies debuff that is this spell uses
+	target.get_ref().afflictions.append(debuff["name"])
+	var new_debuff
+	new_debuff = debuff_scene.instance()
+	# adds the debuff as a child of the enemy so multiple can be applied
+	target.get_ref().add_child(new_debuff)
+	new_debuff.init(debuff)
+	
 
 func _input(event):
 	# Watches for if player is scrolling over runes to power them up or down
