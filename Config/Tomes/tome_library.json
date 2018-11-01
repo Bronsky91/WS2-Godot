@@ -1,7 +1,7 @@
 {
     "Tomes": [
         {
-            "name": "fireball",
+            "name": "Fireball",
             "placement": "out_of_lane",
             "cost": 20,
             "max_power_level": 3,
