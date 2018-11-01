@@ -1,10 +1,10 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://scripts/Fireball.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Fireball.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Spell.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scripts/RuneControl.gd" type="Script" id=3]
 
-[node name="Rune" type="Node2D"]
+[node name="Rune" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Material", "Transform", "Visibility", "Z Index" ]
@@ -25,7 +25,6 @@ margin_top = -32.0
 margin_right = 32.0
 margin_bottom = 32.0
 rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
 mouse_filter = 0
 mouse_default_cursor_shape = 0
 size_flags_horizontal = 1

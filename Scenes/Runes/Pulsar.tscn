@@ -1,8 +1,9 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://scripts/Pulsar.gd" type="Script" id=1]
+[ext_resource path="res://Scripts/Pulsar.gd" type="Script" id=1]
 [ext_resource path="res://Scripts/RuneControl.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Fireball.png" type="Texture" id=3]
+
 
 [node name="Rune" type="Node2D"]
 
