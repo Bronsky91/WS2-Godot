@@ -10,4 +10,4 @@ func _ready():
 func _process(delta):
 	target = choose_target()
 	if target != null and not firing:
-		_shoot(target, spell)
+		_shoot(target, spell, self.position, 0, [])
