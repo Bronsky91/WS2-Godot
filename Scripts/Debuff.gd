@@ -64,9 +64,7 @@ func _on_DebuffTimer_timeout():
 	affliction_counter += 1
 	# Set next debuff cycle for duration
 	if affliction_counter <= affliction_max:
-		print(affliction_counter)
 		debuff_stack(_debuff_details)
-		print(host._speed)
 	elif _debuff_details["on_timer"]:
 	# Ends debuff
 		var affliction = host.afflictions.find(_debuff_details['name'])
