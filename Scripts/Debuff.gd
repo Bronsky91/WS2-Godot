@@ -21,6 +21,8 @@ func init(debuff_details):
 	if debuff_details["reoccuring"] > 0:
 		debuff_timer.set_wait_time(debuff_details["reoccuring"])
 		debuff_timer.start()
+		if affliction_counter <= affliction_max:
+			debuff_stack(_debuff_details)
 	
 	
 func debuff_stack(debuff):
@@ -34,38 +36,44 @@ func _debuff_calculus(op, attribute, value):
 		if attribute == "health":
 			host.take_damage(value)
 		elif attribute == "speed" and host._speed > value:
+			host.last_attr.speed = host._speed
 			host._speed -= value
 		elif attribute == "damage" and host._damage > value:
+			host.last_attr.damage = host._damage
 			host._damage -= value
 	elif op == "add":
 		if attribute == "health":
 			host._health += value
 		elif attribute == "speed":
+			host.last_attr.speed = host._speed
 			host._speed += value
 		elif attribute == "damage":
+			host.last_attr.damage = host._damage
 			host._damage += value
 	elif op == "multiply":
 		if attribute == "health":
 			host._health *= value
 		elif attribute == "speed":
+			host.last_attr.speed = host._speed
 			host._speed *= value
 		elif attribute == "damage":
+			host.last_attr.damage = host._damage
 			host._damage *= value
 	elif op == "divide":
 		if attribute == "health":
 			host._health /= value
 		elif attribute == "speed" and host._speed > value:
+			host.last_attr.speed = host._speed
 			host._speed /= value
 		elif attribute == "damage" and host._damage > value:
+			host.last_attr.damage = host._damage
 			host._damage /= value
 			
 
 func _on_DebuffTimer_timeout():
 	affliction_counter += 1
 	# Set next debuff cycle for duration
-	if affliction_counter <= affliction_max:
-		debuff_stack(_debuff_details)
-	elif _debuff_details["on_timer"]:
+	if _debuff_details["on_timer"]:
 	# Ends debuff
 		var affliction = host.afflictions.find(_debuff_details['name'])
 		host.afflictions.remove(affliction)

@@ -18,6 +18,10 @@ var path = []
 var afflictions = []
 var default_attribute
 var attacking = false
+var last_attr = {
+	"speed": 0,
+	"damage": 0,
+}
 
 var force = Vector2()
 var other_bodies = []
@@ -86,5 +90,8 @@ func remove_debuffs(d):
 			_speed -= reset_value
 		elif d.operand == 'divide':
 			_speed *= reset_value
-		elif d.operand == 'mulitply':
-			_speed /= reset_value
+		elif d.operand == 'multiply':
+			if reset_value == 0:
+				_speed = last_attr.speed
+			else:
+				_speed /= reset_value

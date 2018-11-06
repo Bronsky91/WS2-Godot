@@ -12,16 +12,16 @@
             "pulse": 0.4,
             "chaining": false,
             "rune_sprite": "Rune",
-			"rune_color": {
-				"r": 1.0,
-				"g": 0.5,
-				"b": 0.0
-			},
+            "rune_color": {
+                "r": 1.0,
+                "g": 0.5,
+                "b": 0.0
+            },
             "spell_sprite": "Fireball",
             "button_name": "Felo'Melorn",
             "debuffs": [
                 {
-                    "name":"firbolt",
+                    "name": "firbolt",
                     "attribute": "health",
                     "operand": "subtract",
                     "value": 10,
@@ -46,16 +46,16 @@
             "chain_range": 100,
             "chain_max": 2,
             "rune_sprite": "Rune",
-			"rune_color": {
-				"r": 0.0,
-				"g": 0.0,
-				"b": 1.0
-			},
+            "rune_color": {
+                "r": 0.0,
+                "g": 0.0,
+                "b": 1.0
+            },
             "spell_sprite": "Frostbolt",
             "button_name": "Frostbolt",
             "debuffs": [
                 {
-                    "name":"frostbolt",
+                    "name": "frostbolt",
                     "attribute": "speed",
                     "operand": "subtract",
                     "value": 10,
@@ -78,11 +78,11 @@
             "pulse": 0.4,
             "chaining": false,
             "rune_sprite": "Rune",
-			"rune_color": {
+            "rune_color": {
                 "r": 0,
-				"g": 0.3,
-				"b": 0.8
-			},
+                "g": 0.3,
+                "b": 0.8
+            },
             "spell_sprite": "Pulsar",
             "button_name": "Pulsar",
             "debuffs": false,
@@ -95,10 +95,10 @@
             "max_power_level": 2,
             "rune_sprite": "Rune",
             "range": 0,
-			"rune_color": {
-				"r": 0,
-				"g": 0.3,
-				"b": 0.8
+            "rune_color": {
+                "r": 0,
+                "g": 0.3,
+                "b": 0.8
             },
             "button_name": "Portal To Hell",
             "damage": false,
@@ -129,10 +129,10 @@
             "max_power_level": 2,
             "rune_sprite": "Rune",
             "range": 300,
-			"rune_color": {
-				"r": 0,
-				"g": 0.8,
-				"b": 0.3
+            "rune_color": {
+                "r": 0,
+                "g": 0.8,
+                "b": 0.3
             },
             "button_name": "Necromancy Sigil",
             "damage": false,
@@ -163,10 +163,10 @@
             "max_power_level": 2,
             "rune_sprite": "Rune",
             "range": 200,
-			"rune_color": {
-				"r": 0.1,
-				"g": 0.2,
-				"b": 0.8
+            "rune_color": {
+                "r": 0.1,
+                "g": 0.2,
+                "b": 0.8
             },
             "button_name": "Whirlpool",
             "damage": false,
@@ -176,6 +176,40 @@
             "fire_delta": false,
             "spell_sprite": false,
             "debuffs": false,
+            "mob": false
+        },
+        {
+            "name": "Lighting",
+            "placement": "out_of_lane",
+            "cost": 10,
+            "max_power_level": 5,
+            "range": 200,
+            "fire_delta": 0.2,
+            "damage": 10,
+            "speed": 800,
+            "pulse": 4,
+            "chaining": true,
+            "chain_range": 100,
+            "chain_max": 2,
+            "rune_sprite": "Rune",
+            "rune_color": {
+                "r": 0.0,
+                "g": 0.0,
+                "b": 1.0
+            },
+            "spell_sprite": "Lighting",
+            "button_name": "Lighting",
+            "debuffs": [
+                {
+                    "name": "lighting",
+                    "attribute": "speed",
+                    "operand": "multiply",
+                    "value": 0,
+                    "reoccuring": 1,
+                    "duration": 1,
+                    "on_timer": true
+                }
+            ],
             "mob": false
         }
     ]
