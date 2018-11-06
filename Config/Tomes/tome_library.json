@@ -42,9 +42,7 @@
             "damage": 10,
             "speed": 800,
             "pulse": 0.5,
-            "chaining": true,
-            "chain_range": 100,
-            "chain_max": 2,
+            "chaining": false,
             "rune_sprite": "Rune",
             "rune_color": {
                 "r": 0.0,
@@ -205,7 +203,7 @@
                     "attribute": "speed",
                     "operand": "multiply",
                     "value": 0,
-                    "reoccuring": 1,
+                    "reoccuring": 0,
                     "duration": 1,
                     "on_timer": true
                 }

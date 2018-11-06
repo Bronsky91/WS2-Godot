@@ -21,9 +21,12 @@ func init(debuff_details):
 	if debuff_details["reoccuring"] > 0:
 		debuff_timer.set_wait_time(debuff_details["reoccuring"])
 		debuff_timer.start()
-		if affliction_counter <= affliction_max:
-			debuff_stack(_debuff_details)
-	
+		debuff_stack(_debuff_details)
+	else:
+		debuff_timer.set_wait_time(debuff_details["duration"])
+		debuff_timer.start()
+		debuff_stack(debuff_details)
+
 	
 func debuff_stack(debuff):
 	# Applies and stacks the debuff with the proper duration and occurance timer
@@ -72,8 +75,11 @@ func _debuff_calculus(op, attribute, value):
 
 func _on_DebuffTimer_timeout():
 	affliction_counter += 1
+	if affliction_counter < affliction_max:
+		debuff_stack(_debuff_details)
+		print('host speed = ' + str(host._speed))
 	# Set next debuff cycle for duration
-	if _debuff_details["on_timer"]:
+	if _debuff_details.on_timer and affliction_counter >= affliction_max:
 	# Ends debuff
 		var affliction = host.afflictions.find(_debuff_details['name'])
 		host.afflictions.remove(affliction)
