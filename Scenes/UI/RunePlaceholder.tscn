@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/RunePlaceholder.gd" type="Script" id=1]
 [ext_resource path="res://Assets/Rune.png" type="Texture" id=2]
 
-[node name="RunePlaceholder" type="Node2D" index="0"]
+[node name="RunePlaceholder" type="Node2D"]
 
 script = ExtResource( 1 )
 _sections_unfolded = [ "Material", "Transform", "Visibility" ]
@@ -12,14 +12,5 @@ _sections_unfolded = [ "Material", "Transform", "Visibility" ]
 
 texture = ExtResource( 2 )
 _sections_unfolded = [ "Material", "Offset", "Transform", "Visibility", "Z Index" ]
-
-[node name="GlobalCooldown" type="Timer" parent="." index="1"]
-
-process_mode = 1
-wait_time = 1.0
-one_shot = false
-autostart = false
-
-[connection signal="timeout" from="GlobalCooldown" to="." method="_on_GlobalCooldown_timeout"]
 
 

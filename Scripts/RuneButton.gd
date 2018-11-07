@@ -3,6 +3,7 @@ extends Node
 export(PackedScene) var rune_placeholder
 
 onready var global = get_node("/root/Global")
+onready var hud = get_tree().get_root().get_node("Game").find_node("TowerDefenseHUD")
 onready var rune_button = $RuneButton
 
 var placeholder
@@ -23,10 +24,9 @@ func _input(event):
 				p_holder.queue_free()
 		placeholder = rune_placeholder.instance()
 		placeholder.init_placeholder(_rune_details)
-		get_tree().get_root().add_child(placeholder)
-	
-	
-	
+		hud.add_child(placeholder)
+
+
 func init(rune_details):
 	# Inits what rune will be used when button is pressed
 	_rune_details = rune_details

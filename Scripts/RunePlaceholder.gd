@@ -2,11 +2,11 @@ extends Node2D
 
 onready var global = get_node("/root/Global")
 onready var placeholder = $Sprite
-onready var global_cooldown = $GlobalCooldown
+onready var hud = get_tree().get_root().get_node("Game").find_node("TowerDefenseHUD")
 
 var disabled = false
 var power_level = 1.0
-var placeable = true
+var placeable = false
 
 
 # class variables that include details for rune being placed 
@@ -39,13 +39,11 @@ func _process(delta):
 			set_visibility(false)
 	elif not global.hovering_on_rune:
 			set_visibility(true)
-			
-		
 	position = global.cursor_tile_pos
 	# Checks if rune can be placed based on mana and tile availabity
 	if placeable and (global.mana < _cost or global.cursor_tile_path != _placement):
 		cannot_place()
-	elif not placeable and global.mana >= _cost and global.cursor_tile_path == _placement and global_cooldown.is_stopped():
+	elif not placeable and global.mana >= _cost and global.cursor_tile_path == _placement and hud.global_cooldown.is_stopped():
 		can_place()
 
 		
@@ -74,7 +72,7 @@ func _input(event):
 		new_rune.position = global.cursor_tile_pos
 		global.mana -= _cost
 		cannot_place()
-		global_cooldown.start()
+		hud.global_cooldown.start()
 		get_tree().get_root().add_child(new_rune)
 		new_rune.refresh_rune()
 
@@ -98,7 +96,3 @@ func set_visibility(visible):
 	else:
 		hide()
 		disabled = true
-
-
-func _on_GlobalCooldown_timeout():
-	global_cooldown.stop()

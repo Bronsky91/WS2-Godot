@@ -2,9 +2,11 @@ extends Control
 
 onready var global = get_node("/root/Global")
 onready var tome_container = $TomeContainer
-export(PackedScene) var rune_button
-var new_rune_button
+onready var global_cooldown = $GlobalTimer
 
+export(PackedScene) var rune_button
+
+var new_rune_button
 
 
 func _ready():
@@ -17,11 +19,7 @@ func _ready():
 		new_rune_button.init(tome)
 		new_rune_button.spell_key = i
 		tome_container.add_child(new_rune_button)
-		
-	
 
-#func _process(delta):
-#	# Called every frame. Delta is time since last frame.
-#	# Update game logic here.
-#	pass
 
+func _on_GlobalTimer_timeout():
+	global_cooldown.stop()
