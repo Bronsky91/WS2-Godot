@@ -1,6 +1,6 @@
 extends Control
 
-onready var placeholder = get_node("/root/RunePlaceholder")
+#onready var placeholder = get_node("/root/RunePlaceholder")
 onready var global = get_node("/root/Global")
 onready var rune = get_parent()
 

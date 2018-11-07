@@ -175,17 +175,16 @@ func apply_debuff(debuff, target):
 
 func _input(event):
 	# Watches for if player is scrolling over runes to power them up or down
-	if event.is_pressed():
-		if cursor_hovering and event.button_index == BUTTON_WHEEL_UP and _power_level < _max_power_level and global.mana > _cost:
-			power_up()
-		if cursor_hovering and event.button_index == BUTTON_WHEEL_DOWN and _power_level > 1 and global.mana < global.mana_max:
-			power_down()
-		if cursor_hovering and event.button_index == BUTTON_RIGHT:
-			global.mana += _cost # Refund full cost for now when destroying rune
-			#TODO: Make cooldown (probably long) of how often you can destroy a rune and refund
-			global.mana_bar(global.mana)
-			queue_free()
-	
+	if cursor_hovering and event.is_action_released("power_up") and _power_level < _max_power_level and global.mana > _cost:
+		power_up()
+	if cursor_hovering and event.is_action_released("power_down") and _power_level > 1 and global.mana < global.mana_max:
+		power_down()
+	if cursor_hovering and event.is_action_released("remove"):
+		global.mana += _cost # Refund full cost for now when destroying rune
+		#TODO: Make cooldown (probably long) of how often you can destroy a rune and refund
+		global.mana_bar(global.mana)
+		queue_free()
+
 		
 func _on_PulseTimer_timeout():
 	rearm()

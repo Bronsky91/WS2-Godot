@@ -3,7 +3,7 @@
 [ext_resource path="res://Scripts/RuneButton.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/UI/RunePlaceholder.tscn" type="PackedScene" id=2]
 
-[node name="NewRune" type="Control" index="0"]
+[node name="NewRune" type="Control"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -24,8 +24,9 @@ anchor_left = 0.0
 anchor_top = 0.0
 anchor_right = 0.0
 anchor_bottom = 0.0
-margin_right = 70.0
-margin_bottom = 50.0
+margin_left = 1.0
+margin_right = 83.0
+margin_bottom = 39.0
 rect_pivot_offset = Vector2( 0, 0 )
 rect_clip_content = false
 focus_mode = 2
@@ -44,5 +45,7 @@ _sections_unfolded = [ "Focus", "Hint", "Mouse", "Rect", "Size Flags" ]
 [connection signal="mouse_entered" from="RuneButton" to="." method="_on_RuneButton_mouse_entered"]
 
 [connection signal="mouse_exited" from="RuneButton" to="." method="_on_RuneButton_mouse_exited"]
+
+[connection signal="pressed" from="RuneButton" to="." method="_on_RuneButton_pressed"]
 
 

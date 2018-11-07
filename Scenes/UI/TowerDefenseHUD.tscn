@@ -6,7 +6,7 @@
 [ext_resource path="res://Scenes/UI/ManaMeter.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scenes/UI/UltimateMeter.tscn" type="PackedScene" id=5]
 
-[node name="UI" type="Control"]
+[node name="UI" type="Control" index="0"]
 
 anchor_left = 0.0
 anchor_top = 0.0
@@ -26,26 +26,26 @@ rune_button = ExtResource( 2 )
 
 [node name="HealthMeter" parent="." index="0" instance=ExtResource( 3 )]
 
-margin_left = 1327.0
-margin_top = 700.0
-margin_right = 1827.0
-margin_bottom = 750.0
+margin_left = 52.0
+margin_top = 17.0
+margin_right = 307.0
+margin_bottom = 67.0
 
 [node name="ManaMeter" parent="." index="1" instance=ExtResource( 4 )]
 
-margin_left = 1325.0
-margin_top = 748.0
-margin_right = 1825.0
-margin_bottom = 798.0
+margin_left = 54.0
+margin_top = 70.0
+margin_right = 302.0
+margin_bottom = 110.0
 
 [node name="UltimateMeter" parent="." index="2" instance=ExtResource( 5 )]
 
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 674.0
-margin_top = -48.0
-margin_right = 1174.0
-margin_bottom = -8.0
+margin_left = 1322.0
+margin_top = -780.0
+margin_right = 1570.0
+margin_bottom = -740.0
 
 [node name="TomeContainer" type="HBoxContainer" parent="." index="3"]
 
@@ -55,7 +55,7 @@ anchor_right = 0.0
 anchor_bottom = 0.0
 margin_left = 57.0
 margin_top = 724.0
-margin_right = 611.0
+margin_right = 650.0
 margin_bottom = 774.0
 rect_min_size = Vector2( 100, 50 )
 rect_pivot_offset = Vector2( 0, 0 )

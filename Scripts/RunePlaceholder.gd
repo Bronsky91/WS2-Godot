@@ -21,7 +21,7 @@ var _placement
 
 
 func _ready():
-	add_to_group("runes")
+	add_to_group("placeholder")
 	
 
 func init_placeholder(rune_details):
@@ -58,24 +58,25 @@ func _input(event):
 	# Watches for scrolling up or down to place the rune already powered up or back down
 	if disabled:
 		return
-	if event.is_pressed():
-		if event.button_index == BUTTON_WHEEL_UP and power_level < _max_power_level:
-			power_level += 1
-			_cost = _rune_details["cost"] * power_level
-			modulate = Color(_color.r / power_level, _color.g / power_level, _color.b / power_level)
-		if event.button_index == BUTTON_WHEEL_DOWN and power_level > 1:
-			power_level -= 1
-			_cost -= _rune_details["cost"]
-			modulate = Color(_color.r / power_level, _color.g / power_level, _color.b / power_level)
-		if event.button_index == BUTTON_LEFT and placeable:
-			var new_rune = rune.instance() # instances new rune to place
-			new_rune.init(_rune_details, power_level)
-			new_rune.position = global.cursor_tile_pos
-			global.mana -= _cost
-			cannot_place()
-			global_cooldown.start()
-			get_tree().get_root().add_child(new_rune)
-			new_rune.refresh_rune()
+	if event.is_action_released("power_up") and power_level < _max_power_level:
+		power_level += 1
+		_cost = _rune_details["cost"] * power_level
+		modulate = Color(_color.r / power_level, _color.g / power_level, _color.b / power_level)
+	if event.is_action_released("power_down") and power_level > 1:
+		power_level -= 1
+		_cost -= _rune_details["cost"]
+		modulate = Color(_color.r / power_level, _color.g / power_level, _color.b / power_level)
+	if event.is_action_released("remove"):
+		queue_free()
+	if event.is_action("create") and placeable:
+		var new_rune = rune.instance() # instances new rune to place
+		new_rune.init(_rune_details, power_level)
+		new_rune.position = global.cursor_tile_pos
+		global.mana -= _cost
+		cannot_place()
+		global_cooldown.start()
+		get_tree().get_root().add_child(new_rune)
+		new_rune.refresh_rune()
 
 
 func cannot_place():
