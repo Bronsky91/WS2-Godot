@@ -1,0 +1,556 @@
+[gd_resource type="TileSet" load_steps=56 format=2]
+
+[ext_resource path="res://Assets/Tiles/Outdoors_00.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Tiles/Outdoors_01.png" type="Texture" id=2]
+[ext_resource path="res://Assets/Tiles/Outdoors_10.png" type="Texture" id=3]
+[ext_resource path="res://Assets/Tiles/Outdoors_11.png" type="Texture" id=4]
+[ext_resource path="res://Assets/Tiles/Outdoors_12.png" type="Texture" id=5]
+[ext_resource path="res://Assets/Tiles/Outdoors_13.png" type="Texture" id=6]
+[ext_resource path="res://Assets/Tiles/Outdoors_14.png" type="Texture" id=7]
+[ext_resource path="res://Assets/Tiles/Outdoors_15.png" type="Texture" id=8]
+[ext_resource path="res://Assets/Tiles/Outdoors_16.png" type="Texture" id=9]
+[ext_resource path="res://Assets/Tiles/Outdoors_17.png" type="Texture" id=10]
+[ext_resource path="res://Assets/Tiles/Outdoors_18.png" type="Texture" id=11]
+[ext_resource path="res://Assets/Tiles/Outdoors_19.png" type="Texture" id=12]
+[ext_resource path="res://Assets/Tiles/Outdoors_02.png" type="Texture" id=13]
+[ext_resource path="res://Assets/Tiles/Outdoors_20.png" type="Texture" id=14]
+[ext_resource path="res://Assets/Tiles/Outdoors_21.png" type="Texture" id=15]
+[ext_resource path="res://Assets/Tiles/Outdoors_22.png" type="Texture" id=16]
+[ext_resource path="res://Assets/Tiles/Outdoors_23.png" type="Texture" id=17]
+[ext_resource path="res://Assets/Tiles/Outdoors_24.png" type="Texture" id=18]
+[ext_resource path="res://Assets/Tiles/Outdoors_25.png" type="Texture" id=19]
+[ext_resource path="res://Assets/Tiles/Outdoors_26.png" type="Texture" id=20]
+[ext_resource path="res://Assets/Tiles/Outdoors_27.png" type="Texture" id=21]
+[ext_resource path="res://Assets/Tiles/Outdoors_28.png" type="Texture" id=22]
+[ext_resource path="res://Assets/Tiles/Outdoors_29.png" type="Texture" id=23]
+[ext_resource path="res://Assets/Tiles/Outdoors_03.png" type="Texture" id=24]
+[ext_resource path="res://Assets/Tiles/Outdoors_30.png" type="Texture" id=25]
+[ext_resource path="res://Assets/Tiles/Outdoors_31.png" type="Texture" id=26]
+[ext_resource path="res://Assets/Tiles/Outdoors_32.png" type="Texture" id=27]
+[ext_resource path="res://Assets/Tiles/Outdoors_33.png" type="Texture" id=28]
+[ext_resource path="res://Assets/Tiles/Outdoors_34.png" type="Texture" id=29]
+[ext_resource path="res://Assets/Tiles/Outdoors_35.png" type="Texture" id=30]
+[ext_resource path="res://Assets/Tiles/Outdoors_36.png" type="Texture" id=31]
+[ext_resource path="res://Assets/Tiles/Outdoors_37.png" type="Texture" id=32]
+[ext_resource path="res://Assets/Tiles/Outdoors_38.png" type="Texture" id=33]
+[ext_resource path="res://Assets/Tiles/Outdoors_39.png" type="Texture" id=34]
+[ext_resource path="res://Assets/Tiles/Outdoors_04.png" type="Texture" id=35]
+[ext_resource path="res://Assets/Tiles/Outdoors_40.png" type="Texture" id=36]
+[ext_resource path="res://Assets/Tiles/Outdoors_41.png" type="Texture" id=37]
+[ext_resource path="res://Assets/Tiles/Outdoors_42.png" type="Texture" id=38]
+[ext_resource path="res://Assets/Tiles/Outdoors_43.png" type="Texture" id=39]
+[ext_resource path="res://Assets/Tiles/Outdoors_44.png" type="Texture" id=40]
+[ext_resource path="res://Assets/Tiles/Outdoors_45.png" type="Texture" id=41]
+[ext_resource path="res://Assets/Tiles/Outdoors_46.png" type="Texture" id=42]
+[ext_resource path="res://Assets/Tiles/Outdoors_47.png" type="Texture" id=43]
+[ext_resource path="res://Assets/Tiles/Outdoors_48.png" type="Texture" id=44]
+[ext_resource path="res://Assets/Tiles/Outdoors_49.png" type="Texture" id=45]
+[ext_resource path="res://Assets/Tiles/Outdoors_05.png" type="Texture" id=46]
+[ext_resource path="res://Assets/Tiles/Outdoors_50.png" type="Texture" id=47]
+[ext_resource path="res://Assets/Tiles/Outdoors_51.png" type="Texture" id=48]
+[ext_resource path="res://Assets/Tiles/Outdoors_52.png" type="Texture" id=49]
+[ext_resource path="res://Assets/Tiles/Outdoors_53.png" type="Texture" id=50]
+[ext_resource path="res://Assets/Tiles/trees-and-bushes.png" type="Texture" id=51]
+[ext_resource path="res://Assets/Tiles/Outdoors_06.png" type="Texture" id=52]
+[ext_resource path="res://Assets/Tiles/Outdoors_07.png" type="Texture" id=53]
+[ext_resource path="res://Assets/Tiles/Outdoors_08.png" type="Texture" id=54]
+[ext_resource path="res://Assets/Tiles/Outdoors_09.png" type="Texture" id=55]
+
+[resource]
+
+0/name = "Outdoors_00"
+0/texture = ExtResource( 1 )
+0/tex_offset = Vector2( 0, 0 )
+0/modulate = Color( 1, 1, 1, 1 )
+0/region = Rect2( 0, 0, 16, 16 )
+0/is_autotile = false
+0/occluder_offset = Vector2( 8, 8 )
+0/navigation_offset = Vector2( 8, 8 )
+0/shapes = [  ]
+1/name = "Outdoors_01"
+1/texture = ExtResource( 2 )
+1/tex_offset = Vector2( 0, 0 )
+1/modulate = Color( 1, 1, 1, 1 )
+1/region = Rect2( 0, 0, 16, 16 )
+1/is_autotile = false
+1/occluder_offset = Vector2( 8, 8 )
+1/navigation_offset = Vector2( 8, 8 )
+1/shapes = [  ]
+2/name = "Outdoors_02"
+2/texture = ExtResource( 13 )
+2/tex_offset = Vector2( 0, 0 )
+2/modulate = Color( 1, 1, 1, 1 )
+2/region = Rect2( 0, 0, 16, 16 )
+2/is_autotile = false
+2/occluder_offset = Vector2( 8, 8 )
+2/navigation_offset = Vector2( 8, 8 )
+2/shapes = [  ]
+3/name = "Outdoors_03"
+3/texture = ExtResource( 24 )
+3/tex_offset = Vector2( 0, 0 )
+3/modulate = Color( 1, 1, 1, 1 )
+3/region = Rect2( 0, 0, 16, 16 )
+3/is_autotile = false
+3/occluder_offset = Vector2( 8, 8 )
+3/navigation_offset = Vector2( 8, 8 )
+3/shapes = [  ]
+4/name = "Outdoors_04"
+4/texture = ExtResource( 35 )
+4/tex_offset = Vector2( 0, 0 )
+4/modulate = Color( 1, 1, 1, 1 )
+4/region = Rect2( 0, 0, 16, 16 )
+4/is_autotile = false
+4/occluder_offset = Vector2( 8, 8 )
+4/navigation_offset = Vector2( 8, 8 )
+4/shapes = [  ]
+5/name = "Outdoors_05"
+5/texture = ExtResource( 46 )
+5/tex_offset = Vector2( 0, 0 )
+5/modulate = Color( 1, 1, 1, 1 )
+5/region = Rect2( 0, 0, 16, 16 )
+5/is_autotile = false
+5/occluder_offset = Vector2( 8, 8 )
+5/navigation_offset = Vector2( 8, 8 )
+5/shapes = [  ]
+6/name = "Outdoors_06"
+6/texture = ExtResource( 52 )
+6/tex_offset = Vector2( 0, 0 )
+6/modulate = Color( 1, 1, 1, 1 )
+6/region = Rect2( 0, 0, 16, 16 )
+6/is_autotile = false
+6/occluder_offset = Vector2( 8, 8 )
+6/navigation_offset = Vector2( 8, 8 )
+6/shapes = [  ]
+7/name = "Outdoors_07"
+7/texture = ExtResource( 53 )
+7/tex_offset = Vector2( 0, 0 )
+7/modulate = Color( 1, 1, 1, 1 )
+7/region = Rect2( 0, 0, 16, 16 )
+7/is_autotile = false
+7/occluder_offset = Vector2( 8, 8 )
+7/navigation_offset = Vector2( 8, 8 )
+7/shapes = [  ]
+8/name = "Outdoors_08"
+8/texture = ExtResource( 54 )
+8/tex_offset = Vector2( 0, 0 )
+8/modulate = Color( 1, 1, 1, 1 )
+8/region = Rect2( 0, 0, 16, 16 )
+8/is_autotile = false
+8/occluder_offset = Vector2( 8, 8 )
+8/navigation_offset = Vector2( 8, 8 )
+8/shapes = [  ]
+9/name = "Outdoors_09"
+9/texture = ExtResource( 55 )
+9/tex_offset = Vector2( 0, 0 )
+9/modulate = Color( 1, 1, 1, 1 )
+9/region = Rect2( 0, 0, 16, 16 )
+9/is_autotile = false
+9/occluder_offset = Vector2( 8, 8 )
+9/navigation_offset = Vector2( 8, 8 )
+9/shapes = [  ]
+10/name = "Outdoors_10"
+10/texture = ExtResource( 3 )
+10/tex_offset = Vector2( 0, 0 )
+10/modulate = Color( 1, 1, 1, 1 )
+10/region = Rect2( 0, 0, 16, 16 )
+10/is_autotile = false
+10/occluder_offset = Vector2( 8, 8 )
+10/navigation_offset = Vector2( 8, 8 )
+10/shapes = [  ]
+11/name = "Outdoors_11"
+11/texture = ExtResource( 4 )
+11/tex_offset = Vector2( 0, 0 )
+11/modulate = Color( 1, 1, 1, 1 )
+11/region = Rect2( 0, 0, 16, 16 )
+11/is_autotile = false
+11/occluder_offset = Vector2( 8, 8 )
+11/navigation_offset = Vector2( 8, 8 )
+11/shapes = [  ]
+12/name = "Outdoors_12"
+12/texture = ExtResource( 5 )
+12/tex_offset = Vector2( 0, 0 )
+12/modulate = Color( 1, 1, 1, 1 )
+12/region = Rect2( 0, 0, 16, 16 )
+12/is_autotile = false
+12/occluder_offset = Vector2( 8, 8 )
+12/navigation_offset = Vector2( 8, 8 )
+12/shapes = [  ]
+13/name = "Outdoors_13"
+13/texture = ExtResource( 6 )
+13/tex_offset = Vector2( 0, 0 )
+13/modulate = Color( 1, 1, 1, 1 )
+13/region = Rect2( 0, 0, 16, 16 )
+13/is_autotile = false
+13/occluder_offset = Vector2( 8, 8 )
+13/navigation_offset = Vector2( 8, 8 )
+13/shapes = [  ]
+14/name = "Outdoors_14"
+14/texture = ExtResource( 7 )
+14/tex_offset = Vector2( 0, 0 )
+14/modulate = Color( 1, 1, 1, 1 )
+14/region = Rect2( 0, 0, 16, 16 )
+14/is_autotile = false
+14/occluder_offset = Vector2( 8, 8 )
+14/navigation_offset = Vector2( 8, 8 )
+14/shapes = [  ]
+15/name = "Outdoors_15"
+15/texture = ExtResource( 8 )
+15/tex_offset = Vector2( 0, 0 )
+15/modulate = Color( 1, 1, 1, 1 )
+15/region = Rect2( 0, 0, 16, 16 )
+15/is_autotile = false
+15/occluder_offset = Vector2( 8, 8 )
+15/navigation_offset = Vector2( 8, 8 )
+15/shapes = [  ]
+16/name = "Outdoors_16"
+16/texture = ExtResource( 9 )
+16/tex_offset = Vector2( 0, 0 )
+16/modulate = Color( 1, 1, 1, 1 )
+16/region = Rect2( 0, 0, 16, 16 )
+16/is_autotile = false
+16/occluder_offset = Vector2( 8, 8 )
+16/navigation_offset = Vector2( 8, 8 )
+16/shapes = [  ]
+17/name = "Outdoors_17"
+17/texture = ExtResource( 10 )
+17/tex_offset = Vector2( 0, 0 )
+17/modulate = Color( 1, 1, 1, 1 )
+17/region = Rect2( 0, 0, 16, 16 )
+17/is_autotile = false
+17/occluder_offset = Vector2( 8, 8 )
+17/navigation_offset = Vector2( 8, 8 )
+17/shapes = [  ]
+18/name = "Outdoors_18"
+18/texture = ExtResource( 11 )
+18/tex_offset = Vector2( 0, 0 )
+18/modulate = Color( 1, 1, 1, 1 )
+18/region = Rect2( 0, 0, 16, 16 )
+18/is_autotile = false
+18/occluder_offset = Vector2( 8, 8 )
+18/navigation_offset = Vector2( 8, 8 )
+18/shapes = [  ]
+19/name = "Outdoors_19"
+19/texture = ExtResource( 12 )
+19/tex_offset = Vector2( 0, 0 )
+19/modulate = Color( 1, 1, 1, 1 )
+19/region = Rect2( 0, 0, 16, 16 )
+19/is_autotile = false
+19/occluder_offset = Vector2( 8, 8 )
+19/navigation_offset = Vector2( 8, 8 )
+19/shapes = [  ]
+20/name = "Outdoors_20"
+20/texture = ExtResource( 14 )
+20/tex_offset = Vector2( 0, 0 )
+20/modulate = Color( 1, 1, 1, 1 )
+20/region = Rect2( 0, 0, 16, 16 )
+20/is_autotile = false
+20/occluder_offset = Vector2( 8, 8 )
+20/navigation_offset = Vector2( 8, 8 )
+20/shapes = [  ]
+21/name = "Outdoors_21"
+21/texture = ExtResource( 15 )
+21/tex_offset = Vector2( 0, 0 )
+21/modulate = Color( 1, 1, 1, 1 )
+21/region = Rect2( 0, 0, 16, 16 )
+21/is_autotile = false
+21/occluder_offset = Vector2( 8, 8 )
+21/navigation_offset = Vector2( 8, 8 )
+21/shapes = [  ]
+22/name = "Outdoors_22"
+22/texture = ExtResource( 16 )
+22/tex_offset = Vector2( 0, 0 )
+22/modulate = Color( 1, 1, 1, 1 )
+22/region = Rect2( 0, 0, 16, 16 )
+22/is_autotile = false
+22/occluder_offset = Vector2( 8, 8 )
+22/navigation_offset = Vector2( 8, 8 )
+22/shapes = [  ]
+23/name = "Outdoors_23"
+23/texture = ExtResource( 17 )
+23/tex_offset = Vector2( 0, 0 )
+23/modulate = Color( 1, 1, 1, 1 )
+23/region = Rect2( 0, 0, 16, 16 )
+23/is_autotile = false
+23/occluder_offset = Vector2( 8, 8 )
+23/navigation_offset = Vector2( 8, 8 )
+23/shapes = [  ]
+24/name = "Outdoors_24"
+24/texture = ExtResource( 18 )
+24/tex_offset = Vector2( 0, 0 )
+24/modulate = Color( 1, 1, 1, 1 )
+24/region = Rect2( 0, 0, 16, 16 )
+24/is_autotile = false
+24/occluder_offset = Vector2( 8, 8 )
+24/navigation_offset = Vector2( 8, 8 )
+24/shapes = [  ]
+25/name = "Outdoors_25"
+25/texture = ExtResource( 19 )
+25/tex_offset = Vector2( 0, 0 )
+25/modulate = Color( 1, 1, 1, 1 )
+25/region = Rect2( 0, 0, 16, 16 )
+25/is_autotile = false
+25/occluder_offset = Vector2( 8, 8 )
+25/navigation_offset = Vector2( 8, 8 )
+25/shapes = [  ]
+26/name = "Outdoors_26"
+26/texture = ExtResource( 20 )
+26/tex_offset = Vector2( 0, 0 )
+26/modulate = Color( 1, 1, 1, 1 )
+26/region = Rect2( 0, 0, 16, 16 )
+26/is_autotile = false
+26/occluder_offset = Vector2( 8, 8 )
+26/navigation_offset = Vector2( 8, 8 )
+26/shapes = [  ]
+27/name = "Outdoors_27"
+27/texture = ExtResource( 21 )
+27/tex_offset = Vector2( 0, 0 )
+27/modulate = Color( 1, 1, 1, 1 )
+27/region = Rect2( 0, 0, 16, 16 )
+27/is_autotile = false
+27/occluder_offset = Vector2( 8, 8 )
+27/navigation_offset = Vector2( 8, 8 )
+27/shapes = [  ]
+28/name = "Outdoors_28"
+28/texture = ExtResource( 22 )
+28/tex_offset = Vector2( 0, 0 )
+28/modulate = Color( 1, 1, 1, 1 )
+28/region = Rect2( 0, 0, 16, 16 )
+28/is_autotile = false
+28/occluder_offset = Vector2( 8, 8 )
+28/navigation_offset = Vector2( 8, 8 )
+28/shapes = [  ]
+29/name = "Outdoors_29"
+29/texture = ExtResource( 23 )
+29/tex_offset = Vector2( 0, 0 )
+29/modulate = Color( 1, 1, 1, 1 )
+29/region = Rect2( 0, 0, 16, 16 )
+29/is_autotile = false
+29/occluder_offset = Vector2( 8, 8 )
+29/navigation_offset = Vector2( 8, 8 )
+29/shapes = [  ]
+30/name = "Outdoors_30"
+30/texture = ExtResource( 25 )
+30/tex_offset = Vector2( 0, 0 )
+30/modulate = Color( 1, 1, 1, 1 )
+30/region = Rect2( 0, 0, 16, 16 )
+30/is_autotile = false
+30/occluder_offset = Vector2( 8, 8 )
+30/navigation_offset = Vector2( 8, 8 )
+30/shapes = [  ]
+31/name = "Outdoors_31"
+31/texture = ExtResource( 26 )
+31/tex_offset = Vector2( 0, 0 )
+31/modulate = Color( 1, 1, 1, 1 )
+31/region = Rect2( 0, 0, 16, 16 )
+31/is_autotile = false
+31/occluder_offset = Vector2( 8, 8 )
+31/navigation_offset = Vector2( 8, 8 )
+31/shapes = [  ]
+32/name = "Outdoors_32"
+32/texture = ExtResource( 27 )
+32/tex_offset = Vector2( 0, 0 )
+32/modulate = Color( 1, 1, 1, 1 )
+32/region = Rect2( 0, 0, 16, 16 )
+32/is_autotile = false
+32/occluder_offset = Vector2( 8, 8 )
+32/navigation_offset = Vector2( 8, 8 )
+32/shapes = [  ]
+33/name = "Outdoors_33"
+33/texture = ExtResource( 28 )
+33/tex_offset = Vector2( 0, 0 )
+33/modulate = Color( 1, 1, 1, 1 )
+33/region = Rect2( 0, 0, 16, 16 )
+33/is_autotile = false
+33/occluder_offset = Vector2( 8, 8 )
+33/navigation_offset = Vector2( 8, 8 )
+33/shapes = [  ]
+34/name = "Outdoors_34"
+34/texture = ExtResource( 29 )
+34/tex_offset = Vector2( 0, 0 )
+34/modulate = Color( 1, 1, 1, 1 )
+34/region = Rect2( 0, 0, 16, 16 )
+34/is_autotile = false
+34/occluder_offset = Vector2( 8, 8 )
+34/navigation_offset = Vector2( 8, 8 )
+34/shapes = [  ]
+35/name = "Outdoors_35"
+35/texture = ExtResource( 30 )
+35/tex_offset = Vector2( 0, 0 )
+35/modulate = Color( 1, 1, 1, 1 )
+35/region = Rect2( 0, 0, 16, 16 )
+35/is_autotile = false
+35/occluder_offset = Vector2( 8, 8 )
+35/navigation_offset = Vector2( 8, 8 )
+35/shapes = [  ]
+36/name = "Outdoors_36"
+36/texture = ExtResource( 31 )
+36/tex_offset = Vector2( 0, 0 )
+36/modulate = Color( 1, 1, 1, 1 )
+36/region = Rect2( 0, 0, 16, 16 )
+36/is_autotile = false
+36/occluder_offset = Vector2( 8, 8 )
+36/navigation_offset = Vector2( 8, 8 )
+36/shapes = [  ]
+37/name = "Outdoors_37"
+37/texture = ExtResource( 32 )
+37/tex_offset = Vector2( 0, 0 )
+37/modulate = Color( 1, 1, 1, 1 )
+37/region = Rect2( 0, 0, 16, 16 )
+37/is_autotile = false
+37/occluder_offset = Vector2( 8, 8 )
+37/navigation_offset = Vector2( 8, 8 )
+37/shapes = [  ]
+38/name = "Outdoors_38"
+38/texture = ExtResource( 33 )
+38/tex_offset = Vector2( 0, 0 )
+38/modulate = Color( 1, 1, 1, 1 )
+38/region = Rect2( 0, 0, 16, 16 )
+38/is_autotile = false
+38/occluder_offset = Vector2( 8, 8 )
+38/navigation_offset = Vector2( 8, 8 )
+38/shapes = [  ]
+39/name = "Outdoors_39"
+39/texture = ExtResource( 34 )
+39/tex_offset = Vector2( 0, 0 )
+39/modulate = Color( 1, 1, 1, 1 )
+39/region = Rect2( 0, 0, 16, 16 )
+39/is_autotile = false
+39/occluder_offset = Vector2( 8, 8 )
+39/navigation_offset = Vector2( 8, 8 )
+39/shapes = [  ]
+40/name = "Outdoors_40"
+40/texture = ExtResource( 36 )
+40/tex_offset = Vector2( 0, 0 )
+40/modulate = Color( 1, 1, 1, 1 )
+40/region = Rect2( 0, 0, 16, 16 )
+40/is_autotile = false
+40/occluder_offset = Vector2( 8, 8 )
+40/navigation_offset = Vector2( 8, 8 )
+40/shapes = [  ]
+41/name = "Outdoors_41"
+41/texture = ExtResource( 37 )
+41/tex_offset = Vector2( 0, 0 )
+41/modulate = Color( 1, 1, 1, 1 )
+41/region = Rect2( 0, 0, 16, 16 )
+41/is_autotile = false
+41/occluder_offset = Vector2( 8, 8 )
+41/navigation_offset = Vector2( 8, 8 )
+41/shapes = [  ]
+42/name = "Outdoors_42"
+42/texture = ExtResource( 38 )
+42/tex_offset = Vector2( 0, 0 )
+42/modulate = Color( 1, 1, 1, 1 )
+42/region = Rect2( 0, 0, 16, 16 )
+42/is_autotile = false
+42/occluder_offset = Vector2( 8, 8 )
+42/navigation_offset = Vector2( 8, 8 )
+42/shapes = [  ]
+43/name = "Outdoors_43"
+43/texture = ExtResource( 39 )
+43/tex_offset = Vector2( 0, 0 )
+43/modulate = Color( 1, 1, 1, 1 )
+43/region = Rect2( 0, 0, 16, 16 )
+43/is_autotile = false
+43/occluder_offset = Vector2( 8, 8 )
+43/navigation_offset = Vector2( 8, 8 )
+43/shapes = [  ]
+44/name = "Outdoors_44"
+44/texture = ExtResource( 40 )
+44/tex_offset = Vector2( 0, 0 )
+44/modulate = Color( 1, 1, 1, 1 )
+44/region = Rect2( 0, 0, 16, 16 )
+44/is_autotile = false
+44/occluder_offset = Vector2( 8, 8 )
+44/navigation_offset = Vector2( 8, 8 )
+44/shapes = [  ]
+45/name = "Outdoors_45"
+45/texture = ExtResource( 41 )
+45/tex_offset = Vector2( 0, 0 )
+45/modulate = Color( 1, 1, 1, 1 )
+45/region = Rect2( 0, 0, 16, 16 )
+45/is_autotile = false
+45/occluder_offset = Vector2( 8, 8 )
+45/navigation_offset = Vector2( 8, 8 )
+45/shapes = [  ]
+46/name = "Outdoors_46"
+46/texture = ExtResource( 42 )
+46/tex_offset = Vector2( 0, 0 )
+46/modulate = Color( 1, 1, 1, 1 )
+46/region = Rect2( 0, 0, 16, 16 )
+46/is_autotile = false
+46/occluder_offset = Vector2( 8, 8 )
+46/navigation_offset = Vector2( 8, 8 )
+46/shapes = [  ]
+47/name = "Outdoors_47"
+47/texture = ExtResource( 43 )
+47/tex_offset = Vector2( 0, 0 )
+47/modulate = Color( 1, 1, 1, 1 )
+47/region = Rect2( 0, 0, 16, 16 )
+47/is_autotile = false
+47/occluder_offset = Vector2( 8, 8 )
+47/navigation_offset = Vector2( 8, 8 )
+47/shapes = [  ]
+48/name = "Outdoors_48"
+48/texture = ExtResource( 44 )
+48/tex_offset = Vector2( 0, 0 )
+48/modulate = Color( 1, 1, 1, 1 )
+48/region = Rect2( 0, 0, 16, 16 )
+48/is_autotile = false
+48/occluder_offset = Vector2( 8, 8 )
+48/navigation_offset = Vector2( 8, 8 )
+48/shapes = [  ]
+49/name = "Outdoors_49"
+49/texture = ExtResource( 45 )
+49/tex_offset = Vector2( 0, 0 )
+49/modulate = Color( 1, 1, 1, 1 )
+49/region = Rect2( 0, 0, 16, 16 )
+49/is_autotile = false
+49/occluder_offset = Vector2( 8, 8 )
+49/navigation_offset = Vector2( 8, 8 )
+49/shapes = [  ]
+50/name = "Outdoors_50"
+50/texture = ExtResource( 47 )
+50/tex_offset = Vector2( 0, 0 )
+50/modulate = Color( 1, 1, 1, 1 )
+50/region = Rect2( 0, 0, 16, 16 )
+50/is_autotile = false
+50/occluder_offset = Vector2( 8, 8 )
+50/navigation_offset = Vector2( 8, 8 )
+50/shapes = [  ]
+51/name = "Outdoors_51"
+51/texture = ExtResource( 48 )
+51/tex_offset = Vector2( 0, 0 )
+51/modulate = Color( 1, 1, 1, 1 )
+51/region = Rect2( 0, 0, 16, 16 )
+51/is_autotile = false
+51/occluder_offset = Vector2( 8, 8 )
+51/navigation_offset = Vector2( 8, 8 )
+51/shapes = [  ]
+52/name = "Outdoors_52"
+52/texture = ExtResource( 49 )
+52/tex_offset = Vector2( 0, 0 )
+52/modulate = Color( 1, 1, 1, 1 )
+52/region = Rect2( 0, 0, 16, 16 )
+52/is_autotile = false
+52/occluder_offset = Vector2( 8, 8 )
+52/navigation_offset = Vector2( 8, 8 )
+52/shapes = [  ]
+53/name = "Outdoors_53"
+53/texture = ExtResource( 50 )
+53/tex_offset = Vector2( 0, 0 )
+53/modulate = Color( 1, 1, 1, 1 )
+53/region = Rect2( 0, 0, 16, 16 )
+53/is_autotile = false
+53/occluder_offset = Vector2( 8, 8 )
+53/navigation_offset = Vector2( 8, 8 )
+53/shapes = [  ]
+54/name = "trees-and-bushes"
+54/texture = ExtResource( 51 )
+54/tex_offset = Vector2( 0, 0 )
+54/modulate = Color( 1, 1, 1, 1 )
+54/region = Rect2( 0, 0, 288, 160 )
+54/is_autotile = false
+54/occluder_offset = Vector2( 144, 80 )
+54/navigation_offset = Vector2( 144, 80 )
+54/shapes = [  ]
+
