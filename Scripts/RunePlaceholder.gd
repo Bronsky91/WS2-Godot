@@ -8,7 +8,6 @@ var disabled = false
 var power_level = 1.0
 var placeable = false
 
-
 # class variables that include details for rune being placed 
 var rune
 
@@ -22,7 +21,7 @@ var _placement
 
 func _ready():
 	add_to_group("placeholder")
-	
+
 
 func init_placeholder(rune_details):
 	rune = load("res://Scenes/Runes/{spell}.tscn".format({"spell": rune_details["name"]}))
@@ -46,11 +45,12 @@ func _process(delta):
 	elif not placeable and global.mana >= _cost and global.cursor_tile_path == _placement and hud.global_cooldown.is_stopped():
 		can_place()
 
-		
+
 func _draw():
    	draw_circle(Vector2(0,0),_range,Color(1.0,1.0,1.0,0.3))
 	# TODO: Unsure of what the other float should be in the circle_radius Vector2. Also unsure what the resolution should be.
 	#draw_empty_circle(Vector2(0,0), Vector2(10,_attack_range), Color(1.0,1.0,1.0,0.5), 720)
+
 
 func _input(event):
 	# Watches for scrolling up or down to place the rune already powered up or back down

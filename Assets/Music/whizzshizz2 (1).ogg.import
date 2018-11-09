@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/whizzshizz2 (1).ogg-2d1d18b723bb42f83a0cadef4e8f897b.oggstr"
+
+[deps]
+
+source_file="res://Assets/Music/whizzshizz2 (1).ogg"
+dest_files=[ "res://.import/whizzshizz2 (1).ogg-2d1d18b723bb42f83a0cadef4e8f897b.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
