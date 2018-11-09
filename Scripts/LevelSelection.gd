@@ -12,3 +12,6 @@ func _ready():
 func _on_level_pressed(level):
 	global.current_level = level
 	get_tree().change_scene("res://Scenes/Game.tscn")
+
+func _on_Return_pressed():
+	get_tree().change_scene("res://Scenes/StartMenu.tscn")

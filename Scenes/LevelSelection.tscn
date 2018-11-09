@@ -131,6 +131,52 @@ text = "Level 5"
 flat = false
 align = 1
 
+[node name="Return" type="Button" parent="." index="5"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 1408.0
+margin_top = 708.0
+margin_right = 1524.0
+margin_bottom = 754.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+focus_mode = 2
+mouse_filter = 0
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 1
+toggle_mode = false
+enabled_focus_mode = 2
+shortcut = null
+group = null
+text = "Return to Menu"
+flat = false
+align = 1
+
+[node name="Label" type="Label" parent="." index="6"]
+
+anchor_left = 0.0
+anchor_top = 0.0
+anchor_right = 0.0
+anchor_bottom = 0.0
+margin_left = 511.0
+margin_top = 364.0
+margin_right = 968.0
+margin_bottom = 434.0
+rect_pivot_offset = Vector2( 0, 0 )
+rect_clip_content = false
+mouse_filter = 2
+mouse_default_cursor_shape = 0
+size_flags_horizontal = 1
+size_flags_vertical = 4
+text = "PRETEND THERES A MAP HERE AND THESE BUTTONS ARE THE NODES"
+percent_visible = 1.0
+lines_skipped = 0
+max_lines_visible = -1
+
 [connection signal="pressed" from="Level1" to="." method="_on_level_pressed" binds= [ 1 ]]
 
 [connection signal="pressed" from="Level2" to="." method="_on_level_pressed" binds= [ 2 ]]
@@ -140,5 +186,7 @@ align = 1
 [connection signal="pressed" from="Level4" to="." method="_on_level_pressed" binds= [ 4 ]]
 
 [connection signal="pressed" from="Level5" to="." method="_on_level_pressed" binds= [ 5 ]]
+
+[connection signal="pressed" from="Return" to="." method="_on_Return_pressed"]
 
 
