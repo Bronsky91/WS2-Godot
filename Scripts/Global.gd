@@ -98,4 +98,6 @@ func clear_map():
 		minion.queue_free()
 	for rune in get_tree().get_nodes_in_group('runes'):
 		rune.queue_free()
+	for placeholder in get_tree().get_nodes_in_group('placeholder'):
+		placeholder.queue_free()
 	

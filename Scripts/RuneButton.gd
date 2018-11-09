@@ -14,7 +14,7 @@ var _rune_details # JSON object of rune details
 
 func _ready():
 	# TODO: Set type of rune dynamically from player character choice and tomes
-	rune_button.set_text(_rune_details["button_name"])
+	rune_button.set_text(_rune_details["button_name"] + ' ' + str(spell_key))
 
 
 func _input(event):
