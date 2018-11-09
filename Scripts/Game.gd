@@ -19,6 +19,8 @@ export(PackedScene) var enemy
 export(PackedScene) var nav_point
 
 func _ready():
+	Sound.get_node("Main").stop()
+	#Sound.get_node("Battle").play()
 	# Loads level fom JSON file and sets UI bars
 	_load_level("Level" + str(global.current_level)) #TODO: Refactor level naming system for more customization
 	global.game = weakref(self)

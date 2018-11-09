@@ -17,6 +17,7 @@ config/icon="res://icon.png"
 [autoload]
 
 Global="*res://Scripts/Global.gd"
+Sound="*res://Scenes/Sound.tscn"
 
 [display]
 
