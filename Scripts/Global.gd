@@ -100,4 +100,5 @@ func clear_map():
 		rune.queue_free()
 	for placeholder in get_tree().get_nodes_in_group('placeholder'):
 		placeholder.queue_free()
+	game.get_ref().get_node("Level/TowerDefenseLevel").queue_free()
 	

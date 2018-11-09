@@ -2,12 +2,11 @@ extends Node2D
 
 onready var global = get_node("/root/Global")
 onready var wave_timer = $WaveTimer
-onready var path_end
-onready var nav = get_node("Nav")
-onready var map = get_node("Nav/TileMap")
-onready var tower = get_node("Tower")
+var nav
+var tower
 
 var level
+var level_scene
 var spawn_new = false
 var waves_over = false
 var current_wave = 0
@@ -17,12 +16,13 @@ var enemy_quantity = 0
 
 export(PackedScene) var enemy
 export(PackedScene) var nav_point
+export var spawn_points = PoolVector2Array()
 
 func _ready():
 	Sound.get_node("Main").stop()
 	#Sound.get_node("Battle").play()
 	# Loads level fom JSON file and sets UI bars
-	_load_level("Level" + str(global.current_level)) #TODO: Refactor level naming system for more customization
+	_load_level("TD%04d" % global.current_level)
 	global.game = weakref(self)
 	global.mana_bar(global.mana)
 	global.hp_bar(global.base_hp)
@@ -37,40 +37,38 @@ func _process(delta):
 		global.current_level += 1 # Advances tp next level
 		global.end_level = true
 		global.clear_map()
-		get_tree().change_scene("res://Scenes/LevelComplete.tscn") # Brings to level complete scene
+		get_tree().change_scene("res://Scenes/LevelSelection.tscn") # Brings to level complete scene
 
 
 func _load_level(levelname):
+	level_scene = load("res://Scenes/LevelsTD/" + levelname + ".tscn")
+	var scene_instance = level_scene.instance()
+	print("scene_instance name: " + scene_instance.name)
+	get_node("Level").add_child(scene_instance)
+	
+	
+	nav = get_node("Level/TowerDefenseLevel/Nav")
+	tower = get_node("Level/TowerDefenseLevel/Tower")
 	global.start_points = []
 	global.end_level = false
 	var file = File.new()
 	file.open("res://Config/Levels/" + levelname + ".json", File.READ)
 	var text = file.get_as_text()
 	level = JSON.parse(text).result
-	if level["tilemap"] != null:
-		var c = 1
-		for s in level["tilemap"]["startpoints"]:
-			var new_startpoint = nav_point.instance()
-			new_startpoint.position = global.get_tile_pos(s.x, s.y)
-			new_startpoint.name = "Path" + str(c)
-			global.start_points.append(new_startpoint.position)
-			add_child(new_startpoint)
-			c += 1
-		path_end = global.get_tile_pos(level["tilemap"]["tower"].x,level["tilemap"]["tower"].y)
-		tower.position = path_end
-		var x = 0
-		var y = 0
-		for row in level["tilemap"]["tiles"]:
-			for cell in row:
-				#print("x: " + str(x) + ", y: " + str(y) + ", cell: " + str(cell))
-				map.set_cell(x, y, cell)
-				x += 1
-			y += 1
-			x = 0
-		if level["waves"].size() > 0:
-		# Begins level
-		#TODO: Let player "start" level when they are ready or create a timer that the player sees
-			spawn_new = true
+	var c = 1
+	print("spawn_points count: " + str(spawn_points.size()))
+	for s in spawn_points:
+		var new_spawn_point = nav_point.instance()
+		new_spawn_point.position = global.get_tile_pos(s.x, s.y)
+		new_spawn_point.name = "Path" + str(c)
+		print("created spawn point: " + new_spawn_point.name)
+		global.start_points.append(new_spawn_point.position)
+		add_child(new_spawn_point)
+		c += 1
+	if level["waves"].size() > 0:
+	# Begins level
+	#TODO: Let player "start" level when they are ready or create a timer that the player sees
+		spawn_new = true
 
 
 func _process_wave():
@@ -79,14 +77,14 @@ func _process_wave():
 	spawn_new = false
 	wave_timer.set_wait_time(level["waves"][current_wave]["enemies"][current_enemy_batch].enemy_timer)
 	wave_timer.start()
-	
-	
+
+
 func _spawn_enemy(d):
 	# instances enemy into map and sets nav goal to base
 	var new_enemy = enemy.instance()
 	new_enemy.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate)
 	new_enemy.position = get_node(d.path).position
-	new_enemy.final_dest = path_end
+	new_enemy.final_dest = tower.position
 	new_enemy.nav = nav
 	global.nav = nav
 	add_child(new_enemy)
@@ -110,4 +108,3 @@ func _on_Timer_timeout():
 	_increment_enemy()
 	if not waves_over:
 		spawn_new = true
-		

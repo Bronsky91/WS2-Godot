@@ -2,8 +2,6 @@
 
 [ext_resource path="res://Assets/Tower.png" type="Texture" id=1]
 
-
-
 [node name="Base" type="Node2D"]
 
 position = Vector2( -0.352066, -0.738808 )

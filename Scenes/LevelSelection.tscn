@@ -2,7 +2,7 @@
 
 [ext_resource path="res://Scripts/LevelSelection.gd" type="Script" id=1]
 
-[node name="LevelSelection" type="Node"]
+[node name="LevelSelection" type="Node" index="0"]
 
 script = ExtResource( 1 )
 
@@ -131,6 +131,14 @@ text = "Level 5"
 flat = false
 align = 1
 
-[connection signal="pressed" from="Level1" to="." method="_on_Level1_pressed"]
+[connection signal="pressed" from="Level1" to="." method="_on_level_pressed" binds= [ 1 ]]
+
+[connection signal="pressed" from="Level2" to="." method="_on_level_pressed" binds= [ 2 ]]
+
+[connection signal="pressed" from="Level3" to="." method="_on_level_pressed" binds= [ 3 ]]
+
+[connection signal="pressed" from="Level4" to="." method="_on_level_pressed" binds= [ 4 ]]
+
+[connection signal="pressed" from="Level5" to="." method="_on_level_pressed" binds= [ 5 ]]
 
 
