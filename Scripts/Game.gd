@@ -22,7 +22,7 @@ func _ready():
 	Sound.get_node("Main").stop()
 	#Sound.get_node("Battle").play()
 	# Loads level fom JSON file and sets UI bars
-	_load_level("TD%04d" % global.current_level)
+	_load_level("TD%04d" % global.level_state.current)
 	global.game = weakref(self)
 	global.mana_bar(global.mana)
 	global.hp_bar(global.base_hp)
@@ -34,7 +34,9 @@ func _process(delta):
 		_process_wave()
 	elif waves_over and get_tree().get_nodes_in_group("enemies").size() == 0:
 	# Ends the level when all enemies are off the map and no more waves incoming
-		global.current_level += 1 # Advances tp next level
+		global.level_state.completed.append(global.level_state.current) # Advances tp next level
+		global.level_state.remaining.remove(global.level_state.remaining.find(global.level_state.current))
+		global.level_state.current = global.level_state.remaining[0]
 		global.end_level = true
 		global.clear_map()
 		get_tree().change_scene("res://Scenes/LevelSelection.tscn") # Brings to level complete scene

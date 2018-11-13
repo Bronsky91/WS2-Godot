@@ -4,7 +4,6 @@ var ult_charge = 0					# Current ultimate meter charge value
 var ult_max = 1000					# Ultimate meter maximum charge value
 var _ult_damage_to_charge = .1		# What damage dealt is multiplied by before being added to ultimate charge
 var game							# Reference to Game node (self-registers onready)	
-var current_level = 1	
 var end_level = false				# Attempt at fixing crash errors when level is over			
 var restarted = false
 var hovering_on_rune = false
@@ -22,6 +21,11 @@ var cursor_tile_path
 var zoom_level = 1
 var zoom_max = 3
 var zoom_speed = 0.25
+var level_state = {
+	'completed': [],
+	'remaining': [1,2,3,4,5],
+	'current': 1
+}
 const TILE_WIDTH = 64
 const TILE_HEIGHT = 64
 
