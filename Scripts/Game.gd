@@ -34,7 +34,7 @@ func _ready():
 func _process(delta):
 	# Checks when to spawn the next enemy
 	if spawn_new and not waves_over:
-		_process_wave()
+		_process_enemy()
 	elif waves_over and get_tree().get_nodes_in_group("enemies").size() == 0:
 	# Ends the level when all enemies are off the map and no more waves incoming
 		global.level_state.completed.append(global.level_state.current) # Advances tp next level
@@ -57,26 +57,20 @@ func _load_level(levelname):
 	file.open("res://Config/Levels/" + levelname + ".json", File.READ)
 	var text = file.get_as_text()
 	level = JSON.parse(text).result
-	#var c = 1
 	print("spawn_points count: " + str(spawn_points.size()))
 	for s in get_node("Level/TowerDefenseLevel/SpawnPoints").get_children():
-		#var new_spawn_point = nav_point.instance()
-		#new_spawn_point.position = global.get_tile_pos(s.x, s.y)
-		#new_spawn_point.name = "Path" + str(c)
 		spawn_points.append(s)
 		global.start_points.append(s.position)
-		#add_child(new_spawn_point)
-		#c += 1
 	# Begins level
 	start_timer.set_wait_time(level.waves[0].start_timer)
 	start_timer.start()
 
 
-func _process_wave():
-	# Processes the wave of enemies then starts timer for next wave
-	_spawn_enemy(level["waves"][current_wave]["enemies"][current_enemy_batch])
+func _process_enemy():
+	# Processes the enemy then starts timer for next enemy
+	_spawn_enemy(level.waves[current_wave].enemies[current_enemy_batch])
 	spawn_new = false
-	enemy_timer.set_wait_time(level["waves"][current_wave]["enemies"][current_enemy_batch].enemy_timer)
+	enemy_timer.set_wait_time(level.waves[current_wave].enemies[current_enemy_batch].enemy_timer)
 	enemy_timer.start()
 
 
@@ -84,8 +78,6 @@ func _spawn_enemy(d):
 	# instances enemy into map and sets nav goal to base
 	var new_enemy = enemy.instance()
 	new_enemy.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate)
-	#new_enemy.position = get_node(d.path).position
-	#new_enemy.position = spawn_points.find(d.path).position
 	for s in spawn_points:
 		if s.name == d.path:
 			new_enemy.position = s.position
@@ -97,14 +89,17 @@ func _spawn_enemy(d):
 
 func _increment_enemy():
 	current_enemy += 1
-	if(current_enemy > level["waves"][current_wave]["enemies"][current_enemy_batch].quantity - 1):
+	if current_enemy > level["waves"][current_wave]["enemies"][current_enemy_batch].quantity - 1:
 		current_enemy = 0
 		current_enemy_batch += 1
-		if(current_enemy_batch > level["waves"][current_wave]["enemies"].size() - 1):
+		if current_enemy_batch > level["waves"][current_wave]["enemies"].size() - 1:
 			current_enemy_batch = 0
 			current_wave += 1
-			print('new wave')
-			if(current_wave > level["waves"].size() - 1):
+			if current_wave < level["waves"].size():
+				start_timer.set_wait_time(level.waves[current_wave].start_timer)
+				start_timer.start()
+				enemy_timer.stop()
+			else:
 				current_wave = 0
 				waves_over = true
 				enemy_timer.stop()
@@ -112,12 +107,15 @@ func _increment_enemy():
 
 func _on_EnemyTimer_timeout():
 	_increment_enemy()
-	if not waves_over:
+	if not start_timer.is_stopped():
+		spawn_new = false
+	elif not waves_over:
 		spawn_new = true
 		
 
 func _on_StartTimer_timeout():
 	spawn_new = true
 	print('start!')
+	start_timer.stop()
 
 

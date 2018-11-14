@@ -6,7 +6,7 @@
 [ext_resource path="res://Scenes/UI/TowerDefenseHUD.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Scripts/Camera.gd" type="Script" id=5]
 
-[node name="Game" type="Node2D"]
+[node name="Game" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 enemy = ExtResource( 2 )
@@ -34,7 +34,7 @@ autostart = false
 process_mode = 1
 wait_time = 0.8
 one_shot = false
-autostart = true
+autostart = false
 
 [node name="CameraPivot" type="Position2D" parent="." index="4"]
 
