@@ -1,7 +1,7 @@
 {
   "waves": [
     {
-      "wave_timer": 10.0,
+      "start_timer": 5,
       "enemies": [
         {
           "sprite": "Enemy",
@@ -30,7 +30,7 @@
       ]
     },
     {
-      "wave_timer": 10.0,
+      "start_timer": 5,
       "enemies": [
         {
           "sprite": "Enemy",

@@ -1,7 +1,9 @@
 extends Node2D
 
 onready var global = get_node("/root/Global")
-onready var wave_timer = $WaveTimer
+onready var enemy_timer = $EnemyTimer
+onready var start_timer = $StartTimer
+
 var nav
 var tower
 
@@ -13,10 +15,11 @@ var current_wave = 0
 var current_enemy_batch = 0
 var current_enemy = 0
 var enemy_quantity = 0
+var spawn_points = []
 
 export(PackedScene) var enemy
 export(PackedScene) var nav_point
-export var spawn_points = PoolVector2Array()
+
 
 func _ready():
 	Sound.get_node("Main").stop()
@@ -45,10 +48,7 @@ func _process(delta):
 func _load_level(levelname):
 	level_scene = load("res://Scenes/LevelsTD/" + levelname + ".tscn")
 	var scene_instance = level_scene.instance()
-	print("scene_instance name: " + scene_instance.name)
 	get_node("Level").add_child(scene_instance)
-	
-	
 	nav = get_node("Level/TowerDefenseLevel/Nav")
 	tower = get_node("Level/TowerDefenseLevel/Tower")
 	global.start_points = []
@@ -57,35 +57,38 @@ func _load_level(levelname):
 	file.open("res://Config/Levels/" + levelname + ".json", File.READ)
 	var text = file.get_as_text()
 	level = JSON.parse(text).result
-	var c = 1
+	#var c = 1
 	print("spawn_points count: " + str(spawn_points.size()))
-	for s in spawn_points:
-		var new_spawn_point = nav_point.instance()
-		new_spawn_point.position = global.get_tile_pos(s.x, s.y)
-		new_spawn_point.name = "Path" + str(c)
-		print("created spawn point: " + new_spawn_point.name)
-		global.start_points.append(new_spawn_point.position)
-		add_child(new_spawn_point)
-		c += 1
-	if level["waves"].size() > 0:
+	for s in get_node("Level/TowerDefenseLevel/SpawnPoints").get_children():
+		#var new_spawn_point = nav_point.instance()
+		#new_spawn_point.position = global.get_tile_pos(s.x, s.y)
+		#new_spawn_point.name = "Path" + str(c)
+		spawn_points.append(s)
+		global.start_points.append(s.position)
+		#add_child(new_spawn_point)
+		#c += 1
 	# Begins level
-	#TODO: Let player "start" level when they are ready or create a timer that the player sees
-		spawn_new = true
+	start_timer.set_wait_time(level.waves[0].start_timer)
+	start_timer.start()
 
 
 func _process_wave():
 	# Processes the wave of enemies then starts timer for next wave
 	_spawn_enemy(level["waves"][current_wave]["enemies"][current_enemy_batch])
 	spawn_new = false
-	wave_timer.set_wait_time(level["waves"][current_wave]["enemies"][current_enemy_batch].enemy_timer)
-	wave_timer.start()
+	enemy_timer.set_wait_time(level["waves"][current_wave]["enemies"][current_enemy_batch].enemy_timer)
+	enemy_timer.start()
 
 
 func _spawn_enemy(d):
 	# instances enemy into map and sets nav goal to base
 	var new_enemy = enemy.instance()
 	new_enemy.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate)
-	new_enemy.position = get_node(d.path).position
+	#new_enemy.position = get_node(d.path).position
+	#new_enemy.position = spawn_points.find(d.path).position
+	for s in spawn_points:
+		if s.name == d.path:
+			new_enemy.position = s.position
 	new_enemy.final_dest = tower.position
 	new_enemy.nav = nav
 	global.nav = nav
@@ -100,13 +103,21 @@ func _increment_enemy():
 		if(current_enemy_batch > level["waves"][current_wave]["enemies"].size() - 1):
 			current_enemy_batch = 0
 			current_wave += 1
+			print('new wave')
 			if(current_wave > level["waves"].size() - 1):
 				current_wave = 0
 				waves_over = true
-				wave_timer.stop()
+				enemy_timer.stop()
 
 
-func _on_Timer_timeout():
+func _on_EnemyTimer_timeout():
 	_increment_enemy()
 	if not waves_over:
 		spawn_new = true
+		
+
+func _on_StartTimer_timeout():
+	spawn_new = true
+	print('start!')
+
+
