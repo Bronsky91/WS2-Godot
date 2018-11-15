@@ -11,6 +11,7 @@ var dest_pos = Vector2(0,0)
 var panning = false
 
 func _ready():
+	global.camera = weakref(self)
 	mouse_pos = get_viewport().get_mouse_position()
 	dest_pos = mouse_pos
 	# set camera to match screen size
@@ -24,7 +25,7 @@ func _process(delta):
 	
 	if panning:
 		# reset destination vector
-		dest_pos = mouse_pos
+		dest_pos = camera_clamp(mouse_pos)
 		# lerp camera towards mouse position
 		camera_pos.position = camera_pos.position.linear_interpolate(mouse_pos, delta * pan_speed)
 	else:
@@ -40,8 +41,11 @@ func _process(delta):
 		# down
 		if (mouse_pos.y < (drag_margin_bottom * screen_size.y)):
 			dest_pos.y -= pan_speed
+		# ensure destination position is not beyond camera limits
+		dest_pos = camera_clamp(dest_pos)
 		# lerp camera towards destination vector
 		camera_pos.position = camera_pos.position.linear_interpolate(dest_pos, delta * pan_speed)
+
 
 
 func _input(event):
@@ -64,3 +68,14 @@ func _input(event):
 	if event.is_action_released("pan"):
 		panning = false
 		print("no longer panning")
+
+
+func set_boundary(size):
+	limit_left = 0
+	limit_right = global.TILE_WIDTH * size.x
+	limit_top = 0
+	limit_bottom = global.TILE_WIDTH * size.y
+
+
+func camera_clamp(pos):
+	return Vector2( clamp(pos.x,limit_left,limit_right),clamp(pos.y,limit_top,limit_bottom) )

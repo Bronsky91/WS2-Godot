@@ -58,6 +58,8 @@ func _process(delta):
 func _load_level(levelname):
 	level_scene = load("res://Scenes/LevelsTD/" + levelname + ".tscn")
 	var scene_instance = level_scene.instance()
+	var level_size = calc_level_size( scene_instance.get_node("Nav/TileMap") )
+	global.camera.get_ref().set_boundary( level_size )
 	get_node("Level").add_child(scene_instance)
 	nav = get_node("Level/TowerDefenseLevel/Nav")
 	tower = get_node("Level/TowerDefenseLevel/Tower")
@@ -75,6 +77,24 @@ func _load_level(levelname):
 	message.show()
 	start_timer.set_wait_time(level.waves[0].start_timer)
 	start_timer.start()
+
+
+func calc_level_size(tilemap):
+	var min_x = 0
+	var max_x = 0
+	var min_y = 0
+	var max_y = 0
+	var used_cells = tilemap.get_used_cells()
+	for pos in used_cells:
+		if pos.x < min_x:
+			min_x = int(pos.x)
+		elif pos.x > max_x:
+			max_x = int(pos.x)
+		if pos.y < min_y:
+			min_y = int (pos.y)
+		elif pos.y > max_y:
+			max_y = int(pos.y)
+	return Vector2(max_x + 1, max_y + 1)
 
 
 func _process_enemy():

@@ -3,8 +3,9 @@ extends Node
 var ult_charge = 0					# Current ultimate meter charge value
 var ult_max = 1000					# Ultimate meter maximum charge value
 var _ult_damage_to_charge = .1		# What damage dealt is multiplied by before being added to ultimate charge
-var game							# Reference to Game node (self-registers onready)	
-var end_level = false				# Attempt at fixing crash errors when level is over			
+var game							# Reference to Game node (self-registers onready)
+var camera							# Reference to Camera node (self-registers onready)
+var end_level = false				# Attempt at fixing crash errors when level is over
 var restarted = false
 var hovering_on_rune = false
 var base_hp = 100					# Current base health value
