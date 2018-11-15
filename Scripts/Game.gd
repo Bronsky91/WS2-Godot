@@ -3,6 +3,7 @@ extends Node2D
 onready var global = get_node("/root/Global")
 onready var enemy_timer = $EnemyTimer
 onready var start_timer = $StartTimer
+onready var message = $CanvasLayer/Message
 
 var nav
 var tower
@@ -62,6 +63,7 @@ func _load_level(levelname):
 		spawn_points.append(s)
 		global.start_points.append(s.position)
 	# Begins level
+	message.show()
 	start_timer.set_wait_time(level.waves[0].start_timer)
 	start_timer.start()
 
@@ -98,6 +100,7 @@ func _increment_enemy():
 			if current_wave < level["waves"].size():
 				start_timer.set_wait_time(level.waves[current_wave].start_timer)
 				start_timer.start()
+				message.show()
 				enemy_timer.stop()
 			else:
 				current_wave = 0
@@ -116,6 +119,7 @@ func _on_EnemyTimer_timeout():
 func _on_StartTimer_timeout():
 	spawn_new = true
 	print('start!')
+	message.hide()
 	start_timer.stop()
 
 
