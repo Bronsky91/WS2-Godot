@@ -3,8 +3,8 @@
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Path.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scenes/UI/TowerDefenseHUD.tscn" type="PackedScene" id=4]
-[ext_resource path="res://Scripts/Camera.gd" type="Script" id=5]
+[ext_resource path="res://Scripts/Camera.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/UI/TowerDefenseHUD.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Fonts/old-timey.tres" type="DynamicFont" id=6]
 
 [node name="Game" type="Node2D" index="0"]
@@ -15,29 +15,21 @@ nav_point = ExtResource( 3 )
 
 [node name="Level" type="Node2D" parent="." index="0"]
 
-[node name="TowerDefenseHUD" parent="." index="1" instance=ExtResource( 4 )]
-
-margin_left = 2.0
-margin_top = -4.0
-margin_right = 2.0
-margin_bottom = -4.0
-_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Rect" ]
-
-[node name="StartTimer" type="Timer" parent="." index="2"]
+[node name="StartTimer" type="Timer" parent="." index="1"]
 
 process_mode = 1
 wait_time = 1.0
 one_shot = false
 autostart = false
 
-[node name="EnemyTimer" type="Timer" parent="." index="3"]
+[node name="EnemyTimer" type="Timer" parent="." index="2"]
 
 process_mode = 1
 wait_time = 0.8
 one_shot = false
 autostart = false
 
-[node name="CameraPivot" type="Position2D" parent="." index="4"]
+[node name="CameraPivot" type="Position2D" parent="." index="3"]
 
 position = Vector2( 800, 400 )
 _sections_unfolded = [ "Transform" ]
@@ -66,10 +58,10 @@ drag_margin_bottom = 0.2
 editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
-script = ExtResource( 5 )
+script = ExtResource( 4 )
 _sections_unfolded = [ "Drag Margin", "Offset", "Smoothing", "Transform" ]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." index="5"]
+[node name="CanvasLayer" type="CanvasLayer" parent="." index="4"]
 
 layer = 1
 offset = Vector2( 0, 0 )
@@ -77,7 +69,15 @@ rotation = 0.0
 scale = Vector2( 1, 1 )
 transform = Transform2D( 1, 0, 0, 1, 0, 0 )
 
-[node name="Message" type="Label" parent="CanvasLayer" index="0"]
+[node name="TowerDefenseHUD" parent="CanvasLayer" index="0" instance=ExtResource( 5 )]
+
+margin_left = 2.0
+margin_top = -4.0
+margin_right = 2.0
+margin_bottom = -4.0
+_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Rect" ]
+
+[node name="Message" type="Label" parent="CanvasLayer" index="1"]
 
 visible = false
 anchor_left = 0.0
@@ -101,7 +101,7 @@ lines_skipped = 0
 max_lines_visible = -1
 _sections_unfolded = [ "Visibility", "custom_fonts" ]
 
-[node name="CButton" type="Button" parent="CanvasLayer" index="1"]
+[node name="CButton" type="Button" parent="CanvasLayer" index="2"]
 
 visible = false
 anchor_left = 0.0

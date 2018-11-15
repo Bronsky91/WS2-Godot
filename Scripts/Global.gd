@@ -47,21 +47,21 @@ func increase_ult_charge(num):
 	if (ult_charge >= ult_max):
 		ult_charge = ult_max
 		# If at max value, change meter color
-		game.get_ref().get_node("TowerDefenseHUD/UltimateMeter").set("modulate",Color(0.0,0.0,1.0))
+		game.get_ref().get_node("CanvasLayer/owerDefenseHUD/UltimateMeter").set("modulate",Color(0.0,0.0,1.0))
 	else:
 		# If not at max value, ensure meter color is set to default
-		game.get_ref().get_node("TowerDefenseHUD/UltimateMeter").set("modulate",Color(1.0,1.0,1.0))
+		game.get_ref().get_node("CanvasLayer/TowerDefenseHUD/UltimateMeter").set("modulate",Color(1.0,1.0,1.0))
 	# Increase ultimate meter fill bar to match charge value
-	game.get_ref().get_node("TowerDefenseHUD/UltimateMeter/Fill").set_value(ult_charge)
+	game.get_ref().get_node("CanvasLayer/TowerDefenseHUD/UltimateMeter/Fill").set_value(ult_charge)
 
 
 func decrease_ult_charge(num):
 	# Decrease the ultimate charge by value specified
 	ult_charge -= num
 	# Ensure meter color is set to default
-	game.get_ref().get_node("TowerDefenseHUD/UltimateMeter").set("modulate",Color(1.0,1.0,1.0))
+	game.get_ref().get_node("CanvasLayer/TowerDefenseHUD/UltimateMeter").set("modulate",Color(1.0,1.0,1.0))
 	# Increase ultimate meter fill bar to match charge value
-	game.get_ref().get_node("TowerDefenseHUD/UltimateMeter/Fill").set_value(ult_charge)
+	game.get_ref().get_node("CanvasLayer/TowerDefenseHUD/UltimateMeter/Fill").set_value(ult_charge)
 
 
 func get_tile_pos(x, y):
@@ -72,12 +72,12 @@ func get_tile_pos(x, y):
 
 func mana_bar(num):
 	if game.get_ref():
-		game.get_ref().get_node("TowerDefenseHUD/ManaMeter/Fill").set_value(num)
+		game.get_ref().get_node("CanvasLayer/TowerDefenseHUD/ManaMeter/Fill").set_value(num)
 	
 	
 func hp_bar(num):
 	if game.get_ref():
-		game.get_ref().get_node("TowerDefenseHUD/HealthMeter/Fill").set_value(num)
+		game.get_ref().get_node("CanvasLayer/TowerDefenseHUD/HealthMeter/Fill").set_value(num)
 		
 		
 func find_closest_point(array, current_pos):
