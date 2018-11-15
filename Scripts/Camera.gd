@@ -52,15 +52,17 @@ func _input(event):
 	# zoom in
 	if event.is_action_pressed("zoom_in"):
 		global.zoom_level -= global.zoom_speed
-		if global.zoom_level < -global.zoom_max:
-			global.zoom_level = -global.zoom_max
+		if global.zoom_level < global.zoom_in_max:
+			global.zoom_level = global.zoom_in_max
 		zoom = Vector2(global.zoom_level, global.zoom_level)
+		sync_bounds()
 	# zoom out
 	if event.is_action_pressed("zoom_out"):
 		global.zoom_level += global.zoom_speed
-		if global.zoom_level > global.zoom_max:
-			global.zoom_level = global.zoom_max
+		if global.zoom_level > global.zoom_out_max:
+			global.zoom_level = global.zoom_out_max
 		zoom = Vector2(global.zoom_level, global.zoom_level)
+		sync_bounds()
 	# pan
 	if event.is_action_pressed("pan"):
 		panning = true
@@ -70,12 +72,24 @@ func _input(event):
 		print("no longer panning")
 
 
-func set_boundary(size):
+func set_boundary():
 	limit_left = 0
-	limit_right = global.TILE_WIDTH * size.x
+	limit_right = global.level_size.x
 	limit_top = 0
-	limit_bottom = global.TILE_WIDTH * size.y
+	limit_bottom = global.level_size.y
 
 
 func camera_clamp(pos):
 	return Vector2( clamp(pos.x,limit_left,limit_right),clamp(pos.y,limit_top,limit_bottom) )
+
+
+# TODO: Prevent zooming beyond edge of tilemap
+func sync_bounds():
+	var viewport = get_viewport()
+	if viewport != null:
+		#var zoom = get_zoom()
+		var level_scale = Vector2(1 / zoom.x, 1 / zoom.y)
+		
+		var resolution = viewport.get_visible_rect().size
+		print("level_size: " + str(global.level_size) + ", resolution: " + str(resolution) + ", pos: " + str(get_parent().get_global_position()) + \
+		", zoom_level: " + str(global.zoom_level) + ", level_scale: " + str(level_scale) )

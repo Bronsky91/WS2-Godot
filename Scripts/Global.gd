@@ -20,8 +20,10 @@ var cursor_tile_y = 0
 var cursor_tile_pos = Vector2()
 var cursor_tile_path
 var zoom_level = 1
-var zoom_max = 3
+var zoom_in_max = 0.25
+var zoom_out_max = 3
 var zoom_speed = 0.25
+var level_size = Vector2(0,0)
 var level_state = {
 	'completed': [],
 	'remaining': [1,2,3,4,5],

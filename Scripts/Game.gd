@@ -58,8 +58,11 @@ func _process(delta):
 func _load_level(levelname):
 	level_scene = load("res://Scenes/LevelsTD/" + levelname + ".tscn")
 	var scene_instance = level_scene.instance()
-	var level_size = calc_level_size( scene_instance.get_node("Nav/TileMap") )
-	global.camera.get_ref().set_boundary( level_size )
+	global.level_size = calc_level_size( scene_instance.get_node("Nav/TileMap") )
+	global.level_size.x *= global.TILE_WIDTH
+	global.level_size.y *= global.TILE_HEIGHT
+	global.camera.get_ref().set_boundary()
+	global.camera.get_ref().sync_bounds()
 	get_node("Level").add_child(scene_instance)
 	nav = get_node("Level/TowerDefenseLevel/Nav")
 	tower = get_node("Level/TowerDefenseLevel/Tower")
