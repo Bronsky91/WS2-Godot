@@ -4,6 +4,7 @@ onready var global = get_node("/root/Global")
 onready var enemy_timer = $EnemyTimer
 onready var start_timer = $StartTimer
 onready var message = $CanvasLayer/Message
+onready var cbutton = $CanvasLayer/CButton
 
 var nav
 var tower
@@ -17,6 +18,8 @@ var current_enemy_batch = 0
 var current_enemy = 0
 var enemy_quantity = 0
 var spawn_points = []
+var wave_start = false
+var wave_process_done = false
 
 export(PackedScene) var enemy
 export(PackedScene) var nav_point
@@ -33,17 +36,23 @@ func _ready():
 
 
 func _process(delta):
+	if get_tree().get_nodes_in_group("enemies").size() == 0 and wave_start and wave_process_done:
+		wave_start = false
+		start_timer.set_wait_time(level.waves[0].start_timer)
+		start_timer.start()
+		message.show()
 	# Checks when to spawn the next enemy
 	if spawn_new and not waves_over:
 		_process_enemy()
-	elif waves_over and get_tree().get_nodes_in_group("enemies").size() == 0:
+	elif waves_over and get_tree().get_nodes_in_group("enemies").size() == 0 and not global.end_level:
 	# Ends the level when all enemies are off the map and no more waves incoming
 		global.level_state.completed.append(global.level_state.current) # Advances tp next level
 		global.level_state.remaining.remove(global.level_state.remaining.find(global.level_state.current))
 		global.level_state.current = global.level_state.remaining[0]
 		global.end_level = true
-		global.clear_map()
-		get_tree().change_scene("res://Scenes/LevelSelection.tscn") # Brings to level complete scene
+		message.text = 'Awesome Show, Great Job!'
+		message.show()
+		cbutton.show()
 
 
 func _load_level(levelname):
@@ -87,6 +96,7 @@ func _spawn_enemy(d):
 	new_enemy.nav = nav
 	global.nav = nav
 	add_child(new_enemy)
+	wave_start = true
 
 
 func _increment_enemy():
@@ -98,10 +108,8 @@ func _increment_enemy():
 			current_enemy_batch = 0
 			current_wave += 1
 			if current_wave < level["waves"].size():
-				start_timer.set_wait_time(level.waves[current_wave].start_timer)
-				start_timer.start()
-				message.show()
 				enemy_timer.stop()
+				wave_process_done = true
 			else:
 				current_wave = 0
 				waves_over = true
@@ -110,16 +118,17 @@ func _increment_enemy():
 
 func _on_EnemyTimer_timeout():
 	_increment_enemy()
-	if not start_timer.is_stopped():
-		spawn_new = false
-	elif not waves_over:
+	if not waves_over and not enemy_timer.is_stopped():
 		spawn_new = true
 		
 
 func _on_StartTimer_timeout():
 	spawn_new = true
-	print('start!')
+	wave_process_done = false
 	message.hide()
 	start_timer.stop()
 
 
+func _on_CButton_pressed():
+		global.clear_map()
+		get_tree().change_scene("res://Scenes/LevelSelection.tscn") # Brings to level complete scene
