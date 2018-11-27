@@ -4,7 +4,7 @@
 [ext_resource path="res://Scripts/TileMap.gd" type="Script" id=2]
 [ext_resource path="res://Assets/Tower.png" type="Texture" id=3]
 
-[node name="TowerDefenseLevel" type="Node2D"]
+[node name="TowerDefenseLevel" type="Node2D" index="0"]
 
 [node name="Nav" type="Navigation2D" parent="." index="0"]
 
@@ -39,5 +39,15 @@ position = Vector2( 1568, 800 )
 scale = Vector2( 0.280701, 0.299065 )
 texture = ExtResource( 3 )
 _sections_unfolded = [ "Offset", "Transform" ]
+
+[node name="SpawnPoints" type="Node2D" parent="." index="2"]
+
+[node name="Path1" type="Position2D" parent="SpawnPoints" index="0"]
+
+position = Vector2( 20.3568, 125.842 )
+
+[node name="Path2" type="Position2D" parent="SpawnPoints" index="1"]
+
+position = Vector2( 27.7593, 780.961 )
 
 
