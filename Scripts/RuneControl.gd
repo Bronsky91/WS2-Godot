@@ -18,13 +18,13 @@ func _draw():
 
 func _on_mouse_entered():
 	print('entered')
-	global.hovering_on_rune = true
+	global.hovering_on_any_rune = true
 	rune.cursor_hovering = true
 	circle_width = rune._range
 	update()
 
 func _on_mouse_exited():
-	global.hovering_on_rune = false
+	global.hovering_on_any_rune = false
 	rune.cursor_hovering = false
 	circle_width = 0
 	update()

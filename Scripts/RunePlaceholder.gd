@@ -34,9 +34,9 @@ func init_placeholder(rune_details):
 	
 
 func _process(delta):
-	if global.hovering_on_rune:
+	if global.hovering_on_any_rune:
 			set_visibility(false)
-	elif not global.hovering_on_rune:
+	elif not global.hovering_on_any_rune:
 			set_visibility(true)
 	position = global.cursor_tile_pos
 	# Checks if rune can be placed based on mana and tile availabity

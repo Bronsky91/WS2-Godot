@@ -33,11 +33,11 @@ func init(rune_details):
 		
 
 func _on_RuneButton_mouse_entered():
-	global.hovering_on_rune = true
+	global.hovering_on_any_rune = true
 
 
 func _on_RuneButton_mouse_exited():
-	global.hovering_on_rune = false
+	global.hovering_on_any_rune = false
 
 
 func _on_RuneButton_pressed():
