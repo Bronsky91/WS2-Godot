@@ -24,7 +24,7 @@ func _input(event):
 				p_holder.queue_free()
 		placeholder = rune_placeholder.instance()
 		placeholder.init_placeholder(_rune_details)
-		hud.add_child(placeholder)
+		get_tree().get_root().add_child(placeholder)
 
 
 func init(rune_details):
