@@ -7,7 +7,7 @@ var game							# Reference to Game node (self-registers onready)
 var camera							# Reference to Camera node (self-registers onready)
 var end_level = false				# Attempt at fixing crash errors when level is over
 var restarted = false
-var hovering_on_rune = false
+var hovering_on_any_rune = false
 var base_hp = 100					# Current base health value
 var base_hp_max = 100				# Base maximum health value
 var mana = 200

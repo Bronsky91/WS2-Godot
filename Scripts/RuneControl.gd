@@ -24,6 +24,7 @@ func _on_mouse_entered():
 	update()
 
 func _on_mouse_exited():
+	print('exited')
 	global.hovering_on_any_rune = false
 	rune.cursor_hovering = false
 	circle_width = 0
