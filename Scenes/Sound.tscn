@@ -3,14 +3,14 @@
 [ext_resource path="res://Assets/Music/whizzshizz2 (1).ogg" type="AudioStream" id=1]
 [ext_resource path="res://Assets/Music/whizzshizzbattle.ogg" type="AudioStream" id=2]
 
-[node name="Sound" type="Node"]
+[node name="Sound" type="Node" index="0"]
 
 [node name="Main" type="AudioStreamPlayer" parent="." index="0"]
 
 stream = ExtResource( 1 )
 volume_db = 0.0
 pitch_scale = 1.0
-autoplay = true
+autoplay = false
 mix_target = 0
 bus = "Master"
 
