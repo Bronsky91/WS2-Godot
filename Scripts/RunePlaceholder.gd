@@ -53,6 +53,7 @@ func _draw():
 
 
 func _input(event):
+	print(global.hovering_on_any_rune)
 	# Watches for scrolling up or down to place the rune already powered up or back down
 	if disabled:
 		return

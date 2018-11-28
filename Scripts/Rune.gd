@@ -174,7 +174,6 @@ func apply_debuff(debuff, target):
 	
 
 func _input(event):
-	print(cursor_hovering)
 	# Watches for if player is scrolling over runes to power them up or down
 	if cursor_hovering and event.is_action_released("power_up") and _power_level < _max_power_level and global.mana > _cost:
 		power_up()
@@ -187,6 +186,9 @@ func _input(event):
 		#TODO: Make cooldown (probably long) of how often you can destroy a rune and refund
 		global.mana_bar(global.mana)
 		queue_free()
+		# When the rune is freed the mouse never gets a chance to leave the rune to place the exiting variables back to false
+		global.hovering_on_any_rune = false
+		cursor_hovering = false
 
 		
 func _on_PulseTimer_timeout():
