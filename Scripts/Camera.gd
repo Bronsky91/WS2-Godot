@@ -2,7 +2,7 @@ extends Camera2D
 
 onready var global = get_node("/root/Global")
 onready var screen_size = get_viewport_rect().size
-onready var camera_pivot = get_parent()
+onready var cam_pivot = get_parent()
 var edge_threshold = 100
 var pan_speed = 10
 var mouse_pos = Vector2(0,0)
@@ -10,15 +10,17 @@ var last_mouse_pos = Vector2(0,0)
 var dest_pos = Vector2(0,0)
 var panning = false
 var g_mouse_pos
-	
+var rollback_zoom = false
+var temp_cam_pos = Vector2()
+
 
 func _ready():
 	global.camera = weakref(self)
 	mouse_pos = get_viewport().get_mouse_position()
 	dest_pos = mouse_pos
 	# set camera to match screen size
-	#camera_pivot.position.x = screen_size.x / 2
-	#camera_pivot.position.y = screen_size.y / 2
+	#cam_pivot.position.x = screen_size.x / 2
+	#cam_pivot.position.y = screen_size.y / 2
 
 
 func _process(delta):
@@ -31,7 +33,7 @@ func _process(delta):
 		# reset destination vector
 		dest_pos = camera_clamp(mouse_pos)
 		# lerp camera towards mouse position
-		camera_pivot.position = camera_pivot.position.linear_interpolate(mouse_pos, delta * pan_speed)
+		cam_pivot.position = cam_pivot.position.linear_interpolate(mouse_pos, delta * pan_speed)
 	else:
 		var pan_margin = Vector2(drag_margin_right * screen_size.x, drag_margin_bottom * screen_size.y)
 		
@@ -51,7 +53,7 @@ func _process(delta):
 		
 		dest_pos = camera_clamp(dest_pos)
 		# lerp camera towards destination vector
-		camera_pivot.position = camera_pivot.position.linear_interpolate(dest_pos, delta * pan_speed)
+		cam_pivot.position = cam_pivot.position.linear_interpolate(dest_pos, delta * pan_speed)
 
 
 
@@ -62,14 +64,14 @@ func _input(event):
 		global.zoom_level -= global.zoom_speed
 		if global.zoom_level < global.zoom_in_max:
 			global.zoom_level = global.zoom_in_max
-		clipped_zoom(rollback_zoom_level)
+		try_zoom(rollback_zoom_level)
 	# zoom out
 	if event.is_action_pressed("zoom_out"):
 		var rollback_zoom_level = global.zoom_level
 		global.zoom_level += global.zoom_speed
 		if global.zoom_level > global.zoom_out_max:
 			global.zoom_level = global.zoom_out_max
-		clipped_zoom(rollback_zoom_level)
+		try_zoom(rollback_zoom_level)
 	# pan
 	if event.is_action_pressed("pan"):
 		panning = true
@@ -91,35 +93,103 @@ func camera_clamp(pos):
 	return Vector2( clamp(pos.x,limit_left,limit_right), clamp(pos.y,limit_top,limit_bottom) )
 
 
-func clipped_zoom(var rollback_zoom_level):
-	# Zoom to new new zoom level, unless it will go beyond the edge of the tilemap
+# Zoom to new new zoom level, unless it will go beyond the edge of the tilemap
+func try_zoom(var rollback_zoom_level):
+	# ensure rollback_zoom starts out false
+	rollback_zoom = false
 	
-	var viewport = get_viewport()
-	if viewport != null:
-		#print("setting zoom to : " + str(global.zoom_level))
+	# Set zoom to new zoom level
+	zoom = Vector2(global.zoom_level, global.zoom_level)
+	
+	#TODO: Calculate these at new zoom level, rather than actually changing zoom
+	# Capture where upper left corner of camera is at new zoom level, and what the new scaled screen resolution is
+	temp_cam_pos = get_camera_position()
+	var scaled_resolution = get_viewport().get_visible_rect().size * global.zoom_level
+	
+	# Make sure zoom does not exceed map boundaries
+	smart_zoom(scaled_resolution)
+	
+	# If smart_zoom() was unable to make the zoom work without exceeding map boundaries, rollback to previous zoom level
+	if rollback_zoom:
+		global.zoom_level = rollback_zoom_level
 		zoom = Vector2(global.zoom_level, global.zoom_level)
+	# Otherwise, reset destination position so camera doesn't immediately pan after zoom
+	else:
+		cam_pivot.position = temp_cam_pos
+		dest_pos = camera_clamp(temp_cam_pos)
+
+
+func smart_zoom(var scaled_resolution):
+	# As this function is called recursively, if previous run failed out then don't waste time and return
+	if rollback_zoom:
+		return;
 		
-		var cam_pos = get_camera_position()
-		var scaled_resolution = viewport.get_visible_rect().size * global.zoom_level
-		if( 
-			cam_pos.x < limit_left or \
-			cam_pos.y < limit_top or \
-			cam_pos.x + scaled_resolution.x > limit_right or \
-			cam_pos.y + scaled_resolution.y > limit_bottom \
-		):
-			#print("rolling back zoom to: " + str(rollback_zoom_level))
-			global.zoom_level = rollback_zoom_level
-			zoom = Vector2(global.zoom_level, global.zoom_level)
-		
-		#var level_scale = Vector2(1 / zoom.x, 1 / zoom.y)
-		#var cam_center = get_camera_screen_center()
-		#var resolution = viewport.get_visible_rect().size
-		#print("level_size: " + str(global.level_size) + ", resolution: " + str(resolution) + ", pos: " + str(camera_pivot.position) + \
-		#", zoom_level: " + str(global.zoom_level) + ", level_scale: " + str(level_scale) + ', g_mouse_pos : ' + str(g_mouse_pos) + \
-		#', cam_pos: ' + str(cam_pos) + ', cam_center: ' + str(cam_center) + ', scaled_cam_center: ' + str(scaled_cam_center) + \
-		#', scaled_resolution: ' + str(scaled_resolution))
-		
-		
+	var delta = 0
+	temp_cam_pos = Vector2(round(temp_cam_pos.x), round(temp_cam_pos.y))
+	
+	#print("[" + str(rollback_count) + "] " + "temp_cam_pos: " + str(temp_cam_pos) + ", new_zoom: " + str(global.zoom_level))
+	
+	# if zooming will result in camera being out-of-bounds to the LEFT...
+	if temp_cam_pos.x < limit_left:
+		# check if camera can be moved to still allow the zoom
+		delta = limit_left - temp_cam_pos.x
+		# if move can work, do it, then re-call this function recursively to retest with adjusted position
+		if temp_cam_pos.x + delta + scaled_resolution.x < limit_right:
+			#print("Out-of-bounds LEFT. Delta: " + str(delta) + ", Scaled_Res: " + str(scaled_resolution) + ", Right_Limit: " + str(limit_right) + ". Moving from " + str(temp_cam_pos) + " to " + str(temp_cam_pos.x + delta) + "," + str(temp_cam_pos.y))
+			temp_cam_pos = Vector2(temp_cam_pos.x + delta, temp_cam_pos.y)
+			smart_zoom(scaled_resolution)
+		# otherwise, set rollback flag to true and return
+		else:
+			#print("Out-of-bounds LEFT. Delta: " + str(delta) + ", Scaled_Res: " + str(scaled_resolution) + ", Right_Limit: " + str(limit_right) + ". Unable to move from " + str(temp_cam_pos))
+			rollback_zoom = true
+			return
+	
+	# if zooming will result in camera being out-of-bounds to the TOP...
+	if temp_cam_pos.y < limit_top:
+		# check if camera can be moved to still allow the zoom
+		delta = limit_top - temp_cam_pos.y
+		# if move can work, do it, then re-call this function recursively to retest with adjusted position
+		if temp_cam_pos.y + delta + scaled_resolution.y < limit_bottom:
+			#print("Out-of-bounds TOP. Delta: " + str(delta) + ", Scaled_Res: " + str(scaled_resolution) + ", Bottom_Limit: " + str(limit_bottom) + ". Moving from " + str(temp_cam_pos) + " to " + str(temp_cam_pos.x) + "," + str(temp_cam_pos.y + delta))
+			temp_cam_pos = Vector2(temp_cam_pos.x, temp_cam_pos.y + delta)
+			smart_zoom(scaled_resolution)
+		# otherwise, set rollback flag to true and return
+		else:
+			#print("Out-of-bounds TOP. Delta: " + str(delta) + ", Scaled_Res: " + str(scaled_resolution) + ", Bottom_Limit: " + str(limit_bottom) + ". Unable to move from " + str(temp_cam_pos))
+			rollback_zoom = true
+			return
+	
+	# if zooming will result in camera being out-of-bounds to the RIGHT...
+	if temp_cam_pos.x + scaled_resolution.x > limit_right:
+		# check if camera can be moved to still allow the zoom
+		delta = temp_cam_pos.x + scaled_resolution.x - limit_right
+		# if move can work, do it, then re-call this function recursively to retest with adjusted position
+		if temp_cam_pos.x - delta >= limit_left:
+			#print("Out-of-bounds RIGHT. Delta: " + str(delta) + ", Scaled_Res: " + str(scaled_resolution) + ", Right_Limit: " + str(limit_right) + ". Moving from " + str(temp_cam_pos) + " to " + str(temp_cam_pos.x - delta) + "," + str(temp_cam_pos.y))
+			temp_cam_pos = Vector2(temp_cam_pos.x - delta, temp_cam_pos.y)
+			smart_zoom(scaled_resolution)
+		# otherwise, set rollback flag to true and return
+		else:
+			#print("Out-of-bounds RIGHT. Delta: " + str(delta) + ", Scaled_Res: " + str(scaled_resolution) + ", Right_Limit: " + str(limit_right) + ". Unable to move from " + str(temp_cam_pos))
+			rollback_zoom = true
+			return
+	
+	# if zooming will result in camera being out-of-bounds to the BOTTOM...
+	if temp_cam_pos.y + scaled_resolution.y > limit_bottom:
+		# check if camera can be moved to still allow the zoom
+		delta = temp_cam_pos.y + scaled_resolution.y - limit_bottom
+		# if move can work, do it, then re-call this function recursively to retest with adjusted position
+		if temp_cam_pos.y - delta >= limit_top:
+			#print("Out-of-bounds BOTTOM. Delta: " + str(delta) + ", Scaled_Res: " + str(scaled_resolution) + ", Bottom_Limit: " + str(limit_bottom) + ". Moving from " + str(temp_cam_pos) + " to " + str(temp_cam_pos.x) + "," + str(temp_cam_pos.y - delta))
+			temp_cam_pos = Vector2(temp_cam_pos.x, temp_cam_pos.y - delta)
+			smart_zoom(scaled_resolution)
+		# otherwise, set rollback flag to true and return
+		else:
+			#print("Out-of-bounds BOTTOM. Delta: " + str(delta) + ", Scaled_Res: " + str(scaled_resolution) + ", Bottom_Limit: " + str(limit_bottom) + ". Unable to move from " + str(temp_cam_pos))
+			rollback_zoom = true
+			return
+
+
 func _draw():
 	#var viewport = get_viewport()
 	#var resolution = viewport.get_visible_rect().size
