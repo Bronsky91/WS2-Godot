@@ -16,6 +16,7 @@ func _process(delta):
     #    (int(global.cursor_tile_x) * 64) + (global.TILE_WIDTH / 2),
     #    (int(global.cursor_tile_y) * 64) + (global.TILE_HEIGHT / 2)
     #)
+	#print('cursor tile pos = ' + str(global.cursor_tile_pos))
 	cursor_cell = get_cell(global.cursor_tile_x, global.cursor_tile_y)
 	if tile_set.tile_get_navigation_polygon(cursor_cell) != null:
 		global.cursor_tile_path = "in_lane"
