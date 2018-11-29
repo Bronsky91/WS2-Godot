@@ -62,7 +62,7 @@ func _load_level(levelname):
 	global.level_size.x *= global.TILE_WIDTH
 	global.level_size.y *= global.TILE_HEIGHT
 	global.camera.get_ref().set_boundary()
-	global.camera.get_ref().sync_bounds()
+	#global.camera.get_ref().sync_bounds()
 	get_node("Level").add_child(scene_instance)
 	nav = get_node("Level/TowerDefenseLevel/Nav")
 	tower = get_node("Level/TowerDefenseLevel/Tower")
