@@ -22,7 +22,7 @@ var cursor_tile_path
 var zoom_level = 1
 var zoom_in_max = 0.25
 var zoom_out_max = 3
-var zoom_speed = 0.25
+var zoom_speed = 0.15
 var level_size = Vector2(0,0)
 var level_state = {
 	'completed': [],

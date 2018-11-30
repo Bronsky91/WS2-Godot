@@ -12,6 +12,7 @@ var panning = false
 var g_mouse_pos
 var rollback_zoom = false
 var temp_cam_pos = Vector2()
+var rollback_count = 0
 
 
 func _ready():
@@ -59,14 +60,14 @@ func _process(delta):
 
 func _input(event):
 	# zoom in
-	if event.is_action_pressed("zoom_in"):
+	if event.is_action_pressed("zoom_in") and global.zoom_level != global.zoom_in_max:
 		var rollback_zoom_level = global.zoom_level
 		global.zoom_level -= global.zoom_speed
 		if global.zoom_level < global.zoom_in_max:
 			global.zoom_level = global.zoom_in_max
 		try_zoom(rollback_zoom_level)
 	# zoom out
-	if event.is_action_pressed("zoom_out"):
+	if event.is_action_pressed("zoom_out") and global.zoom_level != global.zoom_out_max:
 		var rollback_zoom_level = global.zoom_level
 		global.zoom_level += global.zoom_speed
 		if global.zoom_level > global.zoom_out_max:
@@ -98,25 +99,25 @@ func try_zoom(var rollback_zoom_level):
 	# ensure rollback_zoom starts out false
 	rollback_zoom = false
 	
-	# Set zoom to new zoom level
-	zoom = Vector2(global.zoom_level, global.zoom_level)
 	
-	#TODO: Calculate these at new zoom level, rather than actually changing zoom
-	# Capture where upper left corner of camera is at new zoom level, and what the new scaled screen resolution is
-	temp_cam_pos = get_camera_position()
+	# Get upper left camera position and what the new scaled screen resolution is
+	#temp_cam_pos = get_camera_position()
 	var scaled_resolution = get_viewport().get_visible_rect().size * global.zoom_level
+	scaled_resolution = Vector2(round(scaled_resolution.x), round(scaled_resolution.y))
+	temp_cam_pos = Vector2(g_mouse_pos.x - (scaled_resolution.x / 2), g_mouse_pos.y - (scaled_resolution.y / 2))
 	
 	# Make sure zoom does not exceed map boundaries
+	rollback_count = 0
 	smart_zoom(scaled_resolution)
 	
 	# If smart_zoom() was unable to make the zoom work without exceeding map boundaries, rollback to previous zoom level
 	if rollback_zoom:
 		global.zoom_level = rollback_zoom_level
-		zoom = Vector2(global.zoom_level, global.zoom_level)
-	# Otherwise, reset destination position so camera doesn't immediately pan after zoom
+	# Otherwise, zoom and reset destination position so camera doesn't immediately pan after zoom
 	else:
 		cam_pivot.position = temp_cam_pos
 		dest_pos = camera_clamp(temp_cam_pos)
+		zoom = Vector2(global.zoom_level, global.zoom_level)
 
 
 func smart_zoom(var scaled_resolution):
@@ -124,11 +125,16 @@ func smart_zoom(var scaled_resolution):
 	if rollback_zoom:
 		return;
 		
+	if rollback_count > 5:
+		print("TOO MUCH ZOOM FINAGLIN'")
+		rollback_zoom = true
+		return
+		
 	var delta = 0
 	temp_cam_pos = Vector2(round(temp_cam_pos.x), round(temp_cam_pos.y))
 	
-	#print("[" + str(rollback_count) + "] " + "temp_cam_pos: " + str(temp_cam_pos) + ", new_zoom: " + str(global.zoom_level))
-	
+	print("[" + str(rollback_count) + "] " + "temp_cam_pos: " + str(temp_cam_pos) + ", new_zoom: " + str(global.zoom_level))
+	rollback_count += 1
 	# if zooming will result in camera being out-of-bounds to the LEFT...
 	if temp_cam_pos.x < limit_left:
 		# check if camera can be moved to still allow the zoom

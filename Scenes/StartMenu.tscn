@@ -28,7 +28,7 @@ use_filter = false
 font_data = ExtResource( 5 )
 _sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
-[node name="StartMenu" type="Node"]
+[node name="StartMenu" type="Node" index="0"]
 
 script = SubResource( 1 )
 
