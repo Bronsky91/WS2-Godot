@@ -8,7 +8,6 @@
 [ext_resource path="res://Scripts/Camera2D.gd" type="Script" id=6]
 
 [sub_resource type="GDScript" id=1]
-
 script/source = "extends Node
 
 # class member variables go here, for example:
@@ -21,253 +20,93 @@ func _ready():
 "
 
 [sub_resource type="DynamicFont" id=2]
-
 size = 60
-use_mipmaps = false
-use_filter = false
 font_data = ExtResource( 5 )
-_sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
 
-[node name="StartMenu" type="Node" index="0"]
-
+[node name="StartMenu" type="Node"]
 script = SubResource( 1 )
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="." index="0"]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
 
-layer = -1
-offset = Vector2( 0, 0 )
-rotation = 0.0
-scale = Vector2( 1, 1 )
-transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-scroll_offset = Vector2( 0, 0 )
-scroll_base_offset = Vector2( 0, 0 )
-scroll_base_scale = Vector2( 1, 1 )
-scroll_limit_begin = Vector2( 0, 0 )
-scroll_limit_end = Vector2( 0, 0 )
-scroll_ignore_camera_zoom = false
-
-[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground" index="0"]
-
-motion_scale = Vector2( 1, 1 )
-motion_offset = Vector2( 0, 0 )
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
 motion_mirroring = Vector2( 1620, 0 )
-_sections_unfolded = [ "Motion", "Transform", "Z Index" ]
 
-[node name="glacial_mountains" type="Sprite" parent="ParallaxBackground/ParallaxLayer" index="0"]
-
+[node name="glacial_mountains" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2( 810, 400 )
 scale = Vector2( 4.23437, 3.76852 )
 texture = ExtResource( 1 )
 region_rect = Rect2( 0, 0, 1920, 1080 )
-_sections_unfolded = [ "Animation", "Material", "Offset", "Region", "Transform", "Visibility", "Z Index" ]
 
-[node name="cloud_lonely" type="Sprite" parent="ParallaxBackground/ParallaxLayer" index="1"]
-
+[node name="cloud_lonely" type="Sprite" parent="ParallaxBackground/ParallaxLayer"]
 position = Vector2( 190, 140 )
 texture = ExtResource( 2 )
 
-[node name="Control" type="CanvasLayer" parent="." index="1"]
-
-layer = 1
-offset = Vector2( 0, 0 )
-rotation = 0.0
-scale = Vector2( 1, 1 )
-transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+[node name="Control" type="CanvasLayer" parent="."]
 script = ExtResource( 3 )
 
-[node name="Label" type="Label" parent="Control" index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Label" type="Label" parent="Control"]
 margin_left = 560.0
 margin_top = 90.0
 margin_right = 1160.0
 margin_bottom = 241.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 custom_fonts/font = ExtResource( 4 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
 text = "Wizard Shit 2..."
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Grow Direction", "Margin", "Theme", "custom_colors", "custom_constants", "custom_fonts", "custom_styles" ]
 
-[node name="Story" type="Button" parent="Control" index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Story" type="Button" parent="Control"]
 margin_left = 440.0
 margin_top = 290.0
 margin_right = 624.0
 margin_bottom = 367.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "* Story"
 flat = true
-align = 1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Arcade" type="Button" parent="Control" index="2"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Arcade" type="Button" parent="Control"]
 margin_left = 460.0
 margin_top = 350.0
 margin_right = 660.0
 margin_bottom = 427.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "* Arcade"
 flat = true
-align = 1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Secret" type="Button" parent="Control" index="3"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Secret" type="Button" parent="Control"]
 margin_left = 440.0
 margin_top = 400.0
 margin_right = 618.0
 margin_bottom = 477.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "* ????"
 flat = true
-align = 1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Options" type="Button" parent="Control" index="4"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Options" type="Button" parent="Control"]
 margin_left = 460.0
 margin_top = 450.0
 margin_right = 642.0
 margin_bottom = 527.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "* Options"
 flat = true
-align = 1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Exit" type="Button" parent="Control" index="5"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
+[node name="Exit" type="Button" parent="Control"]
 margin_left = 430.0
 margin_top = 510.0
 margin_right = 608.0
 margin_bottom = 587.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
 custom_fonts/font = SubResource( 2 )
 custom_colors/font_color = Color( 0, 0, 0, 1 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "* Exit"
 flat = true
-align = 1
-_sections_unfolded = [ "custom_colors", "custom_fonts" ]
 
-[node name="Camera2D" type="Camera2D" parent="." index="2"]
-
+[node name="Camera2D" type="Camera2D" parent="."]
 anchor_mode = 0
-rotating = false
 current = true
-zoom = Vector2( 1, 1 )
-limit_left = -10000000
-limit_top = -10000000
-limit_right = 10000000
-limit_bottom = 10000000
-limit_smoothed = false
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-smoothing_enabled = false
 smoothing_speed = 1.0
-offset_v = 0.0
-offset_h = 0.0
-drag_margin_left = 0.2
-drag_margin_top = 0.2
-drag_margin_right = 0.2
-drag_margin_bottom = 0.2
-editor_draw_screen = true
-editor_draw_limits = false
-editor_draw_drag_margin = false
 script = ExtResource( 6 )
-_sections_unfolded = [ "Editor", "Limit", "Smoothing" ]
-
 [connection signal="pressed" from="Control/Story" to="Control" method="_on_Story_pressed"]
-
 [connection signal="pressed" from="Control/Exit" to="Control" method="_on_Exit_pressed"]
-
-

@@ -3,20 +3,21 @@
 importer="texture"
 type="StreamTexture"
 path="res://.import/Fireball.png-453a14b0c212c44f7db31bbf42e95daf.stex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Assets/Fireball.png"
-source_md5="10f008820a9b119f2c4b7e5684ae59d1"
-
 dest_files=[ "res://.import/Fireball.png-453a14b0c212c44f7db31bbf42e95daf.stex" ]
-dest_md5="fb6f6b6709825112a63b3afc552b1d60"
 
 [params]
 
 compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
+compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=true
@@ -26,6 +27,7 @@ flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
+process/invert_color=false
 stream=false
 size_limit=0
 detect_3d=true

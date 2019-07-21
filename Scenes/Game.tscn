@@ -7,130 +7,54 @@
 [ext_resource path="res://Scenes/UI/TowerDefenseHUD.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Assets/Fonts/old-timey.tres" type="DynamicFont" id=6]
 
-[node name="Game" type="Node2D" index="0"]
-
+[node name="Game" type="Node2D"]
 script = ExtResource( 1 )
 enemy = ExtResource( 2 )
 nav_point = ExtResource( 3 )
 
-[node name="Level" type="Node2D" parent="." index="0"]
+[node name="Level" type="Node2D" parent="."]
 
-[node name="StartTimer" type="Timer" parent="." index="1"]
+[node name="StartTimer" type="Timer" parent="."]
 
-process_mode = 1
-wait_time = 1.0
-one_shot = false
-autostart = false
-
-[node name="EnemyTimer" type="Timer" parent="." index="2"]
-
-process_mode = 1
+[node name="EnemyTimer" type="Timer" parent="."]
 wait_time = 0.8
-one_shot = false
-autostart = false
 
-[node name="CameraPivot" type="Position2D" parent="." index="3"]
+[node name="CameraPivot" type="Position2D" parent="."]
 
-_sections_unfolded = [ "Transform" ]
-
-[node name="Camera2D" type="Camera2D" parent="CameraPivot" index="0"]
-
+[node name="Camera2D" type="Camera2D" parent="CameraPivot"]
 anchor_mode = 0
-rotating = false
 current = true
-zoom = Vector2( 1, 1 )
-limit_left = -10000000
-limit_top = -10000000
-limit_right = 10000000
-limit_bottom = 10000000
-limit_smoothed = false
-drag_margin_h_enabled = true
-drag_margin_v_enabled = true
-smoothing_enabled = false
-smoothing_speed = 5.0
-offset_v = 0.0
-offset_h = 0.0
 drag_margin_left = 0.05
 drag_margin_top = 0.05
 drag_margin_right = 0.05
 drag_margin_bottom = 0.05
-editor_draw_screen = true
-editor_draw_limits = false
-editor_draw_drag_margin = false
 script = ExtResource( 4 )
-_sections_unfolded = [ "Drag Margin", "Editor", "Limit", "Material", "Offset", "Smoothing", "Transform", "Visibility", "Z Index" ]
 
-[node name="CanvasLayer" type="CanvasLayer" parent="." index="4"]
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-layer = 1
-offset = Vector2( 0, 0 )
-rotation = 0.0
-scale = Vector2( 1, 1 )
-transform = Transform2D( 1, 0, 0, 1, 0, 0 )
-
-[node name="TowerDefenseHUD" parent="CanvasLayer" index="0" instance=ExtResource( 5 )]
-
+[node name="TowerDefenseHUD" parent="CanvasLayer" instance=ExtResource( 5 )]
 margin_left = 2.0
 margin_top = -4.0
 margin_right = 2.0
 margin_bottom = -4.0
 mouse_filter = 2
-_sections_unfolded = [ "Anchor", "Focus", "Grow Direction", "Hint", "Margin", "Mouse", "Rect" ]
 
-[node name="Message" type="Label" parent="CanvasLayer" index="1"]
-
+[node name="Message" type="Label" parent="CanvasLayer"]
 visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 442.0
 margin_top = 309.0
 margin_right = 844.0
 margin_bottom = 460.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
 custom_fonts/font = ExtResource( 6 )
 text = "Incoming..."
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "Visibility", "custom_fonts" ]
 
-[node name="CButton" type="Button" parent="CanvasLayer" index="2"]
-
+[node name="CButton" type="Button" parent="CanvasLayer"]
 visible = false
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
 margin_left = 736.0
 margin_top = 501.0
 margin_right = 850.0
 margin_bottom = 547.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Continue"
-flat = false
-align = 1
-
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
-
 [connection signal="timeout" from="EnemyTimer" to="." method="_on_EnemyTimer_timeout"]
-
 [connection signal="pressed" from="CanvasLayer/CButton" to="." method="_on_CButton_pressed"]
-
-

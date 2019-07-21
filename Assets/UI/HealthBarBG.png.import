@@ -3,20 +3,21 @@
 importer="texture"
 type="StreamTexture"
 path="res://.import/HealthBarBG.png-9cf7f4864ead3354294908d8c55552b3.stex"
+metadata={
+"vram_texture": false
+}
 
 [deps]
 
 source_file="res://Assets/UI/HealthBarBG.png"
-source_md5="1d12631d32ef2b98ff541c22418cfddd"
-
 dest_files=[ "res://.import/HealthBarBG.png-9cf7f4864ead3354294908d8c55552b3.stex" ]
-dest_md5="4deeccca141f2685700cfec820735fb0"
 
 [params]
 
 compress/mode=0
 compress/lossy_quality=0.7
 compress/hdr_mode=0
+compress/bptc_ldr=0
 compress/normal_map=0
 flags/repeat=0
 flags/filter=true
@@ -26,6 +27,7 @@ flags/srgb=2
 process/fix_alpha_border=true
 process/premult_alpha=false
 process/HDR_as_SRGB=false
+process/invert_color=false
 stream=false
 size_limit=0
 detect_3d=true
