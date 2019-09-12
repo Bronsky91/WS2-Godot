@@ -1,4 +1,4 @@
-extends "res://Scripts/Rune.gd"
+extends "Rune.gd"
 
 onready var spell = load("res://Scenes/Spell.tscn")
 
