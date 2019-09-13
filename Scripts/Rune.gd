@@ -36,17 +36,15 @@ var firing = false
 var path_end
 var summoned_minions = []
 
-
 func _ready():
 	add_to_group("runes")
 
-
-func init(d, power_level):
+func init(d):
 	get_node("Sprite").set_texture(load("res://Assets/" + d["rune_sprite"] + ".png"))
 	_placement = d["placement"]
 	_color = d["rune_color"]
 	_max_power_level = d["max_power_level"]
-	_power_level = power_level
+	_power_level = d["power_level"]
 	_cost = d["cost"]
 	_details = d
 	modulate = Color(_color.r, _color.g, _color.b)
@@ -96,8 +94,20 @@ func _shoot(target, spell, chain_pos, _chain_counter, _targets_hit):
 	firing = true
 	pulse_timer.set_wait_time(_pulse)
 	pulse_timer.start()
-	var new_spell = spell.instance()																				# DON'T LOOK SSHHHHHHHhhhh
-	new_spell.init(_damage, _speed, _debuffs, _chaining, _chain_range, _pulse, _spell_sprite, _range, _chain_max, _chain_counter, _targets_hit)
+	var new_spell = spell.instance()	
+	new_spell.init({
+			"damage": _damage,
+			 "speed": _speed,
+			 "debuffs": _debuffs,
+			 "chaining": _chaining,
+			 "chain_range": _chain_range,
+			 "pulse": _pulse,
+			 "spell_sprite": _spell_sprite,
+			 "range": _range,
+			 "chain_max": _chain_max,
+			 "chain_counter": _chain_counter, # DON'T LOOK SSHHHHHHHhhhh
+			 "targets_hit": _targets_hit
+		})
 	new_spell.get_node("Sprite").set_texture(load("res://Assets/" + _spell_sprite + ".png"))
 	#new_spell.set_scale(spell_scale)
 	new_spell.target = target
@@ -172,7 +182,7 @@ func apply_debuff(debuff, target):
 	target.get_ref().add_child(new_debuff)
 	new_debuff.init(debuff)
 	
-
+	
 func _input(event):
 	# Watches for if player is scrolling over runes to power them up or down
 	if cursor_hovering and event.is_action_released("power_up") and _power_level < _max_power_level and global.mana > _cost:
@@ -190,7 +200,7 @@ func _input(event):
 		global.hovering_on_any_rune = false
 		cursor_hovering = false
 
-		
+
 func _on_PulseTimer_timeout():
 	rearm()
 	

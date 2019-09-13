@@ -53,7 +53,6 @@ func _draw():
 
 
 func _input(event):
-	print(global.hovering_on_any_rune)
 	# Watches for scrolling up or down to place the rune already powered up or back down
 	if disabled:
 		return
@@ -69,7 +68,8 @@ func _input(event):
 		queue_free()
 	if event.is_action("create") and placeable:
 		var new_rune = rune.instance() # instances new rune to place
-		new_rune.init(_rune_details, power_level)
+		_rune_details["power_level"] = power_level # Sets power_level into param dictionary
+		new_rune.init(_rune_details)
 		new_rune.position = global.cursor_tile_pos
 		global.mana -= _cost
 		cannot_place()

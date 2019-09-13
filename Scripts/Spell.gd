@@ -13,19 +13,20 @@ func _process(delta):
 	pass
 
 
-func init(damage, speed, debuffs, chaining, chain_range, pulse, spell_sprite, __range, chain_max, chain_counter, targets_hit):
-	_damage = damage
-	_speed = speed
-	_debuffs = debuffs
-	_chaining = chaining
-	_range = chain_range
-	_pulse = pulse
-	_spell_sprite = spell_sprite
-	_range = __range
-	_chain_max = chain_max
-	_chain_counter = chain_counter
-	_targets_hit = targets_hit
-	
+func init(d):
+	print(d)
+	_range = d["range"]
+	_speed =  d["speed"]
+	_pulse = d["pulse"]
+	_chaining = d["chaining"]
+	_damage = d["damage"]
+	_spell_sprite = d["spell_sprite"]
+	_debuffs = d["debuffs"]
+	if _chaining:
+		_chain_counter = d["chain_counter"]
+		_chain_range = d["chain_range"]
+		_chain_max = d["chain_max"]
+		_targets_hit = d["targets_hit"]
 	
 func _physics_process(delta):
 	if target and target.get_ref():
