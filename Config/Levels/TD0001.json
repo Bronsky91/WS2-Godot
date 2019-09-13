@@ -1,36 +1,36 @@
 {
   "waves": [
     {
-      "start_timer": 5,
+      "start_timer": 10,
       "enemies": [
         {
           "sprite": "Enemy",
           "speed": 100,
-          "health": 100,
+          "health": 50,
           "damage": 5,
           "reach": 30,
-          "attack_rate": 1,
-          "enemy_timer": 3,
+          "attack_rate": 2,
+          "enemy_timer": 0.25,
           "path": "Path1",
-          "quantity": 2,
+          "quantity": 40,
           "aggro_range": 200
         },
         {
           "sprite": "Enemy",
-          "speed": 100,
+          "speed": 250,
           "health": 250,
           "damage": 10,
           "reach": 30,
-          "attack_rate": 2,
-          "enemy_timer": 2,
+          "attack_rate": 1,
+          "enemy_timer": 0.5,
           "path": "Path2",
-          "quantity": 1,
+          "quantity": 20,
           "aggro_range": 200
         }
       ]
     },
     {
-      "start_timer": 5,
+      "start_timer": 10,
       "enemies": [
         {
           "sprite": "Enemy",

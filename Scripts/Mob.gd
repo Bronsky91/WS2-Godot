@@ -62,7 +62,6 @@ func set_nav(new_nav):
 	update_path(final_dest)
 
 
-
 func update_path(_goal):
 	path = nav.get_simple_path(self.position, _goal, false)
 	if path.size() == 0: 

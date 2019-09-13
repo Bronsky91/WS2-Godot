@@ -13,6 +13,7 @@ var g_mouse_pos
 var rollback_zoom = false
 var temp_cam_pos = Vector2()
 var rollback_count = 0
+var pan_dir: String
 
 
 func _ready():
@@ -23,6 +24,16 @@ func _ready():
 	#cam_pivot.position.x = screen_size.x / 2
 	#cam_pivot.position.y = screen_size.y / 2
 
+func move_cam(pos):
+	if pan_dir == "left":
+		pos.x = pos.x - 100
+	if pan_dir == "right":
+		pos.x =+ pos.x + 100
+	if pan_dir == "up":
+		pos.y = pos.y - 100
+	if pan_dir == "down":
+		pos.y =+ pos.y + 100
+	return pos
 
 func _process(delta):
 	last_mouse_pos = mouse_pos
@@ -31,10 +42,10 @@ func _process(delta):
 	g_mouse_pos = Vector2(ceil(g_mouse_pos.x), ceil(g_mouse_pos.y))
 	
 	if panning:
+		# lerp camera towards pan direction
+		cam_pivot.position = cam_pivot.position.linear_interpolate(move_cam(cam_pivot.position), delta * pan_speed)
 		# reset destination vector
-		dest_pos = camera_clamp(mouse_pos)
-		# lerp camera towards mouse position
-		cam_pivot.position = cam_pivot.position.linear_interpolate(mouse_pos, delta * pan_speed)
+		dest_pos = cam_pivot.position
 	else:
 		var pan_margin = Vector2(drag_margin_right * screen_size.x, drag_margin_bottom * screen_size.y)
 		
@@ -57,7 +68,6 @@ func _process(delta):
 		cam_pivot.position = cam_pivot.position.linear_interpolate(dest_pos, delta * pan_speed)
 
 
-
 func _input(event):
 	# zoom in
 	if event.is_action_pressed("zoom_in") and global.zoom_level != global.zoom_in_max:
@@ -76,10 +86,18 @@ func _input(event):
 	# pan
 	if event.is_action_pressed("pan"):
 		panning = true
-		print("panning")
+		if event.is_action_pressed("pan_left"):
+			pan_dir = "left"
+		if event.is_action_pressed("pan_right"):
+			pan_dir = "right"
+		if event.is_action_pressed("pan_down"):
+			pan_dir = "down"
+		if event.is_action_pressed("pan_up"):
+			pan_dir = "up"
+		if event.is_action_pressed("pan_up") and event.is_action_pressed("pan_left"):
+			print('up and left')
 	if event.is_action_released("pan"):
 		panning = false
-		print("no longer panning")
 
 
 func set_boundary():

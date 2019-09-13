@@ -14,7 +14,6 @@ func _process(delta):
 
 
 func init(d):
-	print(d)
 	_range = d["range"]
 	_speed =  d["speed"]
 	_pulse = d["pulse"]
