@@ -46,6 +46,7 @@ func _process(delta):
 		cam_pivot.position = cam_pivot.position.linear_interpolate(move_cam(cam_pivot.position), delta * pan_speed)
 		# reset destination vector
 		dest_pos = cam_pivot.position
+		dest_pos = camera_clamp(dest_pos)
 	else:
 		var pan_margin = Vector2(drag_margin_right * screen_size.x, drag_margin_bottom * screen_size.y)
 		

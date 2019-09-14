@@ -1,7 +1,6 @@
 extends Node2D
 
 onready var global = get_node("/root/Global")
-onready var enemy_timer = $EnemyTimer
 onready var start_timer = $StartTimer
 onready var message = $CanvasLayer/Message
 onready var cbutton = $CanvasLayer/CButton
@@ -11,14 +10,12 @@ var tower
 
 var level
 var level_scene
-var spawn_new = false
 var waves_over = false
 var current_wave = 0
 var current_enemy_batch = 0
 var current_enemy = 0
 var enemy_quantity = 0
 var spawn_points = []
-var wave_start = false
 var wave_process_done = false
 
 export(PackedScene) var enemy
@@ -36,14 +33,10 @@ func _ready():
 
 
 func _process(delta):
-	if get_tree().get_nodes_in_group("enemies").size() == 0 and wave_start and wave_process_done:
-		wave_start = false
-		start_timer.set_wait_time(level.waves[0].start_timer)
+	if get_tree().get_nodes_in_group("enemies").size() == 0 and wave_process_done:
+		start_timer.set_wait_time(level.waves[current_wave].start_timer)
 		start_timer.start()
 		message.show()
-	# Checks when to spawn the next enemy
-	if spawn_new and not waves_over:
-		_process_enemy()
 	elif waves_over and get_tree().get_nodes_in_group("enemies").size() == 0 and not global.end_level:
 	# Ends the level when all enemies are off the map and no more waves incoming
 		global.level_state.completed.append(global.level_state.current) # Advances tp next level
@@ -72,7 +65,6 @@ func _load_level(levelname):
 	file.open("res://Config/Levels/" + levelname + ".json", File.READ)
 	var text = file.get_as_text()
 	level = JSON.parse(text).result
-	print("spawn_points count: " + str(spawn_points.size()))
 	for s in get_node("Level/TowerDefenseLevel/SpawnPoints").get_children():
 		spawn_points.append(s)
 		global.start_points.append(s.position)
@@ -100,15 +92,7 @@ func calc_level_size(tilemap):
 	return Vector2(max_x + 1, max_y + 1)
 
 
-func _process_enemy():
-	# Processes the enemy then starts timer for next enemy
-	_spawn_enemy(level.waves[current_wave].enemies[current_enemy_batch])
-	spawn_new = false
-	enemy_timer.set_wait_time(level.waves[current_wave].enemies[current_enemy_batch].enemy_timer)
-	enemy_timer.start()
-
-
-func _spawn_enemy(d):
+func _spawn_enemy(d, type):
 	# instances enemy into map and sets nav goal to base
 	var new_enemy = enemy.instance()
 	new_enemy.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate)
@@ -119,37 +103,51 @@ func _spawn_enemy(d):
 	new_enemy.nav = nav
 	global.nav = nav
 	add_child(new_enemy)
-	wave_start = true
+	_increment_enemy(type)
 
 
-func _increment_enemy():
+func _increment_enemy(type):
 	current_enemy += 1
-	if current_enemy > level["waves"][current_wave]["enemies"][current_enemy_batch].quantity - 1:
+	if current_enemy > level["waves"][current_wave]["enemies"][type].quantity-1:
 		current_enemy = 0
-		current_enemy_batch += 1
-		if current_enemy_batch > level["waves"][current_wave]["enemies"].size() - 1:
-			current_enemy_batch = 0
+		if type == level["waves"][current_wave]["enemies"].size() - 1:
 			current_wave += 1
 			if current_wave < level["waves"].size():
-				enemy_timer.stop()
+				stop_enemy_timer(type)
 				wave_process_done = true
 			else:
 				current_wave = 0
 				waves_over = true
-				enemy_timer.stop()
+				stop_enemy_timer(type)
 
 
-func _on_EnemyTimer_timeout():
-	_increment_enemy()
-	if not waves_over and not enemy_timer.is_stopped():
-		spawn_new = true
-		
+func stop_enemy_timer(type):
+	get_node('enemy_timer_'+str(current_wave)+'_'+str(type)).stop()
+	get_node('enemy_timer_'+str(current_wave)+'_'+str(type)).queue_free()
+
+
+func on_Enemy_Timeout(enemy_type):
+	# Checks when to spawn the next enemy
+	if not waves_over:
+		_spawn_enemy(level.waves[current_wave].enemies[enemy_type], enemy_type)
+
 
 func _on_StartTimer_timeout():
-	spawn_new = true
+	print('new wave?')
 	wave_process_done = false
 	message.hide()
 	start_timer.stop()
+	# Create and start timers
+	for wave in level.waves.size():
+		for enemy in level.waves[wave].enemies.size():
+			var newTimerNode = Timer.new()
+			newTimerNode.connect("timeout", self, "on_Enemy_Timeout", [enemy])
+			newTimerNode.name = 'enemy_timer_'+str(wave)+'_'+str(enemy)
+			newTimerNode.set_wait_time(level.waves[current_wave].enemies[enemy].enemy_timer)
+			add_child(newTimerNode)
+			if wave == 0:
+				# If it's the first wave
+				newTimerNode.start()
 
 
 func _on_CButton_pressed():

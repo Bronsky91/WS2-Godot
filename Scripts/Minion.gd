@@ -27,8 +27,8 @@ func init(sprite, speed, health, damage, reach, attack_rate, aggro_range, death_
 
 
 func _physics_process(delta):
-	other_bodies = get_tree().get_nodes_in_group("minions")
-	other_bodies.remove( other_bodies.find( self ) )
+	#other_bodies = get_tree().get_nodes_in_group("minions")
+	#other_bodies.remove( other_bodies.find( self ) )
 	#print( "Found ", other_bodies.size() )
 	# if the minion has not locked onto an enemy yet, check if one is in range
 	if not aggro_target:
@@ -72,9 +72,9 @@ func _physics_process(delta):
 		var other_pos = []
 		var other_vel = []
 		
-		for o in other_bodies:
-			other_pos.append( o.position )
-			other_vel.append( o.vel )
+		#for o in other_bodies:
+		#	other_pos.append( o.position )
+		#	other_vel.append( o.vel )
 			
 		flockforce = steering_control.flocking( position, vel, other_pos, other_vel, \
 				40, 60, \
@@ -95,7 +95,6 @@ func _physics_process(delta):
 		#print(path)
 		# If we are still too far from the next step, continue to head towards it
 		if dist_step > 75:
-
 			move_and_slide(motion)
 		# If we have reached this step, remove it, so the next step is bumped up in line
 		else:

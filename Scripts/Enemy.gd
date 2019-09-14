@@ -21,8 +21,8 @@ func _physics_process(delta):
 	#print(_speed)
 	## DETERMINE IF MOVING TOWARDS FINAL DESTINATION (TOWER) OR TOWARDS AN AGGRO'D MINION
 	## -----------------------
-	other_bodies = get_tree().get_nodes_in_group("enemies") #+ get_tree().get_nodes_in_group("minions")
-	other_bodies.remove( other_bodies.find( self ) )
+	#other_bodies = get_tree().get_nodes_in_group("enemies") #+ get_tree().get_nodes_in_group("minions")
+	#other_bodies.remove( other_bodies.find( self ) )
 	#print( "Found ", other_bodies.size() )
 	# check if we are targetting aggro'd minion
 	chase_force = steering_control.steering( position, path[0], vel, delta )
@@ -58,9 +58,9 @@ func _physics_process(delta):
 		var other_pos = []
 		var other_vel = []
 		
-		for o in other_bodies:
-			other_pos.append( o.position )
-			other_vel.append( o.vel )
+		#for o in other_bodies:
+		#	other_pos.append( o.position )
+		#	other_vel.append( o.vel )
 		var flockforce = Vector2()
 		flockforce = steering_control.flocking( position, vel, other_pos, other_vel, \
 				40, 60, \
@@ -93,7 +93,7 @@ func _physics_process(delta):
 
 func reached_goal():
 	# Called when enemy reaches base
-	attacking = true
+	#attacking = true
 	attack_timer.set_wait_time(_attack_rate)
 	attack_timer.start()
 

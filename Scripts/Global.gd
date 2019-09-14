@@ -50,7 +50,7 @@ func increase_ult_charge(num):
 	if (ult_charge >= ult_max):
 		ult_charge = ult_max
 		# If at max value, change meter color
-		game.get_ref().get_node("CanvasLayer/owerDefenseHUD/UltimateMeter").set("modulate",Color(0.0,0.0,1.0))
+		game.get_ref().get_node("CanvasLayer/TowerDefenseHUD/UltimateMeter").set("modulate",Color(0.0,0.0,1.0))
 	else:
 		# If not at max value, ensure meter color is set to default
 		game.get_ref().get_node("CanvasLayer/TowerDefenseHUD/UltimateMeter").set("modulate",Color(1.0,1.0,1.0))
@@ -76,7 +76,10 @@ func get_tile_pos(x, y):
 func mana_bar(num):
 	if game.get_ref():
 		game.get_ref().get_node("CanvasLayer/TowerDefenseHUD/ManaMeter/Fill").set_value(num)
-	
+
+func mana_regen(num):
+	mana =+ 5
+	mana_bar(mana)
 	
 func hp_bar(num):
 	if game.get_ref():
