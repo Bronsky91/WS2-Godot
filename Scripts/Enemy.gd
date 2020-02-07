@@ -25,6 +25,7 @@ func _physics_process(delta):
 	#other_bodies.remove( other_bodies.find( self ) )
 	#print( "Found ", other_bodies.size() )
 	# check if we are targetting aggro'd minion
+	print(path)
 	chase_force = steering_control.steering( position, path[0], vel, delta )
 	if has_target():
 		_going_towards = aggro_target.get_ref().position
@@ -97,7 +98,6 @@ func reached_goal():
 	#attack_timer.set_wait_time(_attack_rate)
 	#attack_timer.start()
 	pass
-
 
 func _die():
 	# if this enemy was being targetted by a minion, unaggro the minion
