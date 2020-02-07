@@ -1,11 +1,10 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://Scripts/Game.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/Enemy.tscn" type="PackedScene" id=2]
 [ext_resource path="res://Scenes/Path.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Scripts/Camera.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/UI/TowerDefenseHUD.tscn" type="PackedScene" id=5]
-[ext_resource path="res://Assets/Fonts/old-timey.tres" type="DynamicFont" id=6]
+[ext_resource path="res://Scenes/UI/TowerDefenseHUD.tscn" type="PackedScene" id=4]
+[ext_resource path="res://Assets/Fonts/old-timey.tres" type="DynamicFont" id=5]
 
 [node name="Game" type="Node2D"]
 script = ExtResource( 1 )
@@ -16,20 +15,9 @@ nav_point = ExtResource( 3 )
 
 [node name="StartTimer" type="Timer" parent="."]
 
-[node name="CameraPivot" type="Position2D" parent="."]
-
-[node name="Camera2D" type="Camera2D" parent="CameraPivot"]
-anchor_mode = 0
-current = true
-drag_margin_left = 0.05
-drag_margin_top = 0.05
-drag_margin_right = 0.05
-drag_margin_bottom = 0.05
-script = ExtResource( 4 )
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="TowerDefenseHUD" parent="CanvasLayer" instance=ExtResource( 5 )]
+[node name="TowerDefenseHUD" parent="CanvasLayer" instance=ExtResource( 4 )]
 margin_left = 2.0
 margin_top = -4.0
 margin_right = 2.0
@@ -38,19 +26,19 @@ mouse_filter = 2
 
 [node name="Message" type="Label" parent="CanvasLayer"]
 visible = false
-margin_left = 442.0
-margin_top = 309.0
-margin_right = 844.0
-margin_bottom = 460.0
-custom_fonts/font = ExtResource( 6 )
+margin_left = 146.882
+margin_top = 141.188
+margin_right = 548.882
+margin_bottom = 292.188
+custom_fonts/font = ExtResource( 5 )
 text = "Incoming..."
 
 [node name="CButton" type="Button" parent="CanvasLayer"]
 visible = false
-margin_left = 736.0
-margin_top = 501.0
-margin_right = 850.0
-margin_bottom = 547.0
+margin_left = 224.297
+margin_top = 337.321
+margin_right = 338.297
+margin_bottom = 383.321
 text = "Continue"
 [connection signal="timeout" from="StartTimer" to="." method="_on_StartTimer_timeout"]
 [connection signal="pressed" from="CanvasLayer/CButton" to="." method="_on_CButton_pressed"]

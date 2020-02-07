@@ -12,11 +12,9 @@ func _ready():
 			button.add_color_override('font_color', Color(0,0,1,1))
 		else:
 			button.disabled = true
-			
 
 func _on_level_pressed(level):
 	global.level_state.current = level
-	print(global.level_state.completed)
 	get_tree().change_scene("res://Scenes/Game.tscn")
 
 func _on_Return_pressed():

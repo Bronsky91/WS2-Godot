@@ -34,7 +34,6 @@ onready var attack_timer = $AttackTimer
 onready var global = get_node("/root/Global")
 onready var collider = $CollisionShape2D
 
-
 func _ready():
 	steering_control 
 	steering_control.max_vel = _speed

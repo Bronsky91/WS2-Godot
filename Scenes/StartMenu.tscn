@@ -5,7 +5,6 @@
 [ext_resource path="res://Scripts/TitleScreen.gd" type="Script" id=3]
 [ext_resource path="res://Assets/Fonts/old-timey.tres" type="DynamicFont" id=4]
 [ext_resource path="res://Assets/Fonts/Tangerine/Tangerine-Bold.ttf" type="DynamicFontData" id=5]
-[ext_resource path="res://Scripts/Camera2D.gd" type="Script" id=6]
 
 [sub_resource type="GDScript" id=1]
 script/source = "extends Node
@@ -22,6 +21,23 @@ func _ready():
 [sub_resource type="DynamicFont" id=2]
 size = 60
 font_data = ExtResource( 5 )
+
+[sub_resource type="GDScript" id=3]
+script/source = "extends Camera2D
+
+# class member variables go here, for example:
+# var a = 2
+# var b = \"textvar\"
+
+func _ready():
+	# Called when the node is added to the scene for the first time.
+	# Initialization here
+	pass
+	
+	
+func _process(delta):
+	position = Vector2(position.x + 1, position.y)
+"
 
 [node name="StartMenu" type="Node"]
 script = SubResource( 1 )
@@ -116,6 +132,6 @@ flat = true
 anchor_mode = 0
 current = true
 smoothing_speed = 1.0
-script = ExtResource( 6 )
+script = SubResource( 3 )
 [connection signal="pressed" from="Control/Story" to="Control" method="_on_Story_pressed"]
 [connection signal="pressed" from="Control/Exit" to="Control" method="_on_Exit_pressed"]
