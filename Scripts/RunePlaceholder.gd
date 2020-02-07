@@ -47,7 +47,7 @@ func _process(delta):
 
 
 func _draw():
-   	draw_circle(Vector2(0,0),_range,Color(1.0,1.0,1.0,0.3))
+	draw_circle(Vector2(0,0),_range,Color(1.0,1.0,1.0,0.3))
 	# TODO: Unsure of what the other float should be in the circle_radius Vector2. Also unsure what the resolution should be.
 	#draw_empty_circle(Vector2(0,0), Vector2(10,_attack_range), Color(1.0,1.0,1.0,0.5), 720)
 

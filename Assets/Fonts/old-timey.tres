@@ -3,10 +3,5 @@
 [ext_resource path="res://Assets/Fonts/Tangerine/Tangerine-Regular.ttf" type="DynamicFontData" id=1]
 
 [resource]
-
-size = 150
-use_mipmaps = false
-use_filter = false
+size = 100
 font_data = ExtResource( 1 )
-_sections_unfolded = [ "Extra Spacing", "Font", "Settings" ]
-
