@@ -64,9 +64,9 @@ func decrease_ult_charge(num):
 
 func get_tile_pos(x, y):
 	return Vector2(
-        (int(x) * 64) + (TILE_WIDTH / 2),
-        (int(y) * 64) + (TILE_HEIGHT / 2)
-    )
+		(int(x) * 16) + (TILE_WIDTH / 2),
+		(int(y) * 16) + (TILE_HEIGHT / 2)
+	)
 
 func mana_bar(num):
 	if game.get_ref():

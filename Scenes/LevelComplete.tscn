@@ -11,18 +11,21 @@ font_data = ExtResource( 2 )
 [node name="Node" type="Node"]
 
 [node name="Label" type="Label" parent="."]
-margin_left = 107.802
-margin_top = 118.053
-margin_right = 536.802
-margin_bottom = 218.053
+margin_left = 90.7522
+margin_top = 143.729
+margin_right = 519.752
+margin_bottom = 243.729
 custom_fonts/font = ExtResource( 1 )
 text = "Level Completed!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Continue" type="Button" parent="."]
-margin_left = 231.447
-margin_top = 281.688
-margin_right = 372.447
-margin_bottom = 339.688
+margin_left = 242.752
+margin_top = 294.089
+margin_right = 383.752
+margin_bottom = 352.089
 custom_fonts/font = SubResource( 1 )
 text = "Continue"
 script = ExtResource( 3 )

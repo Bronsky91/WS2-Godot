@@ -8,54 +8,72 @@ script = ExtResource( 1 )
 [node name="Levels" type="Control" parent="."]
 margin_right = 40.0
 margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Level1" type="Button" parent="Levels"]
-margin_left = 49.3507
-margin_top = 22.0
-margin_right = 119.351
-margin_bottom = 70.0
+margin_left = 43.529
+margin_top = 33.0
+margin_right = 113.529
+margin_bottom = 81.0
 text = "Level 1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Level2" type="Button" parent="Levels"]
-margin_left = 163.079
-margin_top = 22.0
-margin_right = 227.079
-margin_bottom = 72.0
+margin_left = 170.462
+margin_top = 33.0
+margin_right = 234.462
+margin_bottom = 83.0
 text = "Level 2"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Level3" type="Button" parent="Levels"]
-margin_left = 267.592
-margin_top = 22.0
-margin_right = 331.592
-margin_bottom = 72.0
+margin_left = 286.637
+margin_top = 33.0
+margin_right = 350.637
+margin_bottom = 83.0
 text = "Level 3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Level4" type="Button" parent="Levels"]
-margin_left = 371.562
-margin_top = 22.0
-margin_right = 435.562
-margin_bottom = 72.0
+margin_left = 406.424
+margin_top = 33.0
+margin_right = 470.424
+margin_bottom = 83.0
 text = "Level 4"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Level5" type="Button" parent="Levels"]
-margin_left = 480.288
-margin_top = 22.0
-margin_right = 544.288
-margin_bottom = 72.0
+margin_left = 518.841
+margin_top = 33.0
+margin_right = 582.841
+margin_bottom = 83.0
 text = "Level 5"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="Return" type="Button" parent="."]
-margin_left = 255.73
-margin_top = 397.642
-margin_right = 371.73
-margin_bottom = 443.642
+margin_left = 1408.0
+margin_top = 708.0
+margin_right = 1524.0
+margin_bottom = 754.0
 text = "Return to Menu"
 
 [node name="Label" type="Label" parent="."]
-margin_left = 96.0457
-margin_top = 245.687
-margin_right = 553.046
-margin_bottom = 315.687
+margin_left = 78.4011
+margin_top = 232.044
+margin_right = 535.401
+margin_bottom = 302.044
 text = "PRETEND THERES A MAP HERE AND THESE BUTTONS ARE THE NODES"
 [connection signal="pressed" from="Levels/Level1" to="." method="_on_level_pressed" binds= [ 1 ]]
 [connection signal="pressed" from="Levels/Level2" to="." method="_on_level_pressed" binds= [ 2 ]]

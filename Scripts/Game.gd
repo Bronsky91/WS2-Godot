@@ -100,10 +100,7 @@ func _spawn_enemy(d, type):
 		if s.name == d.path:
 			new_enemy.position = s.position
 	new_enemy.final_dest = tower.position
-	print(new_enemy.final_dest)
-	print(nav)
-	new_enemy.nav = nav
-	print(new_enemy.nav)
+	new_enemy.set_nav(nav)
 	global.nav = nav
 	print(global.nav)
 	print('before add_child')
