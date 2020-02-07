@@ -40,7 +40,7 @@ func _physics_process(delta):
 	elif not has_target() and _going_towards != final_dest:
 		# ensure it is not in attack mode and set it back on its way to its final destination
 		attacking = false
-		attack_timer.stop()
+		#attack_timer.stop()
 		encounter_start = false
 		_going_towards = final_dest
 		update_path(final_dest)
@@ -94,8 +94,9 @@ func _physics_process(delta):
 func reached_goal():
 	# Called when enemy reaches base
 	#attacking = true
-	attack_timer.set_wait_time(_attack_rate)
-	attack_timer.start()
+	#attack_timer.set_wait_time(_attack_rate)
+	#attack_timer.start()
+	pass
 
 
 func _die():
@@ -104,7 +105,7 @@ func _die():
 		aggro_target.get_ref().attacking = false
 		aggro_target.get_ref().encounter_start = false
 		aggro_target.get_ref().aggro_target = null
-		attack_timer.stop()
+		#attack_timer.stop()
 	# explosion / death animation
 	emit_signal("died")
 	queue_free()

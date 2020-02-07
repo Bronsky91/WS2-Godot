@@ -5,66 +5,28 @@
 [ext_resource path="res://Scripts/Continue.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
-
 size = 40
-use_mipmaps = false
-use_filter = false
 font_data = ExtResource( 2 )
-_sections_unfolded = [ "Font", "Settings" ]
 
 [node name="Node" type="Node"]
 
-[node name="Label" type="Label" parent="." index="0"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 556.0
-margin_top = 258.0
-margin_right = 985.0
-margin_bottom = 358.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-mouse_filter = 2
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 4
+[node name="Label" type="Label" parent="."]
+margin_left = 90.7522
+margin_top = 143.729
+margin_right = 519.752
+margin_bottom = 243.729
 custom_fonts/font = ExtResource( 1 )
 text = "Level Completed!"
-percent_visible = 1.0
-lines_skipped = 0
-max_lines_visible = -1
-_sections_unfolded = [ "custom_fonts" ]
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Continue" type="Button" parent="." index="1"]
-
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-margin_left = 708.0
-margin_top = 407.0
-margin_right = 849.0
-margin_bottom = 465.0
-rect_pivot_offset = Vector2( 0, 0 )
-rect_clip_content = false
-focus_mode = 2
-mouse_filter = 0
-mouse_default_cursor_shape = 0
-size_flags_horizontal = 1
-size_flags_vertical = 1
+[node name="Continue" type="Button" parent="."]
+margin_left = 242.752
+margin_top = 294.089
+margin_right = 383.752
+margin_bottom = 352.089
 custom_fonts/font = SubResource( 1 )
-toggle_mode = false
-enabled_focus_mode = 2
-shortcut = null
-group = null
 text = "Continue"
-flat = false
-align = 1
 script = ExtResource( 3 )
-_sections_unfolded = [ "custom_fonts" ]
-
 [connection signal="pressed" from="Continue" to="Continue" method="_on_Continue_pressed"]
-
-

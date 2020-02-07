@@ -29,8 +29,8 @@ var level_state = {
 	'remaining': [1,2,3,4,5],
 	'current': 1
 }
-const TILE_WIDTH = 64
-const TILE_HEIGHT = 64
+const TILE_WIDTH = 16
+const TILE_HEIGHT = 16
 
 
 func _ready():
@@ -69,9 +69,9 @@ func decrease_ult_charge(num):
 
 func get_tile_pos(x, y):
 	return Vector2(
-        (int(x) * 64) + (TILE_WIDTH / 2),
-        (int(y) * 64) + (TILE_HEIGHT / 2)
-    )
+		(int(x) * 16) + (TILE_WIDTH / 2),
+		(int(y) * 16) + (TILE_HEIGHT / 2)
+	)
 
 func mana_bar(num):
 	if game.get_ref():
