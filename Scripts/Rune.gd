@@ -3,6 +3,8 @@ extends Node2D
 onready var pulse_timer = $PulseTimer
 onready var global = get_node("/root/Global")
 onready var debuff_scene = load("res://Scenes/Debuff.tscn")
+onready var particle_scene = load("res://Scenes/Particle.tscn")
+
 
 # Sets class variables from init 
 var _range
@@ -10,6 +12,7 @@ var _fire_delta
 var _damage
 var _speed
 var _spell_sprite
+var _particle
 var _power_level
 var _max_power_level
 var _cost
@@ -55,6 +58,8 @@ func init(d):
 	_fire_delta = d["fire_delta"]
 	_damage = d["damage"]
 	_spell_sprite = d["spell_sprite"]
+	print(d)
+	_particle = d["particle"]
 	_debuffs = d["debuffs"]
 	_mob_stats = d["mob"]
 	if _chaining:
@@ -113,6 +118,11 @@ func _shoot(target, spell, chain_pos, _chain_counter, _targets_hit):
 	new_spell.target = target
 	new_spell.rune = weakref(self)
 	new_spell.position = chain_pos
+	var particle = particle_scene.instance()
+	print(particle)
+	particle.init(_particle)
+	print(particle)
+	new_spell.add_child(particle)
 	get_tree().get_root().add_child(new_spell)
 	
 	

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/Frostbolt.png-1ffc4895de125a6affd9b5c0e8493514.stex"
+path="res://.import/frost_part.png-dd740fe6d9390ccfc9e58513165119f5.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Frostbolt.png"
-dest_files=[ "res://.import/Frostbolt.png-1ffc4895de125a6affd9b5c0e8493514.stex" ]
+source_file="res://Assets/frost_part.png"
+dest_files=[ "res://.import/frost_part.png-dd740fe6d9390ccfc9e58513165119f5.stex" ]
 
 [params]
 
@@ -30,5 +30,5 @@ process/HDR_as_SRGB=false
 process/invert_color=false
 stream=false
 size_limit=0
-detect_3d=true
+detect_3d=false
 svg/scale=1.0

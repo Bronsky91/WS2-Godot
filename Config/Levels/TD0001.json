@@ -1,7 +1,7 @@
 {
   "waves": [
     {
-      "start_timer": 10,
+      "start_timer": 1,
       "enemies": [
         {
           "sprite": "Enemy",

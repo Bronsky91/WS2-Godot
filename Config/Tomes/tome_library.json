@@ -40,10 +40,10 @@
             "range": 200,
             "fire_delta": 0.2,
             "damage": 10,
-            "speed": 800,
+            "speed": 300,
             "pulse": 0.5,
             "chaining": false,
-            "rune_sprite": "Rune",
+            "rune_sprite": "Blue",
             "rune_color": {
                 "r": 0.0,
                 "g": 0.0,
@@ -51,6 +51,7 @@
             },
             "spell_sprite": "Frostbolt",
             "button_name": "Frostbolt",
+            "particle": "frost",
             "debuffs": [
                 {
                     "name": "frostbolt",
