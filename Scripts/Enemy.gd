@@ -16,14 +16,8 @@ func init(sprite, speed, health, damage, reach, attack_rate):
 
 
 func _physics_process(delta):
-	#print(_speed)
 	## DETERMINE IF MOVING TOWARDS FINAL DESTINATION (TOWER) OR TOWARDS AN AGGRO'D MINION
 	## -----------------------
-	#other_bodies = get_tree().get_nodes_in_group("enemies") #+ get_tree().get_nodes_in_group("minions")
-	#other_bodies.remove( other_bodies.find( self ) )
-	#print( "Found ", other_bodies.size() )
-	# check if we are targetting aggro'd minion
-	
 	if has_target():
 		_going_towards = aggro_target.get_ref().position
 		# if so, check if this is the first iteration dealing with this minion
@@ -51,14 +45,6 @@ func _physics_process(delta):
 	var dist_step = self.position.distance_to(path[0])
 	# If the final destination's distance is outside of the enemy's reach...
 	if dist_total > _reach:
-		
-		# var bound_force = steering_control.rect_bound( position, vel, Rect2( Vector2( 0, 0 ), Vector2( 1024, 930 ) ).size, 20, 20, delta )
-		var other_pos = []
-		var other_vel = []
-		
-		#for o in other_bodies:
-		#	other_pos.append( o.position )
-		#	other_vel.append( o.vel )
 		var force = steering_control.steering( position, path[0], vel, delta )
 		steering_control.max_vel = _speed
 		force = steering_control.truncate( force, steering_control.max_force )

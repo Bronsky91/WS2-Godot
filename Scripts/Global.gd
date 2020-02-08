@@ -34,7 +34,6 @@ func _ready():
 	var text = file.get_as_text()
 	tome_library = JSON.parse(text).result
 	file.close()
-	print_tree()
 	
 	
 func increase_ult_charge(num):

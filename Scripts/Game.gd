@@ -94,18 +94,13 @@ func _spawn_enemy(d, type):
 	# instances enemy into map and sets nav goal to base
 	var new_enemy = enemy.instance()
 	new_enemy.init(d.sprite ,d.speed, d.health, d.damage, d.reach, d.attack_rate)
-	print('init')
 	for s in spawn_points:
-		print('s')
 		if s.name == d.path:
 			new_enemy.position = s.position
 	new_enemy.final_dest = tower.position
 	new_enemy.set_nav(nav)
 	global.nav = nav
-	print(global.nav)
-	print('before add_child')
 	add_child(new_enemy)
-	print('add_child')
 	_increment_enemy(type)
 
 
