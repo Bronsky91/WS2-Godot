@@ -23,8 +23,7 @@ func _physics_process(delta):
 	#other_bodies.remove( other_bodies.find( self ) )
 	#print( "Found ", other_bodies.size() )
 	# check if we are targetting aggro'd minion
-	print(path)
-	chase_force = steering_control.steering( position, path[0], vel, delta )
+	
 	if has_target():
 		_going_towards = aggro_target.get_ref().position
 		# if so, check if this is the first iteration dealing with this minion
@@ -39,7 +38,7 @@ func _physics_process(delta):
 	elif not has_target() and _going_towards != final_dest:
 		# ensure it is not in attack mode and set it back on its way to its final destination
 		attacking = false
-		#attack_timer.stop()
+		attack_timer.stop()
 		encounter_start = false
 		_going_towards = final_dest
 		update_path(final_dest)
@@ -60,12 +59,7 @@ func _physics_process(delta):
 		#for o in other_bodies:
 		#	other_pos.append( o.position )
 		#	other_vel.append( o.vel )
-		var flockforce = Vector2()
-		flockforce = steering_control.flocking( position, vel, other_pos, other_vel, \
-				40, 60, \
-				50, 1, \
-				50, 1)
-		var force = chase_force  + flockforce
+		var force = steering_control.steering( position, path[0], vel, delta )
 		steering_control.max_vel = _speed
 		force = steering_control.truncate( force, steering_control.max_force )
 		vel += force * delta
@@ -76,7 +70,7 @@ func _physics_process(delta):
 		# Rotate enemy to face where it is going
 		look_at(path[0])
 		# If we are still too far from the next step, continue to head towards it
-		if dist_step > 75:
+		if dist_step > 15:
 			# var velocity = (path[0] - position).normalized() * _speed
 			move_and_slide(motion)
 		# If we have reached this step, remove it, so the next step is bumped up in line
@@ -91,12 +85,11 @@ func _physics_process(delta):
 
 
 func reached_goal():
-	pass
 	# Called when enemy reaches base
+	pass
 	#attacking = true
 	#attack_timer.set_wait_time(_attack_rate)
 	#attack_timer.start()
-	pass
 
 func _die():
 	# if this enemy was being targetted by a minion, unaggro the minion
@@ -104,7 +97,7 @@ func _die():
 		aggro_target.get_ref().attacking = false
 		aggro_target.get_ref().encounter_start = false
 		aggro_target.get_ref().aggro_target = null
-		#attack_timer.stop()
+		attack_timer.stop()
 	# explosion / death animation
 	emit_signal("died")
 	queue_free()

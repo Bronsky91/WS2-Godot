@@ -40,10 +40,8 @@ func _ready():
 	steering_control.max_force = 1500
 	set_physics_process(true)
 
-
 func has_target():
 	return aggro_target and aggro_target.get_ref()
-
 
 func nearer(a, b):
 	var pos = get_global_position()
@@ -51,15 +49,12 @@ func nearer(a, b):
 	var b_pos = b.get_global_position()
 	return pos.distance_to(a_pos) > pos.distance_to(b_pos)
 
-
 func fight_me(_aggro_target):
 	aggro_target = _aggro_target
-
 
 func set_nav(new_nav):
 	nav = new_nav
 	update_path(final_dest)
-
 
 func update_path(_goal):
 	print(_goal)
@@ -68,18 +63,15 @@ func update_path(_goal):
 	if path.size() == 0: 
 		call("reached_goal")
 
-
 func update_path_aggro(_goal):
 	if path.size() > 1:
 		path[path.size() - 1] = _goal
-
 
 func take_damage(damage):
 	# Mob has taken damage
 	_health -= damage
 	if _health <= 0:
 		call("_die")
-
 
 func remove_debuffs(d):
 	# If debuffs affected enemy speed or damage they are now reset

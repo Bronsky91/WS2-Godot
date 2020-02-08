@@ -18,6 +18,7 @@ position = Vector2( -2.75079, 1.59552 )
 rotation = -1.5708
 scale = Vector2( 4.64521, 2.8845 )
 shape = SubResource( 1 )
+disabled = true
 
 [node name="AttackTimer" type="Timer" parent="."]
 [connection signal="timeout" from="AttackTimer" to="." method="_on_AttackTimer_timeout"]
